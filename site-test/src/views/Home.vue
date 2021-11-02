@@ -4,8 +4,8 @@
     <!-- <TestComponents msgTest="welp, this it a test" /> -->
 
   
-      <div class="col-md search_elt">
-        <h2>search</h2>
+      <div class="col-md action_elt">
+        <h2>action</h2>
       </div>
 
       <div class="col-md news_elt">
@@ -29,9 +29,9 @@
 // @ is an alias to /src
 // import HelloWorld from '@/components/HelloWorld.vue'
 // import TestComponents from '@/components/test-component-1.vue'
-import user_home from '@/components/user_home.vue'
-import field_home from '@/components/field_home.vue'
-import news_home from '@/components/news_home.vue'
+import user_home from '@/components/home/user_home.vue'
+import field_home from '@/components/home/field_home.vue'
+import news_home from '@/components/home/news_home.vue'
 
 
 
@@ -54,15 +54,15 @@ export default {
     margin-top: 4vw;
     display: grid;
     gap: 1vw;
-    grid-template-columns: repeat(3,1fr);
+    grid-template-columns: 1fr 2fr 1fr;
     grid-template-rows: 4vw 1fr;
-    grid-template-areas: "search search news"
+    grid-template-areas: "action action news"
                           "user field news";
 
 }
-.search_elt{
+.action_elt{
   background: white;
-  grid-area: search;
+  grid-area: action;
 
 }
 .user_elt{

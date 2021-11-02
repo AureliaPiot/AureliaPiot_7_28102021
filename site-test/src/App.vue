@@ -1,4 +1,3 @@
-
 <template>
   <div id="nav">
     <nav class="navbar navbar-light bg-light">
@@ -8,7 +7,8 @@
             <input class="form-control " type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
-        <router-link to="/">Home</router-link> 
+        <router-link to="/">Sign</router-link> 
+        <router-link to="/home">Home</router-link> 
         <router-link to="/about">About</router-link>
       </div>
     </nav>
