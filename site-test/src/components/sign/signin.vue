@@ -21,7 +21,11 @@
 
             </div>
 
-            <button id="signSubmit" type="submit" class="submit btn btn-primary">Entrée</button>
+            
+            <div class="d-flex justify-content-between">
+                <button id="signSubmit" type="submit" class="submit btn btn-primary">Entrée</button>
+                <button id="goLogin" type="submit" class="submit btn btn-primary"  @click="url_Login" >se connecter</button>
+            </div>
         </form>
 
     </div>
@@ -30,6 +34,11 @@
 <script>
 export default {
   name: 'SignIn',
+  methodes:{
+      url_Login(){
+          this.$router.push('/login')
+        } 
+  }
 }
 </script>
 

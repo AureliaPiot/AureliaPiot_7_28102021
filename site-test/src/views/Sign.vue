@@ -2,7 +2,6 @@
   <div class="home col-md-5 mx-auto">
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
     <!-- <TestComponents msgTest="welp, this it a test" /> -->
-    <div> {{ url_param }} </div>
     <div v-if="url_param == 'login'" ><Login/></div>
     <div v-if="url_param == 'sign'"><SignIn/></div>
 
@@ -35,9 +34,9 @@ export default {
     },
 
   mounted(){
-    //   const singup = document.getElementById
-        this.url_param = this.$route.query.sign;
-        // const params = this.$route.params.sign;
+        this.url_param = this.$route.params.sign;
+        console.log(this.url_param);
+
     }
 }
 
