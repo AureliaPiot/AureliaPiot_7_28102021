@@ -1,13 +1,13 @@
 <template>
   <div class="home col-md-5 mx-auto">
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
-    <!-- <TestComponents msgTest="welp, this it a test" /> -->
+
 
     <div class="sign card ">
         <h2 v-if="!show">{{title}}</h2>
         <h2 v-if="show">{{negatif_title}}</h2>
 
-        <!-- <form class="col-md-10 mx-auto"> -->
+
 
                 <div v-if="!show" ><Login/></div>
 
@@ -16,16 +16,14 @@
             </transition>
 
         <div class="d-flex justify-content-center">
-           <button id="signSubmit" type="submit" class="submit btn btn-primary">Entrée</button>
+           <button id="signSubmit" type="submit" class="submit btn btn-primary" v-on:click="getDataSign">Entrée</button>
         </div>
 
         <div class="togSign d-flex justify-content-between">
-            <!-- <div class="row"> -->
 
                 <p v-if="!show">pas encore de compte ? <span v-on:click="show = !show"> enregistrez-vous ! </span> </p>
                 <p v-if="show">déjà un compte ? <span v-on:click="show =!show">connecter vous !</span></p>
 
-            <!-- </div> -->
         </div>
 
     </div>
@@ -35,15 +33,8 @@
 
 <script>
 // @ is an alias to /src
-// import HelloWorld from '@/components/HelloWorld.vue'
 import SignIn from '@/components/sign/signin.vue'
 import Login from '@/components/sign/login.vue'
-
-
-
-
-
-
 
 export default {
   name: 'sign',
@@ -68,8 +59,21 @@ export default {
         console.log(this.title);
     },
     methods:{
-    isActive() {
-            return this.title;
+        getDataSign(){
+            if(this.show == false){
+                console.log('ok submit');
+                const email = document.getElementsByName("email_login")[0].value;
+                const password = document.getElementsByName("password_login")[0].value;
+                console.log(email , password);
+            }
+            if(this.show == true){
+                console.log('ok submit');
+                const nom = document.getElementsByName("nom_Sign")[0].value;
+                const prenom = document.getElementsByName("prenom_Sign")[0].value;
+                const email = document.getElementsByName("email_Sign")[0].value;
+                const password = document.getElementsByName("password_Sign")[0].value;
+                console.log(email , password ,nom ,prenom);
+            }
         }
     }
 }
