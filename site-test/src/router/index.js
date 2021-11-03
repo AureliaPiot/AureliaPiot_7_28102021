@@ -5,7 +5,11 @@ import Sign from '../views/Sign.vue'
 
 const routes = [
   {
-    path: '/',
+   path:'/',
+   redirect:'/sign'
+  },
+  {
+    path: '/sign',
     name: 'sign',
     component: Sign,
   },

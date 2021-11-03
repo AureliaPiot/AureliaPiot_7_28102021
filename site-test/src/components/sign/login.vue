@@ -1,25 +1,27 @@
 <template>
-    <div class="sign card p-md-5">
-        <h2>connexion</h2>
-        <form class="col-md-10 mx-auto">
+    <!-- <div class="sign card p-md-5">
+        <h2>connexion</h2>-->
+        <form class="col-md-10 mx-auto"> 
+        <!-- <div> -->
+
             <div class="form-group my-md-4">
                 <label for="email">Email</label>
-                <input type="email" class="form-control" id="email"  placeholder="Enter email" name="email">
+                <input type="email" class="form-control" id="email"  placeholder="Enter email" name="email" required>
             </div>
             <div class="form-group my-md-4">
                 <label for="password_input">Password</label>
-                <input type="password" class="form-control" id="password_input" placeholder="Password" aria-describedby="passwordHelp" name="password">
+                <input type="password" class="form-control" id="password_input" placeholder="Password" aria-describedby="passwordHelp" name="password" autocomplete="off" required>
                 <small id="passwordHelp" class="form-text text-muted"> never share your password with anyone else.</small>
             </div>
 
-        <div class="d-flex justify-content-between">
+        <!-- </div> -->
+        <!-- <div class="d-flex justify-content-between">
             <button id="signLogin" type="button" class="submit btn btn-primary"  @click="$submit">Entrée</button>
             <router-link  tag="button" id="goSign" class="submit btn btn-primary" @click="this.$forceUpdate()" to="/sign">s'inscrire</router-link>
-        </div>
-
+        </div> -->
         </form>
 
-    </div>
+<!-- </div> -->
 </template>
 
 <script>
