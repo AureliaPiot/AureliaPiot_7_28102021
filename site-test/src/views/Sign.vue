@@ -16,7 +16,7 @@
             </transition>
 
         <div class="d-flex justify-content-center">
-           <button id="signSubmit" type="submit" class="submit btn btn-primary" v-on:click="getDataSign">Entrée</button>
+           <button id="signSubmit" type="submit" class="submit btn btn-primary" v-on:click="pushData">Entrée</button>
         </div>
 
         <div class="togSign d-flex justify-content-between">
@@ -74,6 +74,33 @@ export default {
                 const password = document.getElementsByName("password_Sign")[0].value;
                 console.log(email , password ,nom ,prenom);
             }
+        },
+        pushData(){
+            console.log('ok push');
+            const data = {
+                 nom : document.getElementsByName("nom_Sign")[0].value,
+                 prenom : document.getElementsByName("prenom_Sign")[0].value,
+                 email : document.getElementsByName("email_Sign")[0].value,
+                 password : document.getElementsByName("password_Sign")[0].value,
+                };
+
+            fetch('http://localhost:3000/api/user/', {
+                method : "Post",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data),
+            }) 
+            .then(function(res){
+                if(res.ok){
+                    console.log(res);
+                    return res.json();
+                }       
+            })           
+            .catch(function(){
+                console.log('erreur de requete');
+            })
+
+// Fin de push
+
         }
     }
 }
