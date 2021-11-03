@@ -7,7 +7,7 @@
             <input class="form-control " type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
-        <router-link to="/">Sign</router-link> 
+        <router-link v-bind:to="{name: 'sign',params:{sign: 'login'}}">Sign</router-link> 
         <router-link to="/home">Home</router-link> 
         <router-link to="/about">About</router-link>
       </div>
@@ -27,7 +27,7 @@ body{
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  // text-align: center;
   color: #2c3e50;
 
 }
