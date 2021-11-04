@@ -15,10 +15,6 @@
                 <div v-if="show"><SignIn/></div>
             </transition>
 
-        <div class="d-flex justify-content-center">
-           <button id="signSubmit" type="submit" class="submit btn btn-primary" v-on:click="signIn">Entrée</button>
-        </div>
-
         <div class="togSign d-flex justify-content-between">
 
                 <p v-if="!show">pas encore de compte ? <span v-on:click="show = !show"> enregistrez-vous ! </span> </p>
@@ -76,34 +72,10 @@ export default {
             }
         },
 // [Sign]__________________________________
-        signIn(){
-            console.log('ok push');
-            const data = {
-                 nom : document.getElementsByName("nom_Sign")[0].value,
-                 prenom : document.getElementsByName("prenom_Sign")[0].value,
-                 email : document.getElementsByName("email_Sign")[0].value,
-                 password : document.getElementsByName("password_Sign")[0].value,
-                };
+        
+// [Login]__________________________________
 
-            fetch('http://localhost:3000/api/user/', {
-                method : "Post",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(data),
-            }) 
-            .then(function(res){
-                    return res.json();
-            })    
-            .then(function(value){
-                    console.log(value.message);
-            })
-   
-            .catch(function(){
-                console.log('erreur de requete');
-            })
 
-// [Sign]__________________________________
-
-        }
     }
 }
 

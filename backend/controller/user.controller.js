@@ -11,7 +11,50 @@ const jwt = require('jsonwebtoken');
 const bcrypt =require('bcrypt');
 
 
+// //////////////////////////////////////////////////////////////////////////////////////
 
+exports.login = (req,res)=>{
+  console.log('login');
+  const user ={
+    email : req.body.email,
+    password : req.body.password
+  }
+
+  User.findOne({ where: { email : user.email} })
+  .then(data=>{
+    if(data){
+
+      if (data.password == user.password) {
+
+        console.log(data);
+        res.status(200).json({ 
+          message:'utilisateur trouvé',
+          userId: data.id,
+          token: jwt.sign(
+            { userId:data.id },
+            process.env.TOKEN,
+            { expiresIn: '24h' }
+          ) 
+        });
+
+      } else {
+        res.status(404).send({ message: `mot de passe incorrect` });
+      }
+    }
+    else{
+      res.status(404).send({ message: `utilisateur introuvable` });
+    }
+
+  })
+  .catch(err=> {
+      res.status(500).send({message: err.message || " error canot found any user"})
+  })
+
+};
+
+
+
+// //////////////////////////////////////////////////////////////////////////////////////
 
 // [Create]
 exports.create = (req,res,err) =>{
@@ -52,11 +95,16 @@ exports.create = (req,res,err) =>{
     User.create(user)
          .then(data=>{
             res.status(201).send(data);
+            // authentifier juste apres
         })
         .catch(err=> {
             res.status(500).send({message: err.message || "cannot create an account"})
         })
   
+
+    // res.redirect('route');
+
+
     // const user =User.build({
     //   nom : req.body.nom,
     //   prenom: req.body.prenom,
@@ -78,6 +126,7 @@ exports.create = (req,res,err) =>{
 
 
 
+// //////////////////////////////////////////////////////////////////////////////////////
 // [get all]
 exports.findAll = (req,res)=>{
     console.log('findAll');
@@ -95,7 +144,7 @@ exports.findAll = (req,res)=>{
 
 };
 
-
+// //////////////////////////////////////////////////////////////////////////////////////
 // [get one ]
 exports.findOne = (req,res)=>{
     console.log('findOne');
@@ -124,7 +173,7 @@ exports.findOne = (req,res)=>{
 
 
 
-
+// //////////////////////////////////////////////////////////////////////////////////////
 // [update with id]
 exports.update = (req,res)=>{
     console.log('update');
@@ -151,7 +200,7 @@ exports.update = (req,res)=>{
     });
 };
 
-
+// //////////////////////////////////////////////////////////////////////////////////////
 // [delete whit id]
 exports.delete = (req,res)=>{
     console.log('delete');

@@ -4,8 +4,11 @@ const userCtrl = require("../controller/user.controller.js")
 
 
 // Create
+router.post('/sign',userCtrl.create);
+//sign
+router.post('/login',userCtrl.login)
 
-router.post('/',userCtrl.create);
+
 // get all
 router.get('/',userCtrl.findAll);
 // get one 
