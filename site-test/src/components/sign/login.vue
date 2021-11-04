@@ -41,17 +41,24 @@ export default {
                 body: JSON.stringify(data),
             }) 
             .then(function(res){
-                if(res.ok){
-
-                    this.router.push({ name: 'home' });
-                    return 
-                }                
-                if(!res.ok){
-                    return res.json();
-                }
+                console.log(res);
+           
+                    // stoké le token quelque part 
+                    // localStorage.setItem(Json.stringify(token));
+                    console.log('redirection'); 
+                return res.json();
             })    
             .then(function(value){
+                if(value.token){
+                    console.log(value.token);
+                    localStorage.setItem("token",value.token);
+                    // setTimeout(()=>{this.router.go("home")}, 400);//redirection apres 0.4sec
+                    // this.router.push({name: "Home"});
+                    // this.$router.go({ name: 'Home', query: { redirect: '/home' } });
+
+                }
                     console.log(value.message);
+
             })
    
             .catch(function(){

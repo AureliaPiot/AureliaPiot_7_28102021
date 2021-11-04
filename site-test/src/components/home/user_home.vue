@@ -1,8 +1,25 @@
 <template>
 
     <div class="container">
-        <h2>{{ msg }}</h2>
 
+        <h2>{{ msg }}</h2>
+        <div class="info-user col-md-12">
+            <p>info User</p>
+        </div>
+        <div class="info-user col-md-12">
+            <p>info User</p>
+        </div>
+        <div class="info-user col-md-12">
+            <p>info User</p>
+        </div>
+        <div class="info-user col-md-12">
+            <p>info User</p>
+        </div>
+        <!-- si admin -->
+        <div class="info-user col-md-12">
+            <p><router-link to="/admin">Admin</router-link></p>
+        </div>
+        <!-- si admin -->
 
     </div>
 
@@ -21,6 +38,12 @@ export default {
 .container{
     background: white;
     width: 100%;
-    height: 10vw;
+    // height: 10vw;
+}
+.info-user{
+    border-top: 1px solid rgb(118, 120, 124);
+    // border-bottom: 1px solid rgb(118, 120, 124);
+
+    text-align: center;
 }
 </style>

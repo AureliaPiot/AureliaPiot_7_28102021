@@ -7,7 +7,7 @@
             <input class="form-control " type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
-        <router-link v-bind:to="{name: 'sign',params:{sign: 'login'}}">Sign</router-link> 
+        <router-link v-bind:to="{name: 'Sign',params:{sign: 'login'}}">Sign</router-link> 
         <router-link to="/home">Home</router-link> 
         <router-link to="/about">About</router-link>
       </div>
