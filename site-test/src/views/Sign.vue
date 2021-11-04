@@ -16,7 +16,7 @@
             </transition>
 
         <div class="d-flex justify-content-center">
-           <button id="signSubmit" type="submit" class="submit btn btn-primary" v-on:click="pushData">Entrée</button>
+           <button id="signSubmit" type="submit" class="submit btn btn-primary" v-on:click="signIn">Entrée</button>
         </div>
 
         <div class="togSign d-flex justify-content-between">
@@ -75,7 +75,8 @@ export default {
                 console.log(email , password ,nom ,prenom);
             }
         },
-        pushData(){
+// [Sign]__________________________________
+        signIn(){
             console.log('ok push');
             const data = {
                  nom : document.getElementsByName("nom_Sign")[0].value,
@@ -90,16 +91,17 @@ export default {
                 body: JSON.stringify(data),
             }) 
             .then(function(res){
-                if(res.ok){
-                    console.log(res);
                     return res.json();
-                }       
-            })           
+            })    
+            .then(function(value){
+                    console.log(value.message);
+            })
+   
             .catch(function(){
                 console.log('erreur de requete');
             })
 
-// Fin de push
+// [Sign]__________________________________
 
         }
     }

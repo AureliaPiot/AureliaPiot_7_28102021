@@ -1,5 +1,4 @@
 //action inscription, connexion + token identification
-
 const db =require("../models")
 //le lien ave la bdd
 const User = db.users;
@@ -15,39 +14,64 @@ const bcrypt =require('bcrypt');
 
 
 // [Create]
-exports.create = (req,res) =>{
+exports.create = (req,res,err) =>{
     console.log('create-----------');
     console.log(req.body);
     console.log('create-----------');
 
+// is Email unique ?---------
+    function isEmailUnique (email, done) {
+      User.count({ where: { email: email } })
+      .then(count => {
+        return (count > 0) ? true : false
+      });
+    }
+
+    // recuperation des erreurs+ mise en forme
+
+// is Email unique ?---------
+
+    if(isEmailUnique){
+      return res.status(400).json({ message :"Email déjà utilisé"} );
+     
+    }
 
     if(!req.body.email || !req.body.password){
-        res.status(400).send({mesage:"content cannot be empty"});
-        return
-    }
+      return res.status(400).json({ message : "champ vide" })
     
-    const user ={
+    }
+
+        const user ={
       nom : req.body.nom,
       prenom: req.body.prenom,
       email: req.body.email,
       password: req.body.password,
       role:'user'
-    }
+    };
 
-
-    User.create({
-      nom : user.nom,
-      prenom: user.prenom,
-      email: user.email,
-      password: user.password,
-      role:user.role
-    })
-        .then(data=>{
-            res.status(200).send(data);
+    User.create(user)
+         .then(data=>{
+            res.status(201).send(data);
         })
         .catch(err=> {
-            res.status(500).send({message: "an error occured while creating a new user"})
+            res.status(500).send({message: err.message || "cannot create an account"})
         })
+  
+    // const user =User.build({
+    //   nom : req.body.nom,
+    //   prenom: req.body.prenom,
+    //   email: req.body.email,
+    //   password: req.body.password,
+    //   role:'user'
+    // });
+
+    // user.save()
+    //      .then(data=>{
+    //         res.status(200).send(data);
+    //     })
+    //     .catch(err=> {
+    //         res.status(500).send({message: err.message || "cannot create an account"})
+    //     })
 
 };
 
