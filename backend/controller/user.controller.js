@@ -117,11 +117,11 @@ exports.create = (req,res,err) =>{
 exports.findAll = (req,res)=>{
     console.log('findAll');
 
-    const token = req.headers.authorization.split(' ')[1];
-    const decodedToken = jwt.verify(token,process.env.TOKEN);
-    const role = decodedToken.role;
-    console.log("role = "+role);
-    console.log(token);
+    // const token = req.headers.authorization.split(' ')[1];
+    // const decodedToken = jwt.verify(token,process.env.TOKEN);
+    // const role = decodedToken.role;
+    // console.log("role = "+role);
+    // console.log(token);
 
 
     // const name = req.query.name;

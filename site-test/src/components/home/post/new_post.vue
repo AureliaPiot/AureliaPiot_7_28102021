@@ -79,6 +79,6 @@ export default {
     // height: 10vw;
     padding: 1rem;
     border-radius: 8px;
-        margin-bottom: 2rem;
+    margin-bottom: 2rem;
 }
 </style>

@@ -1,5 +1,7 @@
 const db =require("../models")
-const Post= db.posts;
+const Posts= db.posts;
+// const Users= db.users;
+
 const Op =db.Sequelize.Op;
 
 
@@ -9,7 +11,7 @@ exports.create = (req,res,err) =>{
     console.log('create- post----------');
 
     const post ={
-      idUser: req.body.userId,
+      UserId: req.body.userId,
       content : req.body.message,
       attachement: req.body.file,
       like:[0],
@@ -18,7 +20,7 @@ exports.create = (req,res,err) =>{
     console.log(post);
 
 
-    Post.create(post)
+    Posts.create(post)
          .then(data=>{
             res.status(201).send(data);
         })
@@ -33,20 +35,20 @@ exports.getAll = (req,res,err) =>{
     console.log('findAll post');
 
 
-    const name = req.query.name;
+    // const name = req.query.name;
     // let condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
-    User.findAll({ 
-        order: ['createDate', 'DESC'],
+    Posts.findAll({ 
+        order: [['id', 'DESC']],
         include: [{
-            model: models.Users,
-            through: {
-                attributes: ['userid', 'userId'],
-            },
+            model: db.users,
+            // through: {
+            //     attributes: ['id','UserId'],
+            // },
         }],
     })
     .then(data=>{
         res.send(data);
-        // console.log(data)
+        console.log(data)
     })
     .catch(err=> {
         res.status(500).send({message: err.message || " error canot found any user"})
