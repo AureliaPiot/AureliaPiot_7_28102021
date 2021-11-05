@@ -1,20 +1,6 @@
 <template>
   <div class="home col-md-10 mx-auto">
-    <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
-    <!-- <TestComponents msgTest="welp, this it a test" /> -->
-
   
-      <div class="col-md action_elt">
-        <h2>action</h2>
-        <div class="row">
-          
-          <div class="col"> home </div>
-          <div class="col">search</div>
-          <div class="col"><router-link to="/new/post">new Post</router-link></div>
-
-        </div>
-      </div>
-
       <div class="col-md getPost_elt">
         <!-- <getPost_home msg="news"/> -->
         <field_home msg="actu"/>
@@ -26,7 +12,9 @@
       </div>
       
       <div class="col-md field_elt">
-          <router-view/>
+        <newPost_home/>
+        <getPost_home/>
+          <!-- <router-view/> -->
       </div>
 
   
@@ -39,7 +27,8 @@
 // import TestComponents from '@/components/test-component-1.vue'
 import user_home from '@/components/home/user_home.vue'
 import field_home from '@/components/home/field_home.vue'
-// import getPost_home from '@/components/home/getPost_home.vue'
+import newPost_home from '@/components/home/post/new_post.vue'
+import getPost_home from '@/components/home/post/getPost_home.vue'
 
 
 
@@ -50,8 +39,9 @@ export default {
   components: {
     user_home,
     field_home,
-    // HelloWorld,
-    // TestComponents
+    newPost_home,
+    getPost_home
+
   }
 }
 </script>
@@ -62,7 +52,7 @@ export default {
     gap: 1vw;
     grid-template-columns: 1fr 2fr 1fr;
     grid-template-rows: 4vw 1fr;
-    grid-template-areas: "action action news"
+    grid-template-areas: "user field  news"
                           "user field news";
 
 }

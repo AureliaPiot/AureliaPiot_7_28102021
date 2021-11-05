@@ -20,22 +20,22 @@ const routes = [
   {
     path: '/home',
     name: 'Home',
-    children: [
-      {
-        // UserProfile will be rendered inside User's <router-view>
-        // when /user/:id/profile is matched
-        path: '',
-        // component: UserProfile
-        component: () => import('../components/home/post/getPost_home.vue')
-      },
-      {
-        // UserProfile will be rendered inside User's <router-view>
-        // when /user/:id/profile is matched
-        path: '/new/post',
-        // component: UserProfile
-        component: () => import('../components/home/post/new_post.vue')
-      },
-    ],
+    // children: [
+    //   {
+    //     // UserProfile will be rendered inside User's <router-view>
+    //     // when /user/:id/profile is matched
+    //     path: '',
+    //     // component: UserProfile
+    //     component: () => import('../components/home/post/getPost_home.vue')
+    //   },
+    //   {
+    //     // UserProfile will be rendered inside User's <router-view>
+    //     // when /user/:id/profile is matched
+    //     path: '/new/post',
+    //     // component: UserProfile
+    //     component: () => import('../components/home/post/new_post.vue')
+    //   },
+    // ],
 
     meta: {
       reqAuth: true,

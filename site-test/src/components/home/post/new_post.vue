@@ -2,6 +2,21 @@
 
     <div class="container">
         <h2>new post</h2>
+        <form class="form-inline">
+
+
+            <div class="form-group">
+                <label for="message">message</label>
+                <textarea class="form-control" id="message" rows="3" name="message" required></textarea>
+            </div>
+            <div class="form-group">
+                <input type="file" class="form-control-file" id="file" name="file">
+                <!-- afficher le fichier si un est entré! -->
+            </div>
+
+            <button v-on:click.prevent="submitPost">Submit</button>
+
+        </form>
         
     </div>
 
@@ -12,14 +27,34 @@ export default {
     name:'new_post',
     props: {
         msg: String
-    }
+    },
+     methods:{
+         submitPost(){
+            let file = document.getElementsByName("file")[0].value;
+             if(file.length === 0 ){
+                 file = "null"
+             }
+             const data = {
+                message : document.getElementsByName("message")[0].value,
+                file : file
+                };
+             console.log(data)
+             console.log("file :"  +file.length)
+
+
+
+         }
+     }
 }
 </script>
 
 <style scoped lang="scss">
 .container{
-    background: white;
+    background: rgb(255, 255, 255);
     width: 100%;
-    height: 10vw;
+    // height: 10vw;
+    padding: 1rem;
+    border-radius: 8px;
+        margin-bottom: 2rem;
 }
 </style>
