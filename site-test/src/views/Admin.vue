@@ -3,8 +3,13 @@
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
     <!-- <TestComponents msgTest="welp, this it a test" /> -->
 
-    <adminController />
+    <adminController 
+      v-for="user in data"
+      :key="user"
+      :user="user"
+     />
   
+  <!-- {{data}} -->
   </div>
 </template>
 
@@ -19,6 +24,11 @@ import adminController from '@/components/admin/admin_controller.vue'
 
 export default {
   name: 'Home',
+  data(){
+     return{ 
+       data:null,
+     }
+  },
   components: {
     adminController
   },
@@ -32,15 +42,11 @@ export default {
                     "Content-Type": "application/json",
                     "authorization" : 'Bearer ' + localStorage.getItem('token'), 
                 },
-                // body: (),
             }) 
             .then(function(res){
-                console.log(res); 
                 return res.json();
             })    
-            .then(function(value){
-                    console.log(value);
-            })
+            .then(value => (this.data = value, console.log(this.data) ))
             .catch(function(){
                 console.log('erreur de requete');
             })
