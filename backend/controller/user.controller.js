@@ -1,7 +1,7 @@
 //action inscription, connexion + token identification
 const db =require("../models")
 //le lien ave la bdd
-const User = db.users;
+const Users = db.users;
 //le lien avec la table user de la bdd
 
 const Op =db.Sequelize.Op;
@@ -20,7 +20,7 @@ exports.login = (req,res)=>{
     password : req.body.password
   }
 
-  User.findOne({ where: { email : user.email} })
+  Users.findOne({ where: { email : user.email} })
   .then(data=>{
     if(data){
 
@@ -64,68 +64,48 @@ exports.login = (req,res)=>{
 
 // [Create]
 exports.create = (req,res,err) =>{
-    console.log('create-----------');
+    console.log('create body-----------');
     console.log(req.body);
     console.log('create-----------');
-
-// is Email unique ?---------
-    function isEmailUnique (email, done) {
-      User.count({ where: { email: email } })
-      .then(count => {
-        return (count > 0) ? true : false
-      });
-    }
-
-    // recuperation des erreurs+ mise en forme
-
-// is Email unique ?---------
-
-    if(isEmailUnique){
-      return res.status(400).json({ message :"Email déjà utilisé"} );
-     
-    }
+    const mail = req.body.email;
 
     if(!req.body.email || !req.body.password){
-      return res.status(400).json({ message : "champ vide" })
-    
+      return res.status(400).json({ message : "champ vide" })   
     }
 
-        const user ={
-      nom : req.body.nom,
-      prenom: req.body.prenom,
-      email: req.body.email,
-      password: req.body.password,
-      role:'user'
-    };
+// is Email unique ?---------
+    Users.count({ where: { email: mail } })
+    .then(count => {
 
-    User.create(user)
-         .then(data=>{
-            res.status(201).send(data);
-            // authentifier juste apres
+      if (count === 0){
+        console.log('user ');
+        
+//  ou utiliser const user = Users.build({object}) | puis user.save() avec les th
+        const user ={
+          nom : req.body.nom,
+          prenom: req.body.prenom,
+          email: mail,
+          password: req.body.password,
+          role:'user'
+        };
+        
+        Users.create(user)
+        .then(data=>{
+          res.status(201).json({ message : 'ok' });
+// authentifier juste apres
         })
         .catch(err=> {
-            res.status(500).send({message: err.message || "cannot create an account"})
+          res.status(500).send({message: err.message || "cannot create an account"})
         })
-  
+      }
+      else{
+        console.log('no');
+        return res.status(403).json({ message : "email déjà utilisé" })
+      }
+    })
+    
+        
 
-    // res.redirect('route');
-
-
-    // const user =User.build({
-    //   nom : req.body.nom,
-    //   prenom: req.body.prenom,
-    //   email: req.body.email,
-    //   password: req.body.password,
-    //   role:'user'
-    // });
-
-    // user.save()
-    //      .then(data=>{
-    //         res.status(200).send(data);
-    //     })
-    //     .catch(err=> {
-    //         res.status(500).send({message: err.message || "cannot create an account"})
-    //     })
 
 };
 
@@ -144,12 +124,12 @@ exports.findAll = (req,res)=>{
     console.log(token);
 
 
-    const name = req.query.name;
+    // const name = req.query.name;
     // let condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
-    User.findAll()
+    Users.findAll()
     .then(data=>{
         res.send(data);
-        // console.log(data)
+        console.log(data)
     })
     .catch(err=> {
         res.status(500).send({message: err.message || " error canot found any user"})
@@ -166,7 +146,7 @@ exports.findOne = (req,res)=>{
     console.log("id  "+id);
 
 
-    User.findOne({ where: { id : 1} })
+    Users.findOne({ where: { id : 1} })
     .then(data=>{
         if (data) {
             res.send(data);
@@ -192,7 +172,7 @@ exports.update = (req,res)=>{
     console.log('update');
     const id = req.params.id;
 
-    User.update(req.body, {
+    Users.update(req.body, {
         where: { id: id }
     })
         .then(num => {
@@ -219,7 +199,7 @@ exports.delete = (req,res)=>{
     console.log('delete');
     const id = req.params.id;
 
-    User.destroy({
+    Users.destroy({
       where: { id: id }
     })
       .then(num => {
@@ -243,7 +223,7 @@ exports.delete = (req,res)=>{
 // conditionnel ? Find all user with role = user:
 
 // exports.findAllPublished = (req, res) => {
-//     User.findAll({ where: { role: user } })
+//     Users.findAll({ where: { role: user } })
 //       .then(data => {
 //         res.send(data);
 //       })

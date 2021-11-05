@@ -7,22 +7,22 @@ module.exports = (sequelize, Sequelize) => {
         autoIncrement: true,
         primaryKey: true
       },
-      idUser: {
-        allowNull:false,
-        type: Sequelize.INTEGER,
-        reference:{
-            model:'Users',
-            key:'id'
-        }
-      },
-      idPost: {
-        allowNull:false,
-        type: Sequelize.INTEGER,
-        reference:{
-            model:'Posts',
-            key:'id'
-        }
-      },
+    //   idUser: {
+    //     allowNull:false,
+    //     type: Sequelize.INTEGER,
+    //     reference:{
+    //         model:'Users',
+    //         key:'id'
+    //     }
+    //   },
+    //   idPost: {
+    //     allowNull:false,
+    //     type: Sequelize.INTEGER,
+    //     reference:{
+    //         model:'Posts',
+    //         key:'id'
+    //     }
+    //   },
       content: {
         allowNull:false,
         type: Sequelize.STRING

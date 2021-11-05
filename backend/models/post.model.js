@@ -7,14 +7,14 @@ module.exports = (sequelize, Sequelize) => {
         autoIncrement: true,
         primaryKey: true
       },
-      idUser: {
-        allowNull:false,
-        type: Sequelize.INTEGER,
-        reference:{
-            model:'Users',
-            key:'id'
-        }
-      },
+      // idUser: {
+      //   allowNull:false,
+      //   type: Sequelize.INTEGER,
+      //   reference:{
+      //       model:'Users',
+      //       key:'id'
+      //   }
+      // },
       content: {
         allowNull:false,
         type: Sequelize.STRING
