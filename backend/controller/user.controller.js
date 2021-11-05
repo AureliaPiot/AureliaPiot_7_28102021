@@ -32,6 +32,7 @@ exports.login = (req,res)=>{
         res.status(200).json({ 
           message:'utilisateur trouvé',
           userId: data.id,
+          userRole: data.role,
           userEmail:data.email,
           token: jwt.sign(
             { userId: data.id,

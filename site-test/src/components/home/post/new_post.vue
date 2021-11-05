@@ -30,16 +30,40 @@ export default {
     },
      methods:{
          submitPost(){
+            const userId = localStorage.getItem("userId");
+            const token =localStorage.getItem("token"); 
             let file = document.getElementsByName("file")[0].value;
+
              if(file.length === 0 ){
                  file = "null"
              }
-             const data = {
+            const data= {
+                userId: userId,
                 message : document.getElementsByName("message")[0].value,
-                file : file
-                };
-             console.log(data)
-             console.log("file :"  +file.length)
+                file: file,
+                like:[0],
+                // createDate:Date.now(),
+             }
+             console.log(data);
+             console.log("userId "+ userId);
+             console.log("file "+ file);
+
+
+
+             fetch('http://localhost:3000/api/post', {
+                method : "Post",
+                headers: {
+                     "Content-Type": "application/json" ,
+                     "authorization" : 'Bearer ' + token,
+                     },
+                body: JSON.stringify(data),
+            }) 
+            .then(function(res){return res.json();}) 
+            .then(value => (console.log(value) ))
+            .catch(function(){
+                console.log('erreur de requete');
+            })
+             
 
 
 

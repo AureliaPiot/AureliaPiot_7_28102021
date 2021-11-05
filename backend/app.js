@@ -7,7 +7,6 @@ const db = require("./models/index.js");
 // });
 // db.sequelize.sync();
 
-const userRoutes = require('./route/user.route.js');
 
 app.use(express.json());
 
@@ -19,47 +18,17 @@ app.use((req,res,next)=>{
   next();
 });
 console.log(process.env.ENV)
-// --
-// connexion a la base de donnée mysql de phpMyAdmin
-// DataBase 
-// const mysql = require("mysql");
-// const db = mysql.createConnection({
-//   host: "localhost",
-//   user: "root",
-//   password: "",
-//   database: "projet_7"
-// });
-// db.connect(function(err){
-//   if(err){
-//     console.log('Error connecting to Db');
-//     return;
-//   }
-//   console.log('Connection established');
-// });
-// --
 
-//[avec sequelized] _______________________________________
-
-
-// _______________________________________
-
-
-
+const userRoutes = require('./route/user.route.js');
+const postRoutes = require('./route/post.route.js');
+// const comsRoutes = require('./route/coms.route.js');
 
 
 app.use('/api/user/',userRoutes);
+app.use('/api/post/',postRoutes);
+// app.use('/api/coms/',userRoutes);
 
-//__ Test middlseware recupe des infos user
-// app.use((req, res , next)=>{
-//     db.query('SELECT * FROM user',function(err,rows){
-//         console.log(rows);
-//         let data = rows;
-//         console.log("Outside--"+data.id);
-//         // res.render('userIndex', { title: 'User Information', dataGet: data });
-//         res.json({'info': data });
-//     });
-// });
-//__ recupe des infos user
+
 
 
 

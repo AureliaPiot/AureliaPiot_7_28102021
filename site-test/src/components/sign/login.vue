@@ -50,8 +50,11 @@ export default {
             })    
             .then(function(value){
                 if(value.token){
-                    console.log(value.token);
+                    console.log(value);
                     localStorage.setItem("token",value.token);
+                    localStorage.setItem("userId",value.userId);
+                    localStorage.setItem("role",value.userRole);
+
                     // setTimeout(()=>{this.router.go("home")}, 400);//redirection apres 0.4sec
                     // this.router.push({name: "Home"});
                     // this.$router.go({ name: 'Home', query: { redirect: '/home' } });
