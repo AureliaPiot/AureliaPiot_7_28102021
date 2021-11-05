@@ -4,16 +4,16 @@
 
         <h2>{{ msg }}</h2>
         <div class="info-user col-md-12">
-            <p>info User</p>
+            <p>User name+ lastname</p>
         </div>
         <div class="info-user col-md-12">
-            <p>info User</p>
+            <p>parametre compte</p>
         </div>
         <div class="info-user col-md-12">
-            <p>info User</p>
+            <p>post publier</p>
         </div>
         <div class="info-user col-md-12">
-            <p>info User</p>
+            <p>commentaire publier</p>
         </div>
         <!-- si admin -->
         <div class="info-user col-md-12">

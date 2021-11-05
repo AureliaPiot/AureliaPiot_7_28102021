@@ -1,28 +1,13 @@
 <template>
 
-    <div class="container-fluid">
-             
-<div class="row">
-    <div class="col">
-        {{user.nom}}
-    </div>
-    <div class="col">
-        {{user.prenom}}
-    </div>
-    <div class="col">
-        {{user.email}}
-    </div>
-    <div class="col">
-        {{user.role}}
-    </div>
-    <div class="col">
-       <p>number of post</p>
-    </div>
-    <div class="col">
-       <p>number of comment</p>
-    </div>
-    <div class="col">
-
+<tr>
+    <td>{{user.role}}</td>
+    <td>{{user.nom}}</td>
+    <td>{{user.prenom}}</td>
+    <td>{{user.email}}</td>
+    <td><p>number of post</p></td>
+    <td><p>number of comment</p></td>
+    <td> 
         <div class="row">
             <div class="col">
                 delete
@@ -34,14 +19,12 @@
                 promote
             </div>
         </div>
+    </td>
+</tr>
 
-    </div>
-</div>
+
+
    
-
-
-    </div>
-
 </template>
 
 <script>
@@ -59,10 +42,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.container-fluid{
-    background: white;
-    width: 100%;
-    height: 1vw;
-}
+
 
 </style>

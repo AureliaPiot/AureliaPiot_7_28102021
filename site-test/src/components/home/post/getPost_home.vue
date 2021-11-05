@@ -1,7 +1,8 @@
 <template>
 
     <div class="container">
-        <h2>{{ msg }}</h2>
+        <h2>Get post</h2>
+      <!-- tout le defilement se fera ici -->
         
     </div>
 
@@ -9,7 +10,7 @@
 
 <script>
 export default {
-    name:'news_home',
+    name:'getPost',
     props: {
         msg: String
     }
