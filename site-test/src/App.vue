@@ -10,6 +10,7 @@
         <router-link v-bind:to="{name: 'Sign'}">Sign</router-link> 
         <router-link to="/home">Home</router-link> 
         <router-link to="/about">About</router-link>
+        <button @click="signOut">sign out</button>
       </div>
     </nav>
   </div>
@@ -17,6 +18,18 @@
 
 
 </template>
+
+<script>
+
+export default {
+      methods:{
+        signOut(){
+          localStorage.clear();
+        }
+    },//methods
+
+}
+</script>
 
 <style lang="scss">
 body{

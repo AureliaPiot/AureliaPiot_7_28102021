@@ -1,6 +1,7 @@
 const db =require("../models")
 const Posts= db.posts;
-// const Users= db.users;
+const fs = require('fs');
+
 
 const Op =db.Sequelize.Op;
 
@@ -25,7 +26,7 @@ exports.create = (req,res,err) =>{
       UserId: req.body.userId,
       content : req.body.message,
       attachement: attachement,
-      like:[0],
+      like: req.body.like,
       createDate:Date.now(),
     };
     console.log(post);
@@ -44,10 +45,6 @@ exports.create = (req,res,err) =>{
 
 exports.getAll = (req,res,err) =>{
     console.log('findAll post');
-
-
-    // const name = req.query.name;
-    // let condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
     Posts.findAll({ 
         order: [['id', 'DESC']],
         include: [{
@@ -59,7 +56,7 @@ exports.getAll = (req,res,err) =>{
     })
     .then(data=>{
         res.send(data);
-        console.log(data)
+        // console.log(data)
     })
     .catch(err=> {
         res.status(500).send({message: err.message || " error canot found any user"})
@@ -68,7 +65,27 @@ exports.getAll = (req,res,err) =>{
 };
 
 
-exports.getOne = (req,res,err) =>{};
+exports.getOne = (req,res,err) =>{
+    console.log('find one post');
+    // noter les controoler avec de params (voir routes)
+    const id = req.params.id;
+    Posts.findOne({  where: { id: id} })
+    .then(data=>{res.send(data);console.log(data)})
+    .catch(err=> {
+        res.status(500).send({message: err.message || " error canot found any user"})
+    })
+};
+
 exports.update = (req,res,err) =>{};
-exports.delete = (req,res,err) =>{};
+
+exports.delete = (req,res,err) =>{
+    
+
+    fs.unlink(`images/${filename}`,()=>{
+        Sauce.deleteOne({_id: req.params.id })
+        .then(() => res.status(200).json({message: 'sauce supprimée'}))
+        .catch(error => res.status(404).json({error}));
+    });
+
+};
 

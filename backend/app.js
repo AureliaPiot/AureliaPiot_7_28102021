@@ -3,9 +3,12 @@ const app = express();
 const fs = require("fs");
 
 const db = require("./models/index.js");
+// pour vide et synchoniser les tables par rapport aux model------
+
 // db.sequelize.sync({ force: true }).then(() => {
 //   console.log("Drop and re-sync db.");
 // });
+
 // db.sequelize.sync();
 
 

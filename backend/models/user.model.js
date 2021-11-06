@@ -36,6 +36,11 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.ENUM('mute','user','admin'),
         defaultValue: 'user'
       },
+      profilePic: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        defaultValue :'http://localhost:3000/images/defaultPic/default.jpg'
+      },
     });
   
     return Users;

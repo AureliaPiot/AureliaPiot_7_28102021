@@ -86,7 +86,8 @@ exports.create = (req,res,err) =>{
           prenom: req.body.prenom,
           email: mail,
           password: req.body.password,
-          role:'user'
+          role:'user',
+          profilPic:`http://localhost:3000/images/defaultPic/default.jpg`
         };
         
         Users.create(user)

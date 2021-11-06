@@ -3,32 +3,30 @@
 <div class="post">
     <div class="headerPost d-flex">
        
-        <!-- <div class="profilePic"> -->
-            <img class="profilePic" v-bind:src="post.User.profilePic" alt="">
-        <!-- </div> -->
-       <p> {{post.User.nom}}</p>
-       <p> {{post.User.prenom}}</p>
-       <p> {{Date(post.createDate).toString().slice(0,16)}}</p>
+        <div class="profilePic">
+            <!-- <img v-bind:src="none" alt=""> -->
 
-        <button class="edit">edit</button>
-        <!-- ouvre affiche un composant qui recupere les donnéés dans le form  /comme une fenetre alert?-->
-        <button class="delet" @click.prevent="deletePost">delete</button>
-        <!-- ouvre affiche un composant qui recupere les donnéés dans le form -->
+        </div>
 
-    </div>
+
     <div class="bodyPost">
-        <p>
+        <!-- reprendre les donnée entrée et dans un champ textarea value: value et enregistrer -->
+        <!-- <p>
             {{post.content}}
         </p>
-        <!-- <div class="imgPost" v-if="post.attachement !== 'null'"> -->
-            <img class="imgPost" :src="post.attachement" alt="">
-        <!-- </div> -->
+
+        reprendre les donnée de l'input avec value et  enregistrer
+        <div class="imgPost" v-if="post.attachement !== 'null'">
+            <img :src="post.attachement" alt="">
+        </div> -->
     </div>
+
+
     <div class="footerPost d-flex align-items-center">
-        <!-- <div class="row"> -->
+
             <div class="col like">Likes</div>
             <div class="col comments">Comments</div>
-        <!-- </div> -->
+
     </div>    
 
 </div>
@@ -66,7 +64,6 @@ export default {
     border-radius: 8px;
     img{
         width: 100%;
-        height: 100%;
     }
 
     .headerPost{
@@ -83,7 +80,7 @@ export default {
         min-height: 4rem;
         padding: 1rem;
         .imgPost{
-            width: auto;
+            max-width: 80%;
             max-height: 30vw;
         }
 

@@ -44,7 +44,7 @@ export default {
                 message : document.getElementsByName("message")[0].value,
                 // file: file.name,
                 file: file,
-                like:[0],
+                like:JSON.stringify({'userLike':[0]}),
                 // createDate:Date.now(),
              }
             const dataform = new FormData();
@@ -54,11 +54,11 @@ export default {
             dataform.append('userId',userId);
             dataform.append('message',data.message);
             dataform.append('file',file);
-            dataform.append('like',[0]);
+            dataform.append('like',data.like);
 
 
 
-            //  console.log(data);
+             console.log(typeof(data.like));
             //  console.log("userId "+ userId);
             //  console.log('FILE--------------')
             //  console.log(file);
