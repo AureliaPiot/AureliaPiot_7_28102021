@@ -1,32 +1,43 @@
-// action d'inscription + connexion [+token identification]
+// /verifier si c'est l'user ou un admin
 
 const jwt = require('jsonwebtoken');
 
 
-module.exports = (req, res, next) => {
-  try {
-  
+exports.user = (req, res, next) => {
     const token = req.headers.authorization.split(' ')[1];
     const decodedToken = jwt.verify(token,process.env.TOKEN);
     const userId = decodedToken.userId;
 
-
-    if (req.body.userId && req.body.userId !== userId) {
-    console.log('erreur');
-
-
-      throw 'Invalid user ID';
-
-    } else {
+    if (req.body.userId && req.body.userId != userId ) {
+    console.log(req.body.userId);
+    console.log(userId);
+    
+    console.log('user n est pas connecter');
+    
+    res.status(401).json({ error: error | 'Requete  !'});
+    
+  } else {
+    
+    // console.log(file.mimetype)
+    console.log('user authentifier');
+    console.log(req.body.userId +" + "+ userId)
+    console.log(req.body)
 
       next();
     }
-  } catch(error) {
-    res.status(401).json({ error: error | 'Requete non authentifiée !'});
-    console.log('User non authentifiée');
-  }
-  
+}
 
-};
-// try and catch, car plusieurs elements peuvent posé probleme qui seront géré avec try/catch
-// catch renvoie juste une erreur 401 qui correspond a un probleme d'authentifications
+exports.admin = (req, res, next) =>{
+  const token = req.headers.authorization.split(' ')[1];
+  const decodedToken = jwt.verify(token,process.env.TOKEN);
+  const role = decodedToken.role;
+
+  if (role !== 'admin') {
+    console.log('user n est pas admin');
+    res.status(401).json({ error: error | 'not admin'});
+    } else {
+    console.log('admin authentifier');
+
+      next();
+    }
+}

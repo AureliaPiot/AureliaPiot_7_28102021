@@ -8,12 +8,23 @@ const Op =db.Sequelize.Op;
 exports.create = (req,res,err) =>{
     console.log('create-post----------');
     console.log(req.body);
+    console.log(req.body.userId);
+
     console.log('create- post----------');
+
+    let  attachement ="";
+
+    if(req.body.file !=="null"){
+        attachement = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+    }
+    else{
+        attachement =req.body.file;
+    }
 
     const post ={
       UserId: req.body.userId,
       content : req.body.message,
-      attachement: req.body.file,
+      attachement: attachement,
       like:[0],
       createDate:Date.now(),
     };

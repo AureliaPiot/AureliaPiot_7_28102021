@@ -8,11 +8,12 @@
        <p> {{Date(post.createDate).toString().slice(0,16)}}</p>
     </div>
     <div class="bodyPost">
-        <div class="imgPost" v-if="!post.attachement == null">
-            {{post.attachement}}
-
+        <p>
+            {{post.content}}
+        </p>
+        <div class="imgPost" v-if="post.attachement !== 'null'">
+            <img :src="post.attachement" alt="">
         </div>
-        {{post.content}}
     </div>
     <div class="footerPost d-flex align-items-center">
         <!-- <div class="row"> -->
@@ -43,11 +44,13 @@ export default {
     },//methods
 
 
+
+
 }
 </script>
 
 <style scoped lang="scss">
-
+// gere le post en grid
 .post{
     background: white;
     margin: 2rem 0;
@@ -63,7 +66,9 @@ export default {
         
         min-height: 4rem;
         padding: 1rem;
-
+        img{
+            width: 80%;
+        }
     }
     .footerPost{
         text-align: center;
