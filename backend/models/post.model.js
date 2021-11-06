@@ -25,13 +25,17 @@ module.exports = (sequelize, Sequelize) => {
       },
       like: {
         allowNull:false,
-        type: Sequelize.INTEGER,
-        defaultValue: 0
+        type: Sequelize.STRING,
+        defaultValue: '[0]'
       },
       createDate: {
         allowNull:false,
         type: Sequelize.INTEGER,
         defaultValue: 0
+      },
+      comments: {
+        allowNull:true,
+        type: Sequelize.STRING,
       },
     }
     );
