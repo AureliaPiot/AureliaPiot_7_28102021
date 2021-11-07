@@ -33,31 +33,34 @@ export default {
         }  
     },
 
-    methods:{
+    // methods:{
+    mounted() {
         // get all post
-        getPost(){
+        // getPost(){
             console.log('get post');
             console.log(this.query);
 
-            fetch('http://localhost:3000/api/post/'+this.query, {
-                method : "Get",
+
+            this.axios.get('http://localhost:3000/api/post/'+this.query, {
                 headers: { 
                     "Content-Type": "application/json",
                     "authorization" : 'Bearer ' + localStorage.getItem('token'), 
                 },
             }) 
-            .then(function(res){
-                return res.json();
-            })    
-            .then(value => (this.data = value, console.log(this.data)))
+            .then(response => {
+                this.data = response.data
+                // console.log(response)
+                // console.log(response.data);
+            })
             .catch(function(){
                 console.log('erreur de requete');
             })
-        },//getUsers
+
+        // },//getUsers
     },//methods
-  beforeMount(){
-    this.getPost();
-  },
+//   beforeMount(){
+//     this.getPost();
+//   },
 }
 </script>
 

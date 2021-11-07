@@ -34,7 +34,7 @@ exports.create = (req,res) =>{
 
     Posts.create(post)
          .then(data=>{
-            res.status(201).send(data);
+            res.status(201).send("post créer");
         })
         .catch(err=> {
             res.status(500).send({message: err.message || "cannot create an account"})

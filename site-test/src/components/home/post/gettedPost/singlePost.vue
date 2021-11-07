@@ -6,14 +6,15 @@
         <!-- <div class="profilePic"> -->
             <img class="profilePic" v-bind:src="post.User.profilePic" alt="">
         <!-- </div> -->
-       <p> {{post.User.nom}}</p>
+        <router-link :to="{ name: 'userPage',params:{id: post.User.id }}">{{post.User.nom}}</router-link>
+
        <p> {{post.User.prenom}}</p>
        <p> {{Date(post.createDate).toString().slice(0,16)}}</p>
 
         <div class="edit"  v-if="this.isCreator == post.UserId">
             <button class="edit">edit</button>
             <!-- ouvre affiche un composant qui recupere les donnéés dans le form  /comme une fenetre alert?-->
-            <button class="delet" @click.prevent="deletePost">delete</button>
+            <button class="delete" @click.prevent="deletePost">delete</button>
             <!-- ouvre affiche un composant qui recupere les donnéés dans le form -->
         </div>
 
@@ -56,10 +57,10 @@ export default {
         }
     },
     mounted(){
-        console.log(this.isCreator);
-        console.log(this.post.UserId)
+        // console.log(this.isCreator);
+        // console.log(this.post.UserId)
 
-        console.log(JSON.parse(this.postLike).userLike);
+        // console.log(JSON.parse(this.postLike).userLike);
         const parse = JSON.parse(this.postLike).userLike;
         this.like = parse.length;
     },

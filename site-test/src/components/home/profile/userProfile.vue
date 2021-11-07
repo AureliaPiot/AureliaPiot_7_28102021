@@ -1,12 +1,27 @@
 <template>
     <div>
         <div class="root">
-            <h1 class="titre">{{userData.nom}} {{userData.prenom}}</h1>
+
+            <div class="row">
+                <h1 class="titre">{{userData.nom}} {{userData.prenom}}</h1>
+                <input v-if="this.editName" type="text" class="form-control" id="nom_input"  placeholder="nom" name="nom_Edit"  v-bind:value="userData.nom" required>
+                <input v-if="this.editName" type="text" class="form-control" id="prenom_input"  placeholder="prenom" name="prenom_Edit" v-bind:value="userData.prenom"  required>
+
+                <button class="edit" v-if="this.isUser == userData.id" @:click.prevent="editUserName">edit</button>
+            </div>
+
             <img class="pic" v-bind:src="userData.profilePic" v-bind:alt="userData.nom">
             <div class="test" >
                 <p>{{userData.email}}</p>
             </div>
+             <div class="edit"  v-if="this.isUser == userData.id">
+                <button class="edit">edit</button>
+                <!-- ouvre affiche un composant qui recupere les donnéés dans le form  /comme une fenetre alert?-->
+                <button class="delete" @click.prevent="deleteUser">delete</button>
+                <!-- redirection vers le page de connexion-->
+            </div>      
         </div>
+
         <getPost :query="this.id" />
     </div>
 
@@ -32,9 +47,11 @@ export default {
     },
    data(){  
        return{
+            isUser :localStorage.getItem('userId'),
             userData :"",
             id :  this.$route.params.id,
 
+            editName : false,
         }
   },
   props: {
@@ -59,10 +76,17 @@ export default {
                 return res.json();
             })    
             .then(value => (this.userData = value, console.log(this.userData)))
+
             .catch(function(){
                 console.log('erreur de requete');
             })
         },//getUsersdata
+
+        editUserName(){
+            this.editName = true
+
+        },//getUsersdata
+
 
     },//methods
     beforeMount(){

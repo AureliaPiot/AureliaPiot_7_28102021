@@ -53,23 +53,26 @@ export default {
             dataform.append('like',data.like);
 
          
-            fetch('http://localhost:3000/api/post', {
-                method : "Post",
+            // fetch('http://localhost:3000/api/post', {
+            //     method : "Post",
+            this.axios.post('http://localhost:3000/api/post',dataform, {
                 headers: {
                      "authorization" : 'Bearer ' + token,
                      },
-                body: dataform,
+                // body: dataform,
             }) 
-            .then(function(res){return res.json();}) 
-            .then(value => (console.log(value) ))
-            .catch(function(){
-                console.log('erreur de requete');
+            // .then(function(res){return res.json();}) 
+            // .then(value => (console.log(value) ))
+            // .catch(function(){
+            //     console.log('erreur de requete');
+            // })
+            .then(function(response) {
+                console.log(response.data);
             })
-             
-
-
-
-         }
+            .catch(function (error) {
+                console.log(error);
+            });
+         },
      }
 }
 </script>
