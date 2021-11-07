@@ -2,7 +2,7 @@
 
     <div class="container">
         <h2>new post</h2>
-        <form class="form-inline" enctype="multipart/form-data">
+        <form id="newPost" class="form-inline" enctype="multipart/form-data">
 
 
             <div class="form-group">
@@ -33,6 +33,8 @@ export default {
             const userId = localStorage.getItem("userId");
             const token =localStorage.getItem("token"); 
             let file = document.getElementsByName("file")[0].files[0];
+
+
 
             if(file === undefined ){
                  file = "null"
@@ -68,6 +70,7 @@ export default {
             // })
             .then(function(response) {
                 console.log(response.data);
+                document.getElementById("newPost").reset();
             })
             .catch(function (error) {
                 console.log(error);
