@@ -56,19 +56,11 @@ export default {
             dataform.append('file',file);
             dataform.append('like',data.like);
 
-
-
-             console.log(typeof(data.like));
-            //  console.log("userId "+ userId);
-            //  console.log('FILE--------------')
-            //  console.log(file);
-            //  console.log('FILE--------------')
-
+         
              fetch('http://localhost:3000/api/post', {
                 method : "Post",
                 headers: {
-                    //  "Content-Type": "application/json" ,
-                    //  "Content-Type": "multipart/form-data",
+
                      "authorization" : 'Bearer ' + token,
                      },
                 // body: JSON.stringify(data),

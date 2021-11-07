@@ -20,10 +20,7 @@ exports.user = (req, res, next) => {
     
     // console.log(file.mimetype)
     console.log('user authentifier');
-    console.log(req.body.userId +" + "+ userId)
-    console.log(req.body)
-
-      next();
+    next();
     }
 }
 

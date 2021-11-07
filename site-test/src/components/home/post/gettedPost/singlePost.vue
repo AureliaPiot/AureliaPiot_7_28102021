@@ -20,8 +20,8 @@
         <p>
             {{post.content}}
         </p>
-        <!-- <div class="imgPost" v-if="post.attachement !== 'null'"> -->
-            <img class="imgPost" :src="post.attachement" alt="">
+        <!-- <div class="imgPost" > -->
+            <img v-if="post.attachement !== 'null'" class="imgPost" :src="post.attachement" alt="">
         <!-- </div> -->
     </div>
     <div class="footerPost d-flex align-items-center">
@@ -46,6 +46,26 @@ export default {
         deletePost(){
             if(confirm('you sure ?')){
                 console.log('delete');
+                
+                // const userId = localStorage.getItem("userId");
+                const token =localStorage.getItem("token"); 
+
+                fetch('http://localhost:3000/api/post/'+this.post.id, {
+                    method : "DELETE",
+                    headers: {
+                        "Content-Type": "application/json" ,
+                        "authorization" : 'Bearer ' + token,
+                        },
+                    // body: JSON.stringify(data),
+                    // body: userId,
+
+                    // file:file
+                }) 
+                .then(function(res){return res.json();}) 
+                .then(value => (console.log(value) ))
+                .catch(function(){
+                    console.log('erreur de requete');
+                })
             }
         }
 
@@ -85,6 +105,8 @@ export default {
         .imgPost{
             width: auto;
             max-height: 30vw;
+            max-width: 80%;
+
         }
 
     }

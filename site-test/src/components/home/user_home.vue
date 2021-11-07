@@ -4,7 +4,7 @@
 
         <h2>{{ msg }}</h2>
         <div class="info-user col-md-12">
-            <p>User name+ lastname</p>
+            <p>lien home</p>
         </div>
         <div class="info-user col-md-12">
             <p>parametre compte</p>
