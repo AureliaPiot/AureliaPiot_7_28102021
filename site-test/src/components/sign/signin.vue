@@ -52,6 +52,7 @@ export default {
             })    
             .then(function(value){
                     console.log(value.message);
+                   this.$router.replace({ name: "home" });
             })
    
             .catch(function(){
@@ -59,6 +60,10 @@ export default {
             })
 
         },
+        redirectHome(){
+            this.router.push({name: 'Home'});
+            console.log('lezgo')
+        }
 
   }
 }
