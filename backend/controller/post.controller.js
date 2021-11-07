@@ -92,8 +92,6 @@ exports.getAllByUser = (req,res) =>{
 
 
 
-
-
 exports.getOne = (req,res) =>{
     console.log('find one post');
     // noter les controoler avec de params (voir routes)
@@ -105,6 +103,8 @@ exports.getOne = (req,res) =>{
     })
 };
 
+
+
 exports.update = (req,res) =>{};
 
 exports.delete = (req,res) =>{
@@ -113,7 +113,7 @@ exports.delete = (req,res) =>{
     .then(data =>{
         console.log(req.params);
         console.log(data);
-        // if(data !== null){
+        if(data !== null){
             // console.log(data.attachement == "null");
             
             if(data.attachement == "null"){
@@ -121,27 +121,32 @@ exports.delete = (req,res) =>{
                 
                 Posts.destroy( {where : {id: req.params.id} })
                 .then(() => res.status(200).send({message: 'post supprimé'}))
-                .catch(error => res.status(404).send({message:  "error cannot delete post"}));
-            return
-                
+                .catch(err=> { res.status(404).send({message: err.message || " error canot delete post"}) });
+
+            // return
             }
             else{
                 console.log('else');
-                
                 const filename = data.attachement.split("/images/")[1];
                 fs.unlink(`../images/${filename}`,()=>{
                     console.log('unlink');
                     
                     Posts.destroy( {where : {id: req.params.id} })
                     .then(() => res.status(200).send({message: 'post supprimé'}))
-                    .catch(error => res.status(404).send({message:  "error cannot delete post"}));
+                    .catch(err=> { res.status(404).send({message: err.message || " error canot delete post"}) });
                 });
-            return
+            // return
 
             }
-        // }
+        }else{
+             res.status(404).send({message: "error canot find any post"}) 
+        }
             
     })
-    .catch(console.log('delete error'),res.status(500).send({message:  "error cannot found any post"}))
+    .catch(err=> { res.status(404).send({message: err.message || " error canot find any post"}) });
+
+
+
+    // si la longueur du tableau retourner par les likes est spperieur a 1 alors on chop tout les commentaire lier au post et on les supprime aussi
 }
 
