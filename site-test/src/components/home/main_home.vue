@@ -1,22 +1,20 @@
 <template>
 
-    <div class="container">
-        <userProfil/>
-        <getPost/>
+    <div >
+        <newPost/>
+        <getPost query="all"/>
     </div>
 
 </template>
 
 <script>
-
+import newPost from '@/components/home/post/new_post.vue'
 import getPost from '@/components/home/post/get_post.vue'
-import userProfile from '@/components/home/profile/userProfile.vue'
-
 
 export default {
     name:'main_home',
     components:{
-        userProfile,
+        newPost,
         getPost
     },
     props: {

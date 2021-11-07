@@ -1,6 +1,10 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router';
 // import Home from '../views/Home.vue'
-import Sign from '../views/Sign.vue'
+import Sign from '../views/Sign.vue';
+
+
+
+
 
 
 const routes = [
@@ -15,27 +19,35 @@ const routes = [
     path: '/sign',
     name: 'Sign',
     component: Sign,
+    // if connected redirect to home
   },
   // protection authentification
   {
     path: '/home',
     name: 'Home',
-    // children: [
-    //   {
-    //     // UserProfile will be rendered inside User's <router-view>
-    //     // when /user/:id/profile is matched
-    //     path: '',
-    //     // component: UserProfile
-    //     component: () => import('../components/home/post/getPost_home.vue')
-    //   },
-    //   {
-    //     // UserProfile will be rendered inside User's <router-view>
-    //     // when /user/:id/profile is matched
-    //     path: '/new/post',
-    //     // component: UserProfile
-    //     component: () => import('../components/home/post/new_post.vue')
-    //   },
-    // ],
+    children: [
+      // they will be rendered inside User's <router-view>
+      {
+        // when /user/:id is matched
+        path: '',
+        name: 'homePage',
+        // alias: '/user',
+        // faire un alis pour pas voir les id
+        // component: UserProfile
+        component: () => import('../components/home/main_home.vue')
+        
+
+      },
+      {
+        // when /user/:id is matched
+        path: '/user/:id',
+        name: 'userPage',
+        // alias: '/user',
+        // faire un alis pour pas voir les id
+        // component: UserProfile
+        component: () => import('../components/home/profile/userProfile.vue')
+      },
+    ],
 
     meta: {
       reqAuth: true,
@@ -64,6 +76,7 @@ const routes = [
 
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   },
+
   {
     path: '/admin',
     name: 'Admin',

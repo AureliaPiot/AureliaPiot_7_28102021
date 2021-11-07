@@ -24,9 +24,8 @@ export default {
     components: {
     post
   },
-
     props: {
-        msg: String
+        query: String
     },
       data(){
         return{ 
@@ -38,7 +37,9 @@ export default {
         // get all post
         getPost(){
             console.log('get post');
-            fetch('http://localhost:3000/api/post/', {
+            console.log(this.query);
+
+            fetch('http://localhost:3000/api/post/'+this.query, {
                 method : "Get",
                 headers: { 
                     "Content-Type": "application/json",
@@ -56,7 +57,6 @@ export default {
     },//methods
   beforeMount(){
     this.getPost();
-
   },
 }
 </script>

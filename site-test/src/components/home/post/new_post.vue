@@ -34,39 +34,31 @@ export default {
             const token =localStorage.getItem("token"); 
             let file = document.getElementsByName("file")[0].files[0];
 
-
-
-             if(file === undefined ){
+            if(file === undefined ){
                  file = "null"
-             }
+            }
             const data= {
                 userId: userId,
                 message : document.getElementsByName("message")[0].value,
-                // file: file.name,
                 file: file,
-                like:JSON.stringify({'userLike':[0]}),
+                like:JSON.stringify({userLike:[0]}),                
                 // createDate:Date.now(),
              }
+                // console.log(data.like);
+                // console.log(JSON.parse(data.like));
             const dataform = new FormData();
-            // for(let elt in data){
-            //     dataform.append(elt,data[elt])
-            // }
             dataform.append('userId',userId);
             dataform.append('message',data.message);
             dataform.append('file',file);
             dataform.append('like',data.like);
 
          
-             fetch('http://localhost:3000/api/post', {
+            fetch('http://localhost:3000/api/post', {
                 method : "Post",
                 headers: {
-
                      "authorization" : 'Bearer ' + token,
                      },
-                // body: JSON.stringify(data),
                 body: dataform,
-
-                // file:file
             }) 
             .then(function(res){return res.json();}) 
             .then(value => (console.log(value) ))

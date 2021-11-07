@@ -49,9 +49,6 @@ exports.getAll = (req,res) =>{
         order: [['id', 'DESC']],
         include: [{
             model: db.users,
-            // through: {
-            //     attributes: ['id','UserId'],
-            // },
         }],
     })
     .then(data=>{
@@ -63,6 +60,38 @@ exports.getAll = (req,res) =>{
     })
 
 };
+
+
+
+
+exports.getAllByUser = (req,res) =>{
+    console.log('findAll  post by user');
+    const userId = req.params.user;
+    console.log(userId);
+
+    Posts.findAll({ 
+        order: [['id', 'DESC']],
+        include: [{
+            model: db.users,
+            where:{id : userId}
+        }],
+    })
+    .then(data=>{
+        console.log("data");
+        console.log(data);
+        console.log("data");
+
+        res.send(data);
+        // console.log(data)
+    })
+    .catch(err=> {
+        res.status(500).send({message: err.message || " error canot found any user"})
+    })
+
+};
+
+
+
 
 
 exports.getOne = (req,res) =>{

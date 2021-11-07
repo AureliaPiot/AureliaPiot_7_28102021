@@ -24,9 +24,10 @@
             <img v-if="post.attachement !== 'null'" class="imgPost" :src="post.attachement" alt="">
         <!-- </div> -->
     </div>
-    <div class="footerPost d-flex align-items-center">
+    <div class="footerPost d-flex align-items-center" v-if="this.isCreator == post.Userid">
         <!-- <div class="row"> -->
-            <div class="col like">Likes</div>
+            <div class="col like">{{typeof(this.post.like)}}</div>
+            <div class="col ">{{typeof( JSON.parse(this.post.like))}}</div>
             <div class="col comments">Comments</div>
         <!-- </div> -->
     </div>    
@@ -41,6 +42,16 @@ export default {
     name:'singlePost',
     props: {
         post: Object
+    },
+    data(){  
+        return{
+            isCreator :localStorage.getItem('id'),
+            like : this.likeArray,
+            likeArray : JSON.parse(this.post.like),
+            // .UserLike
+            // nbrLike: this.likeArray.length
+
+        }
     },
     methods:{
         deletePost(){

@@ -147,7 +147,7 @@ exports.findOne = (req,res)=>{
     console.log("id  "+id);
 
 
-    Users.findOne({ where: { id : 1} })
+    Users.findOne({ where: { id : id} ,  attributes: {exclude: ['password']}, })
     .then(data=>{
         if (data) {
             res.send(data);

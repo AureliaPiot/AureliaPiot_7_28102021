@@ -8,7 +8,10 @@ const multer = require("../middleware/multer-config.js");
 // Create
 router.post('/',auth.user,multer,postCtrl.create);
 // get all
-router.get('/',auth.user,postCtrl.getAll);
+router.get('/all',auth.user,postCtrl.getAll);
+// get all where user = query
+router.get('/:user',auth.user,postCtrl.getAllByUser);
+
 // get one 
 router.get('/:id',auth.user,postCtrl.getOne);
 // update with id
