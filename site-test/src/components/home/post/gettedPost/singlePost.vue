@@ -10,10 +10,12 @@
        <p> {{post.User.prenom}}</p>
        <p> {{Date(post.createDate).toString().slice(0,16)}}</p>
 
-        <button class="edit">edit</button>
-        <!-- ouvre affiche un composant qui recupere les donnéés dans le form  /comme une fenetre alert?-->
-        <button class="delet" @click.prevent="deletePost">delete</button>
-        <!-- ouvre affiche un composant qui recupere les donnéés dans le form -->
+        <div class="edit"  v-if="this.isCreator == post.UserId">
+            <button class="edit">edit</button>
+            <!-- ouvre affiche un composant qui recupere les donnéés dans le form  /comme une fenetre alert?-->
+            <button class="delet" @click.prevent="deletePost">delete</button>
+            <!-- ouvre affiche un composant qui recupere les donnéés dans le form -->
+        </div>
 
     </div>
     <div class="bodyPost">
@@ -24,10 +26,10 @@
             <img v-if="post.attachement !== 'null'" class="imgPost" :src="post.attachement" alt="">
         <!-- </div> -->
     </div>
-    <div class="footerPost d-flex align-items-center" v-if="this.isCreator == post.Userid">
+    <div class="footerPost d-flex align-items-center">
         <!-- <div class="row"> -->
-            <div class="col like">{{typeof(this.post.like)}}</div>
-            <div class="col ">{{typeof( JSON.parse(this.post.like))}}</div>
+            <!-- <div class="col like">{{this.like}}</div> -->
+            <div class="col ">{{ this.like}}</div>
             <div class="col comments">Comments</div>
         <!-- </div> -->
     </div>    
@@ -45,14 +47,23 @@ export default {
     },
     data(){  
         return{
-            isCreator :localStorage.getItem('id'),
-            like : this.likeArray,
-            likeArray : JSON.parse(this.post.like),
-            // .UserLike
-            // nbrLike: this.likeArray.length
+            isCreator :localStorage.getItem('userId'),
+            postLike : this.post.like,
+             like : "",
+            
+
 
         }
     },
+    mounted(){
+        console.log(this.isCreator);
+        console.log(this.post.UserId)
+
+        console.log(JSON.parse(this.postLike).userLike);
+        const parse = JSON.parse(this.postLike).userLike;
+        this.like = parse.length;
+    },
+
     methods:{
         deletePost(){
             if(confirm('you sure ?')){

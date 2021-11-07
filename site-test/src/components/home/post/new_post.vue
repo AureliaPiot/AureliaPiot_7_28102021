@@ -41,7 +41,7 @@ export default {
                 userId: userId,
                 message : document.getElementsByName("message")[0].value,
                 file: file,
-                like:JSON.stringify({userLike:[0]}),                
+                like:JSON.stringify({userLike:[]}),                
                 // createDate:Date.now(),
              }
                 // console.log(data.like);
