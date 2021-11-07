@@ -15,7 +15,7 @@
             </div>
 
             <button v-on:click.prevent="submitPost">Submit</button>
-
+<!-- au click refresh le composant get post et vider les inputs -->
         </form>
         
     </div>
