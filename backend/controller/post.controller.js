@@ -127,8 +127,10 @@ exports.delete = (req,res) =>{
             }
             else{
                 console.log('else');
+                
                 const filename = data.attachement.split("/images/")[1];
-                fs.unlink(`../images/${filename}`,()=>{
+                console.log(filename);
+                fs.unlink(`images/${filename}`,()=>{
                     console.log('unlink');
                     
                     Posts.destroy( {where : {id: req.params.id} })

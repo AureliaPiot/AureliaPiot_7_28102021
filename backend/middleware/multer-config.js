@@ -12,13 +12,9 @@ const MIME_TYPES = {
       
     },
     filename: (req, file, callback) => {
-      console.log('filename')
-
-
-      const name = file.originalname.split(' ').join('_');
-    //   const name = JSON.parse(req.body.post).name.replaceAll(regexInput, "-");
+      // const name = file.originalname.split(' ').join('_');
       const extension = MIME_TYPES[file.mimetype];
-      callback(null,name+"_"+ Date.now() + '.' + extension);
+      callback(null, Date.now() + '.' + extension);
     }
   });
   
