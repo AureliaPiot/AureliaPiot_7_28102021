@@ -1,17 +1,19 @@
 <template>
 
 <div class="post">
-    <div class="headerPost d-flex">
-       
+    <div class="headerPost ">
+       <div class="userData">
+
         <!-- <div class="profilePic"> -->
-            <img class="profilePic" v-bind:src="post.User.profilePic" alt="">
+        <img class="profilePic" v-bind:src="post.User.profilePic" alt="">
         <!-- </div> -->
         <router-link :to="{ name: 'userPage',params:{id: post.User.id }}">{{post.User.nom}}</router-link>
 
        <p> {{post.User.prenom}}</p>
        <p> {{Date(post.createDate).toString().slice(0,16)}}</p>
 
-        <div class="edit"  v-if="this.isCreator == post.UserId">
+       </div>
+        <div class="editPost"  v-if="this.isCreator == post.UserId">
             <button class="edit">edit</button>
             <!-- ouvre affiche un composant qui recupere les donnéés dans le form  /comme une fenetre alert?-->
             <button class="delete" @click.prevent="deletePost">delete</button>
@@ -107,41 +109,74 @@ export default {
     margin: 2rem 0;
     padding: 2rem;
     border-radius: 8px;
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    //   grid-template-rows: 4vw 1fr;
+    grid-template-areas: "header header"
+                        "body body"
+                        "footer footer";
+
+
     img{
         width: 100%;
         height: 100%;
     }
 
     .headerPost{
+    grid-area: header;
+    background-color:rgba(0, 0, 255, 0.26) ;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 4vw;
+    grid-template-areas: "userData editPost";
+
+        .userData{
+        grid-area: userData;
+        display:flex;
+        }
+        .editPost{
+            grid-area: editPost;
+        }
+
         p{
             margin-right: 1rem;
         }
         .profilePic{
-            width: 3rem;
-            // height: 1rem;
+            width: 4rem;
+            height: 4rem;
+            border-radius: 50%;
+        }
+        .editPost{
+            justify-self: flex-end;
         }
     }
     .bodyPost{
+        grid-area: body;
+        background-color:rgba(51, 255, 0, 0.26) ;
         
+        display: flex;
+        flex-direction: column;
+
         min-height: 4rem;
         padding: 1rem;
         .imgPost{
             width: auto;
             max-height: 30vw;
-            max-width: 80%;
+            max-width: 100%;
+            align-self: center;
 
         }
 
     }
     .footerPost{
+        grid-area: footer;
+        background-color:rgba(255, 166, 0, 0.26) ;
+
         text-align: center;
         min-height: 4rem;
-        background: rgb(237, 240, 243);
+        // background: rgb(237, 240, 243);
         border-top: 1px solid rgb(223, 223, 223);
         border-bottom: 1px solid rgb(223, 223, 223);
-
-
-
 
     }
 

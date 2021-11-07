@@ -2,25 +2,34 @@
 
 const jwt = require('jsonwebtoken');
 
+exports.connect = (req, res, next) => {
+  const token = req.headers.authorization.split(' ')[1];
+  console.log(token);
+
+
+  if(token !== null) {
+  next();
+  console.log('utilisateur connecté');
+} else {
+  console.log('utilisateur non connecté');
+  res.status(401).json({ error: error | 'Requete  !'});
+  }
+}
+
 
 exports.user = (req, res, next) => {
     const token = req.headers.authorization.split(' ')[1];
     const decodedToken = jwt.verify(token,process.env.TOKEN);
-    const userId = decodedToken.userId;
+    const role = decodedToken.role;
 
-    if (req.body.userId && req.body.userId != userId ) {
-    console.log(req.body.userId);
-    console.log(userId);
-    
-    console.log('user n est pas connecter');
-    
-    res.status(401).json({ error: error | 'Requete  !'});
-    
-  } else {
-    
-    // console.log(file.mimetype)
-    console.log('user authentifier');
+    console.log(role);
+
+    if(role === 'user'|| role === 'admin') {
     next();
+    console.log('action autorisé');
+  } else {
+    console.log('action non autorisé');
+    res.status(401).json({ message:"action non autorisé"});
     }
 }
 
