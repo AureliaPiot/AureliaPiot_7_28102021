@@ -6,15 +6,13 @@
 
 
             <div class="form-group">
-                <label for="message">message</label>
+                <!-- <label for="message">message</label> -->
                 <textarea class="form-control" id="message" rows="3" name="message" required></textarea>
             </div>
-            <div class="form-group">
-                <input type="file" class="form-control-file" id="file" name="file">
-                <!-- afficher le fichier si un est entré! -->
+            <div class="row justify-content-between">
+                <input type="file"  class="btn btn-outline-primary w30" id="file" name="file">
+                <button class="btn btn-outline-primary w30" v-on:click.prevent="submitPost">Submit</button>
             </div>
-
-            <button v-on:click.prevent="submitPost">Submit</button>
 <!-- au click refresh le composant get post et vider les inputs -->
         </form>
         
@@ -80,5 +78,9 @@ export default {
     padding: 1rem;
     border-radius: 8px;
     margin-bottom: 2rem;
+}
+.w30{
+    width: 30%;
+    background: rgba(0, 0, 255, 0.034);
 }
 </style>

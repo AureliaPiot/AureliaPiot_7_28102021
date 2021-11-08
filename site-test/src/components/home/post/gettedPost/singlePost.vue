@@ -7,34 +7,31 @@
         <!-- <div class="profilePic"> -->
         <img class="profilePic" v-bind:src="post.User.profilePic" alt="">
         <!-- </div> -->
-        <router-link :to="{ name: 'userPage',params:{id: post.User.id }}">{{post.User.nom}}</router-link>
+        <router-link class="name" :to="{ name: 'userPage',params:{id: post.User.id }}">{{post.User.nom}}</router-link>
 
-       <p> {{post.User.prenom}}</p>
-       <p> {{Date(post.createDate).toString().slice(0,16)}}</p>
+       <!-- <p class="name"> {{post.User.prenom}}</p> -->
+       <p class="date"> {{Date(post.createDate).toString().slice(0,16)}}</p>
 
        </div>
-        <div class="editPost"  v-if="this.isCreator == post.UserId">
-            <button class="edit">edit</button>
+        <div class="editPost"  v-if="this.isCreator == post.UserId || this.isAdmin ">
+            <button class="btn  edit"><i class="fas fa-pen text-white"></i></button>
             <!-- ouvre affiche un composant qui recupere les donnéés dans le form  /comme une fenetre alert?-->
-            <button class="delete" @click.prevent="deletePost">delete</button>
+            <button class="btn  delete" @click.prevent="deletePost"><i class="fas fa-trash text-white"></i></button>
             <!-- ouvre affiche un composant qui recupere les donnéés dans le form -->
         </div>
 
     </div>
     <div class="bodyPost">
-        <p>
-            {{post.content}}
-        </p>
-        <!-- <div class="imgPost" > -->
-            <img v-if="post.attachement !== 'null'" class="imgPost" :src="post.attachement" alt="">
-        <!-- </div> -->
+
+        <p>{{post.content}}</p>
+        <img v-if="post.attachement !== 'null'" class="imgPost" :src="post.attachement" alt="">
+
     </div>
     <div class="footerPost d-flex align-items-center">
-        <!-- <div class="row"> -->
-            <!-- <div class="col like">{{this.like}}</div> -->
-            <div class="col ">{{ this.like}}</div>
+
             <div class="col comments">Comments</div>
-        <!-- </div> -->
+            <div class="col ">{{ this.like}}</div>
+
     </div>    
 
 </div>
@@ -51,6 +48,7 @@ export default {
     data(){  
         return{
             isCreator :localStorage.getItem('userId'),
+            isAdmin: localStorage.getItem('role') == "admin",
             postLike : this.post.like,
              like : "",
             
@@ -109,14 +107,13 @@ export default {
     margin: 2rem 0;
     padding: 2rem;
     border-radius: 8px;
+    box-shadow: 0px 0px 10px #0000004d;
     display:grid;
     grid-template-columns: 1fr 1fr;
     //   grid-template-rows: 4vw 1fr;
     grid-template-areas: "header header"
                         "body body"
                         "footer footer";
-
-
     img{
         width: 100%;
         height: 100%;
@@ -124,7 +121,7 @@ export default {
 
     .headerPost{
     grid-area: header;
-    background-color:rgba(0, 0, 255, 0.26) ;
+    // background-color:rgba(0, 0, 255, 0.26) ;
     display: grid;
     grid-template-columns: 1fr 1fr;
     min-height: 4vw;
@@ -132,27 +129,49 @@ export default {
 
         .userData{
         grid-area: userData;
-        display:flex;
-        }
-        .editPost{
-            grid-area: editPost;
-        }
+        display:grid;
+        grid-template-columns: 1fr 3fr;
+        min-height: 4vw;
+        grid-template-areas: "pic name "
+                             "pic date"   ;
 
-        p{
-            margin-right: 1rem;
+        }
+        .name{
+        grid-area: name;
+
+        }
+        .date{
+        grid-area: date;
+
         }
         .profilePic{
+        grid-area: pic;
+
             width: 4rem;
             height: 4rem;
             border-radius: 50%;
         }
         .editPost{
+            grid-area: editPost;
             justify-self: flex-end;
+
+            .edit{
+                background: #eed155;
+                margin-right: 3rem ;
+            }
+            .delete{
+                background: #ba1111;
+            }
         }
+
+        p{
+            margin-right: 1rem;
+        }
+
     }
     .bodyPost{
         grid-area: body;
-        background-color:rgba(51, 255, 0, 0.26) ;
+        // background-color:rgba(51, 255, 0, 0.26) ;
         
         display: flex;
         flex-direction: column;
@@ -170,10 +189,10 @@ export default {
     }
     .footerPost{
         grid-area: footer;
-        background-color:rgba(255, 166, 0, 0.26) ;
+        // background-color:rgba(255, 166, 0, 0.26) ;
 
         text-align: center;
-        min-height: 4rem;
+        min-height: 3rem;
         // background: rgb(237, 240, 243);
         border-top: 1px solid rgb(223, 223, 223);
         border-bottom: 1px solid rgb(223, 223, 223);

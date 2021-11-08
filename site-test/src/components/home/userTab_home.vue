@@ -1,6 +1,6 @@
 <template>
 
-    <div class="container">
+    <!-- <div class="container">
 
         <h2>{{ msg }}</h2>
         <div class="info-user col-md-12">
@@ -17,19 +17,36 @@
         <div class="info-user col-md-12">
             <p>commentaire publier</p>
         </div>
-        <!-- si admin -->
-        <div class="info-user col-md-12">
+          si admin  -->
+        <!-- <div class="info-user col-md-12">
             <p><router-link to="/admin">Admin</router-link></p>
-        </div>
+        </div> -->
         <!-- si admin -->
 
-    </div>
+    <!-- </div> --> 
+
+    <nav class="navbar navbar-light bg-light">
+      <div class="container-fluid">
+        <span class="navbar-brand mb-0 h1"><img class="logo" src="../../assets/logo/icon-left-font-monochrome-black.svg" alt="Groupomania"> </span>
+            <form class="d-flex">
+            <input class="form-control " type="search" placeholder="Search any member ?" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        <router-link v-bind:to="{name: 'Sign'}">Sign</router-link> 
+        <router-link to="/home">Home</router-link> 
+        <!-- <router-link to="/about">About</router-link> -->
+        <router-link :to="{ name: 'userPage',params:{id: this.userId }}">Profile</router-link>
+        <button class="btn btn-outline-primary " @click="signOut">logout <i class="fas fa-sign-out-alt"></i></button>
+      </div>
+    </nav>
+
+
 
 </template>
 
 <script>
 export default {
-    name:'userTab_home',
+    name:'tab_home',
     props: {
         msg: String
     },
@@ -61,5 +78,8 @@ export default {
     // border-bottom: 1px solid rgb(118, 120, 124);
 
     text-align: center;
+}
+.logo{
+    height: 2.5rem;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div id="nav">
+  <!-- <div id="nav">
     <nav class="navbar navbar-light bg-light">
       <div class="container-fluid">
         <span class="navbar-brand mb-0 h1">Hello</span>
@@ -13,7 +13,7 @@
         <button @click="signOut">sign out</button>
       </div>
     </nav>
-  </div>
+  </div> -->
   <router-view/>
 
 
@@ -23,9 +23,9 @@
 
 export default {
       methods:{
-        signOut(){
-          localStorage.clear();
-        }
+        // signOut(){
+        //   localStorage.clear();
+        // }
     },//methods
 
 }
@@ -33,8 +33,13 @@ export default {
 
 <style lang="scss">
 body{
-  background-color:#DAE0E6;
+  background-color:#f3f6f8;
+  a{
+    text-decoration: none;
+    color: black;
+  }
 }
+
 
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -45,16 +50,16 @@ body{
 
 }
 
-#nav {
-  // padding: 30px;
+// #nav {
+//   // padding: 30px;
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+//   a {
+//     font-weight: bold;
+//     color: #2c3e50;
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
+//     &.router-link-exact-active {
+//       color: #42b983;
+//     }
+//   }
+// }
 </style>
