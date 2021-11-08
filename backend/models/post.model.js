@@ -24,9 +24,8 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING
       },
       like: {
-        allowNull:false,
+        allowNull:true,
         type: Sequelize.STRING,
-        defaultValue: '{"userLike":[]}'
       },
       createDate: {
         allowNull:false,

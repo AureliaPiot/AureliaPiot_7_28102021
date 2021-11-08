@@ -29,8 +29,8 @@
     </div>
     <div class="footerPost d-flex align-items-center">
 
-            <div class="col comments">Comments</div>
-            <div class="col ">{{ this.like}}</div>
+            <div class="col comments"><i class="fas fa-comment-dots"></i>Comments</div>
+            <div class="col "><i class="fas fa-thumbs-up"></i>{{ this.like}}</div>
 
     </div>    
 
@@ -49,8 +49,8 @@ export default {
         return{
             isCreator :localStorage.getItem('userId'),
             isAdmin: localStorage.getItem('role') == "admin",
-            postLike : this.post.like,
-             like : "",
+            // postLike : this.post.like,
+             like : "nbr:0",
             
 
 
@@ -61,8 +61,8 @@ export default {
         // console.log(this.post.UserId)
 
         // console.log(JSON.parse(this.postLike).userLike);
-        const parse = JSON.parse(this.postLike).userLike;
-        this.like = parse.length;
+        // const parse = JSON.parse(this.postLike).userLike;
+        // this.like = parse.length;
     },
 
     methods:{

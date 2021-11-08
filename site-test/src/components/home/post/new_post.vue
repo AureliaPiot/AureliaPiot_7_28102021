@@ -41,7 +41,7 @@ export default {
                 userId: userId,
                 message : document.getElementsByName("message")[0].value,
                 file: file,
-                like:JSON.stringify({userLike:[]}),                
+                // like:JSON.stringify({userLike:[]}),                
                 // createDate:Date.now(),
              }
                 // console.log(data.like);
@@ -50,7 +50,7 @@ export default {
             dataform.append('userId',userId);
             dataform.append('message',data.message);
             dataform.append('file',file);
-            dataform.append('like',data.like);
+            // dataform.append('like',data.like);
 
          
             this.axios.post('http://localhost:3000/api/post',dataform, {
