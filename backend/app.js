@@ -25,12 +25,12 @@ console.log(process.env.ENV)
 
 const userRoutes = require('./route/user.route.js');
 const postRoutes = require('./route/post.route.js');
-// const comsRoutes = require('./route/coms.route.js');
+const comsRoutes = require('./route/coms.route.js');
 
 
 app.use('/api/user/',userRoutes);
 app.use('/api/post/',postRoutes);
-// app.use('/api/coms/',userRoutes);
+app.use('/api/coms/',comsRoutes);
 
 const path = require('path');
 app.use('/images', express.static(path.join(__dirname, 'images')));
