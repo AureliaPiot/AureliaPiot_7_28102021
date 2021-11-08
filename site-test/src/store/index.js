@@ -4,18 +4,42 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
-    name: "getUsers"
+    name: "getStore"
   },
   mutations: {
   },
   actions: {
+    Sign: ({commit}, userSign)=>{
+      commit;
+      // 'commit' reçois les donnée evoyer depuis le fichier qui appele l'action (un objet)
+      // 'userSign' est la denomination de cet objet
+      // puis on ecrits l'action que l'on veux executé
+      console.log('Sign');
+      console.log(userSign);
+      
+            fetch('http://localhost:3000/api/user/sign', {
+                method : "Post",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(userSign),
+            }) 
+            .then(function(res){
+                    return res.json();
+            })    
+            .then(function(value){
+                    console.log(value.message);
+                   this.$router.replace({ name: "home" });
+            })
+            .catch(function(){
+                console.log('erreur de creation de compte');
+            })
+    },//Sign
+
+
     login: ({commit}, userLogin)=>{
       commit;
       console.log('sign');
       console.log(userLogin);
-      // 'commit' reçois les donnée evoyer depuis le fichier qui l'appele (un objet)
-      // 'userLogin' est la denomination de cet objet
-      // puis on ecrits l'action que l'on veux executé
+
       fetch('http://localhost:3000/api/user/login', {
           method : "Post",
           headers: { "Content-Type": "application/json" },

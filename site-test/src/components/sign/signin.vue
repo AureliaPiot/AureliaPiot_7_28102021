@@ -22,8 +22,6 @@
                 <div class="d-flex justify-content-center">
                      <button id="signSubmit" type="button" class="submit btn btn-primary" v-on:click="signIn">Entrée</button>
                 </div>
-
-
          </form>
 
 
@@ -34,31 +32,12 @@ export default {
   name: 'SignIn',
   methods:{
       signIn(){
-            console.log('ok push');
-            const data = {
-                 nom : document.getElementsByName("nom_Sign")[0].value,
-                 prenom : document.getElementsByName("prenom_Sign")[0].value,
-                 email : document.getElementsByName("email_Sign")[0].value,
-                 password : document.getElementsByName("password_Sign")[0].value,
-                };
-
-            fetch('http://localhost:3000/api/user/sign', {
-                method : "Post",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(data),
-            }) 
-            .then(function(res){
-                    return res.json();
-            })    
-            .then(function(value){
-                    console.log(value.message);
-                   this.$router.replace({ name: "home" });
+          this.$store.dispatch('Sign',{
+                nom : document.getElementsByName("nom_Sign")[0].value,
+                prenom : document.getElementsByName("prenom_Sign")[0].value,
+                email : document.getElementsByName("email_Sign")[0].value,
+                password : document.getElementsByName("password_Sign")[0].value,
             })
-   
-            .catch(function(){
-                console.log('erreur de requete');
-            })
-
         },
         redirectHome(){
             this.router.push({name: 'Home'});
