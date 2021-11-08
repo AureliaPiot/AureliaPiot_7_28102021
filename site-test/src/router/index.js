@@ -86,28 +86,28 @@ const router = createRouter({
 
 // si la route, contient la meta "isAuth" alors -------------
 // const role = localStorage.getItem('role');
-// const token = localStorage.getItem('token');
+const token = localStorage.getItem('token');
 
-// router.beforeEach((to, from, next) => {
-//   if (to.matched.some(record => record.meta.isAuth)) {
-//     if (token == null) 
-//       { next({ name:'Sign'})} 
-//     else 
-//       {next()}
-//   }
-// // si la route, contient la meta "isAdmin" alors -------------
-//   if (to.matched.some(record => record.meta.isAdmin)) {
-//     if (role == 'admin') 
-//       {next()} 
-//     else 
-//       {next({ name: 'Home' })}
-//       // redirection vers home
-//   } 
-// // si la route,ne contient aucune meta ------------
-//   else {
-//     next()
-//   }
-// })
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.isAuth)) {
+    if (token == null) 
+      { next({ name:'Sign'})} 
+    else 
+      {next()}
+  }
+// si la route, contient la meta "isAdmin" alors -------------
+  // if (to.matched.some(record => record.meta.isAdmin)) {
+  //   if (role == 'admin') 
+  //     {next()} 
+  //   else 
+  //     {next({ name: 'Home' })}
+  //     // redirection vers home
+  // } 
+// si la route,ne contient aucune meta ------------
+  else {
+    next()
+  }
+})
 // "to" c'est là où l'user veux aller
 // "from" c'est là d'où il viens
 // "next()" c'est la fonction callBack pour continuer (/accepter) la requete de l'user

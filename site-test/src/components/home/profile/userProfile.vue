@@ -11,8 +11,10 @@
             </div>
 
             <img  class="pic" v-bind:src="userData.profilePic" v-bind:alt="userData.nom">
-            <div v-if="this.isAdmin" class="admin"><i class="fas fa-crown"></i></div>
-            
+            <div v-if="this.isAdmin" class="admin">
+                <i class="fas fa-crown"></i>
+            </div>
+
             <div class="bio" >
                 <p>{{userData.email}}</p>
             </div>
