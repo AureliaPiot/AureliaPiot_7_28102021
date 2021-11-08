@@ -23,9 +23,7 @@
 
 export default {
       methods:{
-        // signOut(){
-        //   localStorage.clear();
-        // }
+        
     },//methods
 
 }

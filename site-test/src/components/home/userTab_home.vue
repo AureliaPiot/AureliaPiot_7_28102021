@@ -58,10 +58,13 @@ export default {
         }
   },
   methods:{
-      userProfile(){
-          const userId = localStorage.getItem(userId);
-          this.$router.push({ name: 'user', param: userId  })
-      }
+    userProfile(){
+        const userId = localStorage.getItem(userId);
+        this.$router.push({ name: 'user', param: userId  })
+    },
+    signOut(){
+        localStorage.clear();
+    }
   }
 
 }

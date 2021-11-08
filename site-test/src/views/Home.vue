@@ -31,6 +31,9 @@ export default {
   components: {
     userTab,
     // field,
+  },
+  methods:{
+    
   }
 }
 </script>
