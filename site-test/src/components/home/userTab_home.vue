@@ -63,8 +63,9 @@ export default {
         this.$router.push({ name: 'user', param: userId  })
     },
     signOut(){
-        localStorage.clear();
-    }
+        // localStorage.clear();
+        this.$store.dispatch('logOut')
+    },
   }
 
 }

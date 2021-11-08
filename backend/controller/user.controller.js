@@ -30,10 +30,10 @@ exports.login = (req,res)=>{
         // console.log(data);
         // res.header({redirection : "/home"});
         res.status(200).json({ 
-          message:'utilisateur trouvé',
+          // message:'utilisateur trouvé',
           userId: data.id,
           userRole: data.role,
-          userEmail:data.email,
+          // userEmail:data.email,
           token: jwt.sign(
             { userId: data.id,
               email: data.email,
@@ -48,7 +48,7 @@ exports.login = (req,res)=>{
       }
     }
     else{
-      res.status(404).send({ message: `utilisateur introuvable` });
+      res.status(401).send({ message: `utilisateur introuvable` });
     }
 
   })

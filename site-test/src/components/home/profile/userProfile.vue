@@ -11,7 +11,7 @@
             </div>
 
             <img  class="pic" v-bind:src="userData.profilePic" v-bind:alt="userData.nom">
-            <div v-if="this.isAdmin" class="admin">
+            <div v-if="userData.role == 'admin'" class="admin">
                 <i class="fas fa-crown"></i>
             </div>
 
@@ -52,7 +52,7 @@ export default {
    data(){  
        return{
             isUser :localStorage.getItem('userId'),
-            isAdmin :localStorage.getItem('role'),
+            isAdmin :localStorage.getItem('role') == 'admin',
 
             userData :"",
             id :  this.$route.params.id,

@@ -22,6 +22,7 @@
                 <div class="d-flex justify-content-center">
                      <button id="signSubmit" type="button" class="submit btn btn-primary" v-on:click="signIn">Entrée</button>
                 </div>
+
          </form>
 
 
@@ -32,7 +33,9 @@ export default {
   name: 'SignIn',
   methods:{
       signIn(){
+        // on appel dans le store l'action que l'on souhaite effectuer
           this.$store.dispatch('Sign',{
+             // ici les element communiquer au store (dans un objet)
                 nom : document.getElementsByName("nom_Sign")[0].value,
                 prenom : document.getElementsByName("prenom_Sign")[0].value,
                 email : document.getElementsByName("email_Sign")[0].value,

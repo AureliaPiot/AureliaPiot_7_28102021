@@ -4,9 +4,28 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
-    name: "getStore"
+    name: "getStore",
+    status:'',
+    user:{
+      userId:'',
+      userRole:'',
+      token:'',
+    },
   },
   mutations: {
+    logUser(state,userState){
+      state.user = userState;
+      console.log("logUser");
+      console.log(userState);
+      console.log(state.user.userRole.length);
+      console.log(state.user.userId);
+
+    },
+    setStatus(state,status){
+      state.status =status;
+      // (state, status) state = state du store ; status = le parametre envoyé lors de l'appele de la mutation
+      // state.status = on defini le status de notre state (dans le store) avec le parametre status
+    },
   },
   actions: {
     Sign: ({commit}, userSign)=>{
@@ -26,8 +45,8 @@ export default createStore({
                     return res.json();
             })    
             .then(function(value){
-                    console.log(value.message);
-                   this.$router.replace({ name: "home" });
+                  console.log(value.message);
+                  this.$router.push("home");
             })
             .catch(function(){
                 console.log('erreur de creation de compte');
@@ -36,9 +55,12 @@ export default createStore({
 
 
     login: ({commit}, userLogin)=>{
-      commit;
+      // const self = this;
+      commit('setStatus','loading');
+      // ici commit permet de transmetre des donnée a l'exterieur de la methode/fonction
+      // commit pour envoyer des info a "setStatus"(une fonction), la valeur "loading"
       console.log('sign');
-      console.log(userLogin);
+      // console.log(userLogin);
 
       fetch('http://localhost:3000/api/user/login', {
           method : "Post",
@@ -51,18 +73,29 @@ export default createStore({
       .then(function(value){
           if(value.token){
               // console.log(value);
+              commit("logUser",value)
               localStorage.setItem("token",value.token);
               localStorage.setItem("userId",value.userId);
               localStorage.setItem("role",value.userRole);
+
+              // self.$router.push('/home');
           }
-          console.log(value.message);
+          console.log("connexion autoriser");
       })
       .catch(function(){
           console.log('erreur de connexion');
       })
 
-    }//Login
-    ,
+    },//Login
+    logOut({commit}){
+      localStorage.clear();
+      commit("logUser",{
+        userId:'',
+        userRole:'',
+        token:'',
+      })
+
+    },
   },
   modules: {
   }

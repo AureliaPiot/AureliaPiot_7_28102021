@@ -15,6 +15,8 @@
 
             <div class="d-flex justify-content-center">
              <button id="signSubmit" type="button" class="submit btn btn-primary" v-on:click="login">Entrée</button>
+        <router-link to="/home">Home</router-link> 
+
             </div>
 
         </form>
@@ -30,9 +32,7 @@ export default {
     methods:{
 
         login(){
-            // on appel dans le store l'action que l'on souhaite effectuer
             this.$store.dispatch('login',{
-                // ici les element communiquer au store
                 email : document.getElementsByName("email_login")[0].value,
                 password : document.getElementsByName("password_login")[0].value,
             })

@@ -1,5 +1,4 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
-// import Home from '../views/Home.vue'
 import Sign from '../views/Sign.vue';
 
 
@@ -88,6 +87,7 @@ const router = createRouter({
 // const role = localStorage.getItem('role');
 const token = localStorage.getItem('token');
 
+
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.isAuth)) {
     if (token == null) 
@@ -95,6 +95,7 @@ router.beforeEach((to, from, next) => {
     else 
       {next()}
   }
+
 // si la route, contient la meta "isAdmin" alors -------------
   // if (to.matched.some(record => record.meta.isAdmin)) {
   //   if (role == 'admin') 
@@ -107,6 +108,7 @@ router.beforeEach((to, from, next) => {
   else {
     next()
   }
+
 })
 // "to" c'est là où l'user veux aller
 // "from" c'est là d'où il viens
