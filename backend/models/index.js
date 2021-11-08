@@ -20,11 +20,18 @@ db.sequelize = sequelize;
 db.users = require("./user.model.js")(sequelize, Sequelize);
 db.posts = require("./post.model.js")(sequelize, Sequelize);
 db.coms = require("./coms.model.js")(sequelize, Sequelize);
+db.likes = require("./likes.model.js")(sequelize, Sequelize);
 
 
+db.posts.belongsTo(db.users);
 db.coms.belongsTo(db.posts);
 db.coms.belongsTo(db.users);
-db.posts.belongsTo(db.users);
+
+db.likes.belongsTo(db.posts);
+db.likes.belongsTo(db.users);
+db.likes.belongsTo(db.coms);
+
+
 
 // db.users.hasMany(db.posts);
 // db.posts.hasMany(db.coms);

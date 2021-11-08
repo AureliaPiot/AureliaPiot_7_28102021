@@ -7,7 +7,7 @@ const auth =require("../middleware/auth.js")
 
 
 // Create
-router.post('/',auth.user,multer,comsCtrl.create);
+router.post('/',auth.user,comsCtrl.create);
 // get all
 router.get('/all',auth.connect,comsCtrl.getAll);
 
@@ -20,7 +20,7 @@ router.get('post/:post',auth.user,comsCtrl.getAllByPost);
 // get one 
 router.get('/:id',auth.user,comsCtrl.getOne);
 // update with id
-router.put('/:id',auth.user,multer,comsCtrl.update);
+router.put('/:id',auth.user,comsCtrl.update);
 // delete whit id
 router.delete('/:id',auth.user,comsCtrl.delete);
 
