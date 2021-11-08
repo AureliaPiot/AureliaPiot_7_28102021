@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="root">
+        <div class="profil-card">
 
             <div class="row">
                 <h1 class="titre">{{userData.nom}} {{userData.prenom}}</h1>
@@ -10,8 +10,10 @@
                 <button class="edit" v-if="this.isUser == userData.id" @:click.prevent="editUserName">edit</button>
             </div>
 
-            <img class="pic" v-bind:src="userData.profilePic" v-bind:alt="userData.nom">
-            <div class="test" >
+            <img  class="pic" v-bind:src="userData.profilePic" v-bind:alt="userData.nom">
+            <div v-if="this.isAdmin" class="admin"><i class="fas fa-crown"></i></div>
+            
+            <div class="bio" >
                 <p>{{userData.email}}</p>
             </div>
              <div class="edit"  v-if="this.isUser == userData.id">
@@ -48,6 +50,8 @@ export default {
    data(){  
        return{
             isUser :localStorage.getItem('userId'),
+            isAdmin :localStorage.getItem('role'),
+
             userData :"",
             id :  this.$route.params.id,
 
@@ -98,17 +102,18 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.root{
+.profil-card{
     background: rgb(255, 255, 255);
     border-radius: 8px;
+    padding: 3rem;
     .pic{
         width: 5rem;
         height: 5rem;
     }
     
-    .test{
-        height :10vw;
-    }
+    // .bio{
+    //     height :10vw;
+    // }
 
 }
 h1{
