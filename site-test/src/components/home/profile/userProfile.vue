@@ -18,6 +18,10 @@
             <div class="bio" >
                 <p>{{userData.email}}</p>
             </div>
+            <div v-if="isAdmin" class="admin">
+                <router-link to="/admin">Admin</router-link>
+            </div>
+
              <div class="edit"  v-if="this.isUser == userData.id">
                 <button class="edit">edit</button>
                 <!-- ouvre affiche un composant qui recupere les donnéés dans le form  /comme une fenetre alert?-->

@@ -1,6 +1,5 @@
-
-
 import { createStore } from 'vuex'
+import router from "../router/index.js"
 
 export default createStore({
   state: {
@@ -46,7 +45,6 @@ export default createStore({
             })    
             .then(function(value){
                   console.log(value.message);
-                  this.$router.push("home");
             })
             .catch(function(){
                 console.log('erreur de creation de compte');
@@ -78,9 +76,14 @@ export default createStore({
               localStorage.setItem("userId",value.userId);
               localStorage.setItem("role",value.userRole);
 
-              // self.$router.push('/home');
+              router.push("home");
+
+              // self.$router.go('/home');
+              console.log("connexion autoriser");
+              return
           }
-          console.log("connexion autoriser");
+          console.log("connexion non autoriser");
+
       })
       .catch(function(){
           console.log('erreur de connexion');
@@ -94,6 +97,8 @@ export default createStore({
         userRole:'',
         token:'',
       })
+      router.push({name:"Sign"});
+
 
     },
   },
