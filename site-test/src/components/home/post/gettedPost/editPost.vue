@@ -1,33 +1,21 @@
 <template>
-
-<div class="post">
-    <div class="headerPost d-flex">
-       
-        <div class="profilePic">
-            <!-- <img v-bind:src="none" alt=""> -->
-
-        </div>
-
-
-    <div class="bodyPost">
-        <!-- reprendre les donnée entrée et dans un champ textarea value: value et enregistrer -->
-        <!-- <p>
-            {{post.content}}
-        </p>
-
-        reprendre les donnée de l'input avec value et  enregistrer
-        <div class="imgPost" v-if="post.attachement !== 'null'">
-            <img :src="post.attachement" alt="">
-        </div> -->
+<div class="editPost">
+    <div class="headerPost ">
+       <div class="userData">
+            <div class="user">Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio iste vitae enim perspiciatis earum sequi a, dicta reiciendis animi est sunt distinctio, odio commodi corrupti, repudiandae dolore expedita. Omnis, nesciunt.</div>
+       </div> <!-- userdata -->
     </div>
-
-
+    <div class="bodyPost">
+        <!-- <input type="text" name="editContent" :v-bind:value="post.content">
+        <input type="file"  class="btn btn-outline-primary w30" id="file" name="file" v-bind:value="post.attachement"> -->
+        <!-- <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veritatis est laudantium expedita, voluptatem eum quis totam optio atque ipsum id doloribus similique animi necessitatibus recusandae? Ut aliquid inventore nulla beatae!</p> -->
+        <p>{{ content }}</p>
+        <p>{{ attachement }}</p>
+    </div>
     <div class="footerPost d-flex align-items-center">
-
-            <div class="col like">Likes</div>
-            <div class="col comments">Comments</div>
-
+        <div>accept</div>
     </div>    
+
 
 </div>
 
@@ -35,18 +23,18 @@
 </template>
 
 <script>
-export default {
-    name:'singlePost',
-    props: {
-        post: Object
-    },
-    methods:{
-        deletePost(){
-            if(confirm('you sure ?')){
-                console.log('delete');
-            }
-        }
 
+export default {
+    name:'editPost',
+    props: {
+        // post: Object,
+        user:Object,
+        content:String,
+        attachement:String,
+    },
+
+    methods:{
+       
     },//methods
 
 
@@ -57,11 +45,14 @@ export default {
 
 <style scoped lang="scss">
 // gere le post en grid
-.post{
+.editPost{
     background: white;
     margin: 2rem 0;
     padding: 2rem;
     border-radius: 8px;
+    position: absolute;
+    top: -30px;
+    left: 0;
     img{
         width: 100%;
     }

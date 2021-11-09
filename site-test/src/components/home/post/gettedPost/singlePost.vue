@@ -14,7 +14,7 @@
 
        </div>
         <div class="editPost"  v-if="this.isCreator == post.UserId || this.isAdmin ">
-            <button class="btn  edit"><i class="fas fa-pen text-white"></i></button>
+            <button class="btn  edit" @click.prevent="showEdit"><i class="fas fa-pen text-white"></i></button>
             <!-- ouvre affiche un composant qui recupere les donnéés dans le form  /comme une fenetre alert?-->
             <button class="btn  delete" @click.prevent="deletePost"><i class="fas fa-trash text-white"></i></button>
             <!-- ouvre affiche un composant qui recupere les donnéés dans le form -->
@@ -29,10 +29,17 @@
     </div>
     <div class="footerPost d-flex align-items-center">
 
-            <div class="col comments"><i class="fas fa-comment-dots"></i>Comments</div>
             <div class="col "><i class="fas fa-thumbs-up"></i>{{ this.like}}</div>
+            <div class="col comments"><i class="fas fa-comment-dots"></i>Comments</div>
 
     </div>    
+    <div class="showEdit" v-if="this.show">
+        <p>Hello</p>
+        <editPost 
+            :user ='post.user'
+            :content ='post.content' 
+            :attachement ='post.attachement' />
+    </div>
 
 </div>
 
@@ -40,20 +47,24 @@
 </template>
 
 <script>
+import editPost from '@/components/home/post/gettedPost/editPost.vue'
+
 export default {
     name:'singlePost',
     props: {
         post: Object
     },
+    components:{
+        editPost
+    },
+
     data(){  
         return{
+            show : false,
             isCreator :localStorage.getItem('userId'),
             isAdmin: localStorage.getItem('role') == "admin",
             // postLike : this.post.like,
              like : "nbr:0",
-            
-
-
         }
     },
     mounted(){
@@ -66,6 +77,17 @@ export default {
     },
 
     methods:{
+        showEdit(){
+            if(this.show){
+                this.show = false
+            }else if(!this.show){
+                this.show = true ;
+            }
+           console.log(this.show)
+        },
+        savePost(){
+            console.log('post edit')
+        },
         deletePost(){
             if(confirm('you sure ?')){
                 console.log('delete');
@@ -103,6 +125,7 @@ export default {
 <style scoped lang="scss">
 // gere le post en grid
 .post{
+    position: relative;
     background: white;
     margin: 2rem 0;
     padding: 2rem;
