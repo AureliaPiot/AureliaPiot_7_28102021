@@ -29,8 +29,8 @@
     </div>
     <div class="footerPost d-flex align-items-center">
 
-            <div class="col "><i class="fas fa-thumbs-up"></i>{{ this.like}}</div>
-            <div class="col comments"><i class="fas fa-comment-dots"></i>Comments</div>
+            <div class="col "><i class="fas fa-thumbs-up"></i>{{ this.post.likes.length}}</div>
+            <div class="col comments"><i class="fas fa-comment-dots"></i>{{ this.post.Coms.length}}</div>
 
     </div>    
     <div class="showEdit" v-if="this.show">
@@ -44,7 +44,26 @@
     </div>
 
 </div>
-
+<!-- Coms: Array(0)
+length: 0
+[[Prototype]]: Array(0)
+User:
+email: "Kingdom.hearts@disney.com"
+id: 1
+nom: "legend"
+password: "vv"
+prenom: "xiao"
+profilePic: "http://localhost:3000/images/defaultPic/default.jpg"
+role: "user"
+[[Prototype]]: Object
+UserId: 1
+attachement: "null"
+comments: null
+content: "rgerggfsfe"
+createDate: 2147483647
+id: 2
+likes: Array(0)
+length: 0 -->
    
 </template>
 
@@ -80,7 +99,6 @@ export default {
 
     methods:{
         showEdit(){
-           console.log("showEdit");
             if(this.show){
                 this.show = false
             }else if(!this.show){

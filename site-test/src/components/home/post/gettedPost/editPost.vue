@@ -39,10 +39,7 @@ export default {
     },
 
     methods:{
-       close(){
-           this.$emit("showEdit");
-           console.log('close');
-       }
+
     },//methods
 
 

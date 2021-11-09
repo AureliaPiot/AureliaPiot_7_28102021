@@ -48,7 +48,7 @@ exports.getAll = (req,res) =>{
     Posts.findAll({ 
         order: [['id', 'DESC']],
         include: [{
-            model: db.users,
+            all:true
         }],
     })
     .then(data=>{

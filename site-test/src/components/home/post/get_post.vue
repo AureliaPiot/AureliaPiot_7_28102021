@@ -50,7 +50,7 @@ export default {
             .then(response => {
                 this.data = response.data
                 // console.log(response)
-                // console.log(response.data);
+                console.log(response.data);
             })
             .catch(function(){
                 console.log('erreur de requete');

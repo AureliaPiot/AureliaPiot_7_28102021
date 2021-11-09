@@ -23,10 +23,10 @@ module.exports = (sequelize, Sequelize) => {
         allowNull:true,
         type: Sequelize.STRING
       },
-      like: {
-        allowNull:true,
-        type: Sequelize.STRING,
-      },
+      // like: {
+      //   allowNull:true,
+      //   type: Sequelize.STRING,
+      // },
       createDate: {
         allowNull:false,
         type: Sequelize.INTEGER,

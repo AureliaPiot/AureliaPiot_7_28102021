@@ -24,17 +24,14 @@ db.likes = require("./likes.model.js")(sequelize, Sequelize);
 
 
 db.posts.belongsTo(db.users);
-db.coms.belongsTo(db.posts);
+db.posts.hasMany(db.likes);
+db.posts.hasMany(db.coms);
+
 db.coms.belongsTo(db.users);
+db.coms.hasMany(db.likes);
 
-db.likes.belongsTo(db.posts);
 db.likes.belongsTo(db.users);
-db.likes.belongsTo(db.coms);
 
-
-
-// db.users.hasMany(db.posts);
-// db.posts.hasMany(db.coms);
 
 // sequelize.sync({alter:true})
 module.exports = db;
