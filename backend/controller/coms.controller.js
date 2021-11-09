@@ -49,21 +49,21 @@ exports.getAll = (req,res) =>{
 
 
 exports.getAllByPost = (req,res) =>{
-    console.log('findAll  post by Post');
-    const PostId = req.params.post;
+    console.log('findAll  coms by Post');
+    const PostId = req.params.postId;
     console.log(PostId);
 
     Coms.findAll({ 
         order: [['id', 'DESC']],
         include: [{
             model: db.posts,
-            where:{id : PostId}
+            // where:{id : PostId}
         }],
     })
     .then(data=>{
         console.log("data");
         console.log(data);
-        res.send(data);
+        res.status(200).send(data);
     })
     .catch(err=> {
         res.status(500).send({message: err.message || " error canot found any coms"})

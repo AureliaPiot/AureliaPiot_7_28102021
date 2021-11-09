@@ -41,6 +41,7 @@
 
             /> 
     </div>
+           <getCom  :postId="post.id"  /> 
      
     <div class="showEdit" v-if="this.show">
         <div class="backgroundCache"></div>
@@ -60,6 +61,8 @@
 <script>
 import editPost from '@/components/home/post/gettedPost/editPost.vue'
 import newCom from '@/components/home/coms/newCom.vue'
+import getCom from '@/components/home/coms/getComs.vue'
+
 
 
 export default {
@@ -69,7 +72,9 @@ export default {
     },
     components:{
         editPost,
-        newCom
+        newCom,
+        getCom,
+
     },
 
     data(){  
