@@ -9,14 +9,18 @@ exports.create = (req,res) =>{
     console.log(req.body);
 
     const com = Coms.build({
-        content:req.body,
+        PostId: req.body.PostId,
+        UserId: req.body.UserId,
+        content: req.body.content,
         createDate:Date.now(),
-        PostId:req.body.postId,
-        UserId:req.body.userId,
     })
-    Coms.create(com)
+    console.log('com');
+
+    console.log(com);
+
+    com.save()
          .then(data=>{
-            res.status(201).send("post créer");
+            res.status(201).send({data : data, message :"com creer"});
         })
         .catch(err=> {
             res.status(500).send({message: err.message || "cannot create a coms"})

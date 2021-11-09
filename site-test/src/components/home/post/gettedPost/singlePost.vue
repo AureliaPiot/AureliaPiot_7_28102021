@@ -5,7 +5,7 @@
        <div class="userData">
 
         <!-- <div class="profilePic"> -->
-        <img class="profilePic" v-bind:src="post.User.profilePic" alt="">
+        <img class="profilePic" v-bind:src="post.User.profilePic" v-bind:alt="post.User.nom">
         <!-- </div> -->
         <router-link class="name" :to="{ name: 'userPage',params:{id: post.User.id }}">{{post.User.nom}}</router-link>
 
@@ -32,7 +32,16 @@
             <div class="col "><i class="fas fa-thumbs-up"></i>{{ this.post.likes.length}}</div>
             <div class="col comments"><i class="fas fa-comment-dots"></i>{{ this.post.Coms.length}}</div>
 
-    </div>    
+    </div>   
+    <div class="newCom">
+            <!-- :userPP ='post.User.profilePic' -->
+        <newCom 
+            :userId ="post.User.id"
+            :postId="post.id"
+
+            /> 
+    </div>
+     
     <div class="showEdit" v-if="this.show">
         <div class="backgroundCache"></div>
         <editPost 
@@ -44,31 +53,14 @@
     </div>
 
 </div>
-<!-- Coms: Array(0)
-length: 0
-[[Prototype]]: Array(0)
-User:
-email: "Kingdom.hearts@disney.com"
-id: 1
-nom: "legend"
-password: "vv"
-prenom: "xiao"
-profilePic: "http://localhost:3000/images/defaultPic/default.jpg"
-role: "user"
-[[Prototype]]: Object
-UserId: 1
-attachement: "null"
-comments: null
-content: "rgerggfsfe"
-createDate: 2147483647
-id: 2
-likes: Array(0)
-length: 0 -->
+
    
 </template>
 
 <script>
 import editPost from '@/components/home/post/gettedPost/editPost.vue'
+import newCom from '@/components/home/coms/newCom.vue'
+
 
 export default {
     name:'singlePost',
@@ -76,7 +68,8 @@ export default {
         post: Object
     },
     components:{
-        editPost
+        editPost,
+        newCom
     },
 
     data(){  
@@ -106,8 +99,14 @@ export default {
             }
            console.log(this.show)
         },
+        saveEdit(){
+
+        },
         savePost(){
             console.log('post edit')
+        },
+        addLike(){
+            
         },
         deletePost(){
             if(confirm('you sure ?')){
@@ -133,7 +132,8 @@ export default {
                     console.log('erreur de requete');
                 })
             }
-        }
+        },
+
 
     },//methods
 
@@ -157,7 +157,15 @@ export default {
     //   grid-template-rows: 4vw 1fr;
     grid-template-areas: "header header"
                         "body body"
-                        "footer footer";
+                        "footer footer"
+                        "newCom newCom";
+    
+
+    
+    .newCom{
+    grid-area: newCom;
+
+    }
     img{
         width: 100%;
         height: 100%;

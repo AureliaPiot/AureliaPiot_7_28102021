@@ -30,7 +30,7 @@ const comsRoutes = require('./route/coms.route.js');
 
 app.use('/api/user/',userRoutes);
 app.use('/api/post/',postRoutes);
-app.use('/api/coms/',comsRoutes);
+app.use('/api/com/',comsRoutes);
 
 const path = require('path');
 app.use('/images', express.static(path.join(__dirname, 'images')));
