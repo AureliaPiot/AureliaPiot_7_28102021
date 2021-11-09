@@ -34,11 +34,13 @@
 
     </div>    
     <div class="showEdit" v-if="this.show">
-        <p>Hello</p>
+        <div class="backgroundCache"></div>
         <editPost 
-            :user ='post.user'
+            v-on:click="showEdit"
+            :user ='post.User'
             :content ='post.content' 
-            :attachement ='post.attachement' />
+            :attachement ='post.attachement'
+            :id="post.id" />
     </div>
 
 </div>
@@ -78,6 +80,7 @@ export default {
 
     methods:{
         showEdit(){
+           console.log("showEdit");
             if(this.show){
                 this.show = false
             }else if(!this.show){
@@ -221,6 +224,17 @@ export default {
         border-bottom: 1px solid rgb(223, 223, 223);
 
     }
+
+}
+.backgroundCache{
+    position: fixed;
+    z-index: 4;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #8080808a;
+    backdrop-filter: blur(2px) grayscale(30%);
 
 }
 </style>
