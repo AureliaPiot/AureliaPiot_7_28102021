@@ -27,7 +27,7 @@ export default createStore({
     },
   },
   actions: {
-    Sign: ({commit}, userSign)=>{
+    Sign: ({commit, dispatch }, userSign)=>{
       commit;
       // 'commit' reçois les donnée evoyer depuis le fichier qui appele l'action (un objet)
       // 'userSign' est la denomination de cet objet
@@ -45,6 +45,15 @@ export default createStore({
             })    
             .then(function(value){
                   console.log(value.message);
+
+                   console.log('userSign');
+                  console.log(userSign.email);
+
+                  // this.login({
+                  //   email : userSign.email,
+                  //   password : userSign.password
+                  // })
+                dispatch('login', {email : userSign.email, password : userSign.password})                  
             })
             .catch(function(){
                 console.log('erreur de creation de compte');
