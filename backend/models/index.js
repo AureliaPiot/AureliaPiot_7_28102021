@@ -34,6 +34,8 @@ db.coms.hasMany(db.likes);
 
 
 db.likes.belongsTo(db.users);
+db.likes.belongsTo(db.posts);
+
 
 
 // sequelize.sync({alter:true})

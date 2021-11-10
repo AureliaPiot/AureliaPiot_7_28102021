@@ -8,7 +8,6 @@
                 <img class="profilePic" v-bind:src="post.User.profilePic" v-bind:alt="post.User.nom">
                 <router-link class="name" :to="{ name: 'userPage',params:{id: post.User.id }}">{{post.User.nom}}</router-link>
                 <p class="date"> {{Date(post.createDate).toString().slice(0,16)}}</p>
-
             </div>
             <div class="editPost"  v-if="this.isCreator == post.UserId || this.isAdmin ">
                 <button class="btn  edit" @click.prevent="showEdit"><i class="fas fa-pen text-white"></i></button>
@@ -16,19 +15,14 @@
                 <button class="btn  delete" @click.prevent="deletePost"><i class="fas fa-trash text-white"></i></button>
                 <!-- ouvre affiche un composant qui recupere les donnéés dans le form -->
             </div>
-
         </div>
         <div class="bodyPost">
-
             <p>{{post.content}}</p>
             <img v-if="post.attachement !== 'null'" class="imgPost" :src="post.attachement" alt="">
-
         </div>
         <div class="footerPost d-flex align-items-center">
-
-                <div class="col "><i class="fas fa-thumbs-up like"></i> <p>{{ this.post.likes.length}} </p></div>
+                <div class="col "><i v-bind:class="{ 'valide' : this.like } " class="fas fa-thumbs-up like" @click="addLike"></i> <p>{{ this.post.likes.length}} </p></div>
                 <div class="col comments"><i class="fas fa-comment-dots comment"></i> <p>{{ this.post.Coms.length}}</p> </div>
-
         </div>   
         
         <div class="showEdit" v-if="this.show">
@@ -41,9 +35,6 @@
                 :id="post.id" />
         </div>
     </div>
-
-
-
 
         <newCom 
             :userId ="post.User.id"
@@ -81,14 +72,23 @@ export default {
 
     data(){  
         return{
+            token : localStorage.getItem("token"),
             show : false,
             isCreator :localStorage.getItem('userId'),
             isAdmin: localStorage.getItem('role') == "admin",
-            // postLike : this.post.like,
-             like : "nbr:0",
+
+            like :false,
+             
         }
     },
-    mounted(){
+    created(){
+// validateur like
+        for(let like of this.post.likes){
+            if(like.UserId == this.isCreator)
+            {
+                this.like = true;
+            }
+        }
     },
 
     methods:{
@@ -106,32 +106,69 @@ export default {
         savePost(){
             console.log('post edit')
         },
-        addLike(){
-            
-        },
         deletePost(){
             if(confirm('you sure ?')){
                 console.log('delete');
-                
-                // const userId = localStorage.getItem("userId");
-                const token =localStorage.getItem("token"); 
-
                 fetch('http://localhost:3000/api/post/'+this.post.id, {
                     method : "DELETE",
                     headers: {
                         "Content-Type": "application/json" ,
-                        "authorization" : 'Bearer ' + token,
+                        "authorization" : 'Bearer ' + this.token,
                         },
-                    // body: JSON.stringify(data),
-                    // body: userId,
-
-                    // file:file
                 }) 
                 .then(function(res){return res.json();}) 
                 .then(value => (console.log(value) ))
                 .catch(function(){
                     console.log('erreur de requete');
                 })
+            }
+        },
+
+        addLike(){
+ 
+
+            if(!this.like){
+                    console.log('like');
+                const data ={
+                    UserId:this.post.User.id,
+                    postId:this.post.id
+                }
+
+                fetch('http://localhost:3000/api/like/post', {
+                    method : "POST",
+                    headers: {
+                        "Content-Type": "application/json" ,
+                        "authorization" : 'Bearer ' + this.token,
+                        },
+                    body: JSON.stringify(data),
+
+                }) 
+                .then(function(res){return res.json();}) 
+                .then(value =>(
+                    console.log(value),
+                    this.like = true
+                ))
+                .catch(function(){
+                    console.log('erreur de requete');
+                })
+            }
+
+            if(this.like){
+                console.log('unlike');
+                    // this.like = false
+                fetch('http://localhost:3000/api/like/'+this.post.id+'/'+this.isCreator, {
+                    method : "DELETE",
+                    headers: {
+                        "Content-Type": "application/json" ,
+                        "authorization" : 'Bearer ' + this.token,
+                        },
+                }) 
+                .then(function(res){return res.json();}) 
+                .then(value =>(console.log(value),this.like = false ))
+                .catch(function(){
+                    console.log('erreur de requete');
+                })
+
             }
         },
 
@@ -145,6 +182,13 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.valide{
+    color: rgba(60, 120, 170, 0.603);
+}
+.not{
+    color: rgba(9, 44, 73, 0.603);
+
+}
 // gere le post en grid
 .getPost{
     background: white;

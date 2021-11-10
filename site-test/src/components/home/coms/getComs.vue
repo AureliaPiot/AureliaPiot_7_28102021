@@ -64,13 +64,7 @@ export default {
             data:"",
         }
     },
-    created(){
-            console.log('this.data');
 
-            console.log(this.data);
-
-    },
-    
     //  methods:{
         mounted(){
                 const token =localStorage.getItem("token"); 

@@ -11,7 +11,7 @@ router.post('/post',auth.user,likeCtrl.addPost);
 router.post('/com',auth.user,likeCtrl.addCom);
 
 
-router.delete('/:id',auth.user,likeCtrl.delete);
+router.delete('/:param1/:param2',auth.user,likeCtrl.delete);
 
 
 module.exports = router;
