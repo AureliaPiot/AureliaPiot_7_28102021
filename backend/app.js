@@ -10,6 +10,8 @@ const db = require("./models/index.js");
 // });
 
 // db.sequelize.sync();
+
+
 // nodemon --exec 'node -r dotenv/config server.js'
 app.use(express.json());
 

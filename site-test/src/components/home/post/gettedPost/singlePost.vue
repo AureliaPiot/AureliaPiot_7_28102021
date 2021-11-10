@@ -45,7 +45,7 @@
      
 
 
-     
+
     <div class="showEdit" v-if="this.show">
         <div class="backgroundCache"></div>
         <editPost 

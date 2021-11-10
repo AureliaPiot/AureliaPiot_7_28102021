@@ -30,6 +30,9 @@ db.posts.hasMany(db.coms);
 db.coms.belongsTo(db.users);
 db.coms.hasMany(db.likes);
 
+
+
+
 db.likes.belongsTo(db.users);
 
 

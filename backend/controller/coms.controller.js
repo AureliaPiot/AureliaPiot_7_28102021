@@ -12,7 +12,7 @@ exports.create = (req,res) =>{
         PostId: req.body.PostId,
         UserId: req.body.UserId,
         content: req.body.content,
-        createDate:Date.now(),
+        createDate:req.body.createDate,
     })
     console.log('com');
 
@@ -57,16 +57,15 @@ exports.getAllByPost = (req,res) =>{
 
 
     Coms.findAll({ 
-        // order: [['id', 'DESC']],
-        where:{PostId : PostId}
-        // include: [{
-        //     model: db.posts,
-        //     where:{PostId : PostId}
-        // }],
+        order: [['createDate', 'DESC']],
+        where:{PostId : PostId},
+        include: [{
+            model: db.users,
+            // where:{PostId : PostId}
+            attributes: {exclude: ['password']},
+        }],
     })
     .then(data=>{
-        console.log("data");
-        console.log(data);
         res.status(200).send(data);
     })
     .catch(err=> {

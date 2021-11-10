@@ -14,8 +14,7 @@ module.exports = (sequelize, Sequelize) => {
 
       createDate: {
         allowNull:false,
-        type: Sequelize.INTEGER,
-        defaultValue: 0
+        type: Sequelize.DATE,
       },
     }
     );

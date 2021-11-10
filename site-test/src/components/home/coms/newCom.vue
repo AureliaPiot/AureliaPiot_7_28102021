@@ -3,7 +3,7 @@
         <form id="newCom" class="form-inline newCom" enctype="multipart/form-data">
 
 
-            <div class="form-group row justify-content-around">
+            <div class="form-group row justify-content-between">
                 <!-- <label for="message">message</label> -->
                 <img  v-bind:src="this.profilePic" alt="" class="userAvatar">
                 <input  type="text" class="form-control messageCom" :name="'messageCom'+postId" id="messageCom" placeholder="commentaire...">
@@ -46,9 +46,9 @@ export default {
             console.log(data)
             const dataform = new FormData();
             dataform.append('PostId',data.PostId);
-            dataform.append('UserId',data.userId);
+            dataform.append('UserId',data.UserId);
             dataform.append('content',data.content);
-            dataform.append('createDate',data.createDate);
+            // dataform.append('createDate',data.createDate);
 
         
             fetch('http://localhost:3000/api/com/', {
@@ -83,7 +83,7 @@ export default {
         width: 4rem;
         // height: 1rem;
         border-radius: 50%;
-        background: yellow;
+        // background: yellow;
     }
     .submitCom{
         width: 10%;
@@ -91,7 +91,7 @@ export default {
     }
 }
 .messageCom{
-    width: 50%;
+    width: 80%;
 }
 .w30{
     width: 30%;
