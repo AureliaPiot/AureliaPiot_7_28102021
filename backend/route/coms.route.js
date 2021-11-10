@@ -12,10 +12,10 @@ router.post('/',auth.user,comsCtrl.create);
 router.get('/all',auth.connect,comsCtrl.getAll);
 
 // get all where user = query
-router.get('user/:user',auth.user,comsCtrl.getAllByUser);
+router.get('/user/:user',auth.user,comsCtrl.getAllByUser);
 
 // get all where post = query
-router.get('post/:post',auth.user,comsCtrl.getAllByPost);
+router.get('/post/:post',auth.user,comsCtrl.getAllByPost);
 
 // get one 
 router.get('/:id',auth.user,comsCtrl.getOne);

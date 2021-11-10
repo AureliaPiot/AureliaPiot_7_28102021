@@ -79,10 +79,12 @@ export default createStore({
       })    
       .then(function(value){
           if(value.token){
-              // console.log(value);
+              console.log(value);
               commit("logUser",value)
               localStorage.setItem("token",value.token);
               localStorage.setItem("userId",value.userId);
+              localStorage.setItem("PP",value.profilePic);
+
               localStorage.setItem("role",value.userRole);
 
               router.push("home");

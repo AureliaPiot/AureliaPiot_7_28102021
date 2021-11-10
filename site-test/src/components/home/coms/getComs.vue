@@ -1,7 +1,7 @@
 post/:post
 <template>
 
-        <div class="com">{{data}}</div>
+        <div v-on:click="getCom" class="com">{{data}}</div>
         
 </template>
 
@@ -18,68 +18,55 @@ export default {
             data:""
         }
     },
-     mounted(){
-        //  getCom(){
+     mounted(){},
+     methods:{
+         getCom(){
             // const userId = localStorage.getItem("userId");
+            // const postId = this.postId;
             const token =localStorage.getItem("token"); 
- 
-            // fetch('http://localhost:3000/api/com/post/'+this.postId, {
-            //     method : "GET",
-            //     headers: {
-            //         // "Content-Type": "application/json" ,
-            //         "authorization" : 'Bearer ' + token,
-            //         },
-            // }) 
-            // .then(function(res){return res.json();}) 
-            // .then(value => (console.log(value), this.data =value ))
-            // .catch(function(){
-            //     console.log('erreur de requete');
-            // })
+            console.log('get com');
+            console.log(this.postId);
 
-             this.axios.get('http://localhost:3000/api/post/'+this.postId, {
+ 
+            fetch('http://localhost:3000/api/com/post/'+this.postId, {
+                method : "Get",
                 headers: { 
                     "Content-Type": "application/json",
                     "authorization" : 'Bearer ' + token, 
                 },
             }) 
-            .then(response => {
-                this.data = response.data
-                console.log(response)
-                console.log(response.data);
-            })
+            .then(function(res){
+                return res.json();
+            })    
+            .then(value => (this.data = value, console.log(this.data) ))
             .catch(function(){
                 console.log('erreur de requete');
             })
 
+            //  this.axios.get('http://localhost:3000/api/com/post/'+this.postId, {
+            //     headers: { 
+            //         // "Content-Type": "application/json",
+            //         "authorization" : 'Bearer ' + token, 
+            //     },
+            // }) 
+            // .then(response => {
+            //     this.data = response.data
+            //     console.log(response)
+            //     console.log(response.data);
+            // })
+            // .catch(function(){
+            //     console.log('erreur de requete');
+            // })
+
          },
-    //  }
+     }
 }
 </script>
 
 <style scoped lang="scss">
-#newCom{
-    background: rgb(255, 255, 255);
-    width: 100%;
-    // height: 10vw;
-    margin: 1rem;
-    border-radius: 8px;
-    // margin-bottom: 2rem;
-    .userAvatar{
-        width: 4rem;
-        // height: 1rem;
-        border-radius: 50%;
-        background: yellow;
-    }
-    .submitCom{
-        width: 10%;
-        font-size: 2rem;
-    }
-}
-.messageCom{
-    width: 50%;
-}
-.w30{
-    width: 30%;
-    background: rgba(0, 0, 255, 0.034);
+.com{
+width: 100%;
+min-height:10rem; 
+background: orange; 
 }
 </style>

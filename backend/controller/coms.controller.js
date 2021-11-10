@@ -31,12 +31,13 @@ exports.create = (req,res) =>{
 
 exports.getAll = (req,res) =>{
     console.log('findAll coms');
-    Coms.findAll({ 
+    Coms.findAll(    {
         order: [['id', 'DESC']],
-        include: [{
-            model: db.users,
-            model: db.posts,
-        }],
+        // where:{PostId : 4}
+        // include: [{
+        //     model: db.users,
+        //     model: db.posts,
+        // }],
     })
     .then(data=>{
         res.send(data);
@@ -50,15 +51,18 @@ exports.getAll = (req,res) =>{
 
 exports.getAllByPost = (req,res) =>{
     console.log('findAll  coms by Post');
-    const PostId = req.params.postId;
+    const PostId = req.params.post;
+    console.log(req.params);
     console.log(PostId);
 
+
     Coms.findAll({ 
-        order: [['id', 'DESC']],
-        include: [{
-            model: db.posts,
-            // where:{id : PostId}
-        }],
+        // order: [['id', 'DESC']],
+        where:{PostId : PostId}
+        // include: [{
+        //     model: db.posts,
+        //     where:{PostId : PostId}
+        // }],
     })
     .then(data=>{
         console.log("data");

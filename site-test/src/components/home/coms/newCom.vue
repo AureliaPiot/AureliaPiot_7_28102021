@@ -5,7 +5,7 @@
 
             <div class="form-group row justify-content-around">
                 <!-- <label for="message">message</label> -->
-                <img  alt="" class="userAvatar">
+                <img  v-bind:src="this.profilePic" alt="" class="userAvatar">
                 <input  type="text" class="form-control messageCom" :name="'messageCom'+postId" id="messageCom" placeholder="commentaire...">
             
                 <!-- <button class="btn btn-outline-primary w30" v-on:click.prevent="submitPost"><i class="fas fa-arrow-alt-circle-right"></i></button> -->
@@ -27,6 +27,11 @@ export default {
         // userPP :String,
         userId : Number,
         postId : Number
+    },
+    data(){
+        return{
+            profilePic : localStorage.getItem('PP')
+        }
     },
      methods:{
          submitCom(){

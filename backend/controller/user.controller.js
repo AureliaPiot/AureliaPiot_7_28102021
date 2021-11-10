@@ -31,6 +31,7 @@ exports.login = (req,res)=>{
         // res.header({redirection : "/home"});
         res.status(200).json({ 
           // message:'utilisateur trouvé',
+          profilePic: data.profilePic,
           userId: data.id,
           userRole: data.role,
           // userEmail:data.email,
@@ -129,7 +130,7 @@ exports.findAll = (req,res)=>{
     // let condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
     Users.findAll()
     .then(data=>{
-        res.send(data);
+        res.status(200).send(data);
         console.log(data)
     })
     .catch(err=> {
@@ -150,7 +151,7 @@ exports.findOne = (req,res)=>{
     Users.findOne({ where: { id : id} ,  attributes: {exclude: ['password']}, })
     .then(data=>{
         if (data) {
-            res.send(data);
+            res.status(200).send(data);
             console.log('data findone ' + data);
           } else {
 
@@ -178,7 +179,7 @@ exports.update = (req,res)=>{
     })
         .then(num => {
         if (num == 1) {
-            res.send({
+            res.status(200).send({
             message: "user was updated successfully."
             });
         } else {

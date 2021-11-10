@@ -41,7 +41,10 @@
 
             /> 
     </div>
-           <getCom  :postId="post.id"  /> 
+           <getComs  :postId="post.id"  /> 
+     
+
+
      
     <div class="showEdit" v-if="this.show">
         <div class="backgroundCache"></div>
@@ -61,7 +64,7 @@
 <script>
 import editPost from '@/components/home/post/gettedPost/editPost.vue'
 import newCom from '@/components/home/coms/newCom.vue'
-import getCom from '@/components/home/coms/getComs.vue'
+import getComs from '@/components/home/coms/getComs.vue'
 
 
 
@@ -73,8 +76,7 @@ export default {
     components:{
         editPost,
         newCom,
-        getCom,
-
+        getComs,
     },
 
     data(){  
@@ -87,12 +89,6 @@ export default {
         }
     },
     mounted(){
-        // console.log(this.isCreator);
-        // console.log(this.post.UserId)
-
-        // console.log(JSON.parse(this.postLike).userLike);
-        // const parse = JSON.parse(this.postLike).userLike;
-        // this.like = parse.length;
     },
 
     methods:{
@@ -163,7 +159,8 @@ export default {
     grid-template-areas: "header header"
                         "body body"
                         "footer footer"
-                        "newCom newCom";
+                        "newCom newCom"
+                        "getComs getComs";
     
 
     
