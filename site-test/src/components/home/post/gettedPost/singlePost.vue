@@ -125,8 +125,6 @@ export default {
         },
 
         addLike(){
- 
-
             if(!this.like){
                     console.log('like');
                 const data ={
@@ -152,7 +150,6 @@ export default {
                     console.log('erreur de requete');
                 })
             }
-
             if(this.like){
                 console.log('unlike');
                     // this.like = false
@@ -168,11 +165,8 @@ export default {
                 .catch(function(){
                     console.log('erreur de requete');
                 })
-
             }
         },
-
-
     },//methods
 
 

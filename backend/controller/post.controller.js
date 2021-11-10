@@ -1,5 +1,8 @@
 const db =require("../models")
 const Posts= db.posts;
+const Coms= db.coms;
+const Likes = db.likes;
+
 const fs = require('fs');
 
 
@@ -116,6 +119,9 @@ exports.delete = (req,res) =>{
         console.log(data);
         if(data !== null){
             // console.log(data.attachement == "null");
+            Coms.destroy( {where : {PostId: req.params.id} });
+            Likes.destroy( {where : {PostId: req.params.id} });
+
             
             if(data.attachement == "null"){
                 console.log('if');
