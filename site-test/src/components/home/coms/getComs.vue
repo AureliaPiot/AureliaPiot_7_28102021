@@ -6,10 +6,22 @@
             <div class="pp">
                 <img v-bind:src="coms.User.profilePic" alt="">
             </div>
-            <div class="userData">
+            <div class="userData d-flex">
                 <!-- {{coms.User}} -->
-                <div class="username">{{coms.User.nom}}  {{coms.User.prenom}} </div>
-                <div class="comDate"> {{coms.createDate}} </div>
+                <router-link class=" d-flex " :to="{ name: 'userPage',params:{id: coms.User.id }}">
+                    <p> {{coms.User.nom}}  </p>
+                    <p>{{coms.User.prenom}} </p>
+                </router-link>
+                <p class="comDate">{{coms.createDate}}</p>
+                <div class="editPost"  v-if="isCreator == coms.User.id || isAdmin ">
+                    <i class="fas fa-pen "></i>
+                    <i class="fas fa-trash "></i>
+                    <!-- <button class="btn edit" @click.prevent="showEditCom"><i class="fas fa-pen text-white"></i></button>
+                    <button class="btn delete" @click.prevent="deleteCom"><i class="fas fa-trash text-white"></i></button> -->
+                </div>
+            
+
+
             </div>
             <div class="content">{{coms.content}}</div>
 
@@ -41,7 +53,10 @@ export default {
     name:'get_com',
     props: {
         // userPP :String,
-        postId : Number
+        postId : Number,
+        isCreator : String,
+        isAdmin : Boolean,
+
 
     },
     data(){
@@ -100,10 +115,9 @@ background: orange;
     display: grid;
     grid-template-columns: 3rem 1fr;
     grid-template-areas: "pp userData"
-                         "pp comDate"
                          "pp content";
     grid-gap: 0.5rem 1rem;
-    padding: 1rem;
+    padding: 1rem 3.5rem;
     border-top: 1px solid #dfdfdf ;
 
 }
@@ -117,11 +131,13 @@ background: orange;
 }
 .userData{
     grid-area: userData;
-}
-.comDate{
-    grid-area: comDate;
-    font-size: 0.7rem;
-
+    p{
+        margin: 0 0.3rem;
+    }
+    .comDate{
+        grid-area: comDate;
+        font-size: 0.7rem;
+    }
 }
 .content{
     grid-area: content;

@@ -7,9 +7,7 @@
                 <!-- <label for="message">message</label> -->
                 <img  v-bind:src="this.profilePic" alt="" class="userAvatar">
                 <input  type="text" class="form-control messageCom" :name="'messageCom'+postId" id="messageCom" placeholder="commentaire...">
-            
-                <!-- <button class="btn btn-outline-primary w30" v-on:click.prevent="submitPost"><i class="fas fa-arrow-alt-circle-right"></i></button> -->
-                <!-- <div class="btn submitCom" v-on:click.prevent="submitPost"><i class="fas fa-arrow-alt-circle-right"></i></div> -->
+
                 <i class="fas fa-arrow-alt-circle-right submitCom"  v-on:click.prevent="submitCom"></i>
 
 

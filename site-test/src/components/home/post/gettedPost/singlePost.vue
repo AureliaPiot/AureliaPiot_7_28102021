@@ -1,38 +1,54 @@
 <template>
 
-<div class="post">
-    <div class="headerPost ">
-       <div class="userData">
+<div class="getPost">
 
-        <!-- <div class="profilePic"> -->
-        <img class="profilePic" v-bind:src="post.User.profilePic" v-bind:alt="post.User.nom">
-        <!-- </div> -->
-        <router-link class="name" :to="{ name: 'userPage',params:{id: post.User.id }}">{{post.User.nom}}</router-link>
+    <div class="post">
+        <div class="headerPost ">
+        <div class="userData">
 
-       <!-- <p class="name"> {{post.User.prenom}}</p> -->
-       <p class="date"> {{Date(post.createDate).toString().slice(0,16)}}</p>
+            <!-- <div class="profilePic"> -->
+            <img class="profilePic" v-bind:src="post.User.profilePic" v-bind:alt="post.User.nom">
+            <!-- </div> -->
+            <router-link class="name" :to="{ name: 'userPage',params:{id: post.User.id }}">{{post.User.nom}}</router-link>
 
-       </div>
-        <div class="editPost"  v-if="this.isCreator == post.UserId || this.isAdmin ">
-            <button class="btn  edit" @click.prevent="showEdit"><i class="fas fa-pen text-white"></i></button>
-            <!-- ouvre affiche un composant qui recupere les donnéés dans le form  /comme une fenetre alert?-->
-            <button class="btn  delete" @click.prevent="deletePost"><i class="fas fa-trash text-white"></i></button>
-            <!-- ouvre affiche un composant qui recupere les donnéés dans le form -->
+        <!-- <p class="name"> {{post.User.prenom}}</p> -->
+        <p class="date"> {{Date(post.createDate).toString().slice(0,16)}}</p>
+
         </div>
+            <div class="editPost"  v-if="this.isCreator == post.UserId || this.isAdmin ">
+                <button class="btn  edit" @click.prevent="showEdit"><i class="fas fa-pen text-white"></i></button>
+                <!-- ouvre affiche un composant qui recupere les donnéés dans le form  /comme une fenetre alert?-->
+                <button class="btn  delete" @click.prevent="deletePost"><i class="fas fa-trash text-white"></i></button>
+                <!-- ouvre affiche un composant qui recupere les donnéés dans le form -->
+            </div>
 
+        </div>
+        <div class="bodyPost">
+
+            <p>{{post.content}}</p>
+            <img v-if="post.attachement !== 'null'" class="imgPost" :src="post.attachement" alt="">
+
+        </div>
+        <div class="footerPost d-flex align-items-center">
+
+                <div class="col "><i class="fas fa-thumbs-up"></i>{{ this.post.likes.length}}</div>
+                <div class="col comments"><i class="fas fa-comment-dots"></i>{{ this.post.Coms.length}}</div>
+
+        </div>   
+        
+        <div class="showEdit" v-if="this.show">
+            <div class="backgroundCache"></div>
+            <editPost 
+                v-on:click="showEdit"
+                :user ='post.User'
+                :content ='post.content' 
+                :attachement ='post.attachement'
+                :id="post.id" />
+        </div>
     </div>
-    <div class="bodyPost">
 
-        <p>{{post.content}}</p>
-        <img v-if="post.attachement !== 'null'" class="imgPost" :src="post.attachement" alt="">
 
-    </div>
-    <div class="footerPost d-flex align-items-center">
 
-            <div class="col "><i class="fas fa-thumbs-up"></i>{{ this.post.likes.length}}</div>
-            <div class="col comments"><i class="fas fa-comment-dots"></i>{{ this.post.Coms.length}}</div>
-
-    </div>   
     <div class="newCom">
             <!-- :userPP ='post.User.profilePic' -->
         <newCom 
@@ -41,21 +57,7 @@
 
             /> 
     </div>
-           <getComs  :postId="post.id"  /> 
-     
-
-
-
-    <div class="showEdit" v-if="this.show">
-        <div class="backgroundCache"></div>
-        <editPost 
-            v-on:click="showEdit"
-            :user ='post.User'
-            :content ='post.content' 
-            :attachement ='post.attachement'
-            :id="post.id" />
-    </div>
-
+           <getComs  :postId="post.id" :isCreator="this.isCreator" :isAdmin="this.isAdmin" /> 
 </div>
 
    
@@ -146,21 +148,24 @@ export default {
 
 <style scoped lang="scss">
 // gere le post en grid
-.post{
-    position: relative;
+.getPost{
     background: white;
     margin: 2rem 0;
-    padding: 2rem;
+        padding: 2rem;
     border-radius: 8px;
     box-shadow: 0px 0px 10px #0000004d;
+}
+.post{
+    position: relative;
+    padding: 2rem;
+    border-bottom:1px solid rgb(138, 138, 138);
+
     display:grid;
     grid-template-columns: 1fr 1fr;
-    //   grid-template-rows: 4vw 1fr;
     grid-template-areas: "header header"
                         "body body"
-                        "footer footer"
-                        "newCom newCom"
-                        "getComs getComs";
+                        "footer footer";
+
     
 
     
@@ -249,7 +254,7 @@ export default {
         min-height: 3rem;
         // background: rgb(237, 240, 243);
         border-top: 1px solid rgb(223, 223, 223);
-        border-bottom: 1px solid rgb(223, 223, 223);
+        // border-bottom: 1px solid rgb(223, 223, 223);
 
     }
 
