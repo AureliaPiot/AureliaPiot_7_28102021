@@ -3,23 +3,18 @@ import Sign from '../views/Sign.vue';
 
 
 const routes = [
-  {
-    mode: 'history',
-  },
+ 
   {
    path:'/',
    redirect:'/sign',
+  // redirect:{name : "Sign"},
+
   },
   {
     path: '/sign',
     name: 'Sign',
     component: Sign,
-    // beforeEnter: (to, from, next) => {
-    //   if (localStorage.getItem('token') !== null) { 
-    //     next({ name: 'Home'})
-    //   } 
-    // }
-    
+  
     
     // if connected redirect to home
   },

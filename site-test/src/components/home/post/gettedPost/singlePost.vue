@@ -85,9 +85,7 @@ export default {
 // validateur like
         for(let like of this.post.likes){
             if(like.UserId == this.isCreator)
-            {
-                this.like = true;
-            }
+            { this.like = true; }
         }
     },
 

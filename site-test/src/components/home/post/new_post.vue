@@ -6,11 +6,11 @@
 
 
             <div class="form-group">
-                <!-- <label for="message">message</label> -->
-                <textarea class="form-control" id="message" rows="3" name="message" required></textarea>
+                <textarea class="form-control" id="message" rows="3" name="message" placeholder="exprimez-vous!" required></textarea>
+                <img v-if="url" class="preview" :src="url" />
             </div>
             <div class="row justify-content-between">
-                <input type="file"  class="btn btn-outline-primary w30" id="file" name="file">
+                <input type="file"  class="btn btn-outline-primary w30" id="file" name="file" accept=".jpg, .jpeg, .png, .gif" @change="onFileChange">
                 <button class="btn btn-outline-primary w30" v-on:click.prevent="submitPost">Submit</button>
             </div>
 <!-- au click refresh le composant get post et vider les inputs -->
@@ -26,7 +26,16 @@ export default {
     props: {
         msg: String
     },
+    data(){
+        return{
+            url: null
+        }
+    },
      methods:{
+         onFileChange(e) {
+            const file = e.target.files[0];
+            this.url = URL.createObjectURL(file);
+            },
          submitPost(){
             const userId = localStorage.getItem("userId");
             const token =localStorage.getItem("token"); 
@@ -71,6 +80,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.preview{
+    width: 50%;
+}
 .container{
     background: rgb(255, 255, 255);
     width: 100%;
