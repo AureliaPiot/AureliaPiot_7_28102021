@@ -60,8 +60,7 @@ exports.getAllByPost = (req,res) =>{
         order: [['createDate', 'DESC']],
         where:{PostId : PostId},
         include: [{
-            model: db.users,
-            // where:{PostId : PostId}
+            all:true,
             attributes: {exclude: ['password']},
         }],
     })
