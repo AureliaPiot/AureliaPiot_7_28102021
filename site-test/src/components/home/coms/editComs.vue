@@ -32,22 +32,22 @@ export default {
             this.$emit('close')
         },
 
-        submitComEdit(){
-            // const dataform = new FormData();
-            // dataform.append('content',document.getElementsByName("messageEdit")[0].value);
+        // submitComEdit(){
+        //     // const dataform = new FormData();
+        //     // dataform.append('content',document.getElementsByName("messageEdit")[0].value);
 
-            // fetch('http://localhost:3000/api/com/'+this.id, {
-            //     method : "Put",
-            //     headers: { 
-            //         // "Content-Type": "application/json", 
-            //         "authorization" : 'Bearer ' + localStorage.getItem('token'),
-            //         },
-            //     body: dataform,
-            // }) 
-            // .then(function(res){return res.json();}) 
-            // .then(value => (console.log(value) ))
-            // .catch(function(){ console.log('erreur de requete'); })
-        },
+        //     // fetch('http://localhost:3000/api/com/'+this.id, {
+        //     //     method : "Put",
+        //     //     headers: { 
+        //     //         // "Content-Type": "application/json", 
+        //     //         "authorization" : 'Bearer ' + localStorage.getItem('token'),
+        //     //         },
+        //     //     body: dataform,
+        //     // }) 
+        //     // .then(function(res){return res.json();}) 
+        //     // .then(value => (console.log(value) ))
+        //     // .catch(function(){ console.log('erreur de requete'); })
+        // },
     },//methods
 
 

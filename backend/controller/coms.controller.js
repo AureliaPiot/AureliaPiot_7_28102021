@@ -112,7 +112,19 @@ exports.getOne = (req,res) =>{
 
 
 
-exports.update = (req,res) =>{};
+exports.update = (req,res) =>{
+    console.log('update');
+    console.log(req.params);
+    console.log(req.body);
+
+    Coms.update({content: req.body.newContent},
+        {where : {id: req.params.id} }
+         )
+    .then(() => res.status(200).send({message: 'commentaire modifié'}))
+    .catch(err=> { res.status(404).send({message: err.message || " error canot update post"}) });
+
+
+};
 
 exports.delete = (req,res) =>{
 

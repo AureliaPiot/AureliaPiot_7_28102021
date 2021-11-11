@@ -24,11 +24,11 @@
             </div>
 
             <div  v-if="!this.editCom" class="content">{{coms.content}}</div>
+
             <div v-if="this.editCom" class="Editcontent">
                 <input  type="text" class="" :name="'editCom'+coms.id" :value="coms.content">
-                <i class="fas fa-arrow-alt-circle-right submitCom"  v-on:click.prevent="submitEditCom"></i>
+                <i class="fas fa-arrow-alt-circle-right submitCom"  v-on:click.prevent="submitComEdit"></i>
                 <button class="close" @click.prevent="showEditCom" >X</button>
-
             </div>
 
             <!-- <editComs v-if="this.editCom" @closeEditCom="showEditCom" :content="coms.content" id="coms.id"/> -->
@@ -36,41 +36,7 @@
 
 
         </div>
-    </div>
-
-<!-- PostId: 3
-PostId: 1
-User:
-    email: "ranchLonllon@Nael.com"
-    id: 1
-    nom: "Nael"
-    password: "vv"
-    prenom: "Lonlon"
-    profilePic: "http://localhost:3000/images/defaultPic/default.jpg"
-    role: "user"
-
-UserId: 1
-content: "bbbb"
-createDate: "2021-11-10T12:04:52.000Z"
-id: 4
--->
-<!--
-    PostId: 1
-User:
-    email: "ranchLonllon@Nael.com"
-    id: 1
-    nom: "Nael"
-    prenom: "Lonlon"
-    profilePic: "http://localhost:3000/images/defaultPic/default.jpg"
-    role: "admin"
-UserId: 1
-content: "'eftergfergergerg"
-createDate: "2021-11-11T15:18:42.000Z"
-id: 5
-likes: []
- -->
-
-        
+    </div>      
 </template>
 
 <script>
@@ -134,6 +100,30 @@ export default {
                     console.log('editcom open')
                 }
             },
+
+            submitComEdit(){
+                // const dataform = new FormData();
+                // dataform.append('content',document.getElementsByName("editCom")[0].value);
+                // dataform.append('content','test');
+                const editData ={
+                    newContent : document.getElementsByName("editCom"+ this.coms.id)[0].value,
+
+                }
+
+
+                fetch('http://localhost:3000/api/com/'+this.coms.id, {
+                    method : "Put",
+                    headers: { 
+                        "Content-Type": "application/json", 
+                        "authorization" : 'Bearer ' + localStorage.getItem('token'),
+                        },
+                    body: JSON.stringify(editData),
+                }) 
+                .then(function(res){return res.json();}) 
+                .then(value => (console.log(value) ))
+                .catch(function(){ console.log('erreur de requete'); })
+            },
+
             deleteCom(param){
                 console.log('deleteCom');
                 console.log(param);
