@@ -44,11 +44,12 @@
             :postId="post.id"
             /> 
 
-           <getComs  
+        <getComs  
            :postId="post.id" 
            :isCreator="this.isCreator" 
            :isAdmin="this.isAdmin" 
            /> 
+
 </div>
 
    

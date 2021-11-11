@@ -14,16 +14,23 @@
                 </router-link>
                 <p class="comDate">{{coms.createDate}}</p>
                 <div class="editPost"  v-if="isCreator == coms.User.id || isAdmin ">
-                    <i class="fas fa-pen "></i>
+                    <i class="fas fa-pen" @click.prevent="showEditCom"></i>
                     <i class="fas fa-trash " @click.prevent="deleteCom(coms.id)"></i>
                     <!-- <button class="btn edit" @click.prevent="showEditCom"><i class="fas fa-pen text-white"></i></button>
                     <button class="btn delete" @click.prevent="deleteCom"><i class="fas fa-trash text-white"></i></button> -->
                 </div>
-            
-
-
             </div>
-            <div class="content">{{coms.content}}</div>
+
+            <div  v-if="!this.editCom" class="content">{{coms.content}}</div>
+            <!-- <div v-if="this.editCom" class="Editcontent">
+                <input  type="text" class="" :name="'editCom'+coms.id" :value="coms.content">
+                <i class="fas fa-arrow-alt-circle-right submitCom"  v-on:click.prevent="submitEditCom"></i>
+                <button class="close" @click.prevent="showEditCom" >X</button>
+
+            </div> -->
+
+            <editComs v-if="this.editCom" @closeEditCom="showEditCom" content="coms.content" id="coms.id"/>
+
 
         </div>
     </div>
@@ -49,8 +56,13 @@ id: 4
 </template>
 
 <script>
+import editComs from '@/components/home/coms/editComs.vue'
+
 export default {
     name:'get_com',
+    components:{
+        editComs
+    },
     props: {
         // userPP :String,
         postId : Number,
@@ -63,6 +75,7 @@ export default {
         return{
             data:"",
             token :localStorage.getItem("token"),
+            editCom: false
         }
     },
 
@@ -93,6 +106,15 @@ export default {
 
         },
         methods:{
+            showEditCom(){
+                if(this.editCom){
+                    this.editCom = false
+                    console.log('editcom close')
+                }else{
+                    this.editCom = true
+                    console.log('editcom open')
+                }
+            },
             deleteCom(param){
                 console.log('deleteCom');
                 console.log(param);
