@@ -45,6 +45,10 @@
             /> 
 
         <getComs  
+        v-for="coms in this.postComs" 
+        :key="coms"
+        :coms="coms"
+
            :postId="post.id" 
            :isCreator="this.isCreator" 
            :isAdmin="this.isAdmin" 
@@ -82,6 +86,7 @@ export default {
             show : false,
             like :false,
              
+            postComs : null,
         }
     },
     created(){
@@ -91,6 +96,31 @@ export default {
             { this.like = true; }
         }
     },
+     mounted(){
+                
+                console.log('get com');
+                console.log(this.post.id);
+
+    
+                fetch('http://localhost:3000/api/com/post/'+this.post.id, {
+                    method : "Get",
+                    headers: { 
+                        "Content-Type": "application/json",
+                        "authorization" : 'Bearer ' + this.token, 
+                    },
+                }) 
+                .then(function(res){
+                    return res.json();
+                })    
+                .then(value => (this.postComs = value , console.log(value) ))
+       
+
+                .catch(function(){
+                    console.log('erreur de requete');
+                });
+            console.log("data");
+
+        },
 
     methods:{
         showEdit(){

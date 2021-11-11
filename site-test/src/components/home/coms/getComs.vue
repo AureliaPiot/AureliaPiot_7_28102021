@@ -1,11 +1,13 @@
 <template>
         <!-- <div v-on:click="getCom" class="com">{{data}}</div> -->
     <div  >
-        <div v-for="coms in this.data" :key="coms"  class="coms" >
+        <!-- <div v-for="coms in this.data" :key="coms"  class="coms" > -->
+        <div  class="coms" >
 
             <div class="pp">
                 <img v-bind:src="coms.User.profilePic" alt="">
             </div>
+
             <div class="userData d-flex">
                 <!-- {{coms.User}} -->
                 <router-link class=" d-flex " :to="{ name: 'userPage',params:{id: coms.User.id }}">
@@ -22,14 +24,15 @@
             </div>
 
             <div  v-if="!this.editCom" class="content">{{coms.content}}</div>
-            <!-- <div v-if="this.editCom" class="Editcontent">
+            <div v-if="this.editCom" class="Editcontent">
                 <input  type="text" class="" :name="'editCom'+coms.id" :value="coms.content">
                 <i class="fas fa-arrow-alt-circle-right submitCom"  v-on:click.prevent="submitEditCom"></i>
                 <button class="close" @click.prevent="showEditCom" >X</button>
 
-            </div> -->
+            </div>
 
-            <editComs v-if="this.editCom" @closeEditCom="showEditCom" content="coms.content" id="coms.id"/>
+            <!-- <editComs v-if="this.editCom" @closeEditCom="showEditCom" :content="coms.content" id="coms.id"/> -->
+           
 
 
         </div>
@@ -51,19 +54,35 @@ content: "bbbb"
 createDate: "2021-11-10T12:04:52.000Z"
 id: 4
 -->
+<!--
+    PostId: 1
+User:
+    email: "ranchLonllon@Nael.com"
+    id: 1
+    nom: "Nael"
+    prenom: "Lonlon"
+    profilePic: "http://localhost:3000/images/defaultPic/default.jpg"
+    role: "admin"
+UserId: 1
+content: "'eftergfergergerg"
+createDate: "2021-11-11T15:18:42.000Z"
+id: 5
+likes: []
+ -->
 
         
 </template>
 
 <script>
-import editComs from '@/components/home/coms/editComs.vue'
+// import editComs from '@/components/home/coms/editComs.vue'
 
 export default {
     name:'get_com',
     components:{
-        editComs
+        // editComs
     },
     props: {
+        coms: Object,
         // userPP :String,
         postId : Number,
         isCreator : String,
@@ -73,38 +92,38 @@ export default {
     },
     data(){
         return{
-            data:"",
+            // data:"",
             token :localStorage.getItem("token"),
             editCom: false
         }
     },
 
     //  methods:{
-        mounted(){
+        // mounted(){
                 
-                console.log('get com');
-                console.log(this.postId);
+        //         console.log('get com');
+        //         console.log(this.postId);
 
     
-                fetch('http://localhost:3000/api/com/post/'+this.postId, {
-                    method : "Get",
-                    headers: { 
-                        "Content-Type": "application/json",
-                        "authorization" : 'Bearer ' + this.token, 
-                    },
-                }) 
-                .then(function(res){
-                    return res.json();
-                })    
-                .then(value => (this.data = value , console.log(value) ))
+        //         fetch('http://localhost:3000/api/com/post/'+this.postId, {
+        //             method : "Get",
+        //             headers: { 
+        //                 "Content-Type": "application/json",
+        //                 "authorization" : 'Bearer ' + this.token, 
+        //             },
+        //         }) 
+        //         .then(function(res){
+        //             return res.json();
+        //         })    
+        //         .then(value => (this.data = value , console.log(value) ))
        
 
-                .catch(function(){
-                    console.log('erreur de requete');
-                });
-            console.log("data");
+        //         .catch(function(){
+        //             console.log('erreur de requete');
+        //         });
+        //     console.log("data");
 
-        },
+        // },
         methods:{
             showEditCom(){
                 if(this.editCom){
