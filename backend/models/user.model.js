@@ -41,6 +41,10 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: false,
         defaultValue :'http://localhost:3000/images/defaultPic/default.jpg'
       },
+      bio: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
     });
   
     return Users;

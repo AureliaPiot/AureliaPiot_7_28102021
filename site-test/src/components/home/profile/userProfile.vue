@@ -2,45 +2,36 @@
     <div>
         <div class="profil-card">
 
-            <div class="row">
-                <h1 class="titre">{{userData.nom}} {{userData.prenom}}</h1>
-                <input v-if="this.editName" type="text" class="form-control" id="nom_input"  placeholder="nom" name="nom_Edit"  v-bind:value="userData.nom" required>
-                <input v-if="this.editName" type="text" class="form-control" id="prenom_input"  placeholder="prenom" name="prenom_Edit" v-bind:value="userData.prenom"  required>
-
-                <button class="edit" v-if="this.isUser == userData.id" @:click.prevent="editUserName">edit</button>
+            <div class="card-head">
+                <h2> {{userName}} {{userPrenom}} </h2>
             </div>
-
-            <img  class="pic" v-bind:src="userData.profilePic" v-bind:alt="userData.nom">
-            <div v-if="userData.role == 'admin'" class="admin">
-                <i class="fas fa-crown"></i>
+            <div class="card-left">
+                    <img  class="pic" :src="this.profilePic" :alt="this.userName">
             </div>
-
-            <div class="bio" >
-                <p>{{userData.email}}</p>
+            <div class="card-right">
+                <p>Description :</p>
+                <div v-if="!editbio" class="userBio">
+                    {{userBio}}
+                </div>
+                <input v-if="editbio" type="textarea" class="userBio" rows="3" name="newBio" >
             </div>
-            <div v-if="isAdmin" class="admin">
-                <router-link to="/admin">Admin</router-link>
-            </div>
+            <!-- <div v-if="this.isUser == this.userId" class="d-flex editpart"> -->
+                <div  v-if="this.isUser == this.userId" class="col editPp">
+                    <button @click="showEditPP">edit profile pic</button>
+                    <input v-if="editPic" type="file" name="newPic" v-on:change="this.getNewPic">
+                </div>
+                <div v-if="this.isUser == this.userId" class="col editBio">
+                    <button @click="showEditBio">edit bio</button>
+                </div>
+            <!-- </div> -->
 
-             <div class="edit"  v-if="this.isUser == userData.id">
-                <button class="edit">edit</button>
-                <!-- ouvre affiche un composant qui recupere les donnéés dans le form  /comme une fenetre alert?-->
-                <button class="delete" @click.prevent="deleteUser">delete</button>
-                <!-- redirection vers le page de connexion-->
-            </div>      
         </div>
+
+
 
         <getPost :query="this.id" />
     </div>
 
-<!--
-email: "Kingdom.hearts@disney.com"
-id: 2
-nom: "legend"
-prenom: "xiao"
-profilePic: "http://localhost:3000/images/defaultPic/default.jpg"
-role: "user"
--->
 
 
 </template>
@@ -58,24 +49,40 @@ export default {
             isUser :localStorage.getItem('userId'),
             isAdmin :localStorage.getItem('role') == 'admin',
 
-            userData :"",
             id :  this.$route.params.id,
+            userData :null,
+            profilePic: null,
 
-            editName : false,
+            userId:null,
+            userName:null,
+            userPrenom:null,
+            userBio:null,
+            userEmail:null,
+            userRole:null,
+
+            editPp:null,
+            editbio:null,
+ 
+            editBio : false,
+            editPic :false,
         }
   },
   props: {
     user: String
   },
+created(){
+    console.log('params  :'+ this.id);
+    // this.getUserData()
+},
    methods:{
  
         getUserData(){
-            const id =  this.id;
+            // const id =  this.id;
 
             console.log('get user data')
             console.log(this.$route.params.id)
 
-            fetch('http://localhost:3000/api/user/'+id, {
+            fetch('http://localhost:3000/api/user/'+this.id, {
                 method : "Get",
                 headers: { 
                     "Content-Type": "application/json",
@@ -85,7 +92,20 @@ export default {
             .then(function(res){
                 return res.json();
             })    
-            .then(value => (this.userData = value, console.log(this.userData)))
+            .then(value => (
+                this.userData = value,
+                this.userId=value.id,
+                this.userName = value.nom,
+                this.userPrenom = value.prenom,
+                this.userEmail = value.email,
+                this.userRole = value.role,
+                this.userBio = value.bio,
+
+
+
+                this. profilePic=value.profilePic ,
+                console.log(this.userData)
+                ))
 
             .catch(function(){
                 console.log('erreur de requete');
@@ -93,9 +113,43 @@ export default {
         },//getUsersdata
 
         editUserName(){
-            this.editName = true
+            console.log('editname')
+            if(!this.editName){
+                this.editName = true
+            }
+            else if(this.editName){
+                this.editName = false
+            }
 
-        },//getUsersdata
+
+        },// editUserName
+        showEditBio(){
+             console.log('editbio')
+            if(!this.editbio){
+                this.editbio = true
+            }
+            else if(this.editbio){
+                this.editbio = false
+            }
+        },
+        showEditPP(){
+             console.log('editpic')
+            if(!this.editPic){
+                this.editPic = true
+            }
+            else if(this.editPic){
+                this.editPic = false
+            }
+        },
+        getNewPic(e) {
+            const file = e.target.files[0];
+            this.profilePic = URL.createObjectURL(file);
+            console.log('file')
+            console.log(this.profilePic)
+    
+
+        },
+
 
 
     },//methods
@@ -107,25 +161,59 @@ export default {
 
 </script>
 
+
+
 <style scoped lang="scss">
 .profil-card{
     background: rgb(255, 255, 255);
     border-radius: 8px;
     padding: 3rem;
-    .pic{
-        width: 5rem;
-        height: 5rem;
+
+    display: grid;
+    grid-gap: 1rem 4rem;
+    grid-template-columns: 33% 1fr;
+    grid-template-areas:"name name" 
+                        "left right";
+
+    .card-head{
+        grid-area: name;
+
     }
-    
-    // .bio{
-    //     height :10vw;
-    // }
+    .card-left{
+        grid-area: left;
+        // padding: 0 4rem;
+        .pic{
+            width: 100%;
+            height: 100%;
+            border-radius: 15%;
+            object-fit: cover;
+
+        }
+
+    }
+    .card-right{
+        grid-area: right;
+        // margin: 2rem 0 0;
+        
+     
+        p{
+            font-weight: 800;
+            margin: 0;
+        }
+        .userBio{
+            min-height: 10vw;
+            width: 100%;
+            padding: 1rem;
+            border-radius: 20px;
+            background-color: rgba(35, 132, 189, 0.014);
+            border: 1px solid rgba(26, 44, 126, 0.322);
+        }
+        
+    }
 
 }
-h1{
+h2{
     color: rgb(17, 52, 66);
 }
-.div{
-    color: rgb(189, 35, 35);
-}
+
 </style>

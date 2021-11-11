@@ -3,12 +3,15 @@ import Sign from '../views/Sign.vue';
 
 
 const routes = [
+  // {
+  //   // will match everything
+  //   path: '*'
+  // },
  
   {
    path:'/',
    redirect:'/sign',
   // redirect:{name : "Sign"},
-
   },
   {
     path: '/sign',
