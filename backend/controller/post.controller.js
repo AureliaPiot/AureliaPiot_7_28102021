@@ -109,7 +109,39 @@ exports.getOne = (req,res) =>{
 
 
 
-exports.update = (req,res) =>{};
+exports.update = (req,res) =>{
+    console.log(req.params);
+    console.log(req.body);
+    console.log(req.file);
+
+    const oldFile = req.body.oldFile;
+    const newFile = `${req.protocol}://${req.get('host')}/images/${req.file.filename}` ;
+    console.log(oldFile);
+    console.log(newFile);
+// par ce que l'image est renommé avec le temp present, elle ne sera jamais egal a son ancien version,
+// faire un refresh pour que l'image soit pris en compte dans 'old file' apres la modification
+    if( oldFile !== newFile ){
+        console.log('not the same');
+        const filename = oldFile.split("/images/")[1];
+        fs.unlink(`images/${filename}`,()=>{
+            console.log('unlink old attachement');
+        });
+    }
+    Posts.update(
+        { content : req.body.content,
+          attachement : req.body.attachement  },
+        { where: { id: req.params.id } }
+      )
+    .then(() => res.status(200).send({message: 'post modifié'}))
+    .catch(err=> { res.status(500).send({message: err.message || " error canot update post"}) });
+
+};
+// content: 'test',
+//   attachement: 'http://localhost:3000/images/1636578338245.jpg',
+//   odlAttachement: 'http://localhost:3000/images/1636578338245.jpg'
+
+
+
 
 exports.delete = (req,res) =>{
     

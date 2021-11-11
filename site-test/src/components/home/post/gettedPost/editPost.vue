@@ -2,25 +2,25 @@
 <div class="editPost">
     <div class="headerPost ">
        <div class="userData">
-            <div class="user"></div>          
-            <button class="close" v-on:click="$emit('showEdit')" >X</button>
+            <div class="user"></div>        
        </div> <!-- userdata -->
     </div>
-    <div class="bodyPost">
-        <textarea class="form-control" id="message" rows="3" name="messageEdit" :value="content"></textarea>
+        <form enctype="multipart/form-data">
+            <div class="bodyPost">
+                <textarea class="form-control" id="message" rows="3" name="messageEdit" :value="content"></textarea>
 
-        <img  v-if="attachement !== 'null'" :src="attachement" alt="upload img">
-        
-        <!-- <p>{{ content }}</p>
-        <p>{{ attachement }}</p> -->
-    </div>
-    <div class="footerPost d-flex justify-content-between">
-        <input type="file"  class="btn btn-outline-primary" id="file" name="fileEdit" >
-        <!-- <div>entrée</div> -->
-        <button class="btn btn-primary w30">entrée</button>
-    </div>    
-
-
+                <img  v-if="this.file" :src="this.file" alt="upload-img" >
+                
+                <!-- <p>{{ content }}</p>
+                <p>{{ attachement }}</p> -->
+            </div>
+            <div class="footerPost d-flex justify-content-between">
+                <input type="file"  class="btn btn-outline-primary" id="file" name="fileEdit"  @change="onFileChange">
+                <!-- <div>entrée</div> -->
+                <button class="btn btn-primary w30" @click.prevent="submitEdit">entrée</button>
+            </div>    
+        </form>
+    <button class="close" @click.prevent="$emit('close')" >X</button>
 </div>
 
    
@@ -37,9 +37,74 @@ export default {
         content:String,
         attachement:String,
     },
+    data(){
+        return{
+            oldFile: this.attachement,
+            file : this.attachement
+        }
+    },
 
     methods:{
+        close(){
+            this.$emit('close')
+        },
 
+         onFileChange(e) {
+            const file = e.target.files[0];
+            this.file = URL.createObjectURL(file);
+            console.log('file')
+            console.log(file)
+            },
+
+        submitEdit(){
+            const dataform = new FormData();
+            dataform.append('content',document.getElementsByName("messageEdit")[0].value);
+            dataform.append('oldFile',this.oldFile);
+            dataform.append('file',document.getElementsByName("fileEdit")[0].files[0]);
+
+            // const edit ={
+            //     content : document.getElementsByName("messageEdit")[0].value,
+            //     attachement : document.getElementsByName("fileEdit")[0].files[0],
+            //     // attachement : this.file,
+            //     odlAttachement : this.oldFile,
+            // }
+
+            fetch('http://localhost:3000/api/post/'+this.id, {
+                method : "Put",
+                headers: { 
+                    // "Content-Type": "application/json", 
+                    "authorization" : 'Bearer ' + localStorage.getItem('token'),
+                    },
+                body: dataform,
+            }) 
+            .then(function(res){return res.json();}) 
+            .then(value => (console.log(value) ))
+            .catch(function(){
+                console.log('erreur de requete');
+            })
+
+
+
+            // console.log('file----');
+            // console.log(document.getElementsByName("fileEdit")[0].files[0]);
+
+
+          
+
+
+            // this.axios.put('http://localhost:3000/api/post/'+this.id, dataform, {
+            //     headers: {
+            //          "authorization" : 'Bearer ' + localStorage.getItem('token'),
+            //          },
+            // }) 
+            // .then(function(response) {
+            //     console.log(response.data);
+            //     document.getElementById("newPost").reset();
+            // })
+            // .catch(function (error) {
+            //     console.log(error);
+            // });
+        },
     },//methods
 
 

@@ -27,13 +27,16 @@
         
         <div class="showEdit" v-if="this.show">
             <div class="backgroundCache"></div>
+            
             <editPost 
-                v-on:click="showEdit"
+                @close ="closeEdit"
                 :user ='post.User'
                 :content ='post.content' 
                 :attachement ='post.attachement'
                 :id="post.id" />
         </div>
+                <!-- :click="showEdit" -->
+
     </div>
 
         <newCom 
@@ -73,10 +76,10 @@ export default {
     data(){  
         return{
             token : localStorage.getItem("token"),
-            show : false,
             isCreator :localStorage.getItem('userId'),
             isAdmin: localStorage.getItem('role') == "admin",
 
+            show : false,
             like :false,
              
         }
@@ -91,12 +94,17 @@ export default {
 
     methods:{
         showEdit(){
-            if(this.show){
-                this.show = false
-            }else if(!this.show){
-                this.show = true ;
-            }
+            this.show = true
+            // if(this.show){
+            //     this.show = false
+            // }else if(!this.show){
+            //     this.show = true ;
+            // }
            console.log(this.show)
+        },
+        closeEdit(){
+            this.show = false
+            console.log(this.show)
         },
         saveEdit(){
 

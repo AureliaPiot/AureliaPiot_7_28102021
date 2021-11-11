@@ -81,7 +81,8 @@ export default {
 
 <style scoped lang="scss">
 .preview{
-    width: 50%;
+    // width: 50%;
+    max-height:10vw;
 }
 .container{
     background: rgb(255, 255, 255);
