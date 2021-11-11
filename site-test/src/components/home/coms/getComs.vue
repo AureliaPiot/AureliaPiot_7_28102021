@@ -15,7 +15,7 @@
                 <p class="comDate">{{coms.createDate}}</p>
                 <div class="editPost"  v-if="isCreator == coms.User.id || isAdmin ">
                     <i class="fas fa-pen "></i>
-                    <i class="fas fa-trash "></i>
+                    <i class="fas fa-trash " @click.prevent="deleteCom(coms.id)"></i>
                     <!-- <button class="btn edit" @click.prevent="showEditCom"><i class="fas fa-pen text-white"></i></button>
                     <button class="btn delete" @click.prevent="deleteCom"><i class="fas fa-trash text-white"></i></button> -->
                 </div>
@@ -62,12 +62,13 @@ export default {
     data(){
         return{
             data:"",
+            token :localStorage.getItem("token"),
         }
     },
 
     //  methods:{
         mounted(){
-                const token =localStorage.getItem("token"); 
+                
                 console.log('get com');
                 console.log(this.postId);
 
@@ -76,7 +77,7 @@ export default {
                     method : "Get",
                     headers: { 
                         "Content-Type": "application/json",
-                        "authorization" : 'Bearer ' + token, 
+                        "authorization" : 'Bearer ' + this.token, 
                     },
                 }) 
                 .then(function(res){
@@ -90,7 +91,25 @@ export default {
                 });
             console.log("data");
 
+        },
+        methods:{
+            deleteCom(param){
+                console.log('deleteCom');
+                console.log(param);
+
+                fetch('http://localhost:3000/api/com/'+param, {
+                    method : "DELETE",
+                    headers: { 
+                        "Content-Type": "application/json",
+                        "authorization" : 'Bearer ' + this.token, 
+                    },
+                }) 
+                .then(function(res){return res.json(); })    
+                .then(value => (console.log(value.message) ))
+                .catch(function(){console.log('erreur de requete');});
+            }
         }
+
     //  },
     //  beforeMount(){
     //     this.getComs()

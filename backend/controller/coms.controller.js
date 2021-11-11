@@ -115,22 +115,12 @@ exports.getOne = (req,res) =>{
 exports.update = (req,res) =>{};
 
 exports.delete = (req,res) =>{
-    
-    Coms.findOne( {where :{id: req.params.id}} )
-    .then(data =>{
-        console.log(req.params);
-        console.log(data);
-        if(data !== null){
-  
-            Posts.destroy( {where : {id: req.params.id} })
-            .then(() => res.status(200).send({message: 'post supprimé'}))
-            .catch(err=> { res.status(404).send({message: err.message || " error canot delete post"}) });
 
-        }else{
-             res.status(404).send({message: "error canot find any coms"}) 
-        }   
-    })
-    .catch(err=> { res.status(404).send({message: err.message || " error canot find any post"}) });
+        console.log(req.params);
+  
+        Coms.destroy( {where : {id: req.params.id} })
+        .then(() => res.status(200).send({message: 'commentaire supprimé'}))
+        .catch(err=> { res.status(404).send({message: err.message || " error canot delete post"}) });
 
 }
 

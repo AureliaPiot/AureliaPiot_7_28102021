@@ -42,7 +42,6 @@
         <newCom 
             :userId ="post.User.id"
             :postId="post.id"
-
             /> 
 
            <getComs  
