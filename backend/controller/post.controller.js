@@ -127,16 +127,14 @@ exports.update = (req,res) =>{
     }
     Posts.update(
         { content : req.body.content,
-          attachement : req.body.attachement  },
+          attachement : newFile },
         { where: { id: req.params.id } }
       )
     .then(() => res.status(200).send({message: 'post modifié'}))
     .catch(err=> { res.status(500).send({message: err.message || " error canot update post"}) });
 
 };
-// content: 'test',
-//   attachement: 'http://localhost:3000/images/1636578338245.jpg',
-//   odlAttachement: 'http://localhost:3000/images/1636578338245.jpg'
+
 
 
 
