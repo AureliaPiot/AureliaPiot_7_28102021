@@ -164,7 +164,7 @@ export default {
             if(!this.like){
                     console.log('like');
                 const data ={
-                    UserId:this.post.User.id,
+                    UserId:this.isCreator,
                     postId:this.post.id
                 }
 
