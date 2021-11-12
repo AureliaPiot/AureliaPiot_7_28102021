@@ -1,9 +1,7 @@
 <template>
 
     <div class="allPost">
-        <!-- <h2>Get post</h2> -->
-        <!-- <p>{{this.data}}</p> -->
- 
+
         <post
             v-for="post in this.data" 
             :key="post"
@@ -35,10 +33,8 @@ export default {
 
     // methods:{
     mounted() {
-        // get all post
-        // getPost(){
-            console.log('get post :query');
-            console.log(this.query);
+            // console.log('get post :query');
+            // console.log(this.query);
 
 
             this.axios.get('http://localhost:3000/api/post/'+this.query, {
@@ -49,8 +45,7 @@ export default {
             }) 
             .then(response => {
                 this.data = response.data
-                // console.log(response)
-                console.log(response.data);
+                // console.log(response.data);
             })
             .catch(function(){
                 console.log('erreur de requete');
@@ -58,16 +53,12 @@ export default {
 
         // },//getUsers
     },//methods
-//   beforeMount(){
-//     this.getPost();
-//   },
+
 }
 </script>
 
 <style scoped lang="scss">
 .allPost{
-    // background: white;
     width: 100%;
-    // height: 10vw;
 }
 </style>

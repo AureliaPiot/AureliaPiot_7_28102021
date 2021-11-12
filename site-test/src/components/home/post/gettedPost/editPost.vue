@@ -62,13 +62,6 @@ export default {
             dataform.append('oldFile',this.oldFile);
             dataform.append('file',document.getElementsByName("fileEdit")[0].files[0]);
 
-            // const edit ={
-            //     content : document.getElementsByName("messageEdit")[0].value,
-            //     attachement : document.getElementsByName("fileEdit")[0].files[0],
-            //     // attachement : this.file,
-            //     odlAttachement : this.oldFile,
-            // }
-
             fetch('http://localhost:3000/api/post/'+this.id, {
                 method : "Put",
                 headers: { 
@@ -83,27 +76,6 @@ export default {
                 console.log('erreur de requete');
             })
 
-
-
-            // console.log('file----');
-            // console.log(document.getElementsByName("fileEdit")[0].files[0]);
-
-
-          
-
-
-            // this.axios.put('http://localhost:3000/api/post/'+this.id, dataform, {
-            //     headers: {
-            //          "authorization" : 'Bearer ' + localStorage.getItem('token'),
-            //          },
-            // }) 
-            // .then(function(response) {
-            //     console.log(response.data);
-            //     document.getElementById("newPost").reset();
-            // })
-            // .catch(function (error) {
-            //     console.log(error);
-            // });
         },
     },//methods
 
@@ -154,9 +126,6 @@ export default {
         background: rgb(237, 240, 243);
         border-top: 1px solid rgb(223, 223, 223);
         border-bottom: 1px solid rgb(223, 223, 223);
-
-
-
 
     }
     .close{

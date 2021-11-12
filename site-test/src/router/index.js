@@ -52,19 +52,6 @@ const routes = [
     ],
   },
 
-
-  {
-    path: '/about',
-    name: 'About',
-    meta: {
-      isAuth: true,
-      // isAdmin: true
-    },
-
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  },
-
-
 ]
 
 const router = createRouter({
