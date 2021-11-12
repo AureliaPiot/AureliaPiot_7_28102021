@@ -217,8 +217,8 @@ exports.updateFile = (req,res)=>{
 // [UPDATE BIO]//////////////////////////////////////////////////////
 
 
-exports.updateBio = (req,res)=>{
-  console.log('update user File---------------------------------');
+exports.update = (req,res)=>{
+  console.log('update (bio ou role---------------------------------');
   const id = req.params.id;
   // let bodyKey = Object.keys(req.body)
   console.log(id);
@@ -230,6 +230,23 @@ exports.updateBio = (req,res)=>{
   .then(() => res.status(200).send({message: 'user modifié'}))
   .catch(err=> { res.status(404).send({message: err.message || " error canot update post"}) });
 };
+
+// [UPDATE ROLE]//////////////////////////////////////////////////////
+
+
+// exports.updateBio = (req,res)=>{
+//   console.log('update user File---------------------------------');
+//   const id = req.params.id;
+//   // let bodyKey = Object.keys(req.body)
+//   console.log(id);
+//   console.log(req.body);
+  
+//   Users.update(req.body,
+//     {where : {id: req.params.id} }
+//      )
+//   .then(() => res.status(200).send({message: 'user modifié'}))
+//   .catch(err=> { res.status(404).send({message: err.message || " error canot update post"}) });
+// };
 
 
 // //////////////////////////////////////////////////////////////////////////////////////

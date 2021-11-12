@@ -3,6 +3,7 @@ const app = express();
 const fs = require("fs");
 
 const db = require("./models/index.js");
+
 // pour vide et synchoniser les tables par rapport aux model------
 
 // db.sequelize.sync({ force: true }).then(() => {
@@ -11,6 +12,7 @@ const db = require("./models/index.js");
 
 // db.sequelize.sync();
 
+// pour deamrrer le back-----
 
 // nodemon --exec 'node -r dotenv/config server.js'
 app.use(express.json());

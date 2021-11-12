@@ -19,7 +19,9 @@ router.get('/',userCtrl.findAll);
 router.get('/:id',userCtrl.findOne);
 // update with id
 router.put('/file/:id',test,multer,userCtrl.updateFile);
-router.put('/bio/:id',userCtrl.updateBio);
+router.put('/bio/:id',userCtrl.update);
+router.put('/role/:id',userCtrl.update);
+
 
 // delete whit id
 router.delete('/:id',userCtrl.delete);
