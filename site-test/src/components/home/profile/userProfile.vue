@@ -38,7 +38,7 @@
 
 
 
-        <getPost :query="'/user/'+this.isUser" />
+        <getPost :query="'/user/'+this.id" />
     </div>
 
 
@@ -82,7 +82,7 @@ export default {
     user: String
   },
 created(){
-    // console.log('params  :'+ this.id);
+    console.log('params  :'+ this.id);
     // this.getUserData()
 },
    methods:{
