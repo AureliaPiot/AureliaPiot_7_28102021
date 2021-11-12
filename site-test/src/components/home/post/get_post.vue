@@ -37,7 +37,7 @@ export default {
     mounted() {
         // get all post
         // getPost(){
-            console.log('get post');
+            console.log('get post :query');
             console.log(this.query);
 
 

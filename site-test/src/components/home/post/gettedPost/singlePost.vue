@@ -98,8 +98,8 @@ export default {
     },
      mounted(){
                 
-                console.log('get com');
-                console.log(this.post.id);
+                // console.log('get com');
+                // console.log(this.post.id);
 
     
                 fetch('http://localhost:3000/api/com/post/'+this.post.id, {
@@ -112,13 +112,15 @@ export default {
                 .then(function(res){
                     return res.json();
                 })    
-                .then(value => (this.postComs = value , console.log(value) ))
+                .then(value => (this.postComs = value 
+                //  ,console.log(value)
+                  ))
        
 
                 .catch(function(){
                     console.log('erreur de requete');
                 });
-            console.log("data");
+            // console.log("data");
 
         },
 

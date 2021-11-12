@@ -2,7 +2,7 @@
 
     <div class="container">
         <userProfil/>
-        <getPost/>
+        <getPost query="all"/>
     </div>
 
 </template>

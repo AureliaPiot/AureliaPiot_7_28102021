@@ -50,9 +50,7 @@ exports.getAll = (req,res) =>{
     console.log('findAll post');
     Posts.findAll({ 
         order: [['id', 'DESC']],
-        include: [{
-            all:true
-        }],
+        include: [{ all:true }],
     })
     .then(data=>{
         res.send(data);
@@ -74,9 +72,9 @@ exports.getAllByUser = (req,res) =>{
 
     Posts.findAll({ 
         order: [['id', 'DESC']],
+        where:{id : userId},
         include: [{
             // model: db.users,
-            // where:{id : userId}
             all:true
         }],
     })

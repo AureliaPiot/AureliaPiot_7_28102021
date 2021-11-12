@@ -10,7 +10,7 @@ router.post('/',auth.user,multer,postCtrl.create);
 // get all
 router.get('/all',auth.connect,postCtrl.getAll);
 // get all where user = query
-router.get('/:user',auth.user,postCtrl.getAllByUser);
+router.get('/user/:user',auth.user,postCtrl.getAllByUser);
 
 // get one 
 router.get('/:id',auth.user,postCtrl.getOne);
