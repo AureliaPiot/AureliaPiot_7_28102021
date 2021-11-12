@@ -13,7 +13,7 @@
                 <div v-if="!editbio" class="userBio">
                     {{userBio}}
                 </div>
-                <input v-if="editbio" type="textarea" class="userBio" rows="3" name="newBio" >
+                <input v-if="editbio" type="textarea" class="userBio eBio" rows="3" name="newBio" :value="this.userBio" v-on:change="this.getNewBio">
             </div>
             <!-- <div v-if="this.isUser == this.userId" class="d-flex editpart"> -->
                 <div  v-if="this.isUser == this.userId" class="col editPp">
@@ -48,6 +48,8 @@ export default {
        return{
             isUser :localStorage.getItem('userId'),
             isAdmin :localStorage.getItem('role') == 'admin',
+            token :localStorage.getItem('token'),
+
 
             id :  this.$route.params.id,
             userData :null,
@@ -86,7 +88,7 @@ created(){
                 method : "Get",
                 headers: { 
                     "Content-Type": "application/json",
-                    "authorization" : 'Bearer ' + localStorage.getItem('token'), 
+                    "authorization" : 'Bearer ' + this.token, 
                 },
             }) 
             .then(function(res){
@@ -142,11 +144,53 @@ created(){
             }
         },
         getNewPic(e) {
+            const oldfile = this.profilePic;
             const file = e.target.files[0];
             this.profilePic = URL.createObjectURL(file);
             console.log('file')
             console.log(this.profilePic)
-    
+
+            if(oldfile !== this.profilePic){
+                console.log('true')
+                
+                fetch('http://localhost:3000/api/user/'+this.id, {
+                method : "Put",
+                headers: { 
+                    "Content-Type": "application/json",
+                    "authorization" : 'Bearer ' + this.token, 
+                },
+                body: JSON.stringify({profilePic : this.profilePic}),
+                }) 
+                .then(function(res){return res.json();})    
+                .then(value => (console.log(value) ))
+                .catch(function(){console.log('erreur de requete');})
+            }
+
+            
+        },
+        getNewBio() {
+            const oldBio = this.userBio;
+            const bio = document.getElementsByName('newBio')[0].value;
+            this.userBio = bio;
+            console.log('bio')
+            console.log(this.userBio)
+            console.log(oldBio)
+
+            if(oldBio !== bio){
+                console.log('true')
+
+                fetch('http://localhost:3000/api/user/'+this.id, {
+                method : "Put",
+                headers: { 
+                    "Content-Type": "application/json",
+                    "authorization" : 'Bearer ' + this.token, 
+                },
+                body: JSON.stringify({bio : bio}),
+                }) 
+                .then(function(res){return res.json();})    
+                .then(value => (console.log(value) ))
+                .catch(function(){console.log('erreur de requete');})
+            }
 
         },
 
@@ -207,6 +251,10 @@ created(){
             border-radius: 20px;
             background-color: rgba(35, 132, 189, 0.014);
             border: 1px solid rgba(26, 44, 126, 0.322);
+        }
+        .eBio{
+            border: 2px solid rgba(58, 83, 192, 0.322);
+
         }
         
     }

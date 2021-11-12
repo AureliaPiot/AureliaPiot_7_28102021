@@ -173,26 +173,34 @@ exports.findOne = (req,res)=>{
 exports.update = (req,res)=>{
     console.log('update');
     const id = req.params.id;
+    console.log(id);
+    console.log(req.body);
+    
+    Users.update(req.body,
+      {where : {id: req.params.id} }
+       )
+    .then(() => res.status(200).send({message: 'user modifié'}))
+    .catch(err=> { res.status(404).send({message: err.message || " error canot update post"}) });
 
-    Users.update(req.body, {
-        where: { id: id }
-    })
-        .then(num => {
-        if (num == 1) {
-            res.status(200).send({
-            message: "user was updated successfully."
-            });
-        } else {
-            res.send({
-            message: `Cannot update user with id=${id}. Maybe user was not found or req.body is empty!`
-            });
-        }
-        })
-        .catch(err => {
-        res.status(500).send({
-            message: "Error updating user with id=" + id
-        });
-    });
+    // Users.update(req.body, {
+    //     where: { id: id }
+    // })
+    //     .then(num => {
+    //     if (num == 1) {
+    //         res.status(200).send({
+    //         message: "user was updated successfully."
+    //         });
+    //     } else {
+    //         res.send({
+    //         message: `Cannot update user with id=${id}. Maybe user was not found or req.body is empty!`
+    //         });
+    //     }
+    //     })
+    //     .catch(err => {
+    //     res.status(500).send({
+    //         message: "Error updating user with id=" + id
+    //     });
+    // });
 };
 
 // //////////////////////////////////////////////////////////////////////////////////////
