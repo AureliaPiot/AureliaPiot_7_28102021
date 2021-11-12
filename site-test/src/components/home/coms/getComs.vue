@@ -169,8 +169,10 @@ background: orange;
     grid-area: pp;
     img {
         width: 100%;
-        // height: 3rem;
+        height: 3rem;
         border-radius:50% ;
+        object-fit: cover;
+
     }
 }
 .userData{

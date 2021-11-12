@@ -13,13 +13,22 @@
                 <div v-if="!editbio" class="userBio">
                     {{userBio}}
                 </div>
+
                 <input v-if="editbio" type="textarea" class="userBio eBio" rows="3" name="newBio" :value="this.userBio" v-on:change="this.getNewBio">
             </div>
             <!-- <div v-if="this.isUser == this.userId" class="d-flex editpart"> -->
                 <div  v-if="this.isUser == this.userId" class="col editPp">
                     <button @click="showEditPP">edit profile pic</button>
-                    <input v-if="editPic" type="file" name="newPic" v-on:change="this.getNewPic">
+
+<div  v-if="editPic" class="newpp">
+
+                    <form id="newPP">
+                        <input id="file" type="file" name="profilePic"  accept=".jpg, .jpeg, .png" v-on:change="this.getNewPic">
+                    </form>
+                    
+</div>
                 </div>
+
                 <div v-if="this.isUser == this.userId" class="col editBio">
                     <button @click="showEditBio">edit bio</button>
                 </div>
@@ -144,27 +153,31 @@ created(){
             }
         },
         getNewPic(e) {
-            const oldfile = this.profilePic;
+            const oldFile = this.profilePic;
+            console.log('oldFile')
+            console.log(oldFile)
+
+
+            console.log('file')
+
             const file = e.target.files[0];
             this.profilePic = URL.createObjectURL(file);
-            console.log('file')
-            console.log(this.profilePic)
 
-            if(oldfile !== this.profilePic){
-                console.log('true')
-                
-                fetch('http://localhost:3000/api/user/'+this.id, {
-                method : "Put",
-                headers: { 
-                    "Content-Type": "application/json",
-                    "authorization" : 'Bearer ' + this.token, 
-                },
-                body: JSON.stringify({profilePic : this.profilePic}),
-                }) 
-                .then(function(res){return res.json();})    
-                .then(value => (console.log(value) ))
-                .catch(function(){console.log('erreur de requete');})
-            }
+            console.log(file)
+
+            const data = new FormData();
+            data.append('oldFile',oldFile);
+            data.append('file',file);
+
+            this.axios.put('http://localhost:3000/api/user/file/'+this.id ,data, {
+            headers: {
+                    "authorization" : 'Bearer ' + this.token,
+                    },
+            }) 
+            .then(function(res){return res.json();})    
+            .then(value => (console.log(value) ))
+            .catch(function(){console.log('erreur de requete');})
+            
 
             
         },
@@ -179,7 +192,7 @@ created(){
             if(oldBio !== bio){
                 console.log('true')
 
-                fetch('http://localhost:3000/api/user/'+this.id, {
+                fetch('http://localhost:3000/api/user/bio/'+this.id, {
                 method : "Put",
                 headers: { 
                     "Content-Type": "application/json",
@@ -229,6 +242,7 @@ created(){
         .pic{
             width: 100%;
             height: 100%;
+            max-height: 11vw;
             border-radius: 15%;
             object-fit: cover;
 

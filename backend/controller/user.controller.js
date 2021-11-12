@@ -6,6 +6,8 @@ const Users = db.users;
 
 const Op =db.Sequelize.Op;
 
+const fs = require('fs');
+
 
 const jwt = require('jsonwebtoken');
 const bcrypt =require('bcrypt');
@@ -169,39 +171,66 @@ exports.findOne = (req,res)=>{
 
 
 // //////////////////////////////////////////////////////////////////////////////////////
-// [update with id]
-exports.update = (req,res)=>{
-    console.log('update');
+// [update with id][FILE]
+exports.updateFile = (req,res)=>{
+    console.log('update user File---------------------------------');
     const id = req.params.id;
+    // let bodyKey = Object.keys(req.body)
     console.log(id);
     console.log(req.body);
-    
-    Users.update(req.body,
-      {where : {id: req.params.id} }
-       )
-    .then(() => res.status(200).send({message: 'user modifié'}))
-    .catch(err=> { res.status(404).send({message: err.message || " error canot update post"}) });
+    console.log(req.file);
 
-    // Users.update(req.body, {
-    //     where: { id: id }
-    // })
-    //     .then(num => {
-    //     if (num == 1) {
-    //         res.status(200).send({
-    //         message: "user was updated successfully."
-    //         });
-    //     } else {
-    //         res.send({
-    //         message: `Cannot update user with id=${id}. Maybe user was not found or req.body is empty!`
-    //         });
-    //     }
-    //     })
-    //     .catch(err => {
-    //     res.status(500).send({
-    //         message: "Error updating user with id=" + id
-    //     });
-    // });
+
+    const oldFile = req.body.oldFile;
+    const newFile = `${req.protocol}://${req.get('host')}/images/${req.file.filename}` ;
+
+    console.log("newFile");
+    console.log(newFile);
+
+   
+    
+    console.log("oldFile");
+    console.log(oldFile);
+    const oldFilename = oldFile.split("/images/")[1];
+    console.log(oldFilename);
+
+      // if(filename !== oldFile){
+        if( oldFile !== newFile && oldFilename !=="defaultPic/default.jpg"){
+          console.log('not the same');
+
+        fs.unlink(`images/${oldFilename}`,()=>{
+          console.log('unlink old profilePic');
+          
+        });
+      }//if
+
+      Users.update({"profilePic": newFile},
+      {where : {id: req.params.id} }
+      )
+      .then(() => res.status(200).send({message: 'user modifié'}))
+      .catch(err=> { res.status(404).send({message: err.message || " error canot update post"}) });
+
+      
+      
+    
 };
+// [UPDATE BIO]//////////////////////////////////////////////////////
+
+
+exports.updateBio = (req,res)=>{
+  console.log('update user File---------------------------------');
+  const id = req.params.id;
+  // let bodyKey = Object.keys(req.body)
+  console.log(id);
+  console.log(req.body);
+  
+  Users.update(req.body,
+    {where : {id: req.params.id} }
+     )
+  .then(() => res.status(200).send({message: 'user modifié'}))
+  .catch(err=> { res.status(404).send({message: err.message || " error canot update post"}) });
+};
+
 
 // //////////////////////////////////////////////////////////////////////////////////////
 // [delete whit id]

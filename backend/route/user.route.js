@@ -1,6 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const userCtrl = require("../controller/user.controller.js")
+const userCtrl = require("../controller/user.controller.js");
+const multer = require("../middleware/multer-config.js");
+const test = require("../middleware/test.js");
+
+
 
 
 // Create
@@ -14,7 +18,9 @@ router.get('/',userCtrl.findAll);
 // get one 
 router.get('/:id',userCtrl.findOne);
 // update with id
-router.put('/:id',userCtrl.update);
+router.put('/file/:id',test,multer,userCtrl.updateFile);
+router.put('/bio/:id',userCtrl.updateBio);
+
 // delete whit id
 router.delete('/:id',userCtrl.delete);
 
