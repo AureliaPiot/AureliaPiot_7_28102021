@@ -1,5 +1,8 @@
 import router from "../router/index.js"
+
 export const userStore ={
+  
+  namespaced: true,
 
   state: {
     name: "userStore",

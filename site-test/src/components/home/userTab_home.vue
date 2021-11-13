@@ -64,7 +64,7 @@ export default {
     },
     signOut(){
         // localStorage.clear();
-        this.$store.dispatch('logOut')
+        this.$store.dispatch('userStore/logOut')
     },
   }
 

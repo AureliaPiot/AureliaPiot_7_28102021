@@ -2,8 +2,6 @@
 
     <div>
         <userProfile/>
-        <!-- <getPost query="all"/> -->
-        <!-- <getPost query="id"/> -->
        <getPost :query="'/user/'+this.id" />
     </div>
 

@@ -34,7 +34,7 @@ export default {
   methods:{
       signIn(){
         // on appel dans le store l'action que l'on souhaite effectuer
-           this.$store.dispatch('Sign',{
+           this.$store.dispatch('userStore/Sign',{
              // ici les element communiquer au store (dans un objet)
                 nom : document.getElementsByName("nom_Sign")[0].value,
                 prenom : document.getElementsByName("prenom_Sign")[0].value,
