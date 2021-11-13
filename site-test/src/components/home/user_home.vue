@@ -1,8 +1,10 @@
 <template>
 
-    <div class="container">
-        <userProfil/>
-        <getPost query="all"/>
+    <div>
+        <userProfile/>
+        <!-- <getPost query="all"/> -->
+        <!-- <getPost query="id"/> -->
+       <getPost :query="'/user/'+this.id" />
     </div>
 
 </template>
@@ -24,6 +26,8 @@ export default {
     },
        data(){  
        return{
+            id :  this.$route.params.id,
+
 
         }
   },

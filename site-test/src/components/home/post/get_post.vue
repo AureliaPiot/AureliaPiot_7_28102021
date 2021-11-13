@@ -33,8 +33,8 @@ export default {
 
     // methods:{
     mounted() {
-            // console.log('get post :query');
-            // console.log(this.query);
+            console.log('get post :query');
+            console.log(this.query);
 
 
             this.axios.get('http://localhost:3000/api/post/'+this.query, {

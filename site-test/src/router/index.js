@@ -44,7 +44,9 @@ const routes = [
         path: '/user/:id',
         name: 'userPage',
         // faire un alis pour pas voir les id
-        component: () => import('../components/home/profile/userProfile.vue'),
+        // component: () => import('../components/home/profile/userProfile.vue'),
+        component: () => import('../components/home/user_home.vue'),
+
         // meta: {
         //   isAuth: true,
         // }

@@ -60,7 +60,7 @@
 
 
 
-        <getPost :query="'/user/'+this.id" />
+        <!-- <getPost :query="'/user/'+this.id" /> -->
     </div>
 
 
@@ -68,12 +68,12 @@
 </template>
 
 <script>
-import getPost from '@/components/home/post/get_post.vue'
+// import getPost from '@/components/home/post/get_post.vue'
 
 export default {
   name: 'user-profile',
     components:{
-        getPost
+        // getPost
     },
    data(){  
        return{

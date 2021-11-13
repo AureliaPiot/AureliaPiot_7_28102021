@@ -45,9 +45,9 @@
             /> 
 
         <getComs  
-        v-for="coms in this.postComs" 
-        :key="coms"
-        :coms="coms"
+            v-for="coms in this.postComs" 
+            :key="coms"
+            :coms="coms"
 
            :postId="post.id" 
            :isCreator="this.isCreator" 
