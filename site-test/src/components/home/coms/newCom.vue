@@ -22,13 +22,13 @@
 export default {
     name:'new_com',
     props: {
-        // userPP :String,
+        userPP :String,
         userId : Number,
         postId : Number
     },
     data(){
         return{
-            profilePic : localStorage.getItem('PP')
+            profilePic : this.userPP
         }
     },
      methods:{

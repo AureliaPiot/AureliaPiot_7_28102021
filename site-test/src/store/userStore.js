@@ -5,15 +5,26 @@ export const userStore ={
   namespaced: true,
 
   state: {
+    // User data
     name: "userStore",
+    //status: tant qu'un token est trouver, le statut sera 'true', sinon 'false'
     status:'',
+    // les recupe depuis le local storage
+    //pour ne pas appeler le localStorage sur toute les pages
     user:{
       userId:'',
       userRole:'',
       token:'',
     },
   },
+  // getters = {
+  //   loggedIn: (state) => {
+  //     return state.user.token ? true : false
+  // },
+  
   mutations: {
+
+
     logUser(state,userState){
       state.user = userState;
       console.log("logUser");
@@ -28,11 +39,14 @@ export const userStore ={
       // state.status = on defini le status de notre state (dans le store) avec le parametre status
     },
   },
+
+
   actions: {
-    Sign: ({commit, dispatch }, userSign)=>{
-      commit;
-      // 'commit' reçois les donnée evoyer depuis le fichier qui appele l'action (un objet)
-      // 'userSign' est la denomination de cet objet
+    Sign: ({dispatch}, userSign)=>{
+
+      // {commit} si on veut effectuer une mutation
+      // {dispatch} si on veut effectuer une action 
+      // 'userSign' est la denomination de l'objet recus
       // puis on ecrits l'action que l'on veux executé
       console.log('Sign');
       console.log(userSign);
@@ -82,11 +96,11 @@ export const userStore ={
       .then(function(value){
           if(value.token){
               console.log(value);
+
               commit("logUser",value)
+
               localStorage.setItem("token",value.token);
               localStorage.setItem("userId",value.userId);
-              localStorage.setItem("PP",value.profilePic);
-
               localStorage.setItem("role",value.userRole);
 
               router.push("home");
@@ -101,6 +115,7 @@ export const userStore ={
       .catch(function(){
           console.log('erreur de connexion');
       })
+
 
     },//Login
     logOut({commit}){

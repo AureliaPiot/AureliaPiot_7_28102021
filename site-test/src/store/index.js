@@ -1,25 +1,32 @@
 import { createStore } from 'vuex'
 
 import {userStore} from './userStore.js'
+import {postStore} from './postStore.js'
+
 // import router from "../router/index.js"
 // const userStore = {
 //   namespaced: true,
 // }
 export default createStore({
   state: {
-    name: "getStore",
     status:'',
   // c'est ici qu'on declare les etats, un peu comme data
   },
+
   mutations: {
+    // set post Com Data
   },
   getters:{}
+
   ,
   actions: {
+    //get post data
 
   },
   modules: {
       userStore: userStore,  
+      postStore: postStore,  
+
   
   }
 })

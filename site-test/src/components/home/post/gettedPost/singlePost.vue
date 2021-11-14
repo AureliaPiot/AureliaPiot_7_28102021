@@ -40,6 +40,7 @@
     </div>
 
         <newCom 
+            :userPP ="post.User.profilePic"
             :userId ="post.User.id"
             :postId="post.id"
             /> 

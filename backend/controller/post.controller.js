@@ -72,7 +72,7 @@ exports.getAllByUser = (req,res) =>{
 
     Posts.findAll({ 
         order: [['id', 'DESC']],
-        where:{id : userId},
+        where:{userid : userId},
         include: [{
             // model: db.users,
             all:true

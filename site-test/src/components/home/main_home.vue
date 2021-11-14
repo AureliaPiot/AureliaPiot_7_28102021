@@ -25,6 +25,12 @@ export default {
 
         }
   },
+  monted(){
+      console.log('test state Store');
+      console.log(this.$store.userStore.state.user)
+      
+
+  },
   methods:{
 
       }

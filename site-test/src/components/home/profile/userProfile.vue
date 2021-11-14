@@ -114,8 +114,8 @@ created(){
         getUserData(){
             // const id =  this.id;
 
-            console.log('get user data')
-            console.log(this.$route.params.id)
+            // console.log('get user data')
+            // console.log(this.$route.params.id)
 
             fetch('http://localhost:3000/api/user/'+this.id, {
                 method : "Get",
@@ -138,8 +138,8 @@ created(){
 
 
 
-                this. profilePic=value.profilePic ,
-                console.log(this.userData)
+                this. profilePic=value.profilePic 
+                // ,console.log(this.userData)
                 ))
 
             .catch(function(){

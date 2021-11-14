@@ -42,10 +42,10 @@ export default {
                 password : document.getElementsByName("password_Sign")[0].value,
             })
         },
-        redirectHome(){
-            this.router.push({name: 'Home'});
-            console.log('lezgo')
-        }
+        // redirectHome(){
+        //     this.router.push({name: 'Home'});
+        //     console.log('lezgo')
+        // }
 
   }
 }
