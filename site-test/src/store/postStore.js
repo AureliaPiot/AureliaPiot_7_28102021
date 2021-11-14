@@ -10,21 +10,31 @@ export const postStore ={
     name: "postStore",
 
     post: null,
+    com: null,
 
   },
   getters:{
-      allPosts : state => state.post
     //   getPosts(state){
     //       return state.post
     //   }
+    // getComs(state){
+    //       return state.com
+    //   }
+  },
+  mutations: {
+    setPost(state,data){
+        state.post = data;
+    },
+    setCom(state,value){
+        state.com = value;
+    }
   },
 
-
   actions: {
-    // ne fonctionne pas au rechargement de la page
+
     // quad ça fonctionnera, rappeler get post apres une action de modification/enchainer avec une autre action
-     async getPost({commit},query){
-          console.log(query)
+    getPost({commit ,state},query){
+          console.log('get post :'+ query);
 
         axios.get('http://localhost:3000/api/post/'+query, {
             headers: { 
@@ -38,19 +48,39 @@ export const postStore ={
             commit("setPost",dataPost),
 
             console.log('getData');
-            console.log(postStore.state.post);
+            console.log(state.post);
+
         })
         .catch(function(){
             console.log('erreur de requete');
         })
-      }//get post
+      },//get post
+      ///////////////////////////////////////////////////////////////////
+    //   getCom({commit,state},postId) {
+          
+    //     fetch('http://localhost:3000/api/com/post/'+postId, {
+    //         method : "Get",
+    //         headers: { 
+    //             "Content-Type": "application/json",
+    //             "authorization" : 'Bearer ' + localStorage.getItem('token'), 
+    //         },
+    //     }) 
+    //     .then(res => res.json())
+    //     .then(value => {
+    //         const dataCom = value;
+    //         commit("setCom",dataCom),
+
+    //         console.log('getcom');
+    //         console.log(state.com);
+
+    //     })
+    //     .catch(function(){
+    //         console.log('erreur de requete');
+    //     });
+    //   }
   },
 
-  mutations: {
-
-    setPost(state,data){
-        state.post = data;
-    }
-  },
+strict :false
 
 }
+export const strict =false;

@@ -66,7 +66,6 @@ import newCom from '@/components/home/coms/newCom.vue'
 import getComs from '@/components/home/coms/getComs.vue'
 
 
-
 export default {
     name:'singlePost',
     props: {
@@ -90,49 +89,58 @@ export default {
             postComs : null,
         }
     },
-    created(){
-// validateur like
+    computed: {
+       
+        setCom(){
+            // console.log(this.postComs)
+            return this.$store.state.postStore.com
+        }  
+
+    },
+    beforeCreate(){
+        
+
+        // this.$store.dispatch('postStore/getCom',this.post.id);
+        // console.log(this.$store.state.postStore.com);
+        
+
+        },
+    created(){     
+   
+        // validateur like
         for(let like of this.post.likes){
             if(like.UserId == this.isCreator)
             { this.like = true; }
         }
     },
+    beforeMounted(){
+        },
      mounted(){
-                
-                // console.log('get com');
-                // console.log(this.post.id);
-
-    
-                fetch('http://localhost:3000/api/com/post/'+this.post.id, {
-                    method : "Get",
-                    headers: { 
-                        "Content-Type": "application/json",
-                        "authorization" : 'Bearer ' + this.token, 
-                    },
-                }) 
-                .then(function(res){
-                    return res.json();
-                })    
-                .then(value => (this.postComs = value 
-                //  ,console.log(value)
-                  ))
-       
-
-                .catch(function(){
-                    console.log('erreur de requete');
-                });
-            // console.log("data");
-
+         this.getCom();
         },
 
     methods:{
+        getCom(){
+            fetch('http://localhost:3000/api/com/post/'+this.post.id, {
+                method : "Get",
+            headers: { 
+                "Content-Type": "application/json",
+                "authorization" : 'Bearer ' + this.token, 
+            },
+            }) 
+            .then(function(res){ return res.json();})    
+            .then(value => (this.postComs = value 
+             ,console.log('value')
+
+             ,console.log(value)
+                ))
+            .catch(function(){
+                console.log('erreur de requete');
+            });
+        },
+
         showEdit(){
             this.show = true
-            // if(this.show){
-            //     this.show = false
-            // }else if(!this.show){
-            //     this.show = true ;
-            // }
            console.log(this.show)
         },
         closeEdit(){
