@@ -6,7 +6,7 @@
         <div class="headerPost ">
             <div class="userData">
                 <img class="profilePic" v-bind:src="post.User.profilePic" v-bind:alt="post.User.nom">
-                <router-link class="name" :to="{ name: 'userPage',params:{id: post.User.id }}">{{post.User.nom}}  {{post.User.prenom}}</router-link>
+                <router-link class="name" :to="{ name: 'userPage',params:{id: post.User.id }}">{{post.User.nom}}  {{post.User.prenom}} <i class="fas fa-crown"  v-if="this.post.User.role == 'admin'" ></i></router-link>
                 <p class="date"> {{Date(post.createDate).toString().slice(0,16)}}</p>
             </div>
             <div class="editPost"  v-if="this.isCreator == post.UserId || this.isAdmin ">

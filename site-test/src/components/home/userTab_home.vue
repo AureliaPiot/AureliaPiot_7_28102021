@@ -51,8 +51,8 @@ export default {
     created(){
         console.log(this.userRole)
 
-        console.log(this.$store.state.userStore.localStorage.userId)
-        console.log(this.$store.state.userStore.localStorage.token)
+        // console.log(this.$store.state.userStore.localStorage.userId)
+        // console.log(this.$store.state.userStore.localStorage.token)
 
     },
 }
