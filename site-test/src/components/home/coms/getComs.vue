@@ -14,10 +14,10 @@
                     <p> {{coms.User.nom}}  </p>
                     <p>{{coms.User.prenom}} </p>
                 </router-link>
-                <p class="comDate">{{coms.createDate}}</p>
+                <p class="comDate">{{coms.createDate.substring(0,10)}}</p>
                 <div class="editPost"  v-if="isCreator == coms.User.id || isAdmin ">
-                    <i class="fas fa-pen" @click.prevent="showEditCom"></i>
-                    <i class="fas fa-trash " @click.prevent="deleteCom(coms.id)"></i>
+                    <i class="fas fa-pen iconEdit edit" @click.prevent="showEditCom"></i>
+                    <i class="fas fa-trash iconEdit delete" @click.prevent="deleteCom(coms.id)"></i>
                     <!-- <button class="btn edit" @click.prevent="showEditCom"><i class="fas fa-pen text-white"></i></button>
                     <button class="btn delete" @click.prevent="deleteCom"><i class="fas fa-trash text-white"></i></button> -->
                 </div>
@@ -28,7 +28,7 @@
             <div v-if="this.editCom" class="Editcontent">
                 <input  type="text" class="" :name="'editCom'+coms.id" :value="coms.content">
                 <i class="fas fa-arrow-alt-circle-right submitCom"  v-on:click.prevent="submitComEdit"></i>
-                <button class="close" @click.prevent="showEditCom" >X</button>
+                <!-- <button class="close" @click.prevent="showEditCom" >X</button> -->
             </div>
 
             <!-- <editComs v-if="this.editCom" @closeEditCom="showEditCom" :content="coms.content" id="coms.id"/> -->
@@ -190,4 +190,26 @@ background: orange;
     word-wrap: break-word;
 
 }
+.editPost{
+    .iconEdit{
+        margin: 0 0.5rem;
+    }
+    .edit{
+        color: #9e9053;
+    }
+    .delete{
+        color: #ba1111;
+    }
+}
+.Editcontent{
+    .submitCom{
+        font-size: 1.5rem
+    }
+}
+@media (max-width: 577px) {
+    .coms{
+        padding: 0.5rem ;
+    }
+}
+
 </style>

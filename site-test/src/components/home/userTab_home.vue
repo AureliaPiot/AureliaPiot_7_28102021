@@ -1,43 +1,17 @@
 <template>
 
-    <!-- <div class="container">
-
-        <h2>{{ msg }}</h2>
-        <div class="info-user col-md-12">
-            <router-link to="/home">Home</router-link> 
-        </div>
-        <div class="info-user col-md-12">
-
-            <router-link :to="{ name: 'userPage',params:{id: this.userId }}">Profile</router-link>
-
-        </div>
-        <div class="info-user col-md-12">
-            <p>post publier</p>
-        </div>
-        <div class="info-user col-md-12">
-            <p>commentaire publier</p>
-        </div>
-          si admin  -->
-        <!-- <div class="info-user col-md-12">
-            <p><router-link to="/admin">Admin</router-link></p>
-        </div> -->
-        <!-- si admin -->
-
-    <!-- </div> --> 
-
-    <nav class="navbar navbar-light bg-light">
-      <div class="container-fluid">
+    <nav class="navbar " id="head">
+      
         <span class="navbar-brand mb-0 h1"><img class="logo" src="../../assets/logo/icon-left-font-monochrome-black.svg" alt="Groupomania"> </span>
-            <form class="d-flex">
-            <input class="form-control " type="search" placeholder="Search any member ?" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
-        <router-link v-bind:to="{name: 'Sign'}">Sign</router-link> 
-        <router-link to="/home">Home</router-link> 
-        <!-- <router-link to="/about">About</router-link> -->
-        <router-link :to="{ name: 'userPage',params:{id: this.userId }}">Profile</router-link>
-        <button class="btn btn-outline-primary " @click="signOut">logout <i class="fas fa-sign-out-alt"></i></button>
-      </div>
+
+        
+        <div class="link-group">
+            <!-- <router-link v-bind:to="{name: 'Sign'}">Sign</router-link>  -->
+            <button><router-link to="/home"><i class="fas fa-home"></i></router-link></button> 
+            <button><router-link :to="{ name: 'userPage',params:{id: this.userId }}"><i class="fas fa-user"></i></router-link></button>
+            <button  @click="signOut"><i class="fas fa-sign-out-alt"></i></button>
+        </div>
+      
     </nav>
 
 
@@ -53,8 +27,6 @@ export default {
        data(){  
        return{
            userId : localStorage.getItem('userId'),
-        //    url: this.$router.push({ name: 'user', params: {id: this.userId}  }) 
-
         }
   },
   methods:{
@@ -63,7 +35,6 @@ export default {
         this.$router.push({ name: 'user', param: userId  })
     },
     signOut(){
-        // localStorage.clear();
         this.$store.dispatch('userStore/logOut')
     },
   }
@@ -72,18 +43,59 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.container{
-    background: white;
+nav{
     width: 100%;
-    // height: 10vw;
+    padding: 1rem 5rem;
+    background: white;
+    border-bottom: 4px solid #1f4988;
+    button{
+        margin: 0 1rem;
+        width: 3.6rem;
+        height: 3.6rem;
+        border: none;
+        border-radius: 50%;
+        background-color: #1f4988;
+
+        font-size: 2rem;
+        color: white ;
+
+         a{
+            color: white ;
+        }
+    }
 }
 .info-user{
     border-top: 1px solid rgb(118, 120, 124);
-    // border-bottom: 1px solid rgb(118, 120, 124);
-
     text-align: center;
 }
 .logo{
     height: 2.5rem;
 }
+
+@media (max-width: 768px) {
+  nav{
+    padding: 1rem 1rem;
+    button{
+        margin: 0 1rem;
+        width: 2.5rem;
+        height: 2.5rem;
+        font-size: 1.3rem;
+
+    }
+    .logo{
+        height: 1.5rem;
+    }
+}
+}
+@media (max-width: 420PX) {
+    nav{
+            padding: 0.5rem 0;
+    justify-content: center;
+    .logo{
+        margin-bottom:1rem;
+    }
+    }
+
+}
+
 </style>

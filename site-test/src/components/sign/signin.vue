@@ -52,6 +52,11 @@ export default {
 </script>
 
 
-<style scoped lang="scss">
+<style lang="scss">
+// body{
+//     background:  url("../../../src/assets/logo/icon.svg")
+//                  no-repeat
+// //   background-color:#f3f6f8;
 
+// }
 </style>

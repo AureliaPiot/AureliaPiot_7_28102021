@@ -106,7 +106,7 @@ export default {
     user: String
   },
 created(){
-    console.log('params  :'+ this.id);
+    // console.log('params  :'+ this.id);
     // this.getUserData()
 },
    methods:{

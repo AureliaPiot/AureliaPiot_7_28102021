@@ -72,8 +72,7 @@ export default {
 <style scoped lang="scss">
 #newCom{
     background: rgb(255, 255, 255);
-    width: 100%;
-    // height: 10vw;
+    // width: 100%;
     margin: 1rem;
     border-radius: 8px;
     // margin-bottom: 2rem;
@@ -84,15 +83,24 @@ export default {
         // background: yellow;
     }
     .submitCom{
-        width: 10%;
+        margin: 0;
         font-size: 2rem;
+        padding: 0;
+        width: min-content;
     }
 }
 .messageCom{
-    width: 80%;
+    width: 70%;
 }
 .w30{
     width: 30%;
     background: rgba(0, 0, 255, 0.034);
+}
+
+@media (max-width: 350px) {
+ .messageCom{
+     width: 55%;
+ }
+
 }
 </style>

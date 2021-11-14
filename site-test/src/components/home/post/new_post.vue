@@ -1,6 +1,6 @@
 <template>
 
-    <div class="container">
+    <div class="newPost">
         <h2>new post</h2>
         <form id="newPost" class="form-inline" enctype="multipart/form-data">
 
@@ -9,7 +9,8 @@
                 <textarea class="form-control" id="message" rows="3" name="message" placeholder="exprimez-vous!" required></textarea>
                 <img v-if="url" class="preview" :src="url" />
             </div>
-            <div class="row justify-content-between">
+            <div class="row justify-content-between m0">
+                <label for="file" class="file-upload btn btn-outline-primary w30">file</label>
                 <input type="file"  class="btn btn-outline-primary w30" id="file" name="file" accept=".jpg, .jpeg, .png, .gif" @change="onFileChange">
                 <button class="btn btn-outline-primary w30" v-on:click.prevent="submitPost">Submit</button>
             </div>
@@ -84,16 +85,29 @@ export default {
     // width: 50%;
     max-height:10vw;
 }
-.container{
+.newPost{
     background: rgb(255, 255, 255);
     width: 100%;
     // height: 10vw;
     padding: 1rem;
     border-radius: 8px;
-    margin-bottom: 2rem;
+    margin: 2rem 0;
+    border:1px solid #1f4988
 }
 .w30{
     width: 30%;
     background: rgba(0, 0, 255, 0.034);
+}
+input[type="file"] {
+    display: none;
+}
+.file-upload {
+    // border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+.m0{
+    margin: 5px 0;
 }
 </style>

@@ -10,9 +10,9 @@
                 <p class="date"> {{Date(post.createDate).toString().slice(0,16)}}</p>
             </div>
             <div class="editPost"  v-if="this.isCreator == post.UserId || this.isAdmin ">
-                <button class="btn  edit" @click.prevent="showEdit"><i class="fas fa-pen text-white"></i></button>
+                <button class="btn edit " @click.prevent="showEdit"><i class="fas fa-pen text-white"></i></button>
                 <!-- ouvre affiche un composant qui recupere les donnéés dans le form  /comme une fenetre alert?-->
-                <button class="btn  delete" @click.prevent="deletePost"><i class="fas fa-trash text-white"></i></button>
+                <button class="btn delete " @click.prevent="deletePost"><i class="fas fa-trash text-white"></i></button>
                 <!-- ouvre affiche un composant qui recupere les donnéés dans le form -->
             </div>
         </div>
@@ -134,7 +134,7 @@ export default {
             }) 
             .then(function(res){ return res.json();})    
             .then(value => (this.postComs = value 
-             ,console.log('value')
+            //  ,console.log('value')
 
             //  ,console.log(value)
                 ))
@@ -228,7 +228,7 @@ export default {
 
 <style scoped lang="scss">
 .valide{
-    color: rgba(60, 120, 170, 0.603);
+    color: rgba(0, 138, 252, 0.85);
 }
 .not{
     color: rgba(9, 44, 73, 0.603);
@@ -270,6 +270,7 @@ export default {
         display:grid;
         grid-template-columns: 1fr 3fr;
         min-height: 4vw;
+        grid-column-gap: 1rem;
         grid-template-areas: "pic name "
                              "pic date"   ;
 
@@ -318,7 +319,7 @@ export default {
         padding: 1rem;
         .imgPost{
             width: auto;
-            max-height: 30vw;
+            max-height: 30rem;
             max-width: 100%;
             align-self: center;
 
@@ -358,5 +359,20 @@ export default {
     background: #8080808a;
     backdrop-filter: blur(2px) grayscale(30%);
 
+}
+@media (max-width: 767px) {
+    .date{
+         font-size:0.8rem;
+    }
+}
+@media (max-width: 577px) {
+    .getPost{
+        padding: 2rem 0.5rem ;
+        background: white;
+        margin: 0;
+        border-radius: 0;
+        box-shadow: none;
+        border-top:2px solid #1f4988;
+    }
 }
 </style>

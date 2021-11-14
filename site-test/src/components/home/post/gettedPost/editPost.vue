@@ -112,6 +112,9 @@ export default {
     margin: 2rem 0;
     padding: 2rem;
     border-radius: 8px;
+    .iconEdit{
+        margin: 0 2rem;
+    }
     img{
         width: 50%;
     }

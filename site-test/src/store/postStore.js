@@ -10,9 +10,7 @@ export const postStore ={
 
     posts: null,
     com: null,
-
   },
-
   getters:{
     getPosts(state){
         return state.post
@@ -21,7 +19,6 @@ export const postStore ={
         return state.com.filer(com=>com.PostId === payload)
     }
 },
-
   mutations: {
     setPost(state,data){
         state.post = data;
@@ -33,11 +30,10 @@ export const postStore ={
         console.log(value);
     }
   },
-
   actions: {
 
     // quad ça fonctionnera, rappeler get post apres une action de modification/enchainer avec une autre action
-    async getPost({commit ,state},query){
+    async getPost({commit},query){
           console.log('get post :'+ query);
 
     await axios.get('http://localhost:3000/api/post/'+query, {
@@ -47,21 +43,15 @@ export const postStore ={
             },
         }) 
         .then(res => {
-            commit("setPost",res.data),
-
-            console.log('getData');
-            console.log(state.post);
-
+            commit("setPost",res.data)
         })
         .catch(function(){
             console.log('erreur de requete');
         })
       },//get post
 
-
-
 ///////////////////////////////////////////////////////////////////
-    async  getCom({commit,state}) {
+    async  getCom({commit}) {
           
     await  fetch('http://localhost:3000/api/com/all', {
             method : "Get",
@@ -73,10 +63,10 @@ export const postStore ={
         .then(res => res.json())
         .then(value => {
             const dataCom = value;
-            commit("setCom",dataCom),
+            commit("setCom",dataCom)
 
-            console.log('getcom');
-            console.log(state.com);
+            // console.log('getcom');
+            // console.log(state.com);
 
         })
         .catch(function(){
@@ -84,8 +74,6 @@ export const postStore ={
         });
       },
 ///////////////////////////////////////////////////////////////////
-
-
 
     savePost({commit},id,content,oldfile,file){
         console.log(id)
@@ -115,11 +103,6 @@ export const postStore ={
         //     console.log('erreur de requete');
         // })
   },
-
-
-
-
-
 
 },
 
