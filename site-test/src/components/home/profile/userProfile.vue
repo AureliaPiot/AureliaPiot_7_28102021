@@ -4,7 +4,7 @@
 
             <div class="card-head">
                 <p class="deleteUser text-center m-0 text-danger" v-if="this.isUser == this.userId" @click="deleteCompte">delete</p>
-                <h2> {{userName}} {{userPrenom}} </h2>
+                <h2> {{userName}} {{userPrenom}} <i class="fas fa-crown"  v-if="this.userRole == 'admin'" ></i></h2>
             </div>
             <div class="card-left">
                     <img  class="pic" :src="this.profilePic" :alt="this.userName">
