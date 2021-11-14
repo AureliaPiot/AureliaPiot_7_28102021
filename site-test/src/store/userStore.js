@@ -7,24 +7,22 @@ export const userStore ={
   state: {
     // User data
     name: "userStore",
-    //status: tant qu'un token est trouver, le statut sera 'true', sinon 'false'
-    status:'',
-    // les recupe depuis le local storage
-    //pour ne pas appeler le localStorage sur toute les pages
+    localStorage:{
+      userId: localStorage.getItem('userId'),
+      userRole: localStorage.getItem('userRole'),
+      token: localStorage.getItem('token'),
+    },
+
+   
+
     user:{
       userId:'',
       userRole:'',
       token:'',
     },
   },
-  // getters = {
-  //   loggedIn: (state) => {
-  //     return state.user.token ? true : false
-  // },
-  
+
   mutations: {
-
-
     logUser(state,userState){
       state.user = userState;
       console.log("logUser");
@@ -129,9 +127,11 @@ export const userStore ={
 
 
     },
-    // addLike({commit}){
 
-    // }
+    getUserData(){
+      
+    }
+
   },
   modules: {
   },

@@ -37,8 +37,13 @@ export default {
     signOut(){
         this.$store.dispatch('userStore/logOut')
     },
-  }
-
+  },
+   async beforeCreate(){
+       await this.$store.dispatch('userStore/getUserData');
+   },
+    // created(){
+    //     console.log(this.$store.state.userStore.localStorage.userId)
+    // },
 }
 </script>
 
