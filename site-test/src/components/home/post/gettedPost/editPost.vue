@@ -9,7 +9,7 @@
             <div class="bodyPost">
                 <textarea class="form-control" id="message" rows="3" name="messageEdit" :value="content"></textarea>
 
-                <img  v-if="this.file" :src="this.file" alt="upload-img" >
+                <img  v-if="this.file !=='null' " :src="this.file" alt="upload-img" >
                 
                 <!-- <p>{{ content }}</p>
                 <p>{{ attachement }}</p> -->

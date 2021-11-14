@@ -10,9 +10,10 @@
 
             <div class="userData d-flex">
                 <!-- {{coms.User}} -->
-                <router-link class=" d-flex " :to="{ name: 'userPage',params:{id: coms.User.id }}">
-                    <p> {{coms.User.nom}}  </p>
-                    <p>{{coms.User.prenom}} </p>
+                <router-link class=" d-flex usernamePost " :to="{ name: 'userPage',params:{id: coms.User.id }}">
+                    <p>{{coms.User.nom}} </p>
+                    <p>{{coms.User.prenom}}</p>
+                    <i class="fas fa-crown"  v-if="this.coms.User.role == 'admin'" ></i>
                 </router-link>
                 <p class="comDate">{{coms.createDate.substring(0,10)}}</p>
                 <div class="editPost"  v-if="isCreator == coms.User.id || isAdmin ">
@@ -177,6 +178,9 @@ background: orange;
 }
 .userData{
     grid-area: userData;
+    .usernamePost{
+        color: rgb(0, 0, 0);
+    }
     p{
         margin: 0 0.3rem;
     }

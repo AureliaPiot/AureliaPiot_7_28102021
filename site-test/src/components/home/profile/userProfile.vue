@@ -372,5 +372,39 @@ h2{
         margin: 0;
     }
 }
+@media (max-width: 1200px) {
+    .profil-card{
+        .card-left{
+            .pic{
+                width: 60%;
+            }
+        }
+
+    }
+}
+
+@media (max-width: 767px) {
+.profil-card{
+    background: rgb(255, 255, 255);
+    border-radius: 8px;
+    padding: 3rem;
+
+    display: grid;
+    grid-gap: 1rem 4rem;
+    grid-template-columns: 20% 1fr;
+    grid-template-areas:"name name" 
+                        "editPp left"
+                        "editBio  right"
+                        "editRole editRole"
+                        ;
+        .card-left{
+            place-self: center;
+            .pic{
+                width: 100%;
+            }
+        }
+
+}
+}
 
 </style>
