@@ -5,47 +5,49 @@ import axios from 'axios'
 export const postStore ={
   
   namespaced: true,
-
-  state: {
+     state: {
     name: "postStore",
 
-    post: null,
+    posts: null,
     com: null,
 
   },
+
   getters:{
-    //   getPosts(state){
-    //       return state.post
-    //   }
-    // getComs(state){
-    //       return state.com
-    //   }
-  },
+    getPosts(state){
+        return state.post
+    },
+    async getComsByPostId({state},payload){
+        return state.com.filer(com=>com.PostId === payload)
+    }
+},
+
   mutations: {
     setPost(state,data){
         state.post = data;
     },
     setCom(state,value){
         state.com = value;
+    },
+    showData(value){
+        console.log(value);
     }
   },
 
   actions: {
 
     // quad ça fonctionnera, rappeler get post apres une action de modification/enchainer avec une autre action
-    getPost({commit ,state},query){
+    async getPost({commit ,state},query){
           console.log('get post :'+ query);
 
-        axios.get('http://localhost:3000/api/post/'+query, {
+    await axios.get('http://localhost:3000/api/post/'+query, {
             headers: { 
                 "Content-Type": "application/json",
                 "authorization" : 'Bearer ' + localStorage.getItem('token'), 
             },
         }) 
         .then(res => {
-            // this.data = response.data
-            const dataPost = res.data;
-            commit("setPost",dataPost),
+            commit("setPost",res.data),
 
             console.log('getData');
             console.log(state.post);
@@ -55,32 +57,74 @@ export const postStore ={
             console.log('erreur de requete');
         })
       },//get post
-      ///////////////////////////////////////////////////////////////////
-    //   getCom({commit,state},postId) {
+
+
+
+///////////////////////////////////////////////////////////////////
+    async  getCom({commit,state}) {
           
-    //     fetch('http://localhost:3000/api/com/post/'+postId, {
-    //         method : "Get",
-    //         headers: { 
-    //             "Content-Type": "application/json",
-    //             "authorization" : 'Bearer ' + localStorage.getItem('token'), 
-    //         },
-    //     }) 
-    //     .then(res => res.json())
-    //     .then(value => {
-    //         const dataCom = value;
-    //         commit("setCom",dataCom),
+    await  fetch('http://localhost:3000/api/com/all', {
+            method : "Get",
+            headers: { 
+                "Content-Type": "application/json",
+                "authorization" : 'Bearer ' + localStorage.getItem('token'), 
+            },
+        }) 
+        .then(res => res.json())
+        .then(value => {
+            const dataCom = value;
+            commit("setCom",dataCom),
 
-    //         console.log('getcom');
-    //         console.log(state.com);
+            console.log('getcom');
+            console.log(state.com);
 
-    //     })
-    //     .catch(function(){
-    //         console.log('erreur de requete');
-    //     });
-    //   }
+        })
+        .catch(function(){
+            console.log('erreur de requete');
+        });
+      },
+///////////////////////////////////////////////////////////////////
+
+
+
+    savePost({commit},id,content,oldfile,file){
+        console.log(id)
+        console.log(content)
+        console.log(oldfile)
+        console.log(file)
+
+        commit("showData",id)
+
+///////////////////////////////////////////////////////////////////
+
+
+        // fetch('http://localhost:3000/api/post/'+postId, {
+        //     method : "Put",
+        //     headers: { 
+        //         // "Content-Type": "application/json", 
+        //         "authorization" : 'Bearer ' + localStorage.getItem('token'),
+        //         },
+        //     body: form,
+        // }) 
+        // .then(function(res){return res.json();}) 
+        // .then(value => (
+        //     // dispatch('postStore/getPost',query),
+        //     console.log(value) 
+        //     ))
+        // .catch(function(){
+        //     console.log('erreur de requete');
+        // })
   },
+
+
+
+
+
+
+},
 
 strict :false
 
 }
 export const strict =false;
+

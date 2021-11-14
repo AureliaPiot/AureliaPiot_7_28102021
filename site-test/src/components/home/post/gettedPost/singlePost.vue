@@ -49,6 +49,8 @@
             v-for="coms in this.postComs" 
             :key="coms"
             :coms="coms"
+            :query="query"
+
 
            :postId="post.id" 
            :isCreator="this.isCreator" 
@@ -69,7 +71,9 @@ import getComs from '@/components/home/coms/getComs.vue'
 export default {
     name:'singlePost',
     props: {
-        post: Object
+        post: Object,
+        query: String
+
     },
     components:{
         editPost,
@@ -132,7 +136,7 @@ export default {
             .then(value => (this.postComs = value 
              ,console.log('value')
 
-             ,console.log(value)
+            //  ,console.log(value)
                 ))
             .catch(function(){
                 console.log('erreur de requete');

@@ -20,6 +20,9 @@ export default {
   components: {
     userTab,
   },
+  async beforeCreate(){
+        await this.$store.dispatch('postStore/getCom');
+  },
   methods:{
     
   }

@@ -3,7 +3,7 @@
     <div class="allPost">
 
         <post
-            v-for="post in this.$store.state.postStore.post " 
+            v-for="post in allPost " 
             :key="post"
             :post="post" 
         />
@@ -32,16 +32,20 @@ export default {
         }  
     },
     computed: {
-      
-    },
-    methods:{
+        allPost(){
+          return this.$store.state.postStore.post
+        },
   
     },
-    beforeCreate(){
-        this.$store.dispatch('postStore/getPost',this.query);
+    methods:{
+
     },
-     created(){
+    async beforeCreate(){
+       await this.$store.dispatch('postStore/getPost',this.query);
     },
+    
+    created(){
+         },
     beforeMount(){
     },
     mounted(){

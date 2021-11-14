@@ -36,6 +36,9 @@ export default {
         User:Object,
         content:String,
         attachement:String,
+
+        query: String
+
     },
     data(){
         return{
@@ -62,19 +65,31 @@ export default {
             dataform.append('oldFile',this.oldFile);
             dataform.append('file',document.getElementsByName("fileEdit")[0].files[0]);
 
-            fetch('http://localhost:3000/api/post/'+this.id, {
-                method : "Put",
-                headers: { 
-                    // "Content-Type": "application/json", 
-                    "authorization" : 'Bearer ' + localStorage.getItem('token'),
-                    },
-                body: dataform,
-            }) 
-            .then(function(res){return res.json();}) 
-            .then(value => (console.log(value) ))
-            .catch(function(){
-                console.log('erreur de requete');
-            })
+            const data ={
+                id:this.id,
+                content:document.getElementsByName("messageEdit")[0].value,
+                oldFile:this.oldFile,
+                file:document.getElementsByName("fileEdit")[0].files[0]
+            }
+            this.$store.dispatch('postStore/savePost',
+                data.id,
+                data.content,
+                data.oldFile,
+                data.file
+                )
+            // fetch('http://localhost:3000/api/post/'+this.id, {
+            //     method : "Put",
+            //     headers: { 
+            //         // "Content-Type": "application/json", 
+            //         "authorization" : 'Bearer ' + localStorage.getItem('token'),
+            //         },
+            //     body: dataform,
+            // }) 
+            // .then(function(res){return res.json();}) 
+            // .then(value => (console.log(value) ))
+            // .catch(function(){
+            //     console.log('erreur de requete');
+            // })
 
         },
     },//methods
