@@ -33,19 +33,53 @@ export default {
   name: 'SignIn',
   methods:{
       signIn(){
-        // on appel dans le store l'action que l'on souhaite effectuer
-           this.$store.dispatch('userStore/Sign',{
-             // ici les element communiquer au store (dans un objet)
-                nom : document.getElementsByName("nom_Sign")[0].value,
-                prenom : document.getElementsByName("prenom_Sign")[0].value,
-                email : document.getElementsByName("email_Sign")[0].value,
-                password : document.getElementsByName("password_Sign")[0].value,
-            })
+          let password = document.getElementsByName("password_Sign")[0].value
+          let email = document.getElementsByName("email_Sign")[0].value
+          let nom =  document.getElementsByName("nom_Sign")[0].value
+          let prenom = document.getElementsByName("prenom_Sign")[0].value
+
+          if(nom.lenght !== 0 ||
+           prenom.lenght !== 0 ||
+           email.lenght !== 0 ||
+           password.lenght !== 0 
+           ){
+
+            if(this.emailRegex(email)){
+
+                if(this.passwordRegex(password)){
+
+                        this.$store.dispatch('userStore/Sign',{
+                            nom :nom,
+                            prenom : prenom,
+                            email : email,
+                            password : password,
+                        })
+                    }else if(!this.passwordRegex(password)){
+                        alert('le mot de passe doit contenir au moins Huit caractères, une lettre minuscule et majuscule, un chiffre et un caractère spécial ;)')
+                    }
+
+                }
+                else if(!this.emailRegex(email)){
+                        alert('email non valide')
+                }
+            }
+            else {
+             alert('champ vide')
+            }
+
+
         },
-        // redirectHome(){
-        //     this.router.push({name: 'Home'});
-        //     console.log('lezgo')
-        // }
+
+        emailRegex(value){
+            const regex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/ 
+            return regex.test(value)
+
+        },
+        passwordRegex(value){
+            const regex =  /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+            console.log(regex.test(value))
+            return regex.test(value)
+        }
 
   }
 }

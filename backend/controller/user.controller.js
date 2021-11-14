@@ -2,6 +2,11 @@
 const db =require("../models")
 //le lien ave la bdd
 const Users = db.users;
+
+const Posts= db.posts;
+const Coms= db.coms;
+const Likes = db.likes;
+
 //le lien avec la table user de la bdd
 
 const Op =db.Sequelize.Op;
@@ -17,26 +22,31 @@ const bcrypt =require('bcrypt');
 
 exports.login = (req,res)=>{
   console.log('login');
+
   const user ={
     email : req.body.email,
     password : req.body.password
   }
+  console.log(user);
 
   Users.findOne({ where: { email : user.email} })
   .then(data=>{
     if(data){
+      bcrypt.compare(user.password + process.env.PASSWORD ,data.password)
+        .then(valid => {
+        if(!valid) {
+            return res.status(401).json({error:'mot de pass incorrect'})
+          } 
 
-      if (data.password == user.password) {
+
         console.log(data.role);
 
-        // console.log(data);
-        // res.header({redirection : "/home"});
         res.status(200).json({ 
-          // message:'utilisateur trouvé',
+
           profilePic: data.profilePic,
           userId: data.id,
           userRole: data.role,
-          // userEmail:data.email,
+
           token: jwt.sign(
             { userId: data.id,
               email: data.email,
@@ -46,14 +56,12 @@ exports.login = (req,res)=>{
           ) 
         });
 
-      } else {
-        res.status(404).send({ message: `mot de passe incorrect` });
-      }
-    }
+        })
+        .catch(error => res.status(500).json({ error }))
+        }
     else{
       res.status(401).send({ message: `utilisateur introuvable` });
     }
-
   })
   .catch(err=> {
       res.status(500).send({message: err.message || " error canot found any user"})
@@ -83,24 +91,29 @@ exports.create = (req,res,err) =>{
       if (count === 0){
         console.log('user ');
         
+        bcrypt.hash( req.body.password + process.env.PASSWORD,10)
+        .then(hash =>{
+
 //  ou utiliser const user = Users.build({object}) | puis user.save() avec les th
-        const user ={
-          nom : req.body.nom,
-          prenom: req.body.prenom,
-          email: mail,
-          password: req.body.password,
-          role:'user',
-          profilPic:`http://localhost:3000/images/defaultPic/default.jpg`
-        };
-        
-        Users.create(user)
-        .then(data=>{
-          res.status(201).json({ message : 'ok' });
-// authentifier juste apres
-        })
-        .catch(err=> {
-          res.status(500).send({message: err.message || "cannot create an account"})
-        })
+          const user ={
+            nom : req.body.nom,
+            prenom: req.body.prenom,
+            email: mail,
+            password: hash,
+            role:'user',
+            profilPic:`http://localhost:3000/images/defaultPic/default.jpg`
+          };
+          
+          Users.create(user)
+          .then(data=>{
+            res.status(201).json({ message : 'ok' });
+  // authentifier juste apres
+          })
+          .catch(err=> {
+            res.status(500).send({message: err.message || "cannot create an account"})
+          })
+      })//fin hash
+
       }
       else{
         console.log('no');
@@ -254,6 +267,21 @@ exports.update = (req,res)=>{
 exports.delete = (req,res)=>{
     console.log('delete');
     const id = req.params.id;
+
+    Users.findOne({ where: { id : id} ,  attributes: {exclude: ['password']}, })
+    .then(data=>{ 
+
+      const filename = data.profilePic.split("/images/")[1];
+      if( filename !=="defaultPic/default.jpg") {
+        fs.unlink(`images/${filename}`,()=>{
+          console.log('unlink profilePic');
+          
+        });
+      }
+  });
+    Posts.destroy( {where : {UserId: id} });
+    Coms.destroy( {where : {UserId: id} });
+    Likes.destroy( {where : {UserId: id} });
 
     Users.destroy({
       where: { id: id }

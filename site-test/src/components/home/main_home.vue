@@ -1,7 +1,8 @@
 <template>
 
     <div >
-        <newPost/>
+        
+        <newPost v-if="this.role !== 'mute'"/>
         <getPost query="all"/>
     </div>
 
@@ -22,7 +23,7 @@ export default {
     },
        data(){  
        return{
-
+           role : this.$store.state.userStore.localStorage.role
         }
   },
   monted(){

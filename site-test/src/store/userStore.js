@@ -9,7 +9,7 @@ export const userStore ={
     name: "userStore",
     localStorage:{
       userId: localStorage.getItem('userId'),
-      userRole: localStorage.getItem('userRole'),
+      userRole: localStorage.getItem('role'),
       token: localStorage.getItem('token'),
     },
 
@@ -36,6 +36,9 @@ export const userStore ={
       // (state, status) state = state du store ; status = le parametre envoyé lors de l'appele de la mutation
       // state.status = on defini le status de notre state (dans le store) avec le parametre status
     },
+    setRole(state,value){
+      state.localStorage.userRole = value
+    }
   },
 
 
@@ -128,7 +131,9 @@ export const userStore ={
 
     },
 
-    getUserData(){
+    changeRole({commit},value){
+
+      commit("setRole",value)
       
     }
 

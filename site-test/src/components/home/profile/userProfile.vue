@@ -3,6 +3,7 @@
         <div class="profil-card">
 
             <div class="card-head">
+                <p class="deleteUser text-center m-0 text-danger" v-if="this.isUser == this.userId" @click="deleteCompte">delete</p>
                 <h2> {{userName}} {{userPrenom}} </h2>
             </div>
             <div class="card-left">
@@ -244,10 +245,35 @@ created(){
                 }) 
                 .then(function(res){return res.json();})    
                 .then(value => (console.log(value),
-                localStorage.setItem('role', this.newRole)
+                localStorage.setItem('role', this.newRole),
+                this.$store.dispatch('userStore/changeRole',this.newRole),
+                console.log(this.$store.state.userStore.localStorage.userRole)
                 ))
                 .catch(function(){console.log('erreur de requete');})
+
+
         },
+
+        deleteCompte(){
+            console.log('delete compte');
+           if(confirm('you sure ?')){
+            console.log('okay');
+
+            fetch('http://localhost:3000/api/user/'+this.id, {
+                method : "Delete",
+                headers: { 
+                    "Content-Type": "application/json",
+                    "authorization" : 'Bearer ' + this.token, 
+                }
+            })
+            .then(function(res){return res.json()})    
+            .then(value => (console.log(value)),
+            this.$store.dispatch('userStore/logOut'))
+            .catch(function(){console.log('erreur de requete')})
+
+           }//if
+
+        }//delete compte
 
 
         

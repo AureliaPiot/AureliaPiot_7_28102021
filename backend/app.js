@@ -4,6 +4,9 @@ const fs = require("fs");
 
 const db = require("./models/index.js");
 
+
+const helmet = require("helmet");
+
 // pour vide et synchoniser les tables par rapport aux model------
 
 // db.sequelize.sync({ force: true }).then(() => {
@@ -16,6 +19,9 @@ const db = require("./models/index.js");
 
 // nodemon --exec 'node -r dotenv/config server.js'
 app.use(express.json());
+
+app.use(helmet());
+
 
 // autorisation du front a interagire avec le back
 app.use((req,res,next)=>{

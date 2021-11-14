@@ -15,9 +15,8 @@ export const postStore ={
     getPosts(state){
         return state.post
     },
-    async getComsByPostId({state},payload){
-        return state.com.filer(com=>com.PostId === payload)
-    }
+   
+   
 },
   mutations: {
     setPost(state,data){

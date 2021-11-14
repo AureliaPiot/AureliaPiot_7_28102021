@@ -29,6 +29,13 @@ export default {
            userId : localStorage.getItem('userId'),
         }
   },
+  computed:{
+      userRole(){
+          return this.$store.state.userStore.localStorage.userRole
+
+      }
+
+  },
   methods:{
     userProfile(){
         const userId = localStorage.getItem(userId);
@@ -39,11 +46,15 @@ export default {
     },
   },
    async beforeCreate(){
-       await this.$store.dispatch('userStore/getUserData');
+    //    await this.$store.dispatch('userStore/getUserData');
    },
-    // created(){
-    //     console.log(this.$store.state.userStore.localStorage.userId)
-    // },
+    created(){
+        console.log(this.userRole)
+
+        console.log(this.$store.state.userStore.localStorage.userId)
+        console.log(this.$store.state.userStore.localStorage.token)
+
+    },
 }
 </script>
 
