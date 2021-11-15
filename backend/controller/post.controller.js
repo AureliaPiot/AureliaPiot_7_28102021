@@ -129,13 +129,16 @@ exports.update = (req,res) =>{
             console.log('unlink old attachement');
         });
     }
-    
+
 // si une nouvelle image n'est pas presente , garde l'anciene
+    else if (req.body.clearFile){
+        newFile = "null" ;
+    }
 
     else if(req.body.file == "undefined" && req.file == undefined && oldFile !== undefined){
         newFile = oldFile ;
     }
-    else if(req.body.file == "undefined" && req.file == undefined && oldFile == undefined){
+    else if(req.body.file == "undefined" && req.file == undefined && oldFile == undefined ){
         newFile = "null" ;
     }
 

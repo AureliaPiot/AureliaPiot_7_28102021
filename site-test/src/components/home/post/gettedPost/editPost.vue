@@ -10,7 +10,7 @@
             </div>
             <div class="footerPost d-flex justify-content-between">
                 <input type="file"  class="btn btn-outline-primary" id="file" name="fileEdit"  @change="onFileChange">
-
+                <button class="btn btn-primary w30" @click.prevent="clearImg">clear Img</button>
                 <button class="btn btn-primary w30" @click.prevent="submitEdit">entrée</button>
             </div>    
         </form>
@@ -37,7 +37,8 @@ export default {
     data(){
         return{
             oldFile: this.attachement,
-            file : this.attachement
+            file : this.attachement,
+            clearFile : null
         }
     },
 
@@ -51,8 +52,13 @@ export default {
             this.file = URL.createObjectURL(file);
             console.log('file')
             console.log(file)
-            },
+        },
+        clearImg(){
+            this.file = 'null';
+            this.clearFile = true;
+             document.getElementsByName("fileEdit")[0].value = ""
 
+        },
         submitEdit(){
             const file = document.getElementsByName("fileEdit")[0].files[0];
             
@@ -60,6 +66,8 @@ export default {
             dataform.append('content',document.getElementsByName("messageEdit")[0].value);
             dataform.append('oldFile',this.oldFile);
             dataform.append('file',file);
+            dataform.append('clearFile',this.clearFile);
+
 
             // const data ={
             //     id:this.id,
