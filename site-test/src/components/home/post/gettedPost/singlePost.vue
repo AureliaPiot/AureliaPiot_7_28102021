@@ -5,11 +5,11 @@
     <div class="post">
         <div class="headerPost ">
             <div class="userData">
-                <img class="profilePic" v-bind:src="post.User.profilePic" v-bind:alt="post.User.nom">
-                <router-link class="name" :to="{ name: 'userPage',params:{id: post.User.id }}">{{post.User.nom}}  {{post.User.prenom}} <i class="fas fa-crown"  v-if="this.post.User.role == 'admin'" ></i></router-link>
+                <img class="profilePic" v-bind:src="this.UserProfilePic" v-bind:alt="this.UserNom">
+                <router-link class="name" :to="{ name: 'userPage',params:{id: this.UserId }}">{{this.UserNom}}  {{this.UserPrenom}} <i class="fas fa-crown"  v-if="this.post.UserRole == 'admin'" ></i></router-link>
                 <p class="date"> {{Date(post.createDate).toString().slice(0,16)}}</p>
             </div>
-            <div class="editPost"  v-if="this.isCreator == post.UserId || this.isAdmin ">
+            <div class="editPost"  v-if="this.isCreator == this.UserId || this.isAdmin ">
                 <button class="btn edit " @click.prevent="showEdit"><i class="fas fa-pen text-white"></i></button>
                 <!-- ouvre affiche un composant qui recupere les donnéés dans le form  /comme une fenetre alert?-->
                 <button class="btn delete " @click.prevent="deletePost"><i class="fas fa-trash text-white"></i></button>
@@ -17,12 +17,12 @@
             </div>
         </div>
         <div class="bodyPost">
-            <p>{{post.content}}</p>
-            <img v-if="post.attachement !== 'null'" class="imgPost" :src="post.attachement" alt="">
+            <p>{{this.content}}</p>
+            <img v-if="this.attachement !== 'null'" class="imgPost" :src="this.attachement" alt="">
         </div>
         <div class="footerPost d-flex align-items-center">
-                <div class="col "><i v-bind:class="{ 'valide' : this.like } " class="fas fa-thumbs-up like" @click="addLike"></i> <p>{{ this.post.likes.length}} </p></div>
-                <div class="col comments"><i class="fas fa-comment-dots comment"></i> <p>{{ this.post.Coms.length}}</p> </div>
+                <div class="col "><i v-bind:class="{ 'valide' : this.like } " class="fas fa-thumbs-up like" @click="addLike"></i> <p>{{ this.Postlikes}} </p></div>
+                <div class="col comments"><i class="fas fa-comment-dots comment"></i> <p>{{ this.PostComs}}</p> </div>
         </div>   
         
         <div class="showEdit" v-if="this.show">
@@ -89,23 +89,40 @@ export default {
 
             show : false,
             like :false,
-             
+
             postComs : null,
+
+            id: this.post.id ,
+            attachement: this.post.attachement ,
+            content: this.post.content ,
+            createDate: this.post.createDate ,
+            Postlikes: this.post.likes.length ,
+            PostComs: this.post.Coms.length ,
+
+            
+            UserId: this.post.UserId ,
+            UserBio: this.post.User.bio,
+            UserEmail: this.post.User.email,
+            UserNom: this.post.User.nom,
+            UserPrenom: this.post.User.prenom,
+            UserProfilePic: this.post.User.profilePic,
+            UserRole: this.post.User.role,
+  
         }
     },
     computed: {
        
         setCom(){
-            // console.log(this.postComs)
+
             return this.$store.state.postStore.com
         }  
 
     },
     beforeCreate(){
         
-
         // this.$store.dispatch('postStore/getCom',this.post.id);
         // console.log(this.$store.state.postStore.com);
+        console.log(this.post);
         
 
         },
@@ -177,6 +194,7 @@ export default {
 
         addLike(){
             if(!this.like){
+                this.Postlikes ++;
                     console.log('like');
                 const data ={
                     UserId:this.isCreator,
@@ -202,6 +220,8 @@ export default {
                 })
             }
             if(this.like){
+                this.Postlikes --;
+
                 console.log('unlike');
                     // this.like = false
                 fetch('http://localhost:3000/api/like/'+this.post.id+'/'+this.isCreator, {

@@ -15,7 +15,7 @@
 
             <div class="d-flex justify-content-center">
              <button id="signSubmit" type="button" class="submit btn btn-primary" v-on:click="login">Entrée</button>
-        <router-link to="/home">Home</router-link> 
+        <!-- <router-link to="/home">Home</router-link>  -->
 
             </div>
 

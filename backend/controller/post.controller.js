@@ -112,19 +112,33 @@ exports.update = (req,res) =>{
     console.log(req.body);
     console.log(req.file);
 
+    let newFile = null;
+
     const oldFile = req.body.oldFile;
-    const newFile = `${req.protocol}://${req.get('host')}/images/${req.file.filename}` ;
+
     console.log(oldFile);
     console.log(newFile);
-// par ce que l'image est renommé avec le temp present, elle ne sera jamais egal a son ancien version,
-// faire un refresh pour que l'image soit pris en compte dans 'old file' apres la modification
-    if( oldFile !== newFile ){
-        console.log('not the same');
+
+
+// si une nouvelle image est present , on supprime l'anciene
+    if( req.file !== undefined ){
+        newFile = `${req.protocol}://${req.get('host')}/images/${req.file.filename}` ;
+        console.log('newFile present');
         const filename = oldFile.split("/images/")[1];
         fs.unlink(`images/${filename}`,()=>{
             console.log('unlink old attachement');
         });
     }
+    
+// si une nouvelle image n'est pas presente , garde l'anciene
+
+    else if(req.body.file == "undefined" && req.file == undefined && oldFile !== undefined){
+        newFile = oldFile ;
+    }
+    else if(req.body.file == "undefined" && req.file == undefined && oldFile == undefined){
+        newFile = "null" ;
+    }
+
     Posts.update(
         { content : req.body.content,
           attachement : newFile },

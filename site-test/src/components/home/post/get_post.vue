@@ -33,7 +33,7 @@ export default {
     },
     computed: {
         allPost(){
-          return this.$store.state.postStore.post
+          return this.$store.state.postStore.posts
         },
   
     },

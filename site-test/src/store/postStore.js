@@ -5,6 +5,7 @@ import axios from 'axios'
 export const postStore ={
   
   namespaced: true,
+
      state: {
     name: "postStore",
 
@@ -13,14 +14,14 @@ export const postStore ={
   },
   getters:{
     getPosts(state){
-        return state.post
+        return state.posts
     },
    
    
 },
   mutations: {
     setPost(state,data){
-        state.post = data;
+        state.posts = data;
     },
     setCom(state,value){
         state.com = value;

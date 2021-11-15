@@ -1,22 +1,16 @@
 <template>
 <div class="editPost">
-    <div class="headerPost ">
-       <div class="userData">
-            <div class="user"></div>        
-       </div> <!-- userdata -->
-    </div>
+
         <form enctype="multipart/form-data">
             <div class="bodyPost">
                 <textarea class="form-control" id="message" rows="3" name="messageEdit" :value="content"></textarea>
 
                 <img  v-if="this.file !=='null' " :src="this.file" alt="upload-img" >
-                
-                <!-- <p>{{ content }}</p>
-                <p>{{ attachement }}</p> -->
+
             </div>
             <div class="footerPost d-flex justify-content-between">
                 <input type="file"  class="btn btn-outline-primary" id="file" name="fileEdit"  @change="onFileChange">
-                <!-- <div>entrée</div> -->
+
                 <button class="btn btn-primary w30" @click.prevent="submitEdit">entrée</button>
             </div>    
         </form>
@@ -60,36 +54,41 @@ export default {
             },
 
         submitEdit(){
+            const file = document.getElementsByName("fileEdit")[0].files[0];
+            
             const dataform = new FormData();
             dataform.append('content',document.getElementsByName("messageEdit")[0].value);
             dataform.append('oldFile',this.oldFile);
-            dataform.append('file',document.getElementsByName("fileEdit")[0].files[0]);
+            dataform.append('file',file);
 
-            const data ={
-                id:this.id,
-                content:document.getElementsByName("messageEdit")[0].value,
-                oldFile:this.oldFile,
-                file:document.getElementsByName("fileEdit")[0].files[0]
-            }
-            this.$store.dispatch('postStore/savePost',
-                data.id,
-                data.content,
-                data.oldFile,
-                data.file
-                )
-            // fetch('http://localhost:3000/api/post/'+this.id, {
-            //     method : "Put",
-            //     headers: { 
-            //         // "Content-Type": "application/json", 
-            //         "authorization" : 'Bearer ' + localStorage.getItem('token'),
-            //         },
-            //     body: dataform,
-            // }) 
-            // .then(function(res){return res.json();}) 
-            // .then(value => (console.log(value) ))
-            // .catch(function(){
-            //     console.log('erreur de requete');
-            // })
+            // const data ={
+            //     id:this.id,
+            //     content:document.getElementsByName("messageEdit")[0].value,
+            //     oldFile:this.oldFile,
+            //     file:document.getElementsByName("fileEdit")[0].files[0]
+            // }
+            // this.$store.dispatch('postStore/savePost',
+            //     data.id,
+            //     data.content,
+            //     data.oldFile,
+            //     data.file
+            //     )
+
+            fetch('http://localhost:3000/api/post/'+this.id, {
+                method : "Put",
+                headers: { 
+                    // "Content-Type": "application/json", 
+                    "authorization" : 'Bearer ' + localStorage.getItem('token'),
+                    },
+                body: dataform,
+            }) 
+            .then(function(res){return res.json();}) 
+            .then(value => (console.log(value),
+                this.close
+            ))
+            .catch(function(){
+                console.log('erreur de requete');
+            })
 
         },
     },//methods

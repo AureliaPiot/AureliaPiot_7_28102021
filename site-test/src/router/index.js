@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 import Sign from '../views/Sign.vue';
 
+const token = localStorage.getItem('token');
 
 const routes = [
   // {
@@ -10,7 +11,20 @@ const routes = [
  
   {
    path:'/',
+  //  name: 'Default',
    redirect:'/sign',
+
+   beforeEnter: (to, from, next) => {
+
+    if(token == null){
+      next({path:'/sign'})
+      
+    }else{
+      next({path:'/home'})
+
+    }
+   }
+
   // redirect:{name : "Sign"},
   },
   {
@@ -51,7 +65,13 @@ const routes = [
           isAuth: true,
         }
       },
-      { path: '*', redirect:'/home', }
+
+      { path: '*',
+       redirect:'/home',
+       meta: {
+        isAuth: true,
+        }
+      }
     ],
   },
 
@@ -67,14 +87,19 @@ const router = createRouter({
 
 // si la route, contient la meta "isAuth" alors -------------
 
-const token = localStorage.getItem('token');
 
 
 router.beforeEach((to, from, next) => {
+  // if (to.name == 'Sign' && token == !null) 
+  //   {next({ name: 'Home' })}
+  // else 
+  //   {next()}
+
   if (to.matched.some(record => record.meta.isAuth)) {
     if (token == null) 
-      {router.push("/sign");
-    } 
+      // {router.push("/sign");}
+    {next({ name: 'Sign' })}
+
     else 
       {next()}
   }
