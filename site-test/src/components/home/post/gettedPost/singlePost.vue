@@ -10,7 +10,7 @@
                 <p class="date"> {{Date(post.createDate).toString().slice(0,16)}}</p>
             </div>
             <div class="editPost"  v-if="this.isCreator == this.UserId || this.isAdmin ">
-                <button class="btn edit " @click.prevent="showEdit"><i class="fas fa-pen text-white"></i></button>
+                <button class="btn edit " v-if="this.isCreator == this.UserId" @click.prevent="showEdit"><i class="fas fa-pen text-white"></i></button>
                 <!-- ouvre affiche un composant qui recupere les donnéés dans le form  /comme une fenetre alert?-->
                 <button class="btn delete " @click.prevent="deletePost"><i class="fas fa-trash text-white"></i></button>
                 <!-- ouvre affiche un composant qui recupere les donnéés dans le form -->
@@ -112,17 +112,16 @@ export default {
     },
     computed: {
        
-        setCom(){
-
-            return this.$store.state.postStore.com
-        }  
+        // setCom(){
+        //     return this.$store.state.postStore.com
+        // }  
 
     },
     beforeCreate(){
         
         // this.$store.dispatch('postStore/getCom',this.post.id);
         // console.log(this.$store.state.postStore.com);
-        console.log(this.post);
+        // console.log(this.post);
         
 
         },

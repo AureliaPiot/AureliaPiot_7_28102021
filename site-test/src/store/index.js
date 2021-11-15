@@ -10,17 +10,28 @@ import {postStore} from './postStore.js'
 export default createStore({
   state: {
     status:'',
+    loader:null,
   // c'est ici qu'on declare les etats, un peu comme data
   },
 
   mutations: {
     // set post Com Data
+
+    setLoader(state,value){
+      state.loader=value
+    }
+
+    
   },
   getters:{}
 
   ,
   actions: {
-    //get post data
+//  test change loader
+    // {commit},query
+    changeLoader (){
+
+    }
 
   },
   modules: {

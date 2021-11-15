@@ -6,11 +6,11 @@ export const postStore ={
   
   namespaced: true,
 
-     state: {
+  state: {
     name: "postStore",
 
     posts: null,
-    com: null,
+
   },
   getters:{
     getPosts(state){
@@ -23,16 +23,15 @@ export const postStore ={
     setPost(state,data){
         state.posts = data;
     },
-    setCom(state,value){
-        state.com = value;
-    },
+
     showData(value){
         console.log(value);
     }
   },
   actions: {
 
-    // quad ça fonctionnera, rappeler get post apres une action de modification/enchainer avec une autre action
+// le seul qui fonctionne
+
     async getPost({commit},query){
           console.log('get post :'+ query);
 
@@ -50,29 +49,7 @@ export const postStore ={
         })
       },//get post
 
-///////////////////////////////////////////////////////////////////
-    async  getCom({commit}) {
-          
-    await  fetch('http://localhost:3000/api/com/all', {
-            method : "Get",
-            headers: { 
-                "Content-Type": "application/json",
-                "authorization" : 'Bearer ' + localStorage.getItem('token'), 
-            },
-        }) 
-        .then(res => res.json())
-        .then(value => {
-            const dataCom = value;
-            commit("setCom",dataCom)
 
-            // console.log('getcom');
-            // console.log(state.com);
-
-        })
-        .catch(function(){
-            console.log('erreur de requete');
-        });
-      },
 ///////////////////////////////////////////////////////////////////
 
 },
