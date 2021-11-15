@@ -133,6 +133,10 @@ exports.update = (req,res) =>{
 // si une nouvelle image n'est pas presente , garde l'anciene
     else if (req.body.clearFile){
         newFile = "null" ;
+        const filename = oldFile.split("/images/")[1];
+        fs.unlink(`images/${filename}`,()=>{
+            console.log('unlink old attachement');
+        });
     }
 
     else if(req.body.file == "undefined" && req.file == undefined && oldFile !== undefined){

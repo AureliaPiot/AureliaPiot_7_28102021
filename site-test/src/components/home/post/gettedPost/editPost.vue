@@ -25,7 +25,7 @@
 export default {
     name:'editPost',
     props: {
-        // post: Object,
+
         id: Number,
         User:Object,
         content:String,
@@ -56,7 +56,7 @@ export default {
         clearImg(){
             this.file = 'null';
             this.clearFile = true;
-             document.getElementsByName("fileEdit")[0].value = ""
+             document.getElementsByName("fileEdit")[0].value = "";
 
         },
         submitEdit(){
@@ -69,23 +69,11 @@ export default {
             dataform.append('clearFile',this.clearFile);
 
 
-            // const data ={
-            //     id:this.id,
-            //     content:document.getElementsByName("messageEdit")[0].value,
-            //     oldFile:this.oldFile,
-            //     file:document.getElementsByName("fileEdit")[0].files[0]
-            // }
-            // this.$store.dispatch('postStore/savePost',
-            //     data.id,
-            //     data.content,
-            //     data.oldFile,
-            //     data.file
-            //     )
 
             fetch('http://localhost:3000/api/post/'+this.id, {
                 method : "Put",
                 headers: { 
-                    // "Content-Type": "application/json", 
+
                     "authorization" : 'Bearer ' + localStorage.getItem('token'),
                     },
                 body: dataform,
@@ -132,7 +120,6 @@ export default {
         }
         .profilePic{
             width: 3rem;
-            // height: 1rem;
         }
     }
     .bodyPost{

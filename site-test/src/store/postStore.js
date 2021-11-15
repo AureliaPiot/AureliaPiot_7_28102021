@@ -75,35 +75,6 @@ export const postStore ={
       },
 ///////////////////////////////////////////////////////////////////
 
-    savePost({commit},id,content,oldfile,file){
-        console.log(id)
-        console.log(content)
-        console.log(oldfile)
-        console.log(file)
-
-        commit("showData",id)
-
-///////////////////////////////////////////////////////////////////
-
-
-        // fetch('http://localhost:3000/api/post/'+postId, {
-        //     method : "Put",
-        //     headers: { 
-        //         // "Content-Type": "application/json", 
-        //         "authorization" : 'Bearer ' + localStorage.getItem('token'),
-        //         },
-        //     body: form,
-        // }) 
-        // .then(function(res){return res.json();}) 
-        // .then(value => (
-        //     // dispatch('postStore/getPost',query),
-        //     console.log(value) 
-        //     ))
-        // .catch(function(){
-        //     console.log('erreur de requete');
-        // })
-  },
-
 },
 
 strict :false
