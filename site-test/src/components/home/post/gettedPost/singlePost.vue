@@ -176,18 +176,20 @@ export default {
         deletePost(){
             if(confirm('you sure ?')){
                 console.log('delete');
-                fetch('http://localhost:3000/api/post/'+this.post.id, {
-                    method : "DELETE",
-                    headers: {
-                        "Content-Type": "application/json" ,
-                        "authorization" : 'Bearer ' + this.token,
-                        },
-                }) 
-                .then(function(res){return res.json();}) 
-                .then(value => (console.log(value) ))
-                .catch(function(){
-                    console.log('erreur de requete');
-                })
+                this.$store.dispatch('postStore/deletePost',{id:this.post.id,query:this.query});
+
+                // fetch('http://localhost:3000/api/post/'+this.post.id, {
+                //     method : "DELETE",
+                //     headers: {
+                //         "Content-Type": "application/json" ,
+                //         "authorization" : 'Bearer ' + this.token,
+                //         },
+                // }) 
+                // .then(function(res){return res.json();}) 
+                // .then(value => (console.log(value) ))
+                // .catch(function(){
+                //     console.log('erreur de requete');
+                // })
             }
         },
 

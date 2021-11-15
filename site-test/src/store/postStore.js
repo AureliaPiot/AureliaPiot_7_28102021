@@ -33,17 +33,14 @@ export const postStore ={
         console.log(value);
     }
   },
-  actions: {
 
-    // si il n'y a pas de commit ou autre, utilser _
-// le seul qui fonctionne
+  actions: {
 
     getPost({commit},query){
           console.log('get post :'+ query);
           commit("setLoadingStatus",'loading')
 
-
-     axios.get('http://localhost:3000/api/post/'+query, {
+        axios.get('http://localhost:3000/api/post/'+query, {
             headers: { 
                 "Content-Type": "application/json",
                 "authorization" : 'Bearer ' + localStorage.getItem('token'), 
@@ -60,7 +57,7 @@ export const postStore ={
 
 
 ///////////////////////////////////////////////////////////////////
-// {commit, dispatch},
+
     newPost({commit, dispatch},data){
 
         commit("setLoadingStatus",'loading')
@@ -80,9 +77,33 @@ export const postStore ={
         .catch(function (error) {
             console.log(error);
         });
-    }
+    },
+///////////////////////////////////////////////////////////////////
+    deletePost({commit, dispatch},data){
+        console.log(data);
+        commit("setLoadingStatus",'loading')
+
+        fetch('http://localhost:3000/api/post/'+ data.id, {
+            method : "DELETE",
+            headers: {
+                "Content-Type": "application/json" ,
+                "authorization" : 'Bearer ' + localStorage.getItem('token'),
+                },
+        }) 
+        .then(function(res){return res.json();}) 
+        .then(value => (console.log(value),         
+            dispatch('getPost', data.query),
+            commit('setLoadingStatus','notLoading')
+        
+        ))
+        .catch(function(){
+            console.log('erreur de requete');
+        })
+        
+    },
 
 },
+
 
 strict :false
 

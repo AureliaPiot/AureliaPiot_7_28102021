@@ -6,6 +6,7 @@
             v-for="post in allPost " 
             :key="post"
             :post="post" 
+            :query="this.query"
         />
 
       <!-- tout le defilement se fera ici -->
@@ -34,6 +35,9 @@ export default {
     computed: {
         allPost(){
           return this.$store.state.postStore.posts
+ 
+          
+
         },
         getLoadinStatus(){
           console.log(this.$store.state.postStore.loadingStatus)
