@@ -13,6 +13,8 @@ exports.create = (req,res) =>{
     console.log('create-post----------');
     console.log(req.body);
     console.log(req.body.userId);
+    console.log(req.file);
+
 
     console.log('create- post----------');
 
@@ -50,7 +52,10 @@ exports.getAll = (req,res) =>{
     console.log('findAll post');
     Posts.findAll({ 
         order: [['id', 'DESC']],
-        include: [{ all:true }],
+        include: [
+            { all:true,
+            attributes: {exclude: ['password']}
+        }],
     })
     .then(data=>{
         res.send(data);
@@ -75,7 +80,8 @@ exports.getAllByUser = (req,res) =>{
         where:{userid : userId},
         include: [{
             // model: db.users,
-            all:true
+            all:true,
+            attributes: {exclude: ['password']}
         }],
     })
     .then(data=>{

@@ -37,44 +37,29 @@ export default {
             const file = e.target.files[0];
             this.url = URL.createObjectURL(file);
             },
+
          submitPost(){
+
             const userId = localStorage.getItem("userId");
-            const token =localStorage.getItem("token"); 
             let file = document.getElementsByName("file")[0].files[0];
-
-
+            this.url = null
 
             if(file === undefined ){
                  file = "null"
             }
-            const data= {
-                userId: userId,
-                message : document.getElementsByName("message")[0].value,
-                file: file,
-                // like:JSON.stringify({userLike:[]}),                
-                // createDate:Date.now(),
-             }
-                // console.log(data.like);
-                // console.log(JSON.parse(data.like));
+
             const dataform = new FormData();
             dataform.append('userId',userId);
-            dataform.append('message',data.message);
+            dataform.append('message',document.getElementsByName("message")[0].value,);
             dataform.append('file',file);
-            // dataform.append('like',data.like);
 
-         
-            this.axios.post('http://localhost:3000/api/post',dataform, {
-                headers: {
-                     "authorization" : 'Bearer ' + token,
-                     },
-            }) 
-            .then(function(response) {
-                console.log(response.data);
-                document.getElementById("newPost").reset();
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+            let form = dataform;        
+
+        //  ---
+        this.$store.dispatch('postStore/newPost', form);
+
+        document.getElementById("newPost").reset();
+
          },
      }
 }

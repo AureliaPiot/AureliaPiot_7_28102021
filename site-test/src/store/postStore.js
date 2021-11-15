@@ -9,17 +9,22 @@ export const postStore ={
   state: {
     name: "postStore",
 
+    loadingStatus:'not Loading',
+
     posts: null,
 
   },
   getters:{
     getPosts(state){
-        return state.posts
+        return state.posts.filter(post => post.UserId==1)
     },
    
    
 },
   mutations: {
+    setLoadingStatus(state,value){
+        state.loadingStatus = value;
+    },
     setPost(state,data){
         state.posts = data;
     },
@@ -30,19 +35,23 @@ export const postStore ={
   },
   actions: {
 
+    // si il n'y a pas de commit ou autre, utilser _
 // le seul qui fonctionne
 
-    async getPost({commit},query){
+    getPost({commit},query){
           console.log('get post :'+ query);
+          commit("setLoadingStatus",'loading')
 
-    await axios.get('http://localhost:3000/api/post/'+query, {
+
+     axios.get('http://localhost:3000/api/post/'+query, {
             headers: { 
                 "Content-Type": "application/json",
                 "authorization" : 'Bearer ' + localStorage.getItem('token'), 
             },
         }) 
         .then(res => {
-            commit("setPost",res.data)
+          commit("setLoadingStatus",'notloading'),
+          commit("setPost",res.data)
         })
         .catch(function(){
             console.log('erreur de requete');
@@ -51,6 +60,27 @@ export const postStore ={
 
 
 ///////////////////////////////////////////////////////////////////
+// {commit, dispatch},
+    newPost({commit, dispatch},data){
+
+        commit("setLoadingStatus",'loading')
+        
+        axios.post('http://localhost:3000/api/post',data,{
+            headers: {
+                 "authorization" : 'Bearer ' + localStorage.getItem('token'),
+                 },
+        }) 
+        .then(function(response) {
+            console.log(response.data);
+            
+            dispatch('getPost','all');
+            commit('setLoadingStatus','notLoading');
+
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+    }
 
 },
 

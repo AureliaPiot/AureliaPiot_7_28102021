@@ -1,7 +1,7 @@
 <template>
 
     <div class="allPost">
-
+        <p v-if="getLoadinStatus =='loading'"> {{getLoadinStatus}} </p> 
         <post
             v-for="post in allPost " 
             :key="post"
@@ -35,14 +35,23 @@ export default {
         allPost(){
           return this.$store.state.postStore.posts
         },
+        getLoadinStatus(){
+          console.log(this.$store.state.postStore.loadingStatus)
+          return this.$store.state.postStore.loadingStatus
+
+        }
   
     },
     methods:{
 
     },
-    async beforeCreate(){
-       await this.$store.dispatch('postStore/getPost',this.query);
+       beforeCreate(){
+        this.$store.dispatch('postStore/getPost',this.query);
+        
     },
+    // async beforeCreate(){
+    //    await this.$store.dispatch('postStore/getPost',this.query);
+    // },
     
     created(){
          },
