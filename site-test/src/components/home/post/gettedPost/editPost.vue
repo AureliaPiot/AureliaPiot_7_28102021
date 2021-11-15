@@ -10,7 +10,7 @@
             </div>
             <div class="footerPost d-flex justify-content-between">
                 <input type="file"  class="btn btn-outline-primary" id="file" name="fileEdit"  @change="onFileChange">
-                <button class="btn btn-primary w30" @click.prevent="clearImg">clear Img</button>
+                <button class="btn btn-danger w30" @click.prevent="clearImg">clear Img</button>
                 <button class="btn btn-primary w30" @click.prevent="submitEdit">entrée</button>
             </div>    
         </form>
@@ -80,7 +80,7 @@ export default {
             }) 
             .then(function(res){return res.json();}) 
             .then(value => (console.log(value),
-                this.close
+                this.close()
             ))
             .catch(function(){
                 console.log('erreur de requete');

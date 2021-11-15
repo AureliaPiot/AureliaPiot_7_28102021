@@ -6,7 +6,7 @@
             <div class="form-group row justify-content-between">
                 <!-- <label for="message">message</label> -->
                 <img  v-bind:src="this.profilePic" alt="" class="userAvatar">
-                <input  type="text" class="form-control messageCom" :name="'messageCom'+postId" id="messageCom" placeholder="commentaire...">
+                <input  type="text" class="form-control messageCom" :name="'messageCom'+postId" :id="'messageCom'+postId" placeholder="commentaire...">
 
                 <i class="fas fa-arrow-alt-circle-right submitCom"  v-on:click.prevent="submitCom"></i>
 
@@ -60,9 +60,15 @@ export default {
 
             }) 
             .then(function(res){return res.json();}) 
-            .then(value => (console.log(value) ))
+            .then(value => (
+                console.log(value) ,
+                console.log(document.getElementById('messageCom'+this.postId)) ,
+
+            document.getElementById('messageCom'+this.postId).value=''
+))
             .catch(function(){
                 console.log('erreur de requete');
+
             })
          },
      }
