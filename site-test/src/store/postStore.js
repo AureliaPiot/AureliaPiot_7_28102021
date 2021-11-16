@@ -13,12 +13,13 @@ export const postStore ={
 
     posts: null,
 
+
   },
   getters:{
     getPosts(state){
         return state.posts.filter(post => post.UserId==1)
     },
-   
+
    
 },
   mutations: {
@@ -27,6 +28,9 @@ export const postStore ={
     },
     setPost(state,data){
         state.posts = data;
+    },
+    setCom(state,data){
+        state.coms = data;
     },
 
     showData(value){
@@ -101,6 +105,31 @@ export const postStore ={
         })
         
     },
+///////////////////////////////////////////////////////////////////
+
+ newCom({commit, dispatch},data){
+    console.log(data);
+    commit("setLoadingStatus",'loading')
+
+
+    axios.post('http://localhost:3000/api/com/',data.form,{
+        headers: {
+             "authorization" : 'Bearer ' + localStorage.getItem('token'),
+             },
+    }) 
+    .then(function(response) {
+        console.log(response.data);
+        
+        dispatch('getPost',data.query);
+        commit('setLoadingStatus','notLoading');
+
+    })
+    .catch(function (error) {
+        console.log(error);
+    });
+ },
+///////////////////////////////////////////////////////////////////
+
 
 },
 

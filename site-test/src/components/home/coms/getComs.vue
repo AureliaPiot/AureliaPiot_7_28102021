@@ -36,6 +36,9 @@
            
 
 
+
+
+
         </div>
     </div>      
 </template>
@@ -55,92 +58,71 @@ export default {
         isCreator : String,
         isAdmin : Boolean,
 
+        query: String
+
+
 
     },
     data(){
         return{
             // data:"",
             token :localStorage.getItem("token"),
-            editCom: false
+            editCom: false,
         }
     },
 
-    //  methods:{
-        // mounted(){
-                
-        //         console.log('get com');
-        //         console.log(this.postId);
-
-    
-        //         fetch('http://localhost:3000/api/com/post/'+this.postId, {
-        //             method : "Get",
-        //             headers: { 
-        //                 "Content-Type": "application/json",
-        //                 "authorization" : 'Bearer ' + this.token, 
-        //             },
-        //         }) 
-        //         .then(function(res){
-        //             return res.json();
-        //         })    
-        //         .then(value => (this.data = value , console.log(value) ))
-       
-
-        //         .catch(function(){
-        //             console.log('erreur de requete');
-        //         });
-        //     console.log("data");
-
-        // },
-        methods:{
-            showEditCom(){
-                if(this.editCom){
-                    this.editCom = false
-                    console.log('editcom close')
-                }else{
-                    this.editCom = true
-                    console.log('editcom open')
-                }
-            },
-
-            submitComEdit(){
-                // const dataform = new FormData();
-                // dataform.append('content',document.getElementsByName("editCom")[0].value);
-                // dataform.append('content','test');
-                const editData ={
-                    newContent : document.getElementsByName("editCom"+ this.coms.id)[0].value,
-
-                }
 
 
-                fetch('http://localhost:3000/api/com/'+this.coms.id, {
-                    method : "Put",
-                    headers: { 
-                        "Content-Type": "application/json", 
-                        "authorization" : 'Bearer ' + localStorage.getItem('token'),
-                        },
-                    body: JSON.stringify(editData),
-                }) 
-                .then(function(res){return res.json();}) 
-                .then(value => (console.log(value) ))
-                .catch(function(){ console.log('erreur de requete'); })
-            },
-
-            deleteCom(param){
-                console.log('deleteCom');
-                console.log(param);
-
-                fetch('http://localhost:3000/api/com/'+param, {
-                    method : "DELETE",
-                    headers: { 
-                        "Content-Type": "application/json",
-                        "authorization" : 'Bearer ' + this.token, 
-                    },
-                }) 
-                .then(function(res){return res.json(); })    
-                .then(value => (console.log(value.message) ))
-                .catch(function(){console.log('erreur de requete');});
+    methods:{
+        showEditCom(){
+            if(this.editCom){
+                this.editCom = false
+                console.log('editcom close')
+            }else{
+                this.editCom = true
+                console.log('editcom open')
             }
+        },
+
+        submitComEdit(){
+            // const dataform = new FormData();
+            // dataform.append('content',document.getElementsByName("editCom")[0].value);
+            // dataform.append('content','test');
+            const editData ={
+                newContent : document.getElementsByName("editCom"+ this.coms.id)[0].value,
+
+            }
+
+
+            fetch('http://localhost:3000/api/com/'+this.coms.id, {
+                method : "Put",
+                headers: { 
+                    "Content-Type": "application/json", 
+                    "authorization" : 'Bearer ' + localStorage.getItem('token'),
+                    },
+                body: JSON.stringify(editData),
+            }) 
+            .then(function(res){return res.json();}) 
+            .then(value => (console.log(value) ))
+            .catch(function(){ console.log('erreur de requete'); })
+        },
+
+        deleteCom(param){
+            console.log('deleteCom');
+            console.log(param);
+
+            fetch('http://localhost:3000/api/com/'+param, {
+                method : "DELETE",
+                headers: { 
+                    "Content-Type": "application/json",
+                    "authorization" : 'Bearer ' + this.token, 
+                },
+            }) 
+            .then(function(res){return res.json(); })    
+            .then(value => (console.log(value.message) ))
+            .catch(function(){console.log('erreur de requete');});
         }
+    }
 
     //  },
     //  beforeMount(){

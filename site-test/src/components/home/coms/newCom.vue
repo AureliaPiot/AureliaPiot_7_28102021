@@ -4,7 +4,7 @@
 
 
             <div class="form-group row justify-content-between">
-                <!-- <label for="message">message</label> -->
+               
                 <img  v-bind:src="this.profilePic" alt="" class="userAvatar">
                 <input  type="text" class="form-control messageCom" :name="'messageCom'+postId" :id="'messageCom'+postId" placeholder="commentaire...">
 
@@ -24,7 +24,10 @@ export default {
     props: {
         userPP :String,
         userId : Number,
-        postId : Number
+        postId : Number,
+
+        query: String
+
     },
     data(){
         return{
@@ -34,7 +37,7 @@ export default {
      methods:{
          submitCom(){
             const userId = localStorage.getItem("userId");
-            const token =localStorage.getItem("token"); 
+            // const token =localStorage.getItem("token"); 
             const data= {
                 UserId: userId,
                 PostId: this.postId ,
@@ -42,34 +45,18 @@ export default {
                 createDate :Date.now(),
              }
             console.log(data)
-            const dataform = new FormData();
-            dataform.append('PostId',data.PostId);
-            dataform.append('UserId',data.UserId);
-            dataform.append('content',data.content);
-            // dataform.append('createDate',data.createDate);
 
-        
-            fetch('http://localhost:3000/api/com/', {
-                method : "POST",
-                headers: {
-                    "Content-Type": "application/json" ,
-                    "authorization" : 'Bearer ' + token,
-                    },
-                body: JSON.stringify(data),
+            // const dataform = new FormData();
+            // dataform.append('PostId',data.PostId);
+            // dataform.append('UserId',data.UserId);
+            // dataform.append('content',data.content);
 
+            // const form = dataform
 
-            }) 
-            .then(function(res){return res.json();}) 
-            .then(value => (
-                console.log(value) ,
-                console.log(document.getElementById('messageCom'+this.postId)) ,
+            this.$store.dispatch('postStore/newCom',{form : data, query : this.query});
 
             document.getElementById('messageCom'+this.postId).value=''
-))
-            .catch(function(){
-                console.log('erreur de requete');
 
-            })
          },
      }
 }

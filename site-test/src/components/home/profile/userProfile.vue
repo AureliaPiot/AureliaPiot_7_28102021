@@ -226,7 +226,7 @@ created(){
                 body: JSON.stringify({bio : bio}),
                 }) 
                 .then(function(res){return res.json();})    
-                .then(value => (console.log(value) ))
+                .then(value => (console.log(value), this.editbio = false))
                 .catch(function(){console.log('erreur de requete');})
             }
 

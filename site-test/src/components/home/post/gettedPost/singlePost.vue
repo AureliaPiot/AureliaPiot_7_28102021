@@ -43,6 +43,7 @@
             :userPP ="post.User.profilePic"
             :userId ="post.User.id"
             :postId="post.id"
+            :query="this.query"
             /> 
 
         <getComs  
