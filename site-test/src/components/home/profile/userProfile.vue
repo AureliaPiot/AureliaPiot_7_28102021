@@ -213,7 +213,7 @@ created(){
 
 
             if(oldBio !== bio){
-                this.$store.dispatch('userStore/UpdateUserBio',{id: this.id, form : bio});
+                this.$store.dispatch('userStore/UpdateUserBio',{id: this.id, form : {bio : bio}});
                 this.editbio = false
             }
         },
@@ -221,23 +221,7 @@ created(){
             console.log('change role');
             console.log(this.newRole)
             const role = this.newRole;
-             fetch('http://localhost:3000/api/user/role/'+this.id, {
-                method : "Put",
-                headers: { 
-                    "Content-Type": "application/json",
-                    "authorization" : 'Bearer ' + this.token, 
-                },
-                body: JSON.stringify({role : role}),
-                }) 
-                .then(function(res){return res.json();})    
-                .then(value => (console.log(value),
-                localStorage.setItem('role', this.newRole),
-                this.$store.dispatch('userStore/changeRole',this.newRole),
-                console.log(this.$store.state.userStore.localStorage.userRole)
-                ))
-                .catch(function(){console.log('erreur de requete');})
-
-
+            this.$store.dispatch('userStore/UpdateUserRole',{id: this.id, form : {role : role}});
         },
 
         deleteCompte(){

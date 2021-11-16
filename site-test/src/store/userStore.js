@@ -136,7 +136,7 @@ export const userStore ={
     },
 ///////////////////////////////////////////////////////////////////
 
-    UpdateUserBio({dispatch},data){
+    UpdateUserBio(_,data){
       console.log('store update')
       axios.put('http://localhost:3000/api/user/bio/'+data.id,data.form,{
                 headers: {
@@ -144,14 +144,29 @@ export const userStore ={
                     },
             }) 
             .then(function(response) {
-                console.log('get user data');
-
                 console.log(response.data);
-                dispatch('getUserData',data.id)
             })
             .catch(function (error) {
                 console.log(error);
             });
+    },
+///////////////////////////////////////////////////////////////////
+    UpdateUserRole({commit},data){
+    console.log('store update')
+    axios.put('http://localhost:3000/api/user/bio/'+data.id,data.form,{
+              headers: {
+                  "authorization" : 'Bearer ' + localStorage.getItem('token'),
+                  },
+          }) 
+          .then(function(response) {
+            console.log(response.data);
+            localStorage.setItem('role', data.form.role),
+            commit("setRole",data.form.role) 
+
+          })
+          .catch(function (error) {
+              console.log(error);
+          });
     },
 ///////////////////////////////////////////////////////////////////
 
