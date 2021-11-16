@@ -22,7 +22,7 @@
         </div>
         <div class="footerPost d-flex align-items-center">
                 <div class="col "><i v-bind:class="{ 'valide' : this.like } " class="fas fa-thumbs-up like" @click="addLike"></i> <p>{{ this.Postlikes}} </p></div>
-                <div class="col comments"><i class="fas fa-comment-dots comment"></i> <p>{{ this.PostComs}}</p> </div>
+                <div class="col comments"><i class="fas fa-comment-dots comment"></i> <p>{{ getAllComs.length}}</p> </div>
         </div>   
         
         <div class="showEdit" v-if="this.show">
@@ -49,7 +49,7 @@
             /> 
 
         <getComs  
-            v-for="coms in this.postComs" 
+            v-for="coms in getAllComs" 
             :key="coms"
             :coms="coms"
             :query="query"
@@ -93,8 +93,6 @@ export default {
             show : false,
             like :false,
 
-            postComs : null,
-
             id: this.post.id ,
             attachement: this.post.attachement ,
             content: this.post.content ,
@@ -115,50 +113,23 @@ export default {
     },
     computed: {
        
-        // setCom(){
-        //     return this.$store.state.postStore.com
-        // }  
-
+        getAllComs(){
+            return this.$store.state.postStore.coms.filter(com => com.PostId == this.id)
+        }  
     },
     beforeCreate(){
-        
-        // this.$store.dispatch('postStore/getCom',this.post.id);
-        // console.log(this.$store.state.postStore.com);
-        // console.log(this.post);
-        
 
         },
     created(){     
-
-        // validateur like
 
     },
     beforeMounted(){
         },
      mounted(){
-         this.getCom();
         },
 
     methods:{
 
-        getCom(){
-            fetch('http://localhost:3000/api/com/post/'+this.post.id, {
-                method : "Get",
-            headers: { 
-                "Content-Type": "application/json",
-                "authorization" : 'Bearer ' + this.token, 
-            },
-            }) 
-            .then(function(res){ return res.json();})    
-            .then(value => (this.postComs = value 
-            //  ,console.log('value')
-
-            //  ,console.log(value)
-                ))
-            .catch(function(){
-                console.log('erreur de requete');
-            });
-        },
 
         showEdit(){
             this.show = true

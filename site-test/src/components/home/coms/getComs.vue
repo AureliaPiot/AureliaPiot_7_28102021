@@ -70,6 +70,10 @@ export default {
             editCom: false,
         }
     },
+    computed:{
+  
+
+    },
 
 
 

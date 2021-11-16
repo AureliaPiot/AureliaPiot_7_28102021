@@ -34,10 +34,10 @@ exports.getAll = (req,res) =>{
     Coms.findAll(    {
         order: [['id', 'DESC']],
         // where:{PostId : 4}
-        // include: [{
-        //     model: db.users,
-        //     model: db.posts,
-        // }],
+        include: [{
+            all:true,
+            attributes: {exclude: ['password']},
+        }],
     })
     .then(data=>{
         res.send(data);

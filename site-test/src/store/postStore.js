@@ -12,6 +12,8 @@ export const postStore ={
     loadingStatus:'not Loading',
 
     posts: null,
+    coms: [],
+
 
 
   },
@@ -29,9 +31,13 @@ export const postStore ={
     setPost(state,data){
         state.posts = data;
     },
-    setCom(state,data){
+    setComs(state,data){
+        // state.coms.push(data);
         state.coms = data;
+
     },
+
+
 
     showData(value){
         console.log(value);
@@ -127,12 +133,32 @@ export const postStore ={
         })
         
     },
+///////////////////////////////////////////////////////////////////    
+// [COMS]
+///////////////////////////////////////////////////////////////////    
+
+    getComs({commit}){
+
+            axios.get('http://localhost:3000/api/com/all',{
+                headers: {
+                    "authorization" : 'Bearer ' + localStorage.getItem('token'),
+                    },
+            }) 
+            .then(function(response) {
+                console.log('data get all coms');
+
+                console.log(response.data);
+                commit('setComs',response.data);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    },
 ///////////////////////////////////////////////////////////////////
 
-    newCom({commit, dispatch},data){
-    console.log(data);
-    commit("setLoadingStatus",'loading')
-
+    newCom({dispatch},data){
+        console.log(data);
+        // commit("setLoadingStatus",'loading')
 
         axios.post('http://localhost:3000/api/com/',data.form,{
             headers: {
@@ -142,8 +168,10 @@ export const postStore ={
         .then(function(response) {
             console.log(response.data);
             
-            dispatch('getPost',data.query);
-            commit('setLoadingStatus','notLoading');
+            // dispatch('getPost',data.query);
+            dispatch('getComs');
+
+            // commit('setLoadingStatus','notLoading');
 
         })
         .catch(function (error) {
@@ -151,50 +179,53 @@ export const postStore ={
         });
     },
 ///////////////////////////////////////////////////////////////////
-    deleteCom({commit, dispatch},data){
+    deleteCom({dispatch},data){
         console.log(data);
-        commit("setLoadingStatus",'loading')
+        // commit("setLoadingStatus",'loading')
 
+        axios.delete('http://localhost:3000/api/com/'+data.id,{
+            headers: {
+                "authorization" : 'Bearer ' + localStorage.getItem('token'),
+                },
+        }) 
+        .then(function(response) {
+            console.log(response.data);
+            
+            // dispatch('getPost',data.query);
+            dispatch('getComs');
 
-            axios.delete('http://localhost:3000/api/com/'+data.id,{
-                headers: {
-                    "authorization" : 'Bearer ' + localStorage.getItem('token'),
-                    },
-            }) 
-            .then(function(response) {
-                console.log(response.data);
-                
-                dispatch('getPost',data.query);
-                commit('setLoadingStatus','notLoading');
+            // commit('setLoadingStatus','notLoading');
 
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
     },
 ///////////////////////////////////////////////////////////////////
-    updateCom({commit, dispatch},data){
+    updateCom({dispatch},data){
         console.log(data);
-        commit("setLoadingStatus",'loading')
+        // commit("setLoadingStatus",'loading')
 
 
-            axios.put('http://localhost:3000/api/com/'+data.id,data.data,{
-                headers: {
-                    "authorization" : 'Bearer ' + localStorage.getItem('token'),
-                    },
-            }) 
-            .then(function(response) {
-                console.log(response.data);
-                
-                dispatch('getPost',data.query);
-                commit('setLoadingStatus','notLoading');
+        axios.put('http://localhost:3000/api/com/'+data.id,data.data,{
+            headers: {
+                "authorization" : 'Bearer ' + localStorage.getItem('token'),
+                },
+        }) 
+        .then(function(response) {
+            console.log(response.data);
+            
+            // dispatch('getPost',data.query);
+            dispatch('getComs');
+            // commit('setLoadingStatus','notLoading');
 
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
     },
 ///////////////////////////////////////////////////////////////////
+
 
 },
 
