@@ -33,7 +33,9 @@
                 :user ='post.User'
                 :content ='post.content' 
                 :attachement ='post.attachement'
-                :id="post.id" />
+                :id="post.id"
+                :query="this.query" />
+
         </div>
                 <!-- :click="showEdit" -->
 
@@ -174,19 +176,6 @@ export default {
             if(confirm('you sure ?')){
                 console.log('delete');
                 this.$store.dispatch('postStore/deletePost',{id:this.post.id,query:this.query});
-
-                // fetch('http://localhost:3000/api/post/'+this.post.id, {
-                //     method : "DELETE",
-                //     headers: {
-                //         "Content-Type": "application/json" ,
-                //         "authorization" : 'Bearer ' + this.token,
-                //         },
-                // }) 
-                // .then(function(res){return res.json();}) 
-                // .then(value => (console.log(value) ))
-                // .catch(function(){
-                //     console.log('erreur de requete');
-                // })
             }
         },
 

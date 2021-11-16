@@ -82,6 +82,28 @@ export const postStore ={
             console.log(error);
         });
     },
+//////////////////////////////////////////////////////////////////
+    updatePost({commit, dispatch},data){
+        console.log(data);
+        commit("setLoadingStatus",'loading')
+
+        axios.put('http://localhost:3000/api/post/'+data.id,data.form,{
+            headers: {
+                 "authorization" : 'Bearer ' + localStorage.getItem('token'),
+                 },
+        }) 
+        .then(function(response) {
+            console.log(response.data);
+            
+            dispatch('getPost',data.query);
+            commit('setLoadingStatus','notLoading');
+
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+        
+    },
 ///////////////////////////////////////////////////////////////////
     deletePost({commit, dispatch},data){
         // console.log(data);
@@ -107,27 +129,27 @@ export const postStore ={
     },
 ///////////////////////////////////////////////////////////////////
 
- newCom({commit, dispatch},data){
+    newCom({commit, dispatch},data){
     console.log(data);
     commit("setLoadingStatus",'loading')
 
 
-    axios.post('http://localhost:3000/api/com/',data.form,{
-        headers: {
-             "authorization" : 'Bearer ' + localStorage.getItem('token'),
-             },
-    }) 
-    .then(function(response) {
-        console.log(response.data);
-        
-        dispatch('getPost',data.query);
-        commit('setLoadingStatus','notLoading');
+        axios.post('http://localhost:3000/api/com/',data.form,{
+            headers: {
+                "authorization" : 'Bearer ' + localStorage.getItem('token'),
+                },
+        }) 
+        .then(function(response) {
+            console.log(response.data);
+            
+            dispatch('getPost',data.query);
+            commit('setLoadingStatus','notLoading');
 
-    })
-    .catch(function (error) {
-        console.log(error);
-    });
- },
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+    },
 ///////////////////////////////////////////////////////////////////
 
 
