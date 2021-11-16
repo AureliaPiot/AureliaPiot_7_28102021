@@ -2,7 +2,7 @@
 
     <div>
         <userProfile/>
-       <getPost :query="'/user/'+this.id" />
+       <getPost :query="'user/'+this.id" />
     </div>
 
 </template>

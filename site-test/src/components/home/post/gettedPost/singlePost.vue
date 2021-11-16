@@ -127,12 +127,9 @@ export default {
 
         },
     created(){     
-   
+
         // validateur like
-        for(let like of this.post.likes){
-            if(like.UserId == this.isCreator)
-            { this.like = true; }
-        }
+
     },
     beforeMounted(){
         },
@@ -141,6 +138,7 @@ export default {
         },
 
     methods:{
+
         getCom(){
             fetch('http://localhost:3000/api/com/post/'+this.post.id, {
                 method : "Get",
@@ -168,9 +166,7 @@ export default {
             this.show = false
             console.log(this.show)
         },
-        saveEdit(){
 
-        },
         savePost(){
             console.log('post edit')
         },

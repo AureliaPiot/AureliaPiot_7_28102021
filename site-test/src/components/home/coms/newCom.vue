@@ -1,20 +1,17 @@
 <template>
+            <div id="newCom" class="newCom">
 
-        <form id="newCom" class="form-inline newCom" enctype="multipart/form-data">
+                <div class="form-group row justify-content-between ">
+                
+                    <img  v-bind:src="this.profilePic" alt="" class="userAvatar">
+                    <input  type="text" class="form-control messageCom" :name="'messageCom'+postId" :id="'messageCom'+postId" placeholder="commentaire..."  v-on:keyup.enter.prevent="submitCom">
 
-
-            <div class="form-group row justify-content-between">
-               
-                <img  v-bind:src="this.profilePic" alt="" class="userAvatar">
-                <input  type="text" class="form-control messageCom" :name="'messageCom'+postId" :id="'messageCom'+postId" placeholder="commentaire...">
-
-                <i class="fas fa-arrow-alt-circle-right submitCom"  v-on:click.prevent="submitCom"></i>
+                    <i class="fas fa-arrow-alt-circle-right submitCom"  v-on:click.prevent="submitCom"></i>
 
 
-            </div>
+                </div>
             
-
-        </form>
+            </div>
         
 </template>
 
@@ -34,7 +31,11 @@ export default {
             profilePic : this.userPP
         }
     },
+    created(){
+
+    },
      methods:{
+
          submitCom(){
             const userId = localStorage.getItem("userId");
             // const token =localStorage.getItem("token"); 
