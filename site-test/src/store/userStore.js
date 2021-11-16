@@ -1,4 +1,5 @@
 import router from "../router/index.js"
+import axios from 'axios'
 
 export const userStore ={
   
@@ -7,37 +8,28 @@ export const userStore ={
   state: {
     // User data
     name: "userStore",
-    localStorage:{
+
+    storage:{
       userId: localStorage.getItem('userId'),
       userRole: localStorage.getItem('role'),
       token: localStorage.getItem('token'),
     },
 
-   
-
-    user:{
-      userId:'',
-      userRole:'',
-      token:'',
-    },
+    user:null,
   },
 
   mutations: {
-    logUser(state,userState){
-      state.user = userState;
-      console.log("logUser");
-      console.log(userState);
-      console.log(state.user.userRole.length);
-      console.log(state.user.userId);
+ 
 
-    },
     setStatus(state,status){
       state.status =status;
-      // (state, status) state = state du store ; status = le parametre envoyé lors de l'appele de la mutation
-      // state.status = on defini le status de notre state (dans le store) avec le parametre status
     },
+    setUser(state,value){
+      state.user = value
+    },
+
     setRole(state,value){
-      state.localStorage.userRole = value
+      state.storage.userRole = value
     }
   },
 
@@ -77,14 +69,13 @@ export const userStore ={
             })
     },//Sign
 
+///////////////////////////////////////////////////////////////////
 
     login: ({commit}, userLogin)=>{
-      // const self = this;
+
       commit('setStatus','loading');
-      // ici commit permet de transmetre des donnée a l'exterieur de la methode/fonction
-      // commit pour envoyer des info a "setStatus"(une fonction), la valeur "loading"
-      console.log('sign');
-      // console.log(userLogin);
+      console.log('login');
+
 
       fetch('http://localhost:3000/api/user/login', {
           method : "Post",
@@ -119,39 +110,39 @@ export const userStore ={
 
 
     },//Login
-    logOut({commit}){
+    logOut(){
       localStorage.clear();
-      commit("logUser",{
-        userId:'',
-        userRole:'',
-        token:'',
-      })
+// commit qui vide les donnée du store
       router.push({name:"Sign"});
-
-
     },
+///////////////////////////////////////////////////////////////////
+
+    getUserData({commit},value){
+      // console.log(value)
+      axios.get('http://localhost:3000/api/user/'+value,{
+                headers: {
+                    "authorization" : 'Bearer ' + localStorage.getItem('token'),
+                    },
+            }) 
+            .then(function(response) {
+                console.log('get user data');
+
+                console.log(response.data);
+                commit('setUser',response.data)
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    },
+///////////////////////////////////////////////////////////////////
 
     changeRole({commit},value){
-
-      commit("setRole",value)
-      
+      commit("setRole",value)   
     }
 
   },
   modules: {
   },
   
-//   plugins: [
-//     createPersistedState({
-//       paths: ['user'],
-//     }),
-//   ],
+
 }
-
-
-// apres avoir indiquer un 'name' dans le state,
-// on peux acceder a ses données dans un composant via:
-//  data(){
-//   return{
-//     data: this.$store.state.name
-// } }

@@ -23,7 +23,7 @@ export default {
     },
        data(){  
        return{
-           role : this.$store.state.userStore.localStorage.role
+           role : this.$store.state.userStore.storage.role
         }
   },
   monted(){

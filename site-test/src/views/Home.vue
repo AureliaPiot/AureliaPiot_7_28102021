@@ -2,7 +2,7 @@
   <div >
     <!-- tentative d'ancre -->
     <!-- <div class=""><a href="#head"><i class="btnUp fas fa-arrow-up"></i></a></div> -->
-      <userTab msg="user"/>
+      <userTab />
  
       <div class="col-xl-5 col-md-8 mx-auto main_elt">
           <router-view/>
@@ -21,10 +21,20 @@ export default {
   components: {
     userTab,
   },
-
   methods:{
-    
-  }
+    getUserData(){
+        this.$store.dispatch('userStore/getUserData',localStorage.getItem('userId'));
+
+    }
+  },
+  computed:{
+    // user(){
+    //   return this.$store.state.userStore.user
+    // }
+  },
+  created(){
+    this.getUserData()
+  },
 }
 </script>
 <style lang="scss" scoped>

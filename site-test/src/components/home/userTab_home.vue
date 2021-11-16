@@ -22,7 +22,7 @@
 export default {
     name:'tab_home',
     props: {
-        msg: String
+  
     },
        data(){  
        return{
@@ -30,31 +30,14 @@ export default {
         }
   },
   computed:{
-      userRole(){
-          return this.$store.state.userStore.localStorage.userRole
-
-      }
 
   },
   methods:{
-    userProfile(){
-        const userId = localStorage.getItem(userId);
-        this.$router.push({ name: 'user', param: userId  })
-    },
     signOut(){
         this.$store.dispatch('userStore/logOut')
     },
   },
-   async beforeCreate(){
-    //    await this.$store.dispatch('userStore/getUserData');
-   },
-    created(){
-        console.log(this.userRole)
 
-        // console.log(this.$store.state.userStore.localStorage.userId)
-        // console.log(this.$store.state.userStore.localStorage.token)
-
-    },
 }
 </script>
 

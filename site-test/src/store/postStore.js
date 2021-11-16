@@ -145,9 +145,8 @@ export const postStore ={
                     },
             }) 
             .then(function(response) {
-                console.log('data get all coms');
-
-                console.log(response.data);
+                // console.log('data get all coms');
+                // console.log(response.data);
                 commit('setComs',response.data);
             })
             .catch(function (error) {

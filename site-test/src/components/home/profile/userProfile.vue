@@ -107,16 +107,11 @@ export default {
     user: String
   },
 created(){
-    // console.log('params  :'+ this.id);
-    // this.getUserData()
 },
    methods:{
  
         getUserData(){
-            // const id =  this.id;
 
-            // console.log('get user data')
-            // console.log(this.$route.params.id)
 
             fetch('http://localhost:3000/api/user/'+this.id, {
                 method : "Get",

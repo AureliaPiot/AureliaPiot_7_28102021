@@ -3,7 +3,7 @@
 
                 <div class="form-group row justify-content-between ">
                 
-                    <img  v-bind:src="this.profilePic" alt="" class="userAvatar">
+                    <img  v-bind:src="getUser.profilePic" alt="" class="userAvatar">
                     <input  type="text" class="form-control messageCom" :name="'messageCom'+postId" :id="'messageCom'+postId" placeholder="commentaire..."  v-on:keyup.enter.prevent="submitCom">
 
                     <i class="fas fa-arrow-alt-circle-right submitCom"  v-on:click.prevent="submitCom"></i>
@@ -28,11 +28,13 @@ export default {
     },
     data(){
         return{
-            profilePic : this.userPP
+
         }
     },
-    created(){
-
+    computed:{
+        getUser(){
+          return this.$store.state.userStore.user
+        }
     },
      methods:{
 
