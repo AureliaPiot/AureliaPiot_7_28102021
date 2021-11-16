@@ -27,8 +27,8 @@
             <div  v-if="!this.editCom" class="content">{{coms.content}}</div>
 
             <div v-if="this.editCom" class="Editcontent">
-                <input  type="text" class="" :name="'editCom'+coms.id" :value="coms.content">
-                <i class="fas fa-arrow-alt-circle-right submitCom"  v-on:click.prevent="submitComEdit"></i>
+                <input  type="text" class="" :name="'editCom'+coms.id" :value="coms.content" v-on:keyup.enter.prevent="submitComEdit(coms.id)">
+                <i class="fas fa-arrow-alt-circle-right submitCom"  v-on:click.prevent="submitComEdit(coms.id)"></i>
                 <!-- <button class="close" @click.prevent="showEditCom" >X</button> -->
             </div>
 
@@ -84,27 +84,15 @@ export default {
             }
         },
 
-        submitComEdit(){
-            // const dataform = new FormData();
-            // dataform.append('content',document.getElementsByName("editCom")[0].value);
-            // dataform.append('content','test');
-            const editData ={
+        submitComEdit(param){
+              const editData ={
                 newContent : document.getElementsByName("editCom"+ this.coms.id)[0].value,
 
             }
+            this.$store.dispatch('postStore/updateCom',{id : param, data:editData , query : this.query});
 
+            this.editCom = false
 
-            fetch('http://localhost:3000/api/com/'+this.coms.id, {
-                method : "Put",
-                headers: { 
-                    "Content-Type": "application/json", 
-                    "authorization" : 'Bearer ' + localStorage.getItem('token'),
-                    },
-                body: JSON.stringify(editData),
-            }) 
-            .then(function(res){return res.json();}) 
-            .then(value => (console.log(value) ))
-            .catch(function(){ console.log('erreur de requete'); })
         },
 
         deleteCom(param){

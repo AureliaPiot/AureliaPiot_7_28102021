@@ -173,6 +173,28 @@ export const postStore ={
             });
     },
 ///////////////////////////////////////////////////////////////////
+    updateCom({commit, dispatch},data){
+        console.log(data);
+        commit("setLoadingStatus",'loading')
+
+
+            axios.put('http://localhost:3000/api/com/'+data.id,data.data,{
+                headers: {
+                    "authorization" : 'Bearer ' + localStorage.getItem('token'),
+                    },
+            }) 
+            .then(function(response) {
+                console.log(response.data);
+                
+                dispatch('getPost',data.query);
+                commit('setLoadingStatus','notLoading');
+
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    },
+///////////////////////////////////////////////////////////////////
 
 },
 
