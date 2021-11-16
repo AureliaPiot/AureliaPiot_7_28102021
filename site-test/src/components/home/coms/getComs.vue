@@ -111,23 +111,11 @@ export default {
             console.log('deleteCom');
             console.log(param);
 
-            fetch('http://localhost:3000/api/com/'+param, {
-                method : "DELETE",
-                headers: { 
-                    "Content-Type": "application/json",
-                    "authorization" : 'Bearer ' + this.token, 
-                },
-            }) 
-            .then(function(res){return res.json(); })    
-            .then(value => (console.log(value.message) ))
-            .catch(function(){console.log('erreur de requete');});
+            this.$store.dispatch('postStore/deleteCom',{id : param, query : this.query});
+
         }
     }
 
-    //  },
-    //  beforeMount(){
-    //     this.getComs()
-    //  }
 }
 </script>
 
