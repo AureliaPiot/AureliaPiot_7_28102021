@@ -143,17 +143,6 @@ created(){
             })
         },//getUsersdata
 
-        // editUserName(){
-        //     console.log('editname')
-        //     if(!this.editName){
-        //         this.editName = true
-        //     }
-        //     else if(this.editName){
-        //         this.editName = false
-        //     }
-
-
-        // },// editUserName
 
         showEditBio(){
              console.log('editbio')
@@ -190,16 +179,8 @@ created(){
             data.append('oldFile',oldFile);
             data.append('file',file);
 
-            this.axios.put('http://localhost:3000/api/user/file/'+this.id ,data, {
-            headers: {
-                    "authorization" : 'Bearer ' + this.token,
-                    },
-            }) 
-            .then(function(res){return res.json();})    
-            .then(value => (console.log(value) ))
-            .catch(function(){console.log('erreur de requete');})
-            
-
+            const form = data;
+            this.$store.dispatch('userStore/UpdateUserProfilePic',{id: this.id, form : form});
             
         },
         getNewBio() {

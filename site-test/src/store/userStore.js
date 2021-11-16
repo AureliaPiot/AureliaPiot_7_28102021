@@ -137,7 +137,7 @@ export const userStore ={
 ///////////////////////////////////////////////////////////////////
 
     UpdateUserBio(_,data){
-      console.log('store update')
+      console.log('user bio update')
       axios.put('http://localhost:3000/api/user/bio/'+data.id,data.form,{
                 headers: {
                     "authorization" : 'Bearer ' + localStorage.getItem('token'),
@@ -152,8 +152,8 @@ export const userStore ={
     },
 ///////////////////////////////////////////////////////////////////
     UpdateUserRole({commit},data){
-    console.log('store update')
-    axios.put('http://localhost:3000/api/user/bio/'+data.id,data.form,{
+    console.log('user role update')
+    axios.put('http://localhost:3000/api/user/role/'+data.id,data.form,{
               headers: {
                   "authorization" : 'Bearer ' + localStorage.getItem('token'),
                   },
@@ -169,10 +169,22 @@ export const userStore ={
           });
     },
 ///////////////////////////////////////////////////////////////////
+    UpdateUserProfilePic(_,data){
+      console.log('user update')
+      axios.put('http://localhost:3000/api/user/file/'+data.id,data.form,{
+                headers: {
+                    "authorization" : 'Bearer ' + localStorage.getItem('token'),
+                    },
+            }) 
+            .then(function(response) {
+              console.log(response.data);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+      },
+///////////////////////////////////////////////////////////////////
 
-    changeRole({commit},value){
-      commit("setRole",value)   
-    }
 
   },
   modules: {
