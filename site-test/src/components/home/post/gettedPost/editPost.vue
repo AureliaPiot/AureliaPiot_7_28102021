@@ -38,7 +38,7 @@ export default {
         return{
             oldFile: this.attachement,
             file : this.attachement,
-            clearFile : null
+            clearFile : false
         }
     },
 
@@ -50,6 +50,7 @@ export default {
          onFileChange(e) {
             const file = e.target.files[0];
             this.file = URL.createObjectURL(file);
+            this.clearFile = false;
             console.log('file')
             console.log(file)
         },

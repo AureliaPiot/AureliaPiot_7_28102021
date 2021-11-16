@@ -144,13 +144,20 @@ exports.update = (req,res) =>{
             console.log('unlink old attachement');
         });
     }
+// si clearFile est true on supprime l'anciene image
+    else if(req.body.clearFile){
+        const filename = oldFile.split("/images/")[1];
+        fs.unlink(`images/${filename}`,()=>{
+            console.log('unlink old attachement');
+        });
+    }
 
-    else if(req.body.file == "undefined" && req.file == undefined && oldFile !== undefined){
-        newFile = oldFile ;
-    }
-    else if(req.body.file == "undefined" && req.file == undefined && oldFile == undefined ){
-        newFile = "null" ;
-    }
+    // else if(req.body.file == "undefined" && req.file == undefined && oldFile !== undefined){
+    //     newFile = oldFile ;
+    // }
+    // else if(req.body.file == "undefined" && req.file == undefined && oldFile == undefined ){
+    //     newFile = "null" ;
+    // }
 
     Posts.update(
         { content : req.body.content,
