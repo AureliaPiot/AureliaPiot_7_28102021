@@ -136,6 +136,25 @@ export const userStore ={
     },
 ///////////////////////////////////////////////////////////////////
 
+    UpdateUserBio({dispatch},data){
+      console.log('store update')
+      axios.put('http://localhost:3000/api/user/bio/'+data.id,data.form,{
+                headers: {
+                    "authorization" : 'Bearer ' + localStorage.getItem('token'),
+                    },
+            }) 
+            .then(function(response) {
+                console.log('get user data');
+
+                console.log(response.data);
+                dispatch('getUserData',data.id)
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    },
+///////////////////////////////////////////////////////////////////
+
     changeRole({commit},value){
       commit("setRole",value)   
     }

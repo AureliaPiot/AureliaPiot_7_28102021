@@ -143,17 +143,18 @@ created(){
             })
         },//getUsersdata
 
-        editUserName(){
-            console.log('editname')
-            if(!this.editName){
-                this.editName = true
-            }
-            else if(this.editName){
-                this.editName = false
-            }
+        // editUserName(){
+        //     console.log('editname')
+        //     if(!this.editName){
+        //         this.editName = true
+        //     }
+        //     else if(this.editName){
+        //         this.editName = false
+        //     }
 
 
-        },// editUserName
+        // },// editUserName
+
         showEditBio(){
              console.log('editbio')
             if(!this.editbio){
@@ -205,26 +206,16 @@ created(){
             const oldBio = this.userBio;
             const bio = document.getElementsByName('newBio')[0].value;
             this.userBio = bio;
+            
             console.log('bio')
             console.log(this.userBio)
             console.log(oldBio)
 
+
             if(oldBio !== bio){
-                console.log('true')
-
-                fetch('http://localhost:3000/api/user/bio/'+this.id, {
-                method : "Put",
-                headers: { 
-                    "Content-Type": "application/json",
-                    "authorization" : 'Bearer ' + this.token, 
-                },
-                body: JSON.stringify({bio : bio}),
-                }) 
-                .then(function(res){return res.json();})    
-                .then(value => (console.log(value), this.editbio = false))
-                .catch(function(){console.log('erreur de requete');})
+                this.$store.dispatch('userStore/UpdateUserBio',{id: this.id, form : bio});
+                this.editbio = false
             }
-
         },
         getRole(){
             console.log('change role');
