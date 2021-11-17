@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="profil-card">
+        <div class="profil-card" v-if="loading">
 
             <div class="card-head">
                 <p class="deleteUser text-center m-0 text-danger" v-if="this.isUser == this.userId" @click="deleteCompte">delete</p>
@@ -24,6 +24,7 @@
                     <div  v-if="editPic" class="newpp">
                         <form id="newPP">
                             <input id="file" type="file" name="profilePic"  accept=".jpg, .jpeg, .png" v-on:change="this.getNewPic">
+                            <button class="btn btn-danger" @click.prevent="this.deletePic">delete pic</button>
                         </form>
                     </div>
                 </div>
@@ -106,6 +107,11 @@ export default {
   props: {
     user: String
   },
+  computed:{
+loading(){
+    return this.$store.state.userStore.loading
+}
+  },
 created(){
 },
    methods:{
@@ -181,8 +187,27 @@ created(){
 
             const form = data;
             this.$store.dispatch('userStore/UpdateUserProfilePic',{id: this.id, form : form});
+                // this.editPic = false
             
         },
+        deletePic() {
+            const oldFile = this.profilePic;
+            console.log('file')
+
+            const file = 'clear';
+            this.profilePic = 'http://localhost:3000/images/defaultPic/default.jpg';
+
+
+            const data = new FormData();
+            data.append('oldFile',oldFile);
+            data.append('file',file);
+
+            // const form = data;
+            this.$store.dispatch('userStore/UpdateUserDeletePic',{id: this.id, form : {oldFile: oldFile, newFile: "clear"}});
+                // this.editPic = false
+            
+        },
+
         getNewBio() {
             const oldBio = this.userBio;
             const bio = document.getElementsByName('newBio')[0].value;

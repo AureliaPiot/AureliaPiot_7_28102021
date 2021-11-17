@@ -223,9 +223,40 @@ exports.updateFile = (req,res)=>{
       .then(() => res.status(200).send({message: 'user modifié'}))
       .catch(err=> { res.status(404).send({message: err.message || " error canot update post"}) });
 
-      
-      
-    
+          
+};
+// [delete file]//////////////////////////////////////////////////////
+
+exports.deleteFile = (req,res)=>{
+  console.log('update user delete File---------------------------------');
+  const id = req.params.id;
+
+  console.log(id);
+  console.log(req.body);
+
+  const oldFile = req.body.oldFile;
+  const newFile = `${req.protocol}://${req.get('host')}/images/defaultPic/default.jpg` ;
+
+  const oldFilename = oldFile.split("/images/")[1];
+  console.log(oldFilename);
+
+    // if(filename !== oldFile){
+      if( oldFilename !=="defaultPic/default.jpg"){
+        console.log('can delete file');
+
+      fs.unlink(`images/${oldFilename}`,()=>{
+        console.log('unlink old profilePic');
+        
+      });
+    }//if
+
+    Users.update({"profilePic": newFile},
+    {where : {id: req.params.id} }
+    )
+    .then(() => res.status(200).send({message: 'user modifié'}))
+    .catch(err=> { res.status(404).send({message: err.message || " error canot update post"}) });
+
+        
 };
 // [UPDATE BIO]//////////////////////////////////////////////////////
 

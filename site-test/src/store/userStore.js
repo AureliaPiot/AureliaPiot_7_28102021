@@ -8,7 +8,7 @@ export const userStore ={
   state: {
     // User data
     name: "userStore",
-
+    loading: true,
     storage:{
       userId: localStorage.getItem('userId'),
       userRole: localStorage.getItem('role'),
@@ -19,7 +19,9 @@ export const userStore ={
   },
 
   mutations: {
- 
+  setLoad(state,value){
+    state.loading = value
+    },
 
     setStatus(state,status){
       state.status =status;
@@ -151,7 +153,7 @@ export const userStore ={
             });
     },
 ///////////////////////////////////////////////////////////////////
-    UpdateUserRole({commit},data){
+    UpdateUserRole({commit,dispatch},data){
     console.log('user role update')
     axios.put('http://localhost:3000/api/user/role/'+data.id,data.form,{
               headers: {
@@ -162,6 +164,12 @@ export const userStore ={
             console.log(response.data);
             localStorage.setItem('role', data.form.role),
             commit("setRole",data.form.role) 
+            dispatch('getUserData',data.id)
+            dispatch('postStore/getPost','user/'+data.id,{root:true})
+            dispatch('postStore/getComs', null, {root:true})
+
+
+
 
           })
           .catch(function (error) {
@@ -169,7 +177,7 @@ export const userStore ={
           });
     },
 ///////////////////////////////////////////////////////////////////
-    UpdateUserProfilePic(_,data){
+    UpdateUserProfilePic({dispatch},data){
       console.log('user update')
       axios.put('http://localhost:3000/api/user/file/'+data.id,data.form,{
                 headers: {
@@ -178,13 +186,42 @@ export const userStore ={
             }) 
             .then(function(response) {
               console.log(response.data);
+            dispatch('getUserData',data.id);
+            dispatch('postStore/getPost','user/'+data.id,{root:true})
+          dispatch('postStore/getComs', null, {root:true})
+
+
+
             })
             .catch(function (error) {
                 console.log(error);
             });
       },
 ///////////////////////////////////////////////////////////////////
+UpdateUserDeletePic({dispatch ,commit},data){
+  commit('setLoad',false)
 
+  console.log('user update')
+  axios.put('http://localhost:3000/api/user/delete/file/'+data.id,data.form,{
+            headers: {
+                "authorization" : 'Bearer ' + localStorage.getItem('token'),
+                },
+        }) 
+        .then(function(response) {
+          console.log(response.data);
+          commit('setLoad',true)
+
+          dispatch('getUserData',data.id);
+          dispatch('postStore/getPost','user/'+data.id,{root:true})
+          dispatch('postStore/getComs', null, {root:true})
+
+
+
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+  },
 
   },
   modules: {
