@@ -10,7 +10,7 @@
                 <p class="date"> {{Date(post.createDate).toString().slice(0,16)}}</p>
             </div>
             <div class="editPost"  v-if="this.isCreator == this.UserId || this.isAdmin ">
-                <button class="btn edit " v-if="this.isCreator == this.UserId" @click.prevent="showEdit"><i class="fas fa-pen text-white"></i></button>
+                <button class="btn edit " v-if="this.isCreator == this.UserId && this.UserRole !== 'mute'" @click.prevent="showEdit"><i class="fas fa-pen text-white"></i></button>
                 <!-- ouvre affiche un composant qui recupere les donnéés dans le form  /comme une fenetre alert?-->
                 <button class="btn delete " @click.prevent="deletePost"><i class="fas fa-trash text-white"></i></button>
                 <!-- ouvre affiche un composant qui recupere les donnéés dans le form -->
@@ -89,6 +89,8 @@ export default {
             token : localStorage.getItem("token"),
             isCreator :localStorage.getItem('userId'),
             isAdmin: localStorage.getItem('role') == "admin",
+            role: localStorage.getItem('role'),
+
 
             show : false,
             like :false,
@@ -118,10 +120,14 @@ export default {
         }  
     },
     beforeCreate(){
-
         },
     created(){     
-
+        for(let like of this.post.likes){
+            if(like.UserId == this.isCreator)
+            {
+                this.like = true;
+            }
+        }
     },
     beforeMounted(){
         },
@@ -151,50 +157,57 @@ export default {
         },
 
         addLike(){
-            if(!this.like){
-                this.Postlikes ++;
-                    console.log('like');
-                const data ={
-                    UserId:this.isCreator,
-                    postId:this.post.id
+            if(this.role == 'mute')
+            {
+                console.log('action non autorisée')
+            }
+            else{
+                if(!this.like){
+                    this.Postlikes ++;
+                        console.log('like');
+                    const data ={
+                        UserId:this.isCreator,
+                        postId:this.post.id
+                    }
+
+                    fetch('http://localhost:3000/api/like/post', {
+                        method : "POST",
+                        headers: {
+                            "Content-Type": "application/json" ,
+                            "authorization" : 'Bearer ' + this.token,
+                            },
+                        body: JSON.stringify(data),
+
+                    }) 
+                    .then(function(res){return res.json();}) 
+                    .then(value =>(
+                        console.log(value),
+                        this.like = true
+                    ))
+                    .catch(function(){
+                        console.log('erreur de requete');
+                    })
                 }
+                if(this.like){
+                    this.Postlikes --;
 
-                fetch('http://localhost:3000/api/like/post', {
-                    method : "POST",
-                    headers: {
-                        "Content-Type": "application/json" ,
-                        "authorization" : 'Bearer ' + this.token,
-                        },
-                    body: JSON.stringify(data),
-
-                }) 
-                .then(function(res){return res.json();}) 
-                .then(value =>(
-                    console.log(value),
-                    this.like = true
-                ))
-                .catch(function(){
-                    console.log('erreur de requete');
-                })
+                    console.log('unlike');
+                        // this.like = false
+                    fetch('http://localhost:3000/api/like/'+this.post.id+'/'+this.isCreator, {
+                        method : "DELETE",
+                        headers: {
+                            "Content-Type": "application/json" ,
+                            "authorization" : 'Bearer ' + this.token,
+                            },
+                    }) 
+                    .then(function(res){return res.json();}) 
+                    .then(value =>(console.log(value),this.like = false ))
+                    .catch(function(){
+                        console.log('erreur de requete');
+                    })
+                }
             }
-            if(this.like){
-                this.Postlikes --;
 
-                console.log('unlike');
-                    // this.like = false
-                fetch('http://localhost:3000/api/like/'+this.post.id+'/'+this.isCreator, {
-                    method : "DELETE",
-                    headers: {
-                        "Content-Type": "application/json" ,
-                        "authorization" : 'Bearer ' + this.token,
-                        },
-                }) 
-                .then(function(res){return res.json();}) 
-                .then(value =>(console.log(value),this.like = false ))
-                .catch(function(){
-                    console.log('erreur de requete');
-                })
-            }
         },
     },//methods
 

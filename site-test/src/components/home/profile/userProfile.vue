@@ -5,7 +5,12 @@
 
             <div class="card-head">
                 <p class="deleteUser text-center m-0 text-danger" v-if="this.isUser == userData.id" @click="deleteCompte">delete</p>
-                <h2> {{userData.nom}} {{userData.prenom}} <i class="fas fa-crown"  v-if="userData.role == 'admin'" ></i></h2>
+                <h2> 
+                    {{userData.nom}} 
+                    {{userData.prenom}} 
+                    <i class="fas fa-crown"  v-if="userData.role == 'admin'" ></i>
+                    <i class="fas fa-comment-slash" v-if="userData.role == 'mute'"></i>
+                    </h2>
             </div>
             <div class="card-left">
                     <img  class="pic" :src="userData.profilePic" :alt="userData.nom">
@@ -104,14 +109,14 @@ export default {
         return this.$store.state.userStore.loading
     },
     userData(){
-        console.log(this.$store.state.userStore.user)
-      return this.$store.state.userStore.user
+        console.log('user profile')
+        return this.$store.state.userStore.userProfile
     }
   },
+  beforeCreate(){
+    this.$store.dispatch('userStore/getUserProfile',this.$route.params.id);
+  },
    methods:{
-
-    
-
         showEditBio(){
              console.log('editbio')
             if(!this.editbio){

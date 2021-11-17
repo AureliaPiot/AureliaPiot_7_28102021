@@ -16,6 +16,8 @@ export const userStore ={
     },
 
     user:null,
+    userProfile:null,
+
   },
 
   mutations: {
@@ -28,6 +30,9 @@ export const userStore ={
     },
     setUser(state,value){
       state.user = value
+    },
+    setUserProfile(state,value){
+      state.userProfile = value
     },
 
     setRole(state,value){
@@ -127,7 +132,26 @@ export const userStore ={
             });
     },
 ///////////////////////////////////////////////////////////////////
+  getUserProfile({commit},value){
+    console.log('getProfile')
 
+    console.log(value)
+    axios.get('http://localhost:3000/api/user/'+value,{
+              headers: {
+                  "authorization" : 'Bearer ' + localStorage.getItem('token'),
+                  },
+          }) 
+          .then(function(response) {
+              console.log('get user profile');
+
+              console.log(response.data);
+              commit('setUserProfile',response.data)
+          })
+          .catch(function (error) {
+              console.log(error);
+          });
+  },
+///////////////////////////////////////////////////////////////////
     UpdateUserBio({dispatch},data){
       console.log('user bio update')
       axios.put('http://localhost:3000/api/user/bio/'+data.id,data.form,{

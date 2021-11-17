@@ -4,7 +4,7 @@
                 <div class="form-group row justify-content-between ">
                 
                     <img  v-bind:src="getUser.profilePic" alt="" class="userAvatar">
-                    <input  type="text" class="form-control messageCom" :name="'messageCom'+postId" :id="'messageCom'+postId" placeholder="commentaire..."  v-on:keyup.enter.prevent="submitCom">
+                    <input  type="text" class="form-control messageCom" :name="'messageCom'+postId" :id="'messageCom'+postId" placeholder="commentaire..."  v-on:keyup.enter.prevent="submitCom" :disabled="getUser.role =='mute' ? true : false">
 
                     <i class="fas fa-arrow-alt-circle-right submitCom"  v-on:click.prevent="submitCom"></i>
 

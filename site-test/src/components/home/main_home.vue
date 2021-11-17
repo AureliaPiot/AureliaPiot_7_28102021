@@ -22,19 +22,10 @@ export default {
         msg: String
     },
        data(){  
-       return{
-           role : this.$store.state.userStore.storage.role
-        }
-  },
-  monted(){
-      console.log('test state Store');
-      console.log(this.$store.userStore.state.user)
-      
-
-  },
-  methods:{
-
-      }
+        return{
+            role : localStorage.getItem('role')
+            }
+        },
   }
 
 
