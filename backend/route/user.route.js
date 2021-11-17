@@ -2,7 +2,8 @@ const express = require("express");
 const router = express.Router();
 const userCtrl = require("../controller/user.controller.js");
 const multer = require("../middleware/multer-config.js");
-const test = require("../middleware/test.js");
+const auth =require("../middleware/auth.js")
+
 
 
 
@@ -14,21 +15,21 @@ router.post('/login',userCtrl.login)
 
 
 // get all
-router.get('/',userCtrl.findAll);
+router.get('/',auth.connect,userCtrl.findAll);
 
 // get one 
-router.get('/:id',userCtrl.findOne);
+router.get('/:id',auth.connect,userCtrl.findOne);
 
 // update with id
-router.put('/file/:id',test,multer,userCtrl.updateFile);
-router.put('/delete/file/:id',test,userCtrl.deleteFile);
+router.put('/file/:id',auth.connect,multer,userCtrl.updateFile);
+router.put('/delete/file/:id',auth.connect,userCtrl.deleteFile);
 
-router.put('/bio/:id',userCtrl.update);
-router.put('/role/:id',userCtrl.update);
+router.put('/bio/:id',auth.connect,userCtrl.update);
+router.put('/role/:id',auth.connect,userCtrl.update);
 
 
 // delete whit id
-router.delete('/:id',userCtrl.delete);
+router.delete('/:id',auth.connect,userCtrl.delete);
 
 // fin url
 // app.use('api/user')

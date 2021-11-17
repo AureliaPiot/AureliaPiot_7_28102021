@@ -1,8 +1,10 @@
 <template>
 
     <nav class="navbar " id="head">
+        <router-link to="/home">
+            <span class="navbar-brand mb-0 h1"><img class="logo" src="../../assets/logo/icon-left-font-monochrome-black.svg" alt="Groupomania"> </span>
+        </router-link>
       
-        <span class="navbar-brand mb-0 h1"><img class="logo" src="../../assets/logo/icon-left-font-monochrome-black.svg" alt="Groupomania"> </span>
 
         
         <div class="link-group">
