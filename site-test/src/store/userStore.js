@@ -10,9 +10,9 @@ export const userStore ={
     name: "userStore",
     loading: true,
     storage:{
-      userId: localStorage.getItem('userId'),
-      userRole: localStorage.getItem('role'),
-      token: localStorage.getItem('token'),
+      userId: null,
+      userRole: null,
+      token: null
     },
 
     user:null,
@@ -35,9 +35,9 @@ export const userStore ={
       state.userProfile = value
     },
 
-    setRole(state,value){
-      state.storage.userRole = value
-    }
+    // setRole(state,value){
+    //   state.storage.userRole = value
+    // }
   },
 
 
@@ -170,7 +170,7 @@ export const userStore ={
             });
     },
 ///////////////////////////////////////////////////////////////////
-    UpdateUserRole({commit,dispatch},data){
+    UpdateUserRole({dispatch},data){
     console.log('user role update')
     axios.put('http://localhost:3000/api/user/role/'+data.id,data.form,{
               headers: {
@@ -179,9 +179,11 @@ export const userStore ={
           }) 
           .then(function(response) {
             console.log(response.data);
-            localStorage.setItem('role', data.form.role),
-            commit("setRole",data.form.role) 
-            dispatch('getUserData',data.id)
+            // commit("setRole",data.form.role) 
+            if(data.id == localStorage.getItem('userId')){
+              localStorage.setItem('role', data.form.role)
+            }
+            dispatch('getUserProfile',data.id)
             dispatch('postStore/getPost','user/'+data.id,{root:true})
             dispatch('postStore/getComs', null, {root:true})
 

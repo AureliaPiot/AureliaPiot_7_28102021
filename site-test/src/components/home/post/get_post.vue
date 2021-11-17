@@ -55,16 +55,7 @@ export default {
 
         
     },
-    // async beforeCreate(){
-    //    await this.$store.dispatch('postStore/getPost',this.query);
-    // },
-    
-    created(){
-         },
-    beforeMount(){
-    },
-    mounted(){
-    }
+
 
 }
 </script>
