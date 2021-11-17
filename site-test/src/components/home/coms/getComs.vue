@@ -17,7 +17,7 @@
                 </router-link>
                 <p class="comDate">{{coms.createDate.substring(0,10)}}</p>
                 <div class="editPost"  v-if="isCreator == coms.User.id  || isAdmin  ">
-                    <i class="fas fa-pen iconEdit edit" v-if="coms.User.role !=='mute'" @click.prevent="showEditCom"></i>
+                    <i class="fas fa-pen iconEdit edit" v-if="this.isCreator == coms.User.id" @click.prevent="showEditCom"></i>
                     <i class="fas fa-trash iconEdit delete" @click.prevent="deleteCom(coms.id)"></i>
                     <!-- <button class="btn edit" @click.prevent="showEditCom"><i class="fas fa-pen text-white"></i></button>
                     <button class="btn delete" @click.prevent="deleteCom"><i class="fas fa-trash text-white"></i></button> -->
@@ -55,8 +55,9 @@ export default {
         coms: Object,
         // userPP :String,
         postId : Number,
-        isCreator : String,
+        isCreator : Number,
         isAdmin : Boolean,
+     
 
         query: String
 
