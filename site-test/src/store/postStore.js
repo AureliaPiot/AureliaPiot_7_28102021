@@ -224,6 +224,42 @@ export const postStore ={
         });
     },
 ///////////////////////////////////////////////////////////////////
+addLike(_,data){
+    console.log('add like')
+    console.log(data)
+
+    axios.post('http://localhost:3000/api/like/post',data,{
+              headers: {
+                  "Content-Type": "application/json" ,
+                  "authorization" : 'Bearer ' + localStorage.getItem('token'),
+                  },
+          }) 
+          .then(function(response) {
+            console.log(response.data);
+          })
+          .catch(function (error) {
+              console.log(error);
+          });
+    },
+  ///////////////////////////////////////////////////////////////////
+  unLike(_,data){
+    console.log('un like')
+    console.log(data)
+
+    axios.delete('http://localhost:3000/api/like/'+data.id+'/'+data.form,{
+              headers: {
+                  "Content-Type": "application/json" ,
+                  "authorization" : 'Bearer ' + localStorage.getItem('token'),
+                  },
+          }) 
+          .then(function(response) {
+            console.log(response.data);
+          })
+          .catch(function (error) {
+              console.log(error);
+          });
+  }
+  
 
 
 },

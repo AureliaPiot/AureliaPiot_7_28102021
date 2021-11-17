@@ -147,7 +147,7 @@ export default {
         },
 
         savePost(){
-            console.log('post edit')
+            console.log('pos edit')
         },
         deletePost(){
             if(confirm('you sure ?')){
@@ -169,42 +169,21 @@ export default {
                         UserId:this.isCreator,
                         postId:this.post.id
                     }
+                this.$store.dispatch('postStore/addLike',data);
 
-                    fetch('http://localhost:3000/api/like/post', {
-                        method : "POST",
-                        headers: {
-                            "Content-Type": "application/json" ,
-                            "authorization" : 'Bearer ' + this.token,
-                            },
-                        body: JSON.stringify(data),
+                    this.like = true
+                    return
 
-                    }) 
-                    .then(function(res){return res.json();}) 
-                    .then(value =>(
-                        console.log(value),
-                        this.like = true
-                    ))
-                    .catch(function(){
-                        console.log('erreur de requete');
-                    })
                 }
                 if(this.like){
                     this.Postlikes --;
 
                     console.log('unlike');
-                        // this.like = false
-                    fetch('http://localhost:3000/api/like/'+this.post.id+'/'+this.isCreator, {
-                        method : "DELETE",
-                        headers: {
-                            "Content-Type": "application/json" ,
-                            "authorization" : 'Bearer ' + this.token,
-                            },
-                    }) 
-                    .then(function(res){return res.json();}) 
-                    .then(value =>(console.log(value),this.like = false ))
-                    .catch(function(){
-                        console.log('erreur de requete');
-                    })
+
+                    this.$store.dispatch('postStore/unLike',{id: this.post.id, form :this.isCreator });
+                    this.like = false 
+
+
                 }
             }
 
