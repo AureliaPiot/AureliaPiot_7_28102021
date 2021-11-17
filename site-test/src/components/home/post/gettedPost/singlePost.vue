@@ -176,7 +176,7 @@ export default {
 
                 }
                 if(this.like){
-                    this.Postlikes --;
+                    this.Postlikes --;1
 
                     console.log('unlike');
 
