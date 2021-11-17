@@ -55,7 +55,7 @@ export default {
         coms: Object,
         // userPP :String,
         postId : Number,
-        isCreator : Number,
+        isCreator : String,
         isAdmin : Boolean,
      
 

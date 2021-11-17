@@ -201,6 +201,8 @@ export const userStore ={
             }) 
             .then(function(response) {
               console.log(response.data);
+
+            dispatch('getUserData',data.id);
             dispatch('getUserProfile',data.id);
             dispatch('postStore/getPost','user/'+data.id,{root:true})
             dispatch('postStore/getComs', null, {root:true})
@@ -223,6 +225,8 @@ export const userStore ={
             .then(function(response) {
               console.log(response.data);
               commit('setLoad',true)
+
+              dispatch('getUserData',data.id);
 
               dispatch('getUserProfile',data.id);
               dispatch('postStore/getPost','user/'+data.id,{root:true})
