@@ -13,11 +13,14 @@ const helmet = require("helmet");
 //   console.log("Drop and re-sync db.");
 // });
 
+// pour  synchoniser les tables par rapport aux model------
+
 // db.sequelize.sync();
 
 // pour deamrrer le back-----
 
 // nodemon --exec 'node -r dotenv/config server.js'
+
 app.use(express.json());
 
 app.use(helmet());
