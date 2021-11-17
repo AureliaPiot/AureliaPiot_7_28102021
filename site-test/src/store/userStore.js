@@ -138,7 +138,7 @@ export const userStore ={
     },
 ///////////////////////////////////////////////////////////////////
 
-    UpdateUserBio(_,data){
+    UpdateUserBio({dispatch},data){
       console.log('user bio update')
       axios.put('http://localhost:3000/api/user/bio/'+data.id,data.form,{
                 headers: {
@@ -147,6 +147,8 @@ export const userStore ={
             }) 
             .then(function(response) {
                 console.log(response.data);
+                dispatch('getUserData',data.id)
+
             })
             .catch(function (error) {
                 console.log(error);
@@ -198,30 +200,48 @@ export const userStore ={
             });
       },
 ///////////////////////////////////////////////////////////////////
-UpdateUserDeletePic({dispatch ,commit},data){
-  commit('setLoad',false)
+    UpdateUserDeletePic({dispatch ,commit},data){
+      commit('setLoad',false)
 
-  console.log('user update')
-  axios.put('http://localhost:3000/api/user/delete/file/'+data.id,data.form,{
-            headers: {
-                "authorization" : 'Bearer ' + localStorage.getItem('token'),
-                },
-        }) 
-        .then(function(response) {
-          console.log(response.data);
-          commit('setLoad',true)
+      console.log('user update')
+      axios.put('http://localhost:3000/api/user/delete/file/'+data.id,data.form,{
+                headers: {
+                    "authorization" : 'Bearer ' + localStorage.getItem('token'),
+                    },
+            }) 
+            .then(function(response) {
+              console.log(response.data);
+              commit('setLoad',true)
 
-          dispatch('getUserData',data.id);
-          dispatch('postStore/getPost','user/'+data.id,{root:true})
-          dispatch('postStore/getComs', null, {root:true})
+              dispatch('getUserData',data.id);
+              dispatch('postStore/getPost','user/'+data.id,{root:true})
+              dispatch('postStore/getComs', null, {root:true})
 
 
 
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
-  },
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+      },
+///////////////////////////////////////////////////////////////////
+
+    deleteUser({dispatch},data){
+      console.log('delete user')
+      axios.delete('http://localhost:3000/api/user/'+data.id,{
+                headers: {
+                    "authorization" : 'Bearer ' + localStorage.getItem('token'),
+                    },
+            }) 
+            .then(function(response) {
+              console.log(response.data);
+              dispatch('logOut');
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+      },
+  ///////////////////////////////////////////////////////////////////
 
   },
   modules: {

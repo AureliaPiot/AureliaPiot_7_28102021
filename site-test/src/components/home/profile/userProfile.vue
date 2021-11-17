@@ -1,24 +1,25 @@
 <template>
     <div>
-        <div class="profil-card" v-if="loading">
+        <!-- <p> {{userData}} </p> -->
+        <div class="profil-card" v-if="userData != null">
 
             <div class="card-head">
-                <p class="deleteUser text-center m-0 text-danger" v-if="this.isUser == this.userId" @click="deleteCompte">delete</p>
-                <h2> {{userName}} {{userPrenom}} <i class="fas fa-crown"  v-if="this.userRole == 'admin'" ></i></h2>
+                <p class="deleteUser text-center m-0 text-danger" v-if="this.isUser == userData.id" @click="deleteCompte">delete</p>
+                <h2> {{userData.nom}} {{userData.prenom}} <i class="fas fa-crown"  v-if="userData.role == 'admin'" ></i></h2>
             </div>
             <div class="card-left">
-                    <img  class="pic" :src="this.profilePic" :alt="this.userName">
+                    <img  class="pic" :src="userData.profilePic" :alt="userData.nom">
             </div>
             <div class="card-right">
                 <p>Description :</p>
                 <div v-if="!editbio" class="userBio">
-                    {{userBio}}
+                    {{userData.bio}}
                 </div>
 
-                <input v-if="editbio" type="textarea" class="userBio eBio" rows="3" name="newBio" :value="this.userBio" v-on:change="this.getNewBio">
+                <input v-if="editbio" type="textarea" class="userBio eBio" rows="3" name="newBio" :value="userData.bio" v-on:change="this.getNewBio">
             </div>
             <!-- <div v-if="this.isUser == this.userId" class="d-flex editpart"> -->
-                <div  v-if="this.isUser == this.userId" class="col editPp">
+                <div  v-if="this.isUser == userData.id" class="col editPp">
                     <button @click="showEditPP">edit profile pic</button>
 
                     <div  v-if="editPic" class="newpp">
@@ -29,28 +30,28 @@
                     </div>
                 </div>
 
-                <div v-if="this.isUser == this.userId" class="col editBio">
+                <div v-if="this.isUser == userData.id" class="col editBio">
                     <button @click="showEditBio">edit bio</button>
                 </div>
 
                 <div v-if="this.isAdmin" class="editRole">
                     <p>Role</p>
                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="role" id="roleMute" value="mute" :checked="this.userRole == 'mute'" @change="getRole" v-model="this.newRole">
+                        <input class="form-check-input" type="radio" name="role" id="roleMute" value="mute" :checked="userData.role == 'mute'" @change="getRole" v-model="this.newRole">
                         <label class="form-check-label" for="roleMute">
                             Mute
                         </label>
                    </div>
                    
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="role" id="roleUser" value="user" :checked="this.userRole == 'user'" @change="getRole" v-model="this.newRole">
+                        <input class="form-check-input" type="radio" name="role" id="roleUser" value="user" :checked="userData.role == 'user'" @change="getRole" v-model="this.newRole">
                         <label class="form-check-label" for="roleUser">
                             User
                         </label>
                     </div>
 
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="role" id="roleAdmin" value="admin"  :checked="this.userRole == 'admin'" @change="getRole" v-model="this.newRole">
+                        <input class="form-check-input" type="radio" name="role" id="roleAdmin" value="admin"  :checked="userData.role == 'admin'" @change="getRole" v-model="this.newRole">
                         <label class="form-check-label" for="roleAdmin">
                             Admin
                         </label>
@@ -85,16 +86,7 @@ export default {
 
 
             id :  this.$route.params.id,
-            userData :null,
-            profilePic: null,
-
-            userId:null,
-            userName:null,
-            userPrenom:null,
-            userBio:null,
-            userEmail:null,
-            userRole:null,
-
+            
             editPp:null,
             editbio:null,
  
@@ -108,47 +100,17 @@ export default {
     user: String
   },
   computed:{
-loading(){
-    return this.$store.state.userStore.loading
-}
+    loading(){
+        return this.$store.state.userStore.loading
+    },
+    userData(){
+        console.log(this.$store.state.userStore.user)
+      return this.$store.state.userStore.user
+    }
   },
-created(){
-},
    methods:{
- 
-        getUserData(){
 
-
-            fetch('http://localhost:3000/api/user/'+this.id, {
-                method : "Get",
-                headers: { 
-                    "Content-Type": "application/json",
-                    "authorization" : 'Bearer ' + this.token, 
-                },
-            }) 
-            .then(function(res){
-                return res.json();
-            })    
-            .then(value => (
-                this.userData = value,
-                this.userId=value.id,
-                this.userName = value.nom,
-                this.userPrenom = value.prenom,
-                this.userEmail = value.email,
-                this.userRole = value.role,
-                this.userBio = value.bio,
-
-
-
-                this. profilePic=value.profilePic 
-                // ,console.log(this.userData)
-                ))
-
-            .catch(function(){
-                console.log('erreur de requete');
-            })
-        },//getUsersdata
-
+    
 
         showEditBio(){
              console.log('editbio')
@@ -169,12 +131,10 @@ created(){
             }
         },
         getNewPic(e) {
-            const oldFile = this.profilePic;
+            const oldFile = this.userData.profilePic;
             console.log('oldFile')
             console.log(oldFile)
 
-
-            console.log('file')
 
             const file = e.target.files[0];
             this.profilePic = URL.createObjectURL(file);
@@ -187,42 +147,28 @@ created(){
 
             const form = data;
             this.$store.dispatch('userStore/UpdateUserProfilePic',{id: this.id, form : form});
-                // this.editPic = false
+
             
         },
         deletePic() {
-            const oldFile = this.profilePic;
-            console.log('file')
-
+            const oldFile = this.userData.profilePic;
             const file = 'clear';
-            this.profilePic = 'http://localhost:3000/images/defaultPic/default.jpg';
-
 
             const data = new FormData();
             data.append('oldFile',oldFile);
             data.append('file',file);
 
-            // const form = data;
             this.$store.dispatch('userStore/UpdateUserDeletePic',{id: this.id, form : {oldFile: oldFile, newFile: "clear"}});
-                // this.editPic = false
-            
+         
         },
 
         getNewBio() {
-            const oldBio = this.userBio;
             const bio = document.getElementsByName('newBio')[0].value;
-            this.userBio = bio;
-            
-            console.log('bio')
-            console.log(this.userBio)
-            console.log(oldBio)
 
-
-            if(oldBio !== bio){
-                this.$store.dispatch('userStore/UpdateUserBio',{id: this.id, form : {bio : bio}});
-                this.editbio = false
-            }
+            this.$store.dispatch('userStore/UpdateUserBio',{id: this.id, form : {bio : bio}});
+            this.editbio = false
         },
+        
         getRole(){
             console.log('change role');
             console.log(this.newRole)
@@ -234,19 +180,7 @@ created(){
             console.log('delete compte');
            if(confirm('you sure ?')){
             console.log('okay');
-
-            fetch('http://localhost:3000/api/user/'+this.id, {
-                method : "Delete",
-                headers: { 
-                    "Content-Type": "application/json",
-                    "authorization" : 'Bearer ' + this.token, 
-                }
-            })
-            .then(function(res){return res.json()})    
-            .then(value => (console.log(value)),
-            this.$store.dispatch('userStore/logOut'))
-            .catch(function(){console.log('erreur de requete')})
-
+            this.$store.dispatch('userStore/deleteUser',{id: this.id});
            }//if
 
         }//delete compte
@@ -257,9 +191,7 @@ created(){
 
 
     },//methods
-    beforeMount(){
-        this.getUserData();
-    },
+ 
   
 }
 
