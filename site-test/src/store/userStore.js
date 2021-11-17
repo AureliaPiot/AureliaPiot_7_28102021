@@ -38,14 +38,8 @@ export const userStore ={
 
   actions: {
     Sign: ({dispatch}, userSign)=>{
-
-      // {commit} si on veut effectuer une mutation
-      // {dispatch} si on veut effectuer une action 
-      // 'userSign' est la denomination de l'objet recus
-      // puis on ecrits l'action que l'on veux executé
       console.log('Sign');
-      console.log(userSign);
-      
+
             fetch('http://localhost:3000/api/user/sign', {
                 method : "Post",
                 headers: { "Content-Type": "application/json" },
@@ -60,10 +54,6 @@ export const userStore ={
                    console.log('userSign');
                   console.log(userSign.email);
 
-                  // this.login({
-                  //   email : userSign.email,
-                  //   password : userSign.password
-                  // })
                 dispatch('login', {email : userSign.email, password : userSign.password})                  
             })
             .catch(function(){
@@ -91,15 +81,12 @@ export const userStore ={
           if(value.token){
               console.log(value);
 
-              commit("logUser",value)
-
               localStorage.setItem("token",value.token);
               localStorage.setItem("userId",value.userId);
               localStorage.setItem("role",value.userRole);
 
               router.push("home");
 
-              // self.$router.go('/home');
               console.log("connexion autoriser");
               return
           }
@@ -110,13 +97,16 @@ export const userStore ={
           console.log('erreur de connexion');
       })
 
-
     },//Login
+
+///////////////////////////////////////////////////////////////////
+
     logOut(){
       localStorage.clear();
 // commit qui vide les donnée du store
       router.push({name:"Sign"});
     },
+
 ///////////////////////////////////////////////////////////////////
 
     getUserData({commit},value){
@@ -170,9 +160,6 @@ export const userStore ={
             dispatch('postStore/getPost','user/'+data.id,{root:true})
             dispatch('postStore/getComs', null, {root:true})
 
-
-
-
           })
           .catch(function (error) {
               console.log(error);
@@ -190,9 +177,7 @@ export const userStore ={
               console.log(response.data);
             dispatch('getUserData',data.id);
             dispatch('postStore/getPost','user/'+data.id,{root:true})
-          dispatch('postStore/getComs', null, {root:true})
-
-
+            dispatch('postStore/getComs', null, {root:true})
 
             })
             .catch(function (error) {
@@ -216,8 +201,6 @@ export const userStore ={
               dispatch('getUserData',data.id);
               dispatch('postStore/getPost','user/'+data.id,{root:true})
               dispatch('postStore/getComs', null, {root:true})
-
-
 
             })
             .catch(function (error) {
