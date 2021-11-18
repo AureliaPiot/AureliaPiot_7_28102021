@@ -19,7 +19,6 @@
 export default {
     name:'new_com',
     props: {
-        userPP :String,
         userId : Number,
         postId : Number,
 
