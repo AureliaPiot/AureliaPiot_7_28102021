@@ -108,14 +108,13 @@ export const userStore ={
 
     logOut(){
       localStorage.clear();
-// commit qui vide les donnée du store
       router.push({name:"Sign"});
     },
 
 ///////////////////////////////////////////////////////////////////
 
     getUserData({commit},value){
-      // console.log(value)
+      console.log('getUser')
       axios.get('http://localhost:3000/api/user/'+value,{
                 headers: {
                     "authorization" : 'Bearer ' + localStorage.getItem('token'),
@@ -134,8 +133,7 @@ export const userStore ={
 ///////////////////////////////////////////////////////////////////
   getUserProfile({commit},value){
     console.log('getProfile')
-
-    console.log(value)
+    // console.log(value)
     axios.get('http://localhost:3000/api/user/'+value,{
               headers: {
                   "authorization" : 'Bearer ' + localStorage.getItem('token'),
@@ -162,8 +160,6 @@ export const userStore ={
             .then(function(response) {
                 console.log(response.data);
                 dispatch('getUserProfile',data.id);
-
-
             })
             .catch(function (error) {
                 console.log(error);

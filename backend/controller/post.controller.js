@@ -114,6 +114,7 @@ exports.getOne = (req,res) =>{
 
 
 exports.update = (req,res) =>{
+    console.log('update/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////')
     console.log(req.params);
     console.log(req.body);
     console.log(req.file);
@@ -125,7 +126,7 @@ exports.update = (req,res) =>{
     console.log(oldFile);
     console.log(newFile);
 
-
+//faire un switch case
 // si une nouvelle image est present , on supprime l'anciene
     if( req.file !== undefined ){
         newFile = `${req.protocol}://${req.get('host')}/images/${req.file.filename}` ;
@@ -137,27 +138,22 @@ exports.update = (req,res) =>{
     }
 
 // si une nouvelle image n'est pas presente , garde l'anciene
-    else if (req.body.clearFile){
-        newFile = "null" ;
-        const filename = oldFile.split("/images/")[1];
-        fs.unlink(`images/${filename}`,()=>{
-            console.log('unlink old attachement');
-        });
+    else if (req.body.clearFile == "false" && req.file == undefined){
+        newFile = oldFile ;
+        // const filename = oldFile.split("/images/")[1];
+        // fs.unlink(`images/${filename}`,()=>{
+        //     console.log('unlink old attachement');
+        // });
     }
-// si clearFile est true on supprime l'anciene image
-    else if(req.body.clearFile){
+// si clearFile est false on supprime l'anciene image
+    else if(req.body.clearFile == "true" && req.file == undefined){
+        newFile = 'null' ;
         const filename = oldFile.split("/images/")[1];
         fs.unlink(`images/${filename}`,()=>{
             console.log('unlink old attachement');
         });
     }
 
-    // else if(req.body.file == "undefined" && req.file == undefined && oldFile !== undefined){
-    //     newFile = oldFile ;
-    // }
-    // else if(req.body.file == "undefined" && req.file == undefined && oldFile == undefined ){
-    //     newFile = "null" ;
-    // }
 
     Posts.update(
         { content : req.body.content,

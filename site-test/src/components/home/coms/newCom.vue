@@ -39,22 +39,13 @@ export default {
 
          submitCom(){
             const userId = localStorage.getItem("userId");
-            // const token =localStorage.getItem("token"); 
             const data= {
                 UserId: userId,
                 PostId: this.postId ,
                 content : document.getElementsByName("messageCom"+this.postId)[0].value,                
                 createDate :Date.now(),
              }
-            console.log(data)
-
-            // const dataform = new FormData();
-            // dataform.append('PostId',data.PostId);
-            // dataform.append('UserId',data.UserId);
-            // dataform.append('content',data.content);
-
-            // const form = dataform
-
+            // console.log(data)
             this.$store.dispatch('postStore/newCom',{form : data, query : this.query});
 
             document.getElementById('messageCom'+this.postId).value=''
@@ -67,15 +58,14 @@ export default {
 <style scoped lang="scss">
 #newCom{
     background: rgb(255, 255, 255);
-    // width: 100%;
+
     margin: 1rem;
     border-radius: 8px;
-    // margin-bottom: 2rem;
+
     .userAvatar{
         width: 4rem;
-        // height: 1rem;
         border-radius: 50%;
-        // background: yellow;
+
     }
     .submitCom{
         margin: 0;

@@ -70,7 +70,6 @@ exports.login = (req,res)=>{
 };
 
 
-
 // //////////////////////////////////////////////////////////////////////////////////////
 
 // [Create]
@@ -121,28 +120,15 @@ exports.create = (req,res,err) =>{
       }
     })
     
-        
-
-
 };
-
-
 
 
 // //////////////////////////////////////////////////////////////////////////////////////
 // [get all]
+// (plus utiliser dans le front)
 exports.findAll = (req,res)=>{
     console.log('findAll');
 
-    // const token = req.headers.authorization.split(' ')[1];
-    // const decodedToken = jwt.verify(token,process.env.TOKEN);
-    // const role = decodedToken.role;
-    // console.log("role = "+role);
-    // console.log(token);
-
-
-    // const name = req.query.name;
-    // let condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
     Users.findAll()
     .then(data=>{
         res.status(200).send(data);
@@ -208,7 +194,7 @@ exports.updateFile = (req,res)=>{
     console.log(oldFilename);
 
       // if(filename !== oldFile){
-        if( oldFile !== newFile && oldFilename !=="defaultPic/default.jpg"){
+        if( oldFilename !=="defaultPic/default.jpg"){
           console.log('not the same');
 
         fs.unlink(`images/${oldFilename}`,()=>{
@@ -275,22 +261,6 @@ exports.update = (req,res)=>{
   .catch(err=> { res.status(404).send({message: err.message || " error canot update post"}) });
 };
 
-// [UPDATE ROLE]//////////////////////////////////////////////////////
-
-
-// exports.updateBio = (req,res)=>{
-//   console.log('update user File---------------------------------');
-//   const id = req.params.id;
-//   // let bodyKey = Object.keys(req.body)
-//   console.log(id);
-//   console.log(req.body);
-  
-//   Users.update(req.body,
-//     {where : {id: req.params.id} }
-//      )
-//   .then(() => res.status(200).send({message: 'user modifié'}))
-//   .catch(err=> { res.status(404).send({message: err.message || " error canot update post"}) });
-// };
 
 
 // //////////////////////////////////////////////////////////////////////////////////////
@@ -323,32 +293,38 @@ exports.delete = (req,res)=>{
         });//for each
 
         Posts.destroy( {where : {UserId: id} });
-        Coms.destroy( {where : {UserId: id} });
-        Likes.destroy( {where : {UserId: id} });
-      })//then findAll
-  
-      Users.destroy({
-        where: { id: id }
-      })
-        .then(num => {
-          if (num == 1) {
-            res.send({
-              message: "user was deleted successfully!"
-            });
-          } else {
-            res.send({
-              message: `Cannot delete user with id=${id}. Maybe user was not found!`
-            });
-          }
-        })//then destroy users
 
-  })//the findone
+      })//then findAll
+
+      .then(()=>{
+        Likes.destroy( {where : {UserId: id} });
+      })
+      .then(()=>{
+        Coms.destroy( {where : {UserId: id} });
+      })
+      .then(()=>{
+        Users.destroy({
+          where: { id: id }
+        })
+          .then(num => {
+            if (num == 1) {
+              res.send({
+                message: "user was deleted successfully!"
+              });
+            } else {
+              res.send({
+                message: `Cannot delete user with id=${id}. Maybe user was not found!`
+              });
+            }
+          })//then destroy users  
+      })
+    })//then findone
     
-      .catch(err => {
-        res.status(500).send({
-          message: "Could not find user with id=" + id
-        });
+    .catch(err => {
+      res.status(500).send({
+        message: "Could not find user with id=" + id
       });
+    });
 };
 
 // conditionnel ? Find all user with role = user:

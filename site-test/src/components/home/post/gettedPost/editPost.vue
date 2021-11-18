@@ -70,25 +70,10 @@ export default {
             dataform.append('clearFile',this.clearFile);
 
             const form = dataform;
+            console.log('file'+file)
+            console.log('clearfile'+this.clearFile)
 
             this.$store.dispatch('postStore/updatePost',{id:this.id,form:form,query:this.query});
-
-
-            // fetch('http://localhost:3000/api/post/'+this.id, {
-            //     method : "Put",
-            //     headers: { 
-
-            //         "authorization" : 'Bearer ' + localStorage.getItem('token'),
-            //         },
-            //     body: dataform,
-            // }) 
-            // .then(function(res){return res.json();}) 
-            // .then(value => (console.log(value),
-            //     this.close()
-            // ))
-            // .catch(function(){
-            //     console.log('erreur de requete');
-            // })
 
         },
     },//methods

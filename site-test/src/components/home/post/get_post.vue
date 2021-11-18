@@ -17,7 +17,6 @@
 </template>
 
 <script>
-// import{mapState} from 'vuex'
 import post from '@/components/home/post/gettedPost/singlePost.vue'
 
 export default {
@@ -35,8 +34,6 @@ export default {
     },
     computed: {
         allPost(){
-          // console.log("Post")
-          // console.log(this.$store.state.postStore.posts)
           return this.$store.state.postStore.posts
 
         },
