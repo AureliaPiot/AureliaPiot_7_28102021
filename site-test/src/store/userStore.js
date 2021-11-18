@@ -177,8 +177,9 @@ export const userStore ={
                   "authorization" : 'Bearer ' + localStorage.getItem('token'),
                   },
           }) 
-          .then(function() {
-            // console.log(response.data);
+          .then(function(response) {
+            console.log(response.data);
+            // commit("setRole",data.form.role) 
             if(data.id == localStorage.getItem('userId')){
               localStorage.setItem('role', data.form.role)
             }
