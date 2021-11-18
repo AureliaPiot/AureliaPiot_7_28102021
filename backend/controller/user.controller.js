@@ -306,31 +306,47 @@ exports.delete = (req,res)=>{
       if( filename !=="defaultPic/default.jpg") {
         fs.unlink(`images/${filename}`,()=>{
           console.log('unlink profilePic');
-          
         });
-      }
-  });
-    Posts.destroy( {where : {UserId: id} });
-    Coms.destroy( {where : {UserId: id} });
-    Likes.destroy( {where : {UserId: id} });
+      }//if filename
 
-    Users.destroy({
-      where: { id: id }
-    })
-      .then(num => {
-        if (num == 1) {
-          res.send({
-            message: "user was deleted successfully!"
-          });
-        } else {
-          res.send({
-            message: `Cannot delete user with id=${id}. Maybe user was not found!`
+      Posts.findAll({ where: { UserId : id}})
+      .then(data=>{
+       
+        data.forEach(post => {
+
+        if(post.attachement !== null){
+          const filename = post.attachement.split("/images/")[1];
+          fs.unlink(`images/${filename}`,()=>{
+            console.log('unlink all delete post attachement');
           });
         }
+        });//for each
+
+        Posts.destroy( {where : {UserId: id} });
+        Coms.destroy( {where : {UserId: id} });
+        Likes.destroy( {where : {UserId: id} });
+      })//then findAll
+  
+      Users.destroy({
+        where: { id: id }
       })
+        .then(num => {
+          if (num == 1) {
+            res.send({
+              message: "user was deleted successfully!"
+            });
+          } else {
+            res.send({
+              message: `Cannot delete user with id=${id}. Maybe user was not found!`
+            });
+          }
+        })//then destroy users
+
+  })//the findone
+    
       .catch(err => {
         res.status(500).send({
-          message: "Could not delete user with id=" + id
+          message: "Could not find user with id=" + id
         });
       });
 };
