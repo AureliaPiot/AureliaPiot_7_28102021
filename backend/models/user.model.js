@@ -43,7 +43,8 @@ module.exports = (sequelize, Sequelize) => {
       },
       bio: {
         type: Sequelize.STRING,
-        allowNull: true
+        allowNull: true,
+        defaultValue: 'null'
       },
     });
   
