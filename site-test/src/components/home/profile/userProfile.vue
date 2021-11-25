@@ -4,7 +4,7 @@
         <div class="profil-card" v-if="userData != null">
 
             <div class="card-head">
-                <p class="deleteUser text-center m-0 text-danger" v-if="this.isUser == userData.id" @click="deleteCompte">delete</p>
+                <p class="deleteUser text-center m-0 text-danger " v-if="this.isUser == userData.id" @click="deleteCompte">delete</p>
                 <h2> 
                     {{userData.nom}} 
                     {{userData.prenom}} 
@@ -183,7 +183,7 @@ export default {
 
         deleteCompte(){
             console.log('delete compte');
-           if(confirm('you sure ?')){
+           if(confirm('ATTENTION: cette action entrainera la suppression de toutes les données et action en relation avec votre compte,(vos posts, commentaire et like seront supprimés) êtes vous certain de vouloir supprimer votre compte ?')){
             console.log('okay');
             this.$store.dispatch('userStore/deleteUser',{id: this.id});
            }//if
@@ -205,6 +205,9 @@ export default {
 
 
 <style scoped lang="scss">
+.deleteUser{
+    cursor: pointer;
+}
 
 .profil-card{
     background: rgb(255, 255, 255);
