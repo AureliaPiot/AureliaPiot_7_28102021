@@ -43,6 +43,8 @@ export default {
 
             if(inputEmpty.test(content.value) == false ){
                 content.classList.add('invalide');
+                content.value="";
+
                 setTimeout(function(){
                    content.classList.remove('invalide');
                 }, 400);

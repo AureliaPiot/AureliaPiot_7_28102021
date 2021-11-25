@@ -41,7 +41,7 @@ export default {
          submitPost(){
 
             const userId = localStorage.getItem("userId");
-            let message = document.getElementsByName("message")[0].value;
+            let message = document.getElementsByName("message")[0];
             let file = document.getElementsByName("file")[0].files[0];
             this.url = null;
 
@@ -51,10 +51,12 @@ export default {
 
             const inputEmpty = /^[\S]+/;
 
-            if(inputEmpty.test(message) == false && file == "null"){
-                document.getElementsByName("message")[0].classList.add('invalide');
+            if(inputEmpty.test(message.value) == false && file == "null"){
+                message.classList.add('invalide');
+                message.value="";
+
                 setTimeout(function(){
-                    document.getElementsByName("message")[0].classList.remove('invalide');
+                    message.classList.remove('invalide');
                 }, 500);
 
 
@@ -63,7 +65,7 @@ export default {
 
             const dataform = new FormData();
             dataform.append('userId',userId);
-            dataform.append('message',message);
+            dataform.append('message',message.value);
             dataform.append('file',file);
 
             let form = dataform;        

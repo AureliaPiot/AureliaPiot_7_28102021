@@ -38,7 +38,7 @@ export default {
 
         },
         getLoadinStatus(){
-          console.log(this.$store.state.postStore.loadingStatus)
+          // console.log(this.$store.state.postStore.loadingStatus)
           return this.$store.state.postStore.loadingStatus
         }  
     },
