@@ -38,14 +38,26 @@ export default {
      methods:{
 
          submitCom(){
+            const content = document.getElementsByName("messageCom"+this.postId)[0]
+            const inputEmpty = /^[\S]+$/;
+
+            if(inputEmpty.test(content.value) == false ){
+                content.classList.add('invalide');
+                setTimeout(function(){
+                   content.classList.remove('invalide');
+                }, 400);
+
+
+                return console.log('input empty');
+            }
+
             const userId = localStorage.getItem("userId");
             const data= {
                 UserId: userId,
                 PostId: this.postId ,
-                content : document.getElementsByName("messageCom"+this.postId)[0].value,                
+                content : content.value,                
                 createDate :Date.now(),
              }
-            // console.log(data)
             this.$store.dispatch('postStore/newCom',{form : data, query : this.query});
 
             document.getElementById('messageCom'+this.postId).value=''
@@ -56,6 +68,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.invalide{
+    border: 1px solid rgb(255, 0, 0);
+}
 #newCom{
     background: rgb(255, 255, 255);
 

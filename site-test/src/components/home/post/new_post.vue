@@ -52,6 +52,11 @@ export default {
             const inputEmpty = /^[\S]+$/;
 
             if(inputEmpty.test(message) == false && file == "null"){
+                document.getElementsByName("message")[0].classList.add('invalide');
+                setTimeout(function(){
+                    document.getElementsByName("message")[0].classList.remove('invalide');
+                }, 500);
+
 
                 return console.log('input empty');
             }
@@ -74,6 +79,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.invalide{
+    border: 1px solid rgb(255, 0, 0);
+}
 .preview{
     // width: 50%;
     max-height:10vw;
