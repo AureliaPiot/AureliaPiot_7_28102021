@@ -112,7 +112,7 @@ export const postStore ={
     },
 ///////////////////////////////////////////////////////////////////
     deletePost({commit, dispatch},data){
-        console.log(data);
+        // console.log(data);
         commit("setLoadingStatus",'loading')
 
         fetch('http://localhost:3000/api/post/'+ data.id, {

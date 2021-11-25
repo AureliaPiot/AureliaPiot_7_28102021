@@ -61,17 +61,26 @@ export default {
 
         },
         submitEdit(){
+            const inputEmpty = /[\S]+/;
+            const content = document.getElementsByName("messageEdit")[0]
+
+
+            if(inputEmpty.test(content.value)== false && this.file == "null"){
+                 this.$store.dispatch('postStore/deletePost',{id:this.id,query:this.query});
+                return console.log('[post vide, suppresion du post]')
+            }
+
             const file = document.getElementsByName("fileEdit")[0].files[0];
             
             const dataform = new FormData();
-            dataform.append('content',document.getElementsByName("messageEdit")[0].value);
+            dataform.append('content',content.value);
             dataform.append('oldFile',this.oldFile);
             dataform.append('file',file);
             dataform.append('clearFile',this.clearFile);
 
             const form = dataform;
             console.log('file'+file)
-            console.log('clearfile'+this.clearFile)
+            console.log('clearfile '+this.clearFile)
 
             this.$store.dispatch('postStore/updatePost',{id:this.id,form:form,query:this.query});
 

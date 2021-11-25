@@ -39,7 +39,7 @@ export default {
 
          submitCom(){
             const content = document.getElementsByName("messageCom"+this.postId)[0]
-            const inputEmpty = /^[\S]+/;
+            const inputEmpty = /[\S]+/;
 
             if(inputEmpty.test(content.value) == false ){
                 content.classList.add('invalide');
