@@ -15,9 +15,10 @@
                     <i class="fas fa-crown"  v-if="this.coms.User.role == 'admin'" ></i>
                 </router-link>
                 <p class="comDate">{{coms.createDate.substring(0,10)}}</p>
-                <div class="editCom"  v-if="isCreator == coms.User.id  || isAdmin  ">
-                    <i class="fas fa-pen iconEdit edit" v-if="coms.User.role !=='mute'" @click.prevent="showEditCom"></i>
-                    <i class="fas fa-trash iconEdit delete" @click.prevent="deleteCom(coms.id)"></i>
+                <div class="editCom" >
+                     <!-- v-if="isCreator == coms.User.id  || isAdmin " -->
+                    <i class="fas fa-pen iconEdit edit" v-if=" isCreator == coms.User.id && coms.User.role !=='mute'" @click.prevent="showEditCom"></i>
+                    <i class="fas fa-trash iconEdit delete"  v-if="isCreator == coms.User.id || isAdmin " @click.prevent="deleteCom(coms.id)"></i>
 
                 </div>
             </div>
@@ -67,8 +68,6 @@ export default {
         }
     },
     computed:{
-  
-
     },
 
 

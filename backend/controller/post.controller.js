@@ -170,6 +170,7 @@ exports.update = (req,res) =>{
 
 
 exports.delete = (req,res) =>{
+    console.log('[DELETE]');
     
     Posts.findOne( {where :{id: req.params.id}} )
     .then(data =>{
@@ -181,7 +182,7 @@ exports.delete = (req,res) =>{
             Likes.destroy( {where : {PostId: req.params.id} });
 
             
-            if(data.attachement == "null"){
+            if(data.attachement == "null" || data.attachement == null ){
                 console.log('if');
                 
                 Posts.destroy( {where : {id: req.params.id} })
@@ -214,6 +215,6 @@ exports.delete = (req,res) =>{
 
 
 
-    // si la longueur du tableau retourner par les likes est spperieur a 1 alors on chop tout les commentaire lier au post et on les supprime aussi
+
 }
 

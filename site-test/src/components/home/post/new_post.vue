@@ -49,7 +49,7 @@ export default {
                  file = "null"
             }
 
-            const inputEmpty = /^[\S]+$/;
+            const inputEmpty = /^[\S]+/;
 
             if(inputEmpty.test(message) == false && file == "null"){
                 document.getElementsByName("message")[0].classList.add('invalide');
