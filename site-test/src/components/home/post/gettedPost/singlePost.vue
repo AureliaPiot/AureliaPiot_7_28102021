@@ -117,8 +117,6 @@ export default {
             return this.$store.state.postStore.coms.filter(com => com.PostId == this.id)
         }  
     },
-    beforeCreate(){
-        },
     created(){     
         for(let like of this.post.likes){
             if(like.UserId == this.isCreator)
@@ -127,13 +125,8 @@ export default {
             }
         }
     },
-    beforeMounted(){
-        },
-     mounted(){
-        },
 
     methods:{
-
 
         showEdit(){
             this.show = true
@@ -148,7 +141,7 @@ export default {
             console.log('pos edit')
         },
         deletePost(){
-            if(confirm('you sure ?')){
+            if(confirm('êtes vous certain de vouloir supprimer cette publication ?')){
                 console.log('delete');
                 this.$store.dispatch('postStore/deletePost',{id:this.post.id,query:this.query});
             }
@@ -181,7 +174,6 @@ export default {
                     this.$store.dispatch('postStore/unLike',{id: this.post.id, form :this.isCreator });
                     this.like = false 
 
-
                 }
             }
 
@@ -212,7 +204,6 @@ export default {
 }
 .post{
     position: relative;
-    // padding: 2rem;
     border-bottom:1px solid rgb(138, 138, 138);
 
     display:grid;
@@ -227,7 +218,6 @@ export default {
 
     .headerPost{
     grid-area: header;
-    // background-color:rgba(0, 0, 255, 0.26) ;
     display: grid;
     grid-template-columns: 1fr 1fr;
     min-height: 4vw;
@@ -279,9 +269,7 @@ export default {
 
     }
     .bodyPost{
-        grid-area: body;
-        // background-color:rgba(51, 255, 0, 0.26) ;
-        
+        grid-area: body;      
         display: flex;
         flex-direction: column;
 
@@ -298,18 +286,12 @@ export default {
     }
     .footerPost{
         grid-area: footer;
-        // background-color:rgba(255, 166, 0, 0.26) ;
-
-        text-align: center;
+        margin: 0.5rem ;
         min-height: 3rem;
-        // background: rgb(237, 240, 243);
+        text-align: center;
+        font-size: 2rem;
         border-top: 1px solid rgb(223, 223, 223);
-        // border-bottom: 1px solid rgb(223, 223, 223);
 
-        // .like, .comment {
-            font-size: 2rem;
-            margin: 0.5rem ;
-        // }
         p{
             display: inline;
             font-size: 1rem;
