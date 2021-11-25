@@ -6,7 +6,7 @@
 
 
             <div class="form-group">
-                <textarea class="form-control" id="message" rows="3" name="message" placeholder="exprimez-vous!" required></textarea>
+                <textarea class="form-control" id="message" rows="3"  name="message" placeholder="exprimez-vous!" required></textarea>
                 <img v-if="url" class="preview" :src="url" />
             </div>
             <div class="row justify-content-between m0">
@@ -14,7 +14,7 @@
                 <input type="file"  class="btn btn-outline-primary w30" id="file" name="file" accept=".jpg, .jpeg, .png, .gif" @change="onFileChange">
                 <button class="btn btn-outline-primary w30" v-on:click.prevent="submitPost">Submit</button>
             </div>
-<!-- au click refresh le composant get post et vider les inputs -->
+
         </form>
         
     </div>
@@ -41,16 +41,24 @@ export default {
          submitPost(){
 
             const userId = localStorage.getItem("userId");
+            let message = document.getElementsByName("message")[0].value;
             let file = document.getElementsByName("file")[0].files[0];
-            this.url = null
+            this.url = null;
 
             if(file === undefined ){
                  file = "null"
             }
 
+            const inputEmpty = /^[\S]+$/;
+
+            if(inputEmpty.test(message) == false && file == "null"){
+
+                return console.log('input empty');
+            }
+
             const dataform = new FormData();
             dataform.append('userId',userId);
-            dataform.append('message',document.getElementsByName("message")[0].value,);
+            dataform.append('message',message);
             dataform.append('file',file);
 
             let form = dataform;        
