@@ -18,6 +18,9 @@ export const userStore ={
     user:null,
     userProfile:null,
 
+    // searchUser:null,
+    // // liste
+
   },
 
   mutations: {
@@ -51,18 +54,21 @@ export const userStore ={
                 body: JSON.stringify(userSign),
             }) 
             .then(function(res){
-                    return res.json();
+                return res.json();            
             })    
             .then(function(value){
-                  console.log(value.message);
-
-                   console.log('userSign');
-                  console.log(userSign.email);
+                if(value.error){
+                  return alert(value.error)
+                }
+                console.log('userSign');
+                console.log(userSign.email);
 
                 dispatch('login', {email : userSign.email, password : userSign.password})                  
             })
             .catch(function(){
                 console.log('erreur de creation de compte');
+
+
             })
     },//Sign
 
@@ -84,8 +90,7 @@ export const userStore ={
       })    
       .then(function(value){
           if(value.token){
-              console.log(value);
-
+              // console.log(value);
               localStorage.setItem("token",value.token);
               localStorage.setItem("userId",value.userId);
               localStorage.setItem("role",value.userRole);
@@ -96,7 +101,7 @@ export const userStore ={
               return
           }
           console.log("connexion non autoriser");
-          alert("email déjà utilisé");
+          alert(value.message);
 
       })
       .catch(function(){
@@ -253,7 +258,25 @@ export const userStore ={
             });
       },
 ///////////////////////////////////////////////////////////////////
-  
+  ///////////////////////////////////////////////////////////////////
+
+  // SearchUser(_,data){
+  //   console.log('search user')
+  //   axios.get('http://localhost:3000/api/user/search/'+data,{
+  //             headers: {
+  //                 "authorization" : 'Bearer ' + localStorage.getItem('token'),
+  //                 },
+  //         }) 
+  //         .then(function(response) {
+  //           console.log(response.data);
+
+  //         })
+  //         .catch(function (error) {
+  //             console.log(error);
+  //         });
+  //   },
+
+
   },
   modules: {
   },

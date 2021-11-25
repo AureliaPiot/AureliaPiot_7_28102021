@@ -10,7 +10,7 @@
             <div class="form-group my-md-4">
                 <label for="password_input">Password</label>
                 <input type="password" class="form-control" id="password_input" placeholder="Password" aria-describedby="passwordHelp" name="password_login" autocomplete="off" required>
-                <small id="passwordHelp" class="form-text text-muted"> never share your password with anyone else.</small>
+                <small id="passwordHelp" class="form-text text-muted"> Ne communiqué jamais votre mot de passe.</small>
             </div>
 
             <div class="d-flex justify-content-center">

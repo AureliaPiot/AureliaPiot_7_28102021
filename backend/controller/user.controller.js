@@ -35,7 +35,7 @@ exports.login = (req,res)=>{
       bcrypt.compare(user.password + process.env.PASSWORD ,data.password)
         .then(valid => {
         if(!valid) {
-            return res.status(401).json({error:'mot de pass incorrect'})
+            return res.status(401).json({message:'mot de passe incorrect'})
           } 
 
 
@@ -93,7 +93,6 @@ exports.create = (req,res,err) =>{
         bcrypt.hash( req.body.password + process.env.PASSWORD,10)
         .then(hash =>{
 
-          // ou utiliser const user = Users.build({object}) | puis user.save() avec les th
           const user ={
             nom : req.body.nom,
             prenom: req.body.prenom,
@@ -105,18 +104,18 @@ exports.create = (req,res,err) =>{
           
           Users.create(user)
           .then(data=>{
-            res.status(201).json({ message : 'ok' });
-  // authentifier juste apres
+            res.status(201).json({ message : 'compte créé' });
+            // authentifier juste apres
           })
           .catch(err=> {
-            res.status(500).send({message: err.message || "cannot create an account"})
+            res.status(500).json({error: err.message || "cannot create an account"})
           })
-      })//fin hash
+        })//fin hash
 
       }
       else{
-        console.log('no');
-        return res.status(403).json({ message : "email déjà utilisé" })
+        console.log('email déjà utilisé');
+        return res.status(403).json({ error : "email déjà utilisé" })
       }
     })
     
