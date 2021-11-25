@@ -1,6 +1,6 @@
 // import router from "../router/index.js"
 import axios from 'axios'
-// import store from '.';
+
 
 export const postStore ={
   

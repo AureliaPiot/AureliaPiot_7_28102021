@@ -96,6 +96,7 @@ export const userStore ={
               return
           }
           console.log("connexion non autoriser");
+          alert("email déjà utilisé");
 
       })
       .catch(function(){

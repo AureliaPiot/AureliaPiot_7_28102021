@@ -33,15 +33,15 @@ export default {
   name: 'SignIn',
   methods:{
       signIn(){
-          let password = document.getElementsByName("password_Sign")[0].value
-          let email = document.getElementsByName("email_Sign")[0].value
-          let nom =  document.getElementsByName("nom_Sign")[0].value
-          let prenom = document.getElementsByName("prenom_Sign")[0].value
+          const password = document.getElementsByName("password_Sign")[0].value
+          const email = document.getElementsByName("email_Sign")[0].value
+          const nom =  document.getElementsByName("nom_Sign")[0].value
+          const prenom = document.getElementsByName("prenom_Sign")[0].value
 
-          if(nom.lenght !== 0 ||
-           prenom.lenght !== 0 ||
-           email.lenght !== 0 ||
-           password.lenght !== 0 
+          if(nom.length !== 0 &&
+           prenom.length !== 0 &&
+           email.length !== 0 &&
+           password.length !== 0 
            ){
 
             if(this.emailRegex(email)){
@@ -64,7 +64,7 @@ export default {
                 }
             }
             else {
-             alert('champ vide')
+             alert('merci de remplir tous les champs!')
             }
 
 

@@ -93,7 +93,7 @@ exports.create = (req,res,err) =>{
         bcrypt.hash( req.body.password + process.env.PASSWORD,10)
         .then(hash =>{
 
-//  ou utiliser const user = Users.build({object}) | puis user.save() avec les th
+          // ou utiliser const user = Users.build({object}) | puis user.save() avec les th
           const user ={
             nom : req.body.nom,
             prenom: req.body.prenom,

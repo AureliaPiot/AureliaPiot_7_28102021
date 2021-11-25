@@ -11,9 +11,9 @@
             </div>
             <div class="editPost"  v-if="this.isCreator == this.UserId || this.isAdmin ">
                 <button class="btn edit " v-if="this.isCreator == this.UserId && this.UserRole !== 'mute'" @click.prevent="showEdit"><i class="fas fa-pen text-white"></i></button>
-                <!-- ouvre affiche un composant qui recupere les donnéés dans le form  /comme une fenetre alert?-->
+                <!-- ouvre affiche un composant qui recupere les données dans le form  -->
                 <button class="btn delete " @click.prevent="deletePost"><i class="fas fa-trash text-white"></i></button>
-                <!-- ouvre affiche un composant qui recupere les donnéés dans le form -->
+                <!-- affiche une alerte avant la suppression du post -->
             </div>
         </div>
         <div class="bodyPost">
@@ -37,7 +37,6 @@
                 :query="this.query" />
 
         </div>
-                <!-- :click="showEdit" -->
 
     </div>
 

@@ -1,7 +1,6 @@
 <template>
-        <!-- <div v-on:click="getCom" class="com">{{data}}</div> -->
-    <div  >
-        <!-- <div v-for="coms in this.data" :key="coms"  class="coms" > -->
+
+    <!-- <div  > -->
         <div  class="coms" >
 
             <div class="pp">
@@ -9,30 +8,28 @@
             </div>
 
             <div class="userData d-flex">
-                <!-- {{coms.User}} -->
+
                 <router-link class=" d-flex usernamePost " :to="{ name: 'userPage',params:{id: coms.User.id }}">
                     <p>{{coms.User.nom}} </p>
                     <p>{{coms.User.prenom}}</p>
                     <i class="fas fa-crown"  v-if="this.coms.User.role == 'admin'" ></i>
                 </router-link>
                 <p class="comDate">{{coms.createDate.substring(0,10)}}</p>
-                <div class="editPost"  v-if="isCreator == coms.User.id  || isAdmin  ">
+                <div class="editCom"  v-if="isCreator == coms.User.id  || isAdmin  ">
                     <i class="fas fa-pen iconEdit edit" v-if="coms.User.role !=='mute'" @click.prevent="showEditCom"></i>
                     <i class="fas fa-trash iconEdit delete" @click.prevent="deleteCom(coms.id)"></i>
-                    <!-- <button class="btn edit" @click.prevent="showEditCom"><i class="fas fa-pen text-white"></i></button>
-                    <button class="btn delete" @click.prevent="deleteCom"><i class="fas fa-trash text-white"></i></button> -->
+
                 </div>
             </div>
 
             <div  v-if="!this.editCom" class="content">{{coms.content}}</div>
 
             <div v-if="this.editCom" class="Editcontent">
-                <input  type="text" class="" :name="'editCom'+coms.id" :value="coms.content" v-on:keyup.enter.prevent="submitComEdit(coms.id)">
+                <input  type="text" class="inputEditCom" :name="'editCom'+coms.id" :value="coms.content" v-on:keyup.enter.prevent="submitComEdit(coms.id)">
                 <i class="fas fa-arrow-alt-circle-right submitCom"  v-on:click.prevent="submitComEdit(coms.id)"></i>
-                <!-- <button class="close" @click.prevent="showEditCom" >X</button> -->
+
             </div>
 
-            <!-- <editComs v-if="this.editCom" @closeEditCom="showEditCom" :content="coms.content" id="coms.id"/> -->
            
 
 
@@ -40,20 +37,20 @@
 
 
         </div>
-    </div>      
+    <!-- </div>       -->
 </template>
 
 <script>
-// import editComs from '@/components/home/coms/editComs.vue'
+
 
 export default {
     name:'get_com',
     components:{
-        // editComs
+
     },
     props: {
         coms: Object,
-        // userPP :String,
+
         postId : Number,
         isCreator : String,
         isAdmin : Boolean,
@@ -65,7 +62,6 @@ export default {
     },
     data(){
         return{
-            // data:"",
             token :localStorage.getItem("token"),
             editCom: false,
         }
@@ -156,7 +152,7 @@ background: orange;
     word-wrap: break-word;
 
 }
-.editPost{
+.editCom{
     .iconEdit{
         margin: 0 0.5rem;
     }
@@ -168,6 +164,9 @@ background: orange;
     }
 }
 .Editcontent{
+    .inputEditCom{
+        width: 90%;
+    }
     .submitCom{
         font-size: 1.5rem
     }

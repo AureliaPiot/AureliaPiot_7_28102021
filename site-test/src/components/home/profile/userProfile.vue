@@ -25,7 +25,7 @@
             </div>
             <!-- <div v-if="this.isUser == this.userId" class="d-flex editpart"> -->
                 <div  v-if="this.isUser == userData.id" class="col editPp">
-                    <button @click="showEditPP">edit profile pic</button>
+                    <button class="btn btn-warning text-white fw-bold" @click="showEditPP"><i class="fas fa-image"></i></button>
 
                     <div  v-if="editPic" class="newpp">
                         <form id="newPP">
@@ -36,7 +36,7 @@
                 </div>
 
                 <div v-if="this.isUser == userData.id" class="col editBio">
-                    <button @click="showEditBio">edit bio</button>
+                    <button class="btn btn-warning text-white fw-bold" @click="showEditBio"><i class="fas fa-pen iconEdit edit"></i></button>
                 </div>
 
                 <div v-if="this.isAdmin" class="editRole">
@@ -205,6 +205,7 @@ export default {
 
 
 <style scoped lang="scss">
+
 .profil-card{
     background: rgb(255, 255, 255);
     border-radius: 8px;
@@ -288,6 +289,7 @@ h2{
 @media (max-width: 1200px) {
     .profil-card{
         .card-left{
+            text-align: center;
             .pic{
                 width: 60%;
             }
@@ -297,27 +299,31 @@ h2{
 }
 
 @media (max-width: 767px) {
-.profil-card{
-    background: rgb(255, 255, 255);
-    border-radius: 8px;
-    padding: 3rem;
+    .profil-card{
+        background: rgb(255, 255, 255);
+        border-radius: 8px;
+        padding: 1rem;
 
-    display: grid;
-    grid-gap: 1rem 4rem;
-    grid-template-columns: 20% 1fr;
-    grid-template-areas:"name name" 
-                        "editPp left"
-                        "editBio  right"
-                        "editRole editRole"
-                        ;
-        .card-left{
-            place-self: center;
-            .pic{
-                width: 100%;
+        display: grid;
+        grid-gap: 1rem 4rem;
+        grid-template-columns: 20% 1fr;
+        grid-template-areas:"name name" 
+                            "editPp left"
+                            "editBio  right"
+                            "editRole editRole"
+                            ;
+            .card-left{
+                place-self: center;
+                .pic{
+                    width: 100%;
+                    min-height: 5rem;
+                }
             }
-        }
+            .editPp, .editBio{
+                justify-self: self-end;
+            }
 
-}
+    }
 }
 
 </style>
