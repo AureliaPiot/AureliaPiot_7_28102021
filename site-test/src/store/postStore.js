@@ -156,7 +156,7 @@ export const postStore ={
 ///////////////////////////////////////////////////////////////////
 
     newCom({dispatch},data){
-        console.log(data);
+        // console.log(data);
         // commit("setLoadingStatus",'loading')
 
         axios.post('http://localhost:3000/api/com/',data.form,{
@@ -179,7 +179,7 @@ export const postStore ={
     },
 ///////////////////////////////////////////////////////////////////
     deleteCom({dispatch},data){
-        console.log(data);
+        // console.log(data);
         // commit("setLoadingStatus",'loading')
 
         axios.delete('http://localhost:3000/api/com/'+data.id,{
@@ -190,7 +190,6 @@ export const postStore ={
         .then(function(response) {
             console.log(response.data);
             
-            // dispatch('getPost',data.query);
             dispatch('getComs');
 
             // commit('setLoadingStatus','notLoading');

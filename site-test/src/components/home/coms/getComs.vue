@@ -84,8 +84,14 @@ export default {
         },
 
         submitComEdit(param){
+            const inputEmpty = /[\S]+/;
+      
               const editData ={
                 newContent : document.getElementsByName("editCom"+ this.coms.id)[0].value,
+            }
+            if(inputEmpty.test(editData.newContent) == false ){
+                this.$store.dispatch('postStore/deleteCom',{id : param, query : this.query});
+                return console.log('[commentaire vide, suppresion du commentaire]')
 
             }
             this.$store.dispatch('postStore/updateCom',{id : param, data:editData , query : this.query});
