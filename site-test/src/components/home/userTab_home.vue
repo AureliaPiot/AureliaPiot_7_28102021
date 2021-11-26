@@ -5,10 +5,18 @@
             <span class="navbar-brand mb-0 h1"><img class="logo" src="../../assets/logo/icon-left-font-monochrome-black.svg" alt="Groupomania"> </span>
         </router-link>
       
+        <div class="search" >
+            <input type="text" name="searchUser" id="searchUser"  @input="searchUser" placeholder="trouver un utilisateur">
+            <div class="getSearchUser" v-if="this.search">
+                <ul >
+                    <li v-for="user in getUsers" :key="user">
+                        <router-link :to="{name:'userPage',params:{id: user.id}}" @click="clearSearch">{{user.nom}} {{user.prenom}}</router-link>
+                    </li>
+                </ul>
+            </div>    
+        </div>
 
-        
         <div class="link-group">
-            <!-- <router-link v-bind:to="{name: 'Sign'}">Sign</router-link>  -->
             <button><router-link to="/home"><i class="fas fa-home"></i></router-link></button> 
             <button><router-link :to="{ name: 'userPage',params:{id: this.userId }}"><i class="fas fa-user"></i></router-link></button>
             <button  @click="signOut"><i class="fas fa-sign-out-alt"></i></button>
@@ -29,12 +37,32 @@ export default {
        data(){  
        return{
            userId : localStorage.getItem('userId'),
+           search : false
+    
         }
   },
   computed:{
-
+      getUsers(){
+          console.table(this.$store.state.userStore.searchUsers)
+        return this.$store.state.userStore.searchUsers
+      }
   },
   methods:{
+      clearSearch(){
+            this.search = false
+            document.getElementById('searchUser').value = "";
+            return this.$store.commit('userStore/setUserList',[])
+
+      },
+    searchUser(){
+        this.search = true
+        let value = document.getElementById('searchUser').value
+        console.log(value)
+        if(value.length == 0 ){
+            this.clearSearch
+        }
+        this.$store.dispatch('userStore/searchUser',value)
+    },
     signOut(){
         this.$store.dispatch('userStore/logOut')
     },
@@ -44,6 +72,39 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.search{
+    width: 30%;
+    input{
+        width: 100%;
+        padding: 0.3rem;
+    }
+}
+.getSearchUser{
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+
+    width: 27%;
+    text-align: center;
+    background: #ffffff;
+    box-shadow: 1px 5px 10px #100a217d;
+    border-radius: 0 0 10px 10px;
+    ul{
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        font-weight: 600;
+        a{
+            color: rgb(0, 0, 0);
+
+        }
+        li:hover{
+            background: #100a2128;
+            cursor: pointer;
+        }
+    }
+}
+
 nav{
     width: 100%;
     padding: 1rem 5rem;

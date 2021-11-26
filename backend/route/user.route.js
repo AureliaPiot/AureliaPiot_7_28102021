@@ -14,8 +14,8 @@ router.post('/sign',userCtrl.create);
 router.post('/login',userCtrl.login)
 
 
-// get all
-router.get('/',auth.connect,userCtrl.findAll);
+// get all (query)
+router.get('/search/:query',auth.connect,userCtrl.findAll);
 
 // get one 
 router.get('/:id',auth.connect,userCtrl.findOne);

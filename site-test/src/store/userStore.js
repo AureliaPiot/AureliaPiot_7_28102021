@@ -18,7 +18,7 @@ export const userStore ={
     user:null,
     userProfile:null,
 
-    // searchUser:null,
+    searchUsers:[],
     // // liste
 
   },
@@ -36,6 +36,10 @@ export const userStore ={
     },
     setUserProfile(state,value){
       state.userProfile = value
+    },
+
+    setUserList(state,value){
+      state.searchUsers = value
     },
 
     // setRole(state,value){
@@ -258,24 +262,25 @@ export const userStore ={
             });
       },
 ///////////////////////////////////////////////////////////////////
+
+  searchUser({commit},data){
+    console.log('search user')
+    axios.get('http://localhost:3000/api/user/search/'+data,{
+              headers: {
+                  "authorization" : 'Bearer ' + localStorage.getItem('token'),
+                  },
+          }) 
+          .then(function(response) {
+            commit('setUserList',response.data)
+            console.log(response.data);
+
+          })
+          .catch(function (error) {
+              console.log(error);
+          });
+    },
+
   ///////////////////////////////////////////////////////////////////
-
-  // SearchUser(_,data){
-  //   console.log('search user')
-  //   axios.get('http://localhost:3000/api/user/search/'+data,{
-  //             headers: {
-  //                 "authorization" : 'Bearer ' + localStorage.getItem('token'),
-  //                 },
-  //         }) 
-  //         .then(function(response) {
-  //           console.log(response.data);
-
-  //         })
-  //         .catch(function (error) {
-  //             console.log(error);
-  //         });
-  //   },
-
 
   },
   modules: {

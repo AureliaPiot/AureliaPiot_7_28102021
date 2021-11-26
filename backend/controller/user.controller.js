@@ -16,6 +16,7 @@ const fs = require('fs');
 
 const jwt = require('jsonwebtoken');
 const bcrypt =require('bcrypt');
+const { getAll } = require("./post.controller");
 
 
 // //////////////////////////////////////////////////////////////////////////////////////
@@ -126,9 +127,22 @@ exports.create = (req,res,err) =>{
 // [get all]
 // (plus utiliser dans le front)
 exports.findAll = (req,res)=>{
-    console.log('findAll');
+    console.log('findAll with query');
+    console.log(req.params.query);
+    const getAllCharacters= req.params.query.split('')
+    console.log(getAllCharacters);
 
-    Users.findAll()
+
+
+    Users.findAll({
+      where : { [Op.or]:[
+
+       { prenom:{[Op.like]: "%"+req.params.query+"%"}},
+       { nom:{[Op.like]: "%"+req.params.query+"%"}}
+      ]
+      },
+      attributes: {exclude: ['password']}
+    })
     .then(data=>{
         res.status(200).send(data);
         console.log(data)
