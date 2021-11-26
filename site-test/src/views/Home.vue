@@ -2,7 +2,7 @@
   <div >
     <!-- tentative d'ancre -->
     <!-- <div class=""><a href="#head"><i class="btnUp fas fa-arrow-up"></i></a></div> -->
-      <userTab />
+      <nav_home />
  
       <div class="col-xl-5 col-md-8 mx-auto main_elt">
           <router-view/>
@@ -13,13 +13,13 @@
 
 <script>
 // @ is an alias to /src
-import userTab from '@/components/home/userTab_home.vue'
+import nav_home from '@/components/home/nav_home.vue'
 
 
 export default {
   name: 'Home',
   components: {
-    userTab,
+    nav_home,
   },
   methods:{
     getUserData(){

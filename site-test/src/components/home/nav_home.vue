@@ -32,7 +32,7 @@
 
 <script>
 export default {
-    name:'tab_home',
+    name:'nav_home',
     props: {
   
     },
