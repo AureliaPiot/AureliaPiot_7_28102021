@@ -32,7 +32,6 @@ export const postStore ={
         state.posts = data;
     },
     setComs(state,data){
-        // state.coms.push(data);
         state.coms = data;
 
     },
@@ -47,7 +46,7 @@ export const postStore ={
   actions: {
 
     getPost({commit},query){
-          console.log('get post :'+ query);
+          console.log('get post : '+ query);
           commit("setLoadingStatus",'loading')
 
         axios.get('http://localhost:3000/api/post/'+query, {
@@ -90,7 +89,7 @@ export const postStore ={
     },
 //////////////////////////////////////////////////////////////////
     updatePost({commit, dispatch},data){
-        console.log(data);
+        // console.log(data);
         commit("setLoadingStatus",'loading')
 
         axios.put('http://localhost:3000/api/post/'+data.id,data.form,{

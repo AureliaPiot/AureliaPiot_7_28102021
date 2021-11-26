@@ -79,8 +79,8 @@ export default {
             dataform.append('clearFile',this.clearFile);
 
             const form = dataform;
-            console.log('file'+file)
-            console.log('clearfile '+this.clearFile)
+            console.log(file ? "nouveau fichier" : "pas de nouveau fichier")
+            console.log(this.clearFile ? "suppression de l'ancienne image" : "pas de suppression de fichier")
 
             this.$store.dispatch('postStore/updatePost',{id:this.id,form:form,query:this.query});
 

@@ -1,8 +1,7 @@
 <template>
     <div>
-        <!-- <p> {{userData}} </p> -->
         <div class="profil-card" v-if="userData != null">
-
+            <!-- [CARD HEAD] -->
             <div class="card-head">
                 <p class="deleteUser text-center m-0 text-danger " v-if="this.isUser == userData.id" @click="deleteCompte">delete</p>
                 <h2> 
@@ -12,33 +11,41 @@
                     <i class="fas fa-comment-slash" v-if="userData.role == 'mute'"></i>
                     </h2>
             </div>
+
+            <!-- [CARD LEFT] -->
             <div class="card-left">
                     <img  class="pic" :src="userData.profilePic" :alt="userData.nom">
             </div>
-            <div class="card-right">
-                <p>Description :</p>
-                <div v-if="!editbio" class="userBio">
-                    {{userData.bio}}
-                </div>
 
-                <input v-if="editbio" type="textarea" class="userBio eBio" rows="3" name="newBio" :value="userData.bio" v-on:change="this.getNewBio">
-            </div>
-            <!-- <div v-if="this.isUser == this.userId" class="d-flex editpart"> -->
+            <!-- [V-IF EDIT PP] -->
                 <div  v-if="this.isUser == userData.id" class="col editPp">
                     <button class="btn btn-warning text-white fw-bold" @click="showEditPP"><i class="fas fa-image"></i></button>
 
                     <div  v-if="editPic" class="newpp">
                         <form id="newPP">
-                            <input id="file" type="file" name="profilePic"  accept=".jpg, .jpeg, .png" v-on:change="this.getNewPic">
-                            <button class="btn btn-danger" @click.prevent="this.deletePic">delete pic</button>
+                            <label for="file" class="btn btn-warning text-white">choisir</label>
+                            <input id="file" type="file" name="profilePic"  accept=".jpg, .jpeg, .png" v-on:change="this.getNewPic" >
+                            <button class="btn btn-danger" @click.prevent="this.deletePic">delete</button>
                         </form>
                     </div>
                 </div>
 
+            <!-- [CARD RIGHT] -->
+            <div class="card-right">
+                <p>Description :</p>
+                <div v-if="!editbio" class="userBio">
+                    {{userData.bio}}
+                </div>
+                <input v-if="editbio" type="textarea" class="userBio eBio" rows="3" name="newBio" :value="userData.bio" v-on:change="this.getNewBio">
+            </div>
+
+
+            <!-- [V-IF EDIT BIO] -->
                 <div v-if="this.isUser == userData.id" class="col editBio">
                     <button class="btn btn-warning text-white fw-bold" @click="showEditBio"><i class="fas fa-pen iconEdit edit"></i></button>
                 </div>
 
+            <!-- [V-IF EDIT ROLE] -->
                 <div v-if="this.isAdmin" class="editRole">
                     <p>Role</p>
                    <div class="form-check">
@@ -62,13 +69,12 @@
                         </label>
                     </div>
                 </div>
-            <!-- </div> -->
 
         </div>
 
 
 
-        <!-- <getPost :query="'/user/'+this.id" /> -->
+
     </div>
 
 
@@ -76,7 +82,7 @@
 </template>
 
 <script>
-// import getPost from '@/components/home/post/get_post.vue'
+
 
 export default {
   name: 'user-profile',
@@ -104,23 +110,23 @@ export default {
   props: {
     user: String
   },
+  watch: {
+      '$route' () {
+          if(this.$route.name !== "HomePage"){
+              this.id = this.$route.params.id;
+          }
+      }
+  },
   computed:{
     loading(){
         return this.$store.state.userStore.loading
     },
     userData(){
         console.log('user profile')
+        console.log(this.$store.state.userStore.userProfile)
         return this.$store.state.userStore.userProfile
     }
   },
-//   watch: {
-//   '$route' () {
-//        this.$store.dispatch('userStore/getUserProfile',this.$route.params.id);
-//     }
-//   },
-//   beforeCreate(){
-//     this.$store.dispatch('userStore/getUserProfile',this.$route.params.id);
-//   },
    methods:{
         showEditBio(){
              console.log('editbio')
@@ -210,6 +216,9 @@ export default {
 
 
 <style scoped lang="scss">
+
+#file{display:none;}
+
 .deleteUser{
     cursor: pointer;
 }
@@ -271,6 +280,7 @@ h2{
 }
 .editPp{
         grid-area: editPp;
+        text-align: end;
 
 }
 .editBio{
@@ -313,7 +323,7 @@ h2{
         padding: 1rem;
 
         display: grid;
-        grid-gap: 1rem 4rem;
+        grid-gap: 1rem 0.5rem;
         grid-template-columns: 20% 1fr;
         grid-template-areas:"name name" 
                             "editPp left"
@@ -332,6 +342,9 @@ h2{
             }
 
     }
+}
+@media (max-width: 500px) {
+
 }
 
 </style>

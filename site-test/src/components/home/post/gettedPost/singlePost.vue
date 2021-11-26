@@ -130,11 +130,11 @@ export default {
 
         showEdit(){
             this.show = true
-           console.log(this.show)
+        //    console.log(this.show)
         },
         closeEdit(){
             this.show = false
-            console.log(this.show)
+            // console.log(this.show)
         },
 
         savePost(){
@@ -194,11 +194,11 @@ export default {
     color: rgba(9, 44, 73, 0.603);
 
 }
-// gere le post en grid
+
 .getPost{
     background: white;
     margin: 2rem 0;
-        padding: 2rem;
+    padding: 2rem;
     border-radius: 8px;
     box-shadow: 0px 0px 10px #0000004d;
 }
@@ -318,6 +318,17 @@ export default {
     }
 }
 @media (max-width: 577px) {
+    .headerPost{
+        grid-template-columns: 1fr !important;
+        grid-template-rows: 1fr  !important;
+        grid-row-gap: 0.5rem;
+
+        grid-template-areas: "editPost"
+                            "userData" !important;
+        .editPost{
+            justify-self: center;
+        }
+    }
     .getPost{
         padding: 2rem 0.5rem ;
         background: white;

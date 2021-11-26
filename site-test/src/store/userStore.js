@@ -124,14 +124,14 @@ export const userStore ={
 ///////////////////////////////////////////////////////////////////
 
     getUserData({commit},value){
-      console.log('getUser')
+      // console.log('getUser')
       axios.get('http://localhost:3000/api/user/'+value,{
                 headers: {
                     "authorization" : 'Bearer ' + localStorage.getItem('token'),
                     },
             }) 
             .then(function(response) {
-                console.log('get user data');
+                console.log('get current user data');
 
                 console.log(response.data);
                 commit('setUser',response.data)

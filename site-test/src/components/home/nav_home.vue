@@ -84,6 +84,8 @@ export default {
     input{
         width: 100%;
         padding: 0.3rem;
+        border: 2px solid #1f4988;
+        border-radius: 15px;
     }
 }
 .getSearchUser{
@@ -140,31 +142,38 @@ nav{
 .logo{
     height: 2.5rem;
 }
-
-@media (max-width: 768px) {
+@media (max-width: 1000px){
+    nav{
+        padding: 1rem 1rem;
+    }
+}
+@media (max-width: 800px){
   nav{
-    padding: 1rem 1rem;
     button{
         margin: 0 1rem;
-        width: 2.5rem;
-        height: 2.5rem;
+        width: 2.4rem;
+        height: 2.4rem;
         font-size: 1.3rem;
 
     }
     .logo{
-        height: 1.5rem;
+        height: 1.4rem;
+    }
+  }
+}
+@media (max-width: 555px){
+    .search{
+        display: none;
     }
 }
-}
-@media (max-width: 420PX) {
+@media (max-width: 420px) {
     nav{
-            padding: 0.5rem 0;
-    justify-content: center;
-    .logo{
-        margin-bottom:1rem;
+        padding: 0.5rem 0;
+        justify-content: center;
+        .logo{
+            margin-bottom:1rem;
+        }
     }
-    }
-
 }
 
 </style>
