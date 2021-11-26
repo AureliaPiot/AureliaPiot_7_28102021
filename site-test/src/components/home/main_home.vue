@@ -3,7 +3,7 @@
     <div >
         
         <newPost v-if="this.role !== 'mute'"/>
-        <getPost/>
+        <getPost query='all'/>
     </div>
 
 </template>

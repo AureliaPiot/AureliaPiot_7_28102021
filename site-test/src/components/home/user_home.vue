@@ -2,7 +2,7 @@
 
     <div>
         <userProfile/>
-        <getPost />
+        <getPost :query="'user/'+this.id" />
     </div>
 
 </template>
@@ -33,6 +33,7 @@ export default {
     '$route' () {
         console.log(this.$route)
         if(this.$route.name !== "HomePage"){
+            this.id = this.$route.params.id;
             this.$store.dispatch('userStore/getUserProfile',this.$route.params.id);
             this.$store.dispatch('postStore/getPost','user/'+this.$route.params.id);
         }

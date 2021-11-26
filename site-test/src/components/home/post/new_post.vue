@@ -85,13 +85,11 @@ export default {
     border: 1px solid rgb(255, 0, 0);
 }
 .preview{
-    // width: 50%;
     max-height:10vw;
 }
 .newPost{
     background: rgb(255, 255, 255);
     width: 100%;
-    // height: 10vw;
     padding: 1rem;
     border-radius: 8px;
     margin: 2rem 0;
@@ -105,7 +103,6 @@ input[type="file"] {
     display: none;
 }
 .file-upload {
-    // border: 1px solid #ccc;
     display: inline-block;
     padding: 6px 12px;
     cursor: pointer;

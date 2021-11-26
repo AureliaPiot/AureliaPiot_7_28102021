@@ -24,14 +24,11 @@ export default {
   methods:{
     getUserData(){
         this.$store.dispatch('userStore/getUserData',localStorage.getItem('userId'));
+        //recuperation des donnée utilisateur connecté (pour son image de profile entre autre)
 
     }
   },
-  computed:{
-    // user(){
-    //   return this.$store.state.userStore.user
-    // }
-  },
+  computed:{},
   created(){
     this.getUserData()
   },

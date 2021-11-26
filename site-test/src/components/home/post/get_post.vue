@@ -7,6 +7,7 @@
             v-for="post in allPost " 
             :key="post"
             :post="post" 
+            :query="this.query"
 
         />
 
@@ -25,7 +26,7 @@ export default {
     post
   },
     props: {
-        // query: String
+        query: String
     },
       data(){
         return{ 
