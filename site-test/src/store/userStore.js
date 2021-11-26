@@ -272,7 +272,7 @@ export const userStore ={
           }) 
           .then(function(response) {
             commit('setUserList',response.data)
-            console.log(response.data);
+            // console.log(response.data);
 
           })
           .catch(function (error) {

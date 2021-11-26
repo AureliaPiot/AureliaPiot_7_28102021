@@ -113,9 +113,14 @@ export default {
         return this.$store.state.userStore.userProfile
     }
   },
-  beforeCreate(){
-    this.$store.dispatch('userStore/getUserProfile',this.$route.params.id);
-  },
+//   watch: {
+//   '$route' () {
+//        this.$store.dispatch('userStore/getUserProfile',this.$route.params.id);
+//     }
+//   },
+//   beforeCreate(){
+//     this.$store.dispatch('userStore/getUserProfile',this.$route.params.id);
+//   },
    methods:{
         showEditBio(){
              console.log('editbio')

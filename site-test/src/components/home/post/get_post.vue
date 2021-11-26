@@ -7,7 +7,7 @@
             v-for="post in allPost " 
             :key="post"
             :post="post" 
-            :query="this.query"
+
         />
 
       <!-- tout le defilement se fera ici -->
@@ -25,7 +25,7 @@ export default {
     post
   },
     props: {
-        query: String
+        // query: String
     },
       data(){
         return{ 
@@ -43,8 +43,11 @@ export default {
         }  
     },
        beforeCreate(){
-        this.$store.dispatch('postStore/getPost',this.query);
+        // this.$store.dispatch('postStore/getPost',this.query);
         this.$store.dispatch('postStore/getComs');
+          console.log("get post")
+          // console.log(this.query)
+
 
         
     },

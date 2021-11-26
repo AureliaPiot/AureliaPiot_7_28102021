@@ -6,12 +6,14 @@
         </router-link>
       
         <div class="search" >
-            <input type="text" name="searchUser" id="searchUser"  @input="searchUser" placeholder="trouver un utilisateur">
+            <input type="text" name="searchUser" id="searchUser"  @input="searchUser" placeholder="trouver un utilisateur ">
             <div class="getSearchUser" v-if="this.search">
                 <ul >
                     <li v-for="user in getUsers" :key="user">
                         <router-link :to="{name:'userPage',params:{id: user.id}}" @click="clearSearch">{{user.nom}} {{user.prenom}}</router-link>
+
                     </li>
+                    <li v-if="getUsers.length == 0"><p>aucun Utilisateur trouvé</p></li>
                 </ul>
             </div>    
         </div>
@@ -37,17 +39,18 @@ export default {
        data(){  
        return{
            userId : localStorage.getItem('userId'),
-           search : false
-    
+           search : false,   
         }
   },
   computed:{
       getUsers(){
-          console.table(this.$store.state.userStore.searchUsers)
         return this.$store.state.userStore.searchUsers
       }
   },
   methods:{
+      goUserProfile(param){
+          this.$router.push( {name:'userPage',params:{id: param} } )
+      },
       clearSearch(){
             this.search = false
             document.getElementById('searchUser').value = "";
@@ -56,18 +59,22 @@ export default {
       },
     searchUser(){
         this.search = true
-        let value = document.getElementById('searchUser').value
+        let value = document.getElementById('searchUser').value.replace(/ /g, "")
         console.log(value)
+        console.log(value.length)
+
         if(value.length == 0 ){
             this.clearSearch
+            this.search = false
         }
-        this.$store.dispatch('userStore/searchUser',value)
+        else(
+            this.$store.dispatch('userStore/searchUser',value)
+        )
     },
     signOut(){
         this.$store.dispatch('userStore/logOut')
     },
   },
-
 }
 </script>
 

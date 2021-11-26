@@ -3,7 +3,7 @@
     <div >
         
         <newPost v-if="this.role !== 'mute'"/>
-        <getPost query="all"/>
+        <getPost/>
     </div>
 
 </template>
@@ -21,13 +21,15 @@ export default {
     props: {
         msg: String
     },
-       data(){  
+    data(){  
         return{
             role : localStorage.getItem('role')
             }
-        },
-  }
-
+    },
+    beforeCreate(){
+    this.$store.dispatch('postStore/getPost','all')
+  },
+}
 
 </script>
 
@@ -35,12 +37,9 @@ export default {
 .container{
     background: white;
     width: 100%;
-    // height: 10vw;
 }
 .info-user{
-    border-top: 1px solid rgb(118, 120, 124);
-    // border-bottom: 1px solid rgb(118, 120, 124);
-
     text-align: center;
+    border-top: 1px solid rgb(118, 120, 124);
 }
 </style>
