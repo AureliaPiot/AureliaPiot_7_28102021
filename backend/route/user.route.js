@@ -29,7 +29,7 @@ router.put('/role/:id',auth.admin,userCtrl.update);
 
 
 // delete whit id
-router.delete('/:id',auth.delete,userCtrl.delete);
+router.delete('/:id',auth.action,userCtrl.delete);
 
 // fin url
 // app.use('api/user')
