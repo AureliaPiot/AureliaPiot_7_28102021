@@ -22,7 +22,7 @@ router.get('/:id',auth.connect,comsCtrl.getOne);
 // update with id
 router.put('/:id',auth.user,comsCtrl.update);
 // delete whit id
-router.delete('/:id',auth.connect,comsCtrl.delete);
+router.delete('/:id',auth.delete,comsCtrl.delete);
 
 // fin url
 // app.use('api/user')

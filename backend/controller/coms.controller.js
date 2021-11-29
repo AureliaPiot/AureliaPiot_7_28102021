@@ -126,9 +126,50 @@ exports.update = (req,res) =>{
 
 };
 
-exports.delete = (req,res) =>{
+exports.delete = (req,res, param) =>{
 
+//     Users.findOne({ where: { email : user.email} })
+//     .then(data=>{
+//       if(data){
+//         bcrypt.compare(user.password + process.env.PASSWORD ,data.password)
+//           .then(valid => {
+//           if(!valid) {
+//               return res.status(401).json({message:'mot de passe incorrect'})
+//             } 
+  
+  
+//           console.log(data.role);
+  
+//           res.status(200).json({ 
+  
+//             profilePic: data.profilePic,
+//             userId: data.id,
+//             userRole: data.role,
+  
+//             token: jwt.sign(
+//               { userId: data.id,
+//                 email: data.email,
+//                 role: data.role  },
+//               process.env.TOKEN,
+//               { expiresIn: '24h' }
+//             ) 
+//           });
+  
+//           })
+//           .catch(error => res.status(500).json({ error }))
+//           }
+//       else{
+//         res.status(401).send({ message: `utilisateur introuvable` });
+//       }
+//     })
+//     .catch(err=> {
+//         res.status(500).send({message: err.message || " error canot found any user"})
+//     })
+  
+//   };
         console.log(req.params);
+        console.log(param);
+
   
         Coms.destroy( {where : {id: req.params.id} })
         .then(() => res.status(200).send({message: 'commentaire supprimé'}))

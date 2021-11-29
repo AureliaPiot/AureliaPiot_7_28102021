@@ -26,14 +26,14 @@ app.use(express.json());
 app.use(helmet());
 
 
-// autorisation du front a interagire avec le back
+
 app.use((req,res,next)=>{
 
 if(req.headers.origin === 'http://localhost:8080' || req.headers.origin === 'http://192.168.1.5:8080' ){
     res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
     res.set("Content-Security-Policy", `default-src 'self' ${req.headers.origin}`);
+    // restriction à 2 origines, le local ou le network
 }
-// restriction à 2 origines, le local ou le network
 
   res.setHeader('Access-Control-Allow-Headers','Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
   res.setHeader('Access-Control-Allow-Methods','GET, POST, PUT, DELETE, PATCH, OPTIONS');

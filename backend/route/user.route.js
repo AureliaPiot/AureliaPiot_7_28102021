@@ -25,11 +25,11 @@ router.put('/file/:id',auth.connect,multer,userCtrl.updateFile);
 router.put('/delete/file/:id',auth.connect,userCtrl.deleteFile);
 
 router.put('/bio/:id',auth.connect,userCtrl.update);
-router.put('/role/:id',auth.connect,userCtrl.update);
+router.put('/role/:id',auth.admin,userCtrl.update);
 
 
 // delete whit id
-router.delete('/:id',auth.connect,userCtrl.delete);
+router.delete('/:id',auth.delete,userCtrl.delete);
 
 // fin url
 // app.use('api/user')

@@ -17,7 +17,7 @@ router.get('/:id',auth.connect,postCtrl.getOne);
 // update with id
 router.put('/:id',auth.user,multer,postCtrl.update);
 // delete whit id
-router.delete('/:id',auth.connect,postCtrl.delete);
+router.delete('/:id',auth.delete,postCtrl.delete);
 
 // fin url
 // app.use('api/user')

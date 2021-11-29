@@ -16,8 +16,8 @@ exports.addPost = (req,res) =>{
     .then(data=>res.status(201).send({message:"like ajouté"}))
     .catch(err=> res.status(500).send({message: err.message}))
 }
+
 exports.addCom = (req,res) =>{
-    console.log(req.body);
     const like ={
         UserId:req.body.UserId,
         ComId:req.body.ComId

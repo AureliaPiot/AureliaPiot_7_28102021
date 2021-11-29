@@ -164,7 +164,7 @@ export const postStore ={
                 },
         }) 
         .then(function(response) {
-            console.log(response.data);
+            console.log(response.data.message);
             
             // dispatch('getPost',data.query);
             dispatch('getComs');
@@ -187,8 +187,7 @@ export const postStore ={
                 },
         }) 
         .then(function(response) {
-            console.log(response.data);
-            
+            console.log(response.data);           
             dispatch('getComs');
 
             // commit('setLoadingStatus','notLoading');
