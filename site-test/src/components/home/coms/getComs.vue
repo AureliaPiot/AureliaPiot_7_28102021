@@ -4,7 +4,7 @@
         <div  class="coms" >
 
             <div class="pp">
-                <img v-bind:src="coms.User.profilePic" alt="">
+                <img class="--round" v-bind:src="coms.User.profilePic" alt="">
             </div>
 
             <div class="userData d-flex">
@@ -19,8 +19,8 @@
 
                 <div class="editCom" >
 
-                    <i class="fas fa-pen iconEdit edit" v-if=" isCreator == coms.User.id && coms.User.role !=='mute'" @click.prevent="showEditCom"></i>
-                    <i class="fas fa-trash iconEdit delete"  v-if="isCreator == coms.User.id || isAdmin " @click.prevent="deleteCom(coms.id)"></i>
+                    <i class="fas fa-pen iconEdit --text-edit" v-if=" isCreator == coms.User.id && coms.User.role !=='mute'" @click.prevent="showEditCom"></i>
+                    <i class="fas fa-trash iconEdit --text-delete"  v-if="isCreator == coms.User.id || isAdmin " @click.prevent="deleteCom(coms.id)"></i>
 
                 </div>
             </div>
@@ -111,11 +111,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.com{
-width: 100%;
-min-height:10rem; 
-background: orange; 
-}
 .coms{
     width: 100%;
     display: grid;
@@ -124,22 +119,19 @@ background: orange;
                          "pp content";
     grid-gap: 0.5rem 1rem;
     padding: 1rem 3.5rem;
-    border-top: 1px solid #dfdfdf ;
+    border-top: 1px solid darken($ligth_theme_Color_terciary,10%)  ;
 
 }
 .pp{
     grid-area: pp;
     img {
         height: 3rem;
-        border-radius:50% ;
+        // border-radius:50% ;
     }
 }
 .userData{
     grid-area: userData;
     align-items: center;
-    .usernamePost{
-        color: rgb(0, 0, 0);
-    }
     p{
         margin: 0 0.3rem;
     }
@@ -156,12 +148,6 @@ background: orange;
 .editCom{
     .iconEdit{
         margin: 0 0.5rem;
-    }
-    .edit{
-        color: #9e9053;
-    }
-    .delete{
-        color: #ba1111;
     }
 }
 .Editcontent{

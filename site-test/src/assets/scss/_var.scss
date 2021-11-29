@@ -7,6 +7,9 @@ $dark_theme_Color_primary : lighten($ligth_theme_Color_primary,20%);
 $ligth_theme_Color_secondary : #ffffff;
 $dark_theme_Color_secondary: darken($ligth_theme_Color_secondary,20%);
 
+$ligth_theme_Color_terciary : #F3F6F8;
+$dark_theme_Color_terciary: darken($ligth_theme_Color_terciary,20%);
+
 
 
 
@@ -30,6 +33,9 @@ $invalide : rgb(255, 0, 0);
 .--delete{
     background-color: $delete;
 }
+.--text-edit{
+    color: $edit;
+}
 .--text-delete{
     color: $delete;
 }
@@ -37,9 +43,15 @@ $invalide : rgb(255, 0, 0);
 .--round{
     border-radius:50%;
 }
+.--border{
+    border-radius:16px;
+}
 img{
     box-sizing: content-box;
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+a{
+    color:$ligth_theme_text ;
 }

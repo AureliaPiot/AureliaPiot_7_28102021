@@ -5,7 +5,7 @@
     <div class="post">
         <div class="headerPost ">
             <div class="userData">
-                <img class="profilePic" v-bind:src="this.UserProfilePic" v-bind:alt="this.UserNom">
+                <img class="profilePic --round" v-bind:src="this.UserProfilePic" v-bind:alt="this.UserNom">
                 <router-link class="name" :to="{ name: 'userPage',params:{id: this.UserId }}">{{this.UserNom}}  {{this.UserPrenom}} <i class="fas fa-crown" v-if="this.UserRole == 'admin'" ></i> </router-link>
                 <p class="date"> {{ this.createDate }}</p>
             </div>
@@ -118,15 +118,13 @@ export default {
         }  
     },
     created(){     
-        console.log("date--------------------");
-
-        console.log( new Date(this.post.createDate).toLocaleDateString('fr-FR', {  year: 'numeric', month: 'long', day: 'numeric' })  );
         for(let like of this.post.likes){
             if(like.UserId == this.isCreator)
             {
                 this.like = true;
             }
         }
+        // boucle qui verifie si l'user connecté a liker le post
     },
 
     methods:{
@@ -238,7 +236,7 @@ export default {
         }
         .name{
         grid-area: name;
-        color: rgb(0, 0, 0);
+        // color: rgb(0, 0, 0);
         font-weight: 600;
 
         }
@@ -251,7 +249,7 @@ export default {
 
             width: 4rem;
             height: 4rem;
-            border-radius: 50%;
+            // border-radius: 50%;
         }
         .editPost{
             grid-area: editPost;
@@ -292,7 +290,9 @@ export default {
         min-height: 3rem;
         text-align: center;
         font-size: 2rem;
-        border-top: 1px solid rgb(223, 223, 223);
+        border-top: 1px solid  darken($ligth_theme_Color_terciary,10%);
+
+        color: darken($ligth_theme_Color_primary,10%);
 
         p{
             display: inline;

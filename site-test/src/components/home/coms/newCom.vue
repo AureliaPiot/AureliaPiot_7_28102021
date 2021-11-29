@@ -1,11 +1,10 @@
 <template>
             <div id="newCom" class="newCom">
                
-                    <img  v-bind:src="getUser.profilePic" alt="" class="userAvatar">
+                    <img  v-bind:src="getUser.profilePic" alt="" class="userAvatar --round">
                     <input  type="text" class="form-control messageCom" :name="'messageCom'+postId" :id="'messageCom'+postId" placeholder="commentaire..."  v-on:keyup.enter.prevent="submitCom" :disabled="getUser.role =='mute' ? true : false">
 
-                    <i class="fas fa-arrow-alt-circle-right submitCom"  v-on:click.prevent="submitCom"></i>
-
+                    <i class="fas fa-chevron-right submitCom"  v-on:click.prevent="submitCom"></i>
 
             
             </div>
@@ -59,7 +58,7 @@ export default {
              }
             this.$store.dispatch('postStore/newCom',{form : data, query : this.query});
 
-            document.getElementById('messageCom'+this.postId).value=''
+            document.getElementById('messageCom'+this.postId).value='';
 
          },
      }
@@ -78,11 +77,9 @@ export default {
 
     background: rgb(255, 255, 255);
     margin: 1rem;
-    border-radius: 8px;
 
     .userAvatar{
         grid-area: pic;
-        border-radius: 50%;
     }
     .messageCom{
         grid-area: comment;
@@ -90,15 +87,11 @@ export default {
     .submitCom{
         grid-area: btn;
         margin: 0;
-        font-size: 2rem;
         padding: 0;
+        font-size: 2rem;
         width: min-content;
+        color: darken($ligth_theme_Color_primary,10%);
     }
-}
-
-.w30{
-    width: 30%;
-    background: rgba(0, 0, 255, 0.034);
 }
 
 @media (max-width: 350px) {
