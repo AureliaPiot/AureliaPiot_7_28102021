@@ -13,6 +13,8 @@ exports.create = (req,res) =>{
     console.log('create-post----------');
     console.log(req.body);
     console.log(req.body.userId);
+    console.log("date :: "+req.body.createDate);
+
     console.log(req.file);
 
 
@@ -26,24 +28,23 @@ exports.create = (req,res) =>{
     else{
         attachement =req.body.file;
     }
-
-    const post ={
-      UserId: req.body.userId,
-      content : req.body.message,
-      attachement: attachement,
-      like: req.body.like,
-      createDate:req.body.createDate,
-    };
+        const post = Posts.build({
+            UserId: req.body.userId,
+            content : req.body.message,
+            attachement: attachement,
+            like: req.body.like,
+            createDate:req.body.createDate,
+        })
     console.log(post);
 
 
-    Posts.create(post)
-         .then(data=>{
-            res.status(201).send("post créer");
-        })
-        .catch(err=> {
-            res.status(500).send({message: err.message || "cannot create an account"})
-        })
+        post.save()
+             .then(data=>{
+                res.status(201).send({data : data, message :"post crée"});
+            })
+            .catch(err=> {
+                res.status(500).send({message: err.message || "cannot create a post"})
+            })
   
 };
 

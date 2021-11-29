@@ -1,15 +1,12 @@
 <template>
             <div id="newCom" class="newCom">
-
-                <!-- <div class="form-group row justify-content-between "> -->
-                
+               
                     <img  v-bind:src="getUser.profilePic" alt="" class="userAvatar">
                     <input  type="text" class="form-control messageCom" :name="'messageCom'+postId" :id="'messageCom'+postId" placeholder="commentaire..."  v-on:keyup.enter.prevent="submitCom" :disabled="getUser.role =='mute' ? true : false">
 
                     <i class="fas fa-arrow-alt-circle-right submitCom"  v-on:click.prevent="submitCom"></i>
 
 
-                <!-- </div> -->
             
             </div>
         
@@ -42,11 +39,11 @@ export default {
             const inputEmpty = /[\S]+/;
 
             if(inputEmpty.test(content.value) == false ){
-                content.classList.add('invalide');
+                content.classList.add('--invalide');
                 content.value="";
 
                 setTimeout(function(){
-                   content.classList.remove('invalide');
+                   content.classList.remove('--invalide');
                 }, 400);
 
 
@@ -70,9 +67,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.invalide{
-    border: 1px solid rgb(255, 0, 0);
-}
+
 #newCom{
     display: grid;
     grid-template-columns: 3rem 1fr 3rem;
@@ -88,11 +83,9 @@ export default {
     .userAvatar{
         grid-area: pic;
         border-radius: 50%;
-
     }
     .messageCom{
         grid-area: comment;
-        // width: 70%;
     }
     .submitCom{
         grid-area: btn;

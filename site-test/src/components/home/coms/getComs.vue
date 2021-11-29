@@ -1,6 +1,6 @@
 <template>
 
-    <!-- <div  > -->
+
         <div  class="coms" >
 
             <div class="pp">
@@ -14,9 +14,11 @@
                     <p>{{coms.User.prenom}}</p>
                     <i class="fas fa-crown"  v-if="this.coms.User.role == 'admin'" ></i>
                 </router-link>
-                <p class="comDate">{{coms.createDate.substring(0,10)}}</p>
+
+                <p class="comDate">{{this.createDate}}</p>
+
                 <div class="editCom" >
-                     <!-- v-if="isCreator == coms.User.id  || isAdmin " -->
+
                     <i class="fas fa-pen iconEdit edit" v-if=" isCreator == coms.User.id && coms.User.role !=='mute'" @click.prevent="showEditCom"></i>
                     <i class="fas fa-trash iconEdit delete"  v-if="isCreator == coms.User.id || isAdmin " @click.prevent="deleteCom(coms.id)"></i>
 
@@ -31,14 +33,9 @@
 
             </div>
 
-           
-
-
-
-
-
         </div>
-    <!-- </div>       -->
+
+
 </template>
 
 <script>
@@ -65,6 +62,7 @@ export default {
         return{
             token :localStorage.getItem("token"),
             editCom: false,
+            createDate: new Date(this.coms.createDate).toLocaleDateString('fr-FR', {  year: 'numeric', month: 'numeric', day: 'numeric' }),
         }
     },
     computed:{
@@ -132,15 +130,13 @@ background: orange;
 .pp{
     grid-area: pp;
     img {
-        // width: 100%;
         height: 3rem;
         border-radius:50% ;
-        // object-fit: cover;
-
     }
 }
 .userData{
     grid-area: userData;
+    align-items: center;
     .usernamePost{
         color: rgb(0, 0, 0);
     }

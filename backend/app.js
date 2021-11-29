@@ -17,7 +17,7 @@ const helmet = require("helmet");
 
 // db.sequelize.sync();
 
-// pour deamrrer le back-----
+// pour demarrer le back-----
 
 // nodemon --exec 'node -r dotenv/config server.js'
 

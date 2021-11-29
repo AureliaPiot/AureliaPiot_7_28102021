@@ -30,7 +30,6 @@ module.exports = (sequelize, Sequelize) => {
       createDate: {
         allowNull:false,
         type: Sequelize.DATE,
-        defaultValue: 0
       },
       comments: {
         allowNull:true,

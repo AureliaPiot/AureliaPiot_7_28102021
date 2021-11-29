@@ -52,11 +52,11 @@ export default {
             const inputEmpty = /[\S]+/;
 
             if(inputEmpty.test(message.value) == false && file == "null"){
-                message.classList.add('invalide');
+                message.classList.add('--invalide');
                 message.value="";
 
                 setTimeout(function(){
-                    message.classList.remove('invalide');
+                    message.classList.remove('--invalide');
                 }, 500);
 
 
@@ -67,7 +67,7 @@ export default {
             dataform.append('userId',userId);
             dataform.append('message',message.value);
             dataform.append('file',file);
-            dataform.append('createDate',Date.now())
+            dataform.append('createDate',new Date().toISOString().slice(0, 19).replace('T', ' '))
 
             let form = dataform;        
 
@@ -82,9 +82,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.invalide{
-    border: 1px solid rgb(255, 0, 0);
-}
+
 .preview{
     max-height:10vw;
 }
@@ -94,7 +92,7 @@ export default {
     padding: 1rem;
     border-radius: 8px;
     margin: 2rem 0;
-    border:1px solid #1f4988
+    border:1px solid $ligth_theme_Color_primary ;
 }
 .w30{
     width: 30%;

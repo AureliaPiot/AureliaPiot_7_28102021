@@ -13,7 +13,15 @@ $dark_theme_Color_secondary: darken($ligth_theme_Color_secondary,20%);
 $edit : rgb(223, 160, 26);
 $delete : rgb(161, 16, 16);
 
+$valide: rgb(16, 119, 55);
+$invalide : rgb(255, 0, 0);
 
+.--invalide{
+    border: 1px solid $invalide;
+}
+.--valide{
+    border: 1px solid $valide;
+}
 
 
 .--edit{
@@ -21,6 +29,9 @@ $delete : rgb(161, 16, 16);
 }
 .--delete{
     background-color: $delete;
+}
+.--text-delete{
+    color: $delete;
 }
 
 .--round{

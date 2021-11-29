@@ -3,7 +3,7 @@
         <div class="profil-card" v-if="userData != null">
             <!-- [CARD HEAD] -->
             <div class="card-head">
-                <p class="deleteUser text-center m-0 text-danger " v-if="this.isUser == userData.id" @click="deleteCompte">delete</p>
+                <p class="deleteUser text-center m-0 --text-delete " v-if="this.isUser == userData.id" @click="deleteCompte">delete</p>
                 <h2> 
                     {{userData.nom}} 
                     {{userData.prenom}} 
@@ -19,11 +19,11 @@
 
             <!-- [V-IF EDIT PP] -->
                 <div  v-if="this.isUser == userData.id" class="col editPp">
-                    <button class="btn btn-warning text-white fw-bold" @click="showEditPP"><i class="fas fa-image"></i></button>
+                    <button class="btn --edit text-white fw-bold" @click="showEditPP"><i class="fas fa-image"></i></button>
 
                     <div  v-if="editPic" class="newpp">
                         <form id="newPP">
-                            <label for="file" class="btn btn-warning text-white">choisir</label>
+                            <label for="file" class="btn --edit text-white">choisir</label>
                             <input id="file" type="file" name="profilePic"  accept=".jpg, .jpeg, .png" v-on:change="this.getNewPic" >
                             <button class="btn btn-danger" @click.prevent="this.deletePic">delete</button>
                         </form>
@@ -36,13 +36,13 @@
                 <div v-if="!editbio" class="userBio">
                     {{userData.bio}}
                 </div>
-                <input v-if="editbio" type="textarea" class="userBio eBio" rows="3" name="newBio" :value="userData.bio" v-on:change="this.getNewBio">
+                <input v-if="editbio" type="textarea" class="userBio eBio" rows="3"  name="newBio" :value="userData.bio" v-on:change="this.getNewBio">
             </div>
 
 
             <!-- [V-IF EDIT BIO] -->
                 <div v-if="this.isUser == userData.id" class="col editBio">
-                    <button class="btn btn-warning text-white fw-bold" @click="showEditBio"><i class="fas fa-pen iconEdit edit"></i></button>
+                    <button class="btn --edit text-white fw-bold" @click="showEditBio"><i class="fas fa-pen iconEdit edit"></i></button>
                 </div>
 
             <!-- [V-IF EDIT ROLE] -->

@@ -7,10 +7,10 @@
             <div class="userData">
                 <img class="profilePic" v-bind:src="this.UserProfilePic" v-bind:alt="this.UserNom">
                 <router-link class="name" :to="{ name: 'userPage',params:{id: this.UserId }}">{{this.UserNom}}  {{this.UserPrenom}} <i class="fas fa-crown" v-if="this.UserRole == 'admin'" ></i> </router-link>
-                <p class="date"> {{post.createDate.substring(0,10)}}</p>
+                <p class="date"> {{ this.createDate }}</p>
             </div>
             <div class="editPost"  v-if="this.isCreator == this.UserId || this.isAdmin ">
-                <button class="btn --edit " v-if="this.isCreator == this.UserId && this.UserRole !== 'mute'" @click.prevent="showEdit"><i class="fas fa-pen text-white"></i></button>
+                <button class="btn --edit m-3" v-if="this.isCreator == this.UserId && this.UserRole !== 'mute'" @click.prevent="showEdit"><i class="fas fa-pen text-white"></i></button>
                 <!-- ouvre affiche un composant qui recupere les données dans le form  -->
                 <button class="btn --delete " @click.prevent="deletePost"><i class="fas fa-trash text-white"></i></button>
                 <!-- affiche une alerte avant la suppression du post -->
@@ -96,7 +96,7 @@ export default {
             id: this.post.id ,
             attachement: this.post.attachement ,
             content: this.post.content ,
-            createDate: this.post.createDate ,
+            createDate: new Date(this.post.createDate).toLocaleDateString('fr-FR', {  year: 'numeric', month: 'long', day: 'numeric' }),
             Postlikes: this.post.likes.length ,
             PostComs: this.post.Coms.length ,
 
@@ -118,6 +118,9 @@ export default {
         }  
     },
     created(){     
+        console.log("date--------------------");
+
+        console.log( new Date(this.post.createDate).toLocaleDateString('fr-FR', {  year: 'numeric', month: 'long', day: 'numeric' })  );
         for(let like of this.post.likes){
             if(like.UserId == this.isCreator)
             {
@@ -254,11 +257,9 @@ export default {
             grid-area: editPost;
             justify-self: flex-end;
 
-            // .edit{
-            //     background: $edit;
-            //     // background: #eed155;
-            //     margin-right: 3rem ;
-            // }
+            .edit{
+                margin-right: 3rem ;
+            }
             // .delete{
             //     background: #ba1111;
             // }
