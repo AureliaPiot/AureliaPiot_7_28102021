@@ -4,12 +4,23 @@
             <!-- [CARD HEAD] -->
             <div class="card-head">
                 <p class="deleteUser text-center m-0 --text-delete " v-if="this.isUser == userData.id" @click="deleteCompte">delete</p>
-                <h2> 
-                    {{userData.nom}} 
-                    {{userData.prenom}} 
-                    <i class="fas fa-crown"  v-if="userData.role == 'admin'" ></i>
-                    <i class="fas fa-comment-slash" v-if="userData.role == 'mute'"></i>
+                
+                <div >
+                    <h2 v-if="!this.editName"> 
+                        {{userData.nom}} 
+                        {{userData.prenom}} 
+                        <i class="fas fa-crown"  v-if="userData.role == 'admin'" ></i>
+                        <i class="fas fa-comment-slash" v-if="userData.role == 'mute'"></i>
                     </h2>
+
+                    <div class="edit-Name" v-if="this.editName">
+                        <input type="text" name="nom" :value="userData.nom">
+                        <input type="text" name="prenom" :value="userData.prenom">
+                    </div>
+                    
+                    <button  class="btn --edit text-white fw-bold"  v-if="this.isUser == userData.id" @click="showEditName"><i class="fas fa-pen"></i></button>
+                </div>
+
             </div>
 
             <!-- [CARD LEFT] -->
@@ -100,7 +111,8 @@ export default {
             
             editPp:null,
             editbio:null,
- 
+
+            editName:false,
             editBio : false,
             editPic :false,
 
@@ -128,6 +140,15 @@ export default {
     }
   },
    methods:{
+        showEditName(){
+             console.log('editname')
+            if(!this.editName){
+                this.editName = true
+            }
+            else if(this.editName){
+                this.editName = false
+            }
+        },
         showEditBio(){
              console.log('editbio')
             if(!this.editbio){
