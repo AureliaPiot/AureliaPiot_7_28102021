@@ -1,7 +1,6 @@
 <template>
 
-    <div >
-        
+    <div class="col-xl-5 col-md-8 mx-auto">
         <newPost v-if="this.role !== 'mute'"/>
         <getPost query='all'/>
     </div>

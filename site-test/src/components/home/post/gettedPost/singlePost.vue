@@ -10,15 +10,15 @@
                 <p class="date"> {{Date(post.createDate).toString().slice(0,16)}}</p>
             </div>
             <div class="editPost"  v-if="this.isCreator == this.UserId || this.isAdmin ">
-                <button class="btn edit " v-if="this.isCreator == this.UserId && this.UserRole !== 'mute'" @click.prevent="showEdit"><i class="fas fa-pen text-white"></i></button>
+                <button class="btn --edit " v-if="this.isCreator == this.UserId && this.UserRole !== 'mute'" @click.prevent="showEdit"><i class="fas fa-pen text-white"></i></button>
                 <!-- ouvre affiche un composant qui recupere les données dans le form  -->
-                <button class="btn delete " @click.prevent="deletePost"><i class="fas fa-trash text-white"></i></button>
+                <button class="btn --delete " @click.prevent="deletePost"><i class="fas fa-trash text-white"></i></button>
                 <!-- affiche une alerte avant la suppression du post -->
             </div>
         </div>
         <div class="bodyPost">
             <p>{{this.content}}</p>
-            <img v-if="this.attachement !== 'null'" class="imgPost" :src="this.attachement" alt="">
+            <img v-if="this.attachement !== 'null'" class="imgPost" :src="this.attachement" alt="post_img">
         </div>
         <div class="footerPost d-flex align-items-center">
                 <div class="col "><i v-bind:class="{ 'valide' : this.like } " class="fas fa-thumbs-up like" @click="addLike"></i> <p>{{ this.Postlikes}} </p></div>
@@ -211,10 +211,10 @@ export default {
     grid-template-areas: "header header"
                         "body body"
                         "footer footer";
-    img{
-        width: 100%;
-        height: 100%;
-    }
+    // img{
+    //     width: 100%;
+    //     height: 100%;
+    // }
 
     .headerPost{
     grid-area: header;
@@ -254,13 +254,14 @@ export default {
             grid-area: editPost;
             justify-self: flex-end;
 
-            .edit{
-                background: #eed155;
-                margin-right: 3rem ;
-            }
-            .delete{
-                background: #ba1111;
-            }
+            // .edit{
+            //     background: $edit;
+            //     // background: #eed155;
+            //     margin-right: 3rem ;
+            // }
+            // .delete{
+            //     background: #ba1111;
+            // }
         }
 
         p{

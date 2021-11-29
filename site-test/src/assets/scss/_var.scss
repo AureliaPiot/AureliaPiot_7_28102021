@@ -1,0 +1,34 @@
+$ligth_theme_text : rgb(0, 0, 0);
+$dark_theme_text : rgb(255, 255, 255);
+
+$ligth_theme_bg-Color_primary : #1f4988;
+$dark_theme_bg-Color_primary : lighten($ligth_theme_bg-Color_primary,20%);
+
+$ligth_theme_bg-Color_secondary : #ffffff;
+$dark_theme_bg-Color_secondary: darken($ligth_theme_bg-Color_secondary,20%);
+
+
+
+
+$edit : rgb(223, 160, 26);
+$delete : rgb(161, 16, 16);
+
+
+
+
+.--edit{
+    background-color: $edit;
+}
+.--delete{
+    background-color: $delete;
+}
+
+.--round{
+    border-radius:50%;
+}
+img{
+    box-sizing: content-box;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

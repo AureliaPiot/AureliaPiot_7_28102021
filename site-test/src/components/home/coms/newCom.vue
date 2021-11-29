@@ -1,7 +1,7 @@
 <template>
             <div id="newCom" class="newCom">
 
-                <div class="form-group row justify-content-between ">
+                <!-- <div class="form-group row justify-content-between "> -->
                 
                     <img  v-bind:src="getUser.profilePic" alt="" class="userAvatar">
                     <input  type="text" class="form-control messageCom" :name="'messageCom'+postId" :id="'messageCom'+postId" placeholder="commentaire..."  v-on:keyup.enter.prevent="submitCom" :disabled="getUser.role =='mute' ? true : false">
@@ -9,7 +9,7 @@
                     <i class="fas fa-arrow-alt-circle-right submitCom"  v-on:click.prevent="submitCom"></i>
 
 
-                </div>
+                <!-- </div> -->
             
             </div>
         
@@ -74,26 +74,35 @@ export default {
     border: 1px solid rgb(255, 0, 0);
 }
 #newCom{
-    background: rgb(255, 255, 255);
+    display: grid;
+    grid-template-columns: 3rem 1fr 3rem;
+    grid-template-rows: 3rem;
+    grid-column-gap: 1.5rem;
+    grid-template-areas: "pic comment btn";
+    align-items: center;
 
+    background: rgb(255, 255, 255);
     margin: 1rem;
     border-radius: 8px;
 
     .userAvatar{
-        width: 4rem;
+        grid-area: pic;
         border-radius: 50%;
 
     }
+    .messageCom{
+        grid-area: comment;
+        // width: 70%;
+    }
     .submitCom{
+        grid-area: btn;
         margin: 0;
         font-size: 2rem;
         padding: 0;
         width: min-content;
     }
 }
-.messageCom{
-    width: 70%;
-}
+
 .w30{
     width: 30%;
     background: rgba(0, 0, 255, 0.034);

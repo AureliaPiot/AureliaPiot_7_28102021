@@ -1,13 +1,10 @@
 <template>
   <div >
     <!-- tentative d'ancre -->
-    <!-- <div class=""><a href="#head"><i class="btnUp fas fa-arrow-up"></i></a></div> -->
+    <!-- <div><a href="#head"><i class="btnUp fas fa-arrow-up"></i></a></div> -->
       <nav_home />
- 
-      <div class="col-xl-5 col-md-8 mx-auto main_elt">
-          <router-view/>
-      </div>
-
+      <router-view/>
+      
   </div>
 </template>
 
@@ -51,25 +48,5 @@ export default {
     font-size: 3rem;
     color: white;
   }
-  .home{
-      margin:0;
-  }
-  .action_elt{
-    background: white;
-    grid-area: action;
-    .row{
-      margin:0
-    }
-  }
-  .user_elt{
-    grid-area: user;
-  }
-  .news_elt{
-    grid-area: news;
-    margin-top: 3vw;
-  }
 
-  .main_elt{
-    grid-area: main;
-  }
 </style>

@@ -244,11 +244,11 @@ export default {
     .card-left{
         grid-area: left;
         .pic{
-            width: 100%;
-            height: 100%;
+            // width: 100%;
+            // height: 100%;
             max-height: 11vw;
             border-radius: 15%;
-            object-fit: cover;
+            // object-fit: cover;
 
         }
 

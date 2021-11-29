@@ -19,9 +19,9 @@
         </div>
 
         <div class="link-group">
-            <button><router-link to="/home"><i class="fas fa-home"></i></router-link></button> 
-            <button><router-link :to="{ name: 'userPage',params:{id: this.userId }}"><i class="fas fa-user"></i></router-link></button>
-            <button  @click="signOut"><i class="fas fa-sign-out-alt"></i></button>
+            <button class="--round"><router-link to="/home"><i class="fas fa-home"></i></router-link></button> 
+            <button class="--round"><router-link :to="{ name: 'userPage',params:{id: this.userId }}"><i class="fas fa-user"></i></router-link></button>
+            <button class="--round" @click="signOut"><i class="fas fa-sign-out-alt"></i></button>
         </div>
       
     </nav>
@@ -84,7 +84,7 @@ export default {
     input{
         width: 100%;
         padding: 0.3rem;
-        border: 2px solid #1f4988;
+        border: 2px solid $ligth_theme_bg-Color_primary;
         border-radius: 15px;
     }
 }
@@ -118,14 +118,13 @@ nav{
     width: 100%;
     padding: 1rem 5rem;
     background: white;
-    border-bottom: 4px solid #1f4988;
+    border-bottom: 4px solid $ligth_theme_bg-Color_primary;
     button{
         margin: 0 1rem;
         width: 3.6rem;
         height: 3.6rem;
         border: none;
-        border-radius: 50%;
-        background-color: #1f4988;
+        background-color: $ligth_theme_bg-Color_primary;
 
         font-size: 2rem;
         color: white ;
