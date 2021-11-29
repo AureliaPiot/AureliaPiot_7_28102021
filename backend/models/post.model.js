@@ -29,7 +29,7 @@ module.exports = (sequelize, Sequelize) => {
       // },
       createDate: {
         allowNull:false,
-        type: Sequelize.INTEGER,
+        type: Sequelize.DATE,
         defaultValue: 0
       },
       comments: {

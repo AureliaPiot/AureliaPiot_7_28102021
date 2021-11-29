@@ -1,6 +1,6 @@
 <template>
 
-    <div>
+    <div class="col-xl-5 col-md-8 mx-auto">
         <userProfile/>
         <getPost :query="'user/'+this.id" />
     </div>
@@ -54,12 +54,4 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.container{
-    background: white;
-    width: 100%;
-}
-.info-user{
-    text-align: center;
-    border-top: 1px solid rgb(118, 120, 124);
-}
 </style>

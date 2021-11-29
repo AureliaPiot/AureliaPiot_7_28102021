@@ -7,7 +7,7 @@
             <div class="userData">
                 <img class="profilePic" v-bind:src="this.UserProfilePic" v-bind:alt="this.UserNom">
                 <router-link class="name" :to="{ name: 'userPage',params:{id: this.UserId }}">{{this.UserNom}}  {{this.UserPrenom}} <i class="fas fa-crown" v-if="this.UserRole == 'admin'" ></i> </router-link>
-                <p class="date"> {{Date(post.createDate).toString().slice(0,16)}}</p>
+                <p class="date"> {{post.createDate.substring(0,10)}}</p>
             </div>
             <div class="editPost"  v-if="this.isCreator == this.UserId || this.isAdmin ">
                 <button class="btn --edit " v-if="this.isCreator == this.UserId && this.UserRole !== 'mute'" @click.prevent="showEdit"><i class="fas fa-pen text-white"></i></button>

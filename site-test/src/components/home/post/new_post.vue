@@ -67,6 +67,7 @@ export default {
             dataform.append('userId',userId);
             dataform.append('message',message.value);
             dataform.append('file',file);
+            dataform.append('createDate',Date.now())
 
             let form = dataform;        
 

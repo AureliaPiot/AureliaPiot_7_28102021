@@ -84,7 +84,7 @@ export default {
     input{
         width: 100%;
         padding: 0.3rem;
-        border: 2px solid $ligth_theme_bg-Color_primary;
+        border: 2px solid $ligth_theme_Color_primary;
         border-radius: 15px;
     }
 }
@@ -118,13 +118,13 @@ nav{
     width: 100%;
     padding: 1rem 5rem;
     background: white;
-    border-bottom: 4px solid $ligth_theme_bg-Color_primary;
+    border-bottom: 4px solid $ligth_theme_Color_primary;
     button{
         margin: 0 1rem;
         width: 3.6rem;
         height: 3.6rem;
         border: none;
-        background-color: $ligth_theme_bg-Color_primary;
+        background-color: $ligth_theme_Color_primary;
 
         font-size: 2rem;
         color: white ;

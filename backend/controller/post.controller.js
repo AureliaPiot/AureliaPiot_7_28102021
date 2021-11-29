@@ -32,7 +32,7 @@ exports.create = (req,res) =>{
       content : req.body.message,
       attachement: attachement,
       like: req.body.like,
-      createDate:Date.now(),
+      createDate:req.body.createDate,
     };
     console.log(post);
 
