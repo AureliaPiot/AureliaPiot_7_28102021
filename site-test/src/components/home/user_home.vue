@@ -32,13 +32,13 @@ export default {
     watch: {
     '$route' () {
         console.log(this.$route)
-        if(this.$route.name !== "HomePage"){
+        if(this.$route.name !== "HomePage" && this.$route.name !== "Sign"){
             this.id = this.$route.params.id;
             this.$store.dispatch('userStore/getUserProfile',this.$route.params.id);
             this.$store.dispatch('postStore/getPost','user/'+this.$route.params.id);
         }
         //réinsitialisation des donnée aux changement des parametres dans l'url
-        // sauf si la route s'appele "HomePage", on evite d'initier des données vide
+        // sauf si la route s'appele "HomePage"et "Sign", on evite d'initier des données vide
         //meme en "sortant" du composant il ecoute toujours la "route"
 
         }

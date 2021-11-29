@@ -99,7 +99,7 @@ export const userStore ={
               localStorage.setItem("userId",value.userId);
               localStorage.setItem("role",value.userRole);
 
-              router.push("home");
+              router.push({path:"home"})
 
               console.log("connexion autoriser");
               return
@@ -118,7 +118,7 @@ export const userStore ={
 
     logOut(){
       localStorage.clear();
-      router.push({name:"Sign"});
+      router.push({path:"/"});
     },
 
 ///////////////////////////////////////////////////////////////////

@@ -194,7 +194,7 @@ export default {
 
         deleteCompte(){
             console.log('delete compte');
-           if(confirm('ATTENTION: cette action entrainera la suppression de toutes les données et action en relation avec votre compte,(vos posts, commentaire et like seront supprimés) êtes vous certain de vouloir supprimer votre compte ?')){
+           if(confirm('ATTENTION: cette action entrainera la suppression de toutes les données et actions en relation avec votre compte,(vos posts, commentaire et like seront supprimés) êtes vous certain de vouloir supprimer votre compte ?')){
             console.log('okay');
             this.$store.dispatch('userStore/deleteUser',{id: this.id});
            }//if

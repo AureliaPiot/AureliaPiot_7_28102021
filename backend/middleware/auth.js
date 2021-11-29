@@ -128,7 +128,9 @@ exports.action = (req, res, next) =>{
     Users.findOne({  where: { id: req.params.id} })
     .then(data=>{
 
-      if(id === data.UserId ){
+
+
+      if( userId === data.id){
         next();
       }
       else{
