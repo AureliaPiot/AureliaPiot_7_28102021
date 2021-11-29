@@ -104,7 +104,8 @@ export default {
         margin: 0;
         font-weight: 600;
         a{
-            color: rgb(0, 0, 0);
+            display: inline-block;
+            width: 100%;
 
         }
         li:hover{

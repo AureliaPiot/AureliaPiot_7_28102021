@@ -36,7 +36,7 @@
                 <div v-if="!editbio" class="userBio">
                     {{userData.bio}}
                 </div>
-                <input v-if="editbio" type="textarea" class="userBio eBio" rows="3"  name="newBio" :value="userData.bio" v-on:change="this.getNewBio">
+                <textarea v-if="editbio"  class="userBio eBio" rows="6"  name="newBio" :value="userData.bio" v-on:change="this.getNewBio"></textarea>
             </div>
 
 

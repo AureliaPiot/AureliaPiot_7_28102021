@@ -67,7 +67,7 @@ export default {
 
             if(inputEmpty.test(content.value)== false && this.file == "null"){
                  this.$store.dispatch('postStore/deletePost',{id:this.id,query:this.query});
-                return console.log('[post vide, suppresion du post]')
+                return console.log('[post vide, suppression du post]')
             }
 
             const file = document.getElementsByName("fileEdit")[0].files[0];
@@ -94,7 +94,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-// gere le post en grid
+
 .editPost{
     position: absolute;
     z-index: 5;
