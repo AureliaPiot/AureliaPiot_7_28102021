@@ -14,8 +14,8 @@
                     </h2>
 
                     <div class="edit-Name" v-if="this.editName">
-                        <input type="text" name="nom" :value="userData.nom" v-on:change="this.getNewName">
-                        <input type="text" name="prenom" :value="userData.prenom" v-on:change="this.getNewName">
+                        <input type="text" name="nom" :value="userData.nom" v-on:change="this.getNewName" maxlength="20">
+                        <input type="text" name="prenom" :value="userData.prenom" v-on:change="this.getNewName" maxlength="20">
                     </div>
                     
                     <button  class="btn --edit text-white fw-bold"  v-if="this.isUser == userData.id" @click="showEditName"><i class="fas fa-pen"></i></button>

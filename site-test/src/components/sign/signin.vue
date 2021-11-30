@@ -4,11 +4,11 @@
 
                 <div class="form-group my-md-4">
                     <label for="nom_input">Nom</label>
-                    <input type="text" class="form-control" id="nom_input"  placeholder="nom" name="nom_Sign" required>
+                    <input type="text" class="form-control" id="nom_input"  placeholder="nom" name="nom_Sign" maxlength="20" required>
                 </div>
                 <div class="form-group my-md-4">
                     <label for="prenom_input">Prenom</label>
-                    <input type="text" class="form-control" id="prenom_input"  placeholder="prenom" name="prenom_Sign" required>
+                    <input type="text" class="form-control" id="prenom_input"  placeholder="prenom" name="prenom_Sign" maxlength="20" required>
                 </div>
                 <div class="form-group my-md-4">
                     <label for="email_input">Email</label>
@@ -33,10 +33,10 @@ export default {
   name: 'SignIn',
   methods:{
       signIn(){
-          const password = document.getElementsByName("password_Sign")[0].value
+          const nom =  document.getElementsByName("nom_Sign")[0].value.replace(/[^a-zA-Z]/g, "")
+          const prenom = document.getElementsByName("prenom_Sign")[0].value.replace(/[^a-zA-Z]/g, "")
           const email = document.getElementsByName("email_Sign")[0].value
-          const nom =  document.getElementsByName("nom_Sign")[0].value
-          const prenom = document.getElementsByName("prenom_Sign")[0].value
+          const password = document.getElementsByName("password_Sign")[0].value
 
           if(nom.length !== 0 &&
            prenom.length !== 0 &&
@@ -64,7 +64,7 @@ export default {
                 }
             }
             else {
-             alert('merci de remplir tous les champs!')
+             alert('merci de remplir correctement tous les champs! (le nom et prenom doivent etre composé seulement de lettre')
             }
 
 
