@@ -5,7 +5,7 @@
             <div class="card-head">
                 <p class="deleteUser text-center m-0 --text-delete " v-if="this.isUser == userData.id" @click="deleteCompte">delete</p>
                 
-                <div >
+                <div class="userNames">
                     <h2 v-if="!this.editName"> 
                         {{userData.nom}} 
                         {{userData.prenom}} 
@@ -263,9 +263,7 @@ export default {
 
 #file{display:none;}
 
-.deleteUser{
-    cursor: pointer;
-}
+
 
 .profil-card{
     background: rgb(255, 255, 255);
@@ -283,6 +281,21 @@ export default {
 
     .card-head{
         grid-area: name;
+
+        display: grid;
+        grid-gap: 1rem 1rem;
+        grid-template-rows: 0fr 0fr;
+
+        .deleteUser{
+            display: inline-flex;
+            justify-self: center;
+            cursor: pointer;
+        }
+
+        .userNames{
+            display: flex;
+            justify-content: center;
+        }
 
     }
     .card-left{
@@ -368,7 +381,7 @@ h2{
 
         display: grid;
         grid-gap: 1rem 0.5rem;
-        grid-template-columns: 20% 1fr;
+        grid-template-columns: 0fr 1fr;
         grid-template-areas:"name name" 
                             "editPp left"
                             "editBio  right"
