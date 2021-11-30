@@ -184,7 +184,7 @@ exports.findOne = (req,res)=>{
 // [update with id][FILE]
 
 exports.updateName = (req,res)=>{
-  console.log('update (bio ou role---------------------------------');
+  console.log('update name---------------------------------');
   const id = req.params.id;
   // let bodyKey = Object.keys(req.body)
   console.log(id);
@@ -277,7 +277,7 @@ exports.deleteFile = (req,res)=>{
 
 
 exports.update = (req,res)=>{
-  console.log('update (bio ou role---------------------------------');
+  console.log('update (bio || role || nom || prenom  ---------------------------------');
   const id = req.params.id;
   // let bodyKey = Object.keys(req.body)
   console.log(id);
