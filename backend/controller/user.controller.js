@@ -180,7 +180,23 @@ exports.findOne = (req,res)=>{
 
 };
 
+// //////////////////////////////////////////////////////////////////////////////////////
+// [update with id][FILE]
 
+exports.updateName = (req,res)=>{
+  console.log('update (bio ou role---------------------------------');
+  const id = req.params.id;
+  // let bodyKey = Object.keys(req.body)
+  console.log(id);
+  console.log(req.body);
+  
+  Users.update(req.body,
+    {where : {id: req.params.id} }
+     )
+  .then(() => res.status(200).send({message: 'user modifié'}))
+  .catch(err=> { res.status(404).send({message: err.message || " error canot update post"}) });
+  // res.status(200).send({message: 'user modifié | nom :' + req.body.nom +"  + prenom :"+req.body.prenom })
+};
 
 // //////////////////////////////////////////////////////////////////////////////////////
 // [update with id][FILE]
@@ -257,7 +273,7 @@ exports.deleteFile = (req,res)=>{
 
         
 };
-// [UPDATE BIO]//////////////////////////////////////////////////////
+// [UPDATE BIO / ROLE  ]//////////////////////////////////////////////////////
 
 
 exports.update = (req,res)=>{

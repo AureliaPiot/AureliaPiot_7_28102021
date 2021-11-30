@@ -14,8 +14,8 @@
                     </h2>
 
                     <div class="edit-Name" v-if="this.editName">
-                        <input type="text" name="nom" :value="userData.nom">
-                        <input type="text" name="prenom" :value="userData.prenom">
+                        <input type="text" name="nom" :value="userData.nom" v-on:change="this.getNewName">
+                        <input type="text" name="prenom" :value="userData.prenom" v-on:change="this.getNewName">
                     </div>
                     
                     <button  class="btn --edit text-white fw-bold"  v-if="this.isUser == userData.id" @click="showEditName"><i class="fas fa-pen"></i></button>
@@ -197,6 +197,29 @@ export default {
 
             this.$store.dispatch('userStore/UpdateUserDeletePic',{id: this.id, form : {oldFile: oldFile, newFile: "clear"}});
          
+        },
+
+        getNewName() {
+            console.log('new name')
+            const nom = document.getElementsByName('nom')[0].value.replace(/[^a-zA-Z]/g, "");
+            const prenom = document.getElementsByName('prenom')[0].value.replace(/[^a-zA-Z]/g, "");
+            console.log(nom.length)
+            console.log(prenom)
+
+            if(nom.length > 0 && prenom.length > 0){
+
+                    this.$store.dispatch('userStore/UpdateUserName',{id: this.id, form : {nom : nom , prenom : prenom}});
+                    this.editName = false
+            }
+            else{
+                if(nom.length > 0 ){
+                    alert('champs nom invalide')
+                }
+                if( prenom.length > 0){
+                    alert('champs prenom invalide')
+                }
+            }
+
         },
 
         getNewBio() {

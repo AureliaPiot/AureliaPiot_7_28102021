@@ -24,6 +24,7 @@ router.get('/:id',auth.connect,userCtrl.findOne);
 router.put('/file/:id',auth.connect,multer,userCtrl.updateFile);
 router.put('/delete/file/:id',auth.connect,userCtrl.deleteFile);
 
+router.put('/name/:id',auth.connect,multer,userCtrl.update);
 router.put('/bio/:id',auth.connect,userCtrl.update);
 router.put('/role/:id',auth.admin,userCtrl.update);
 
