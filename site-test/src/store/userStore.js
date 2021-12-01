@@ -41,10 +41,6 @@ export const userStore ={
     setUserList(state,value){
       state.searchUsers = value
     },
-
-    // setRole(state,value){
-    //   state.storage.userRole = value
-    // }
   },
 
 
@@ -118,7 +114,7 @@ export const userStore ={
 
     logOut(){
       localStorage.clear();
-      router.push({path:"/"});
+      router.push({path:"/sign"});
     },
 
 ///////////////////////////////////////////////////////////////////

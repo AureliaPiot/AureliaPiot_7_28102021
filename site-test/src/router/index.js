@@ -4,15 +4,11 @@ import Sign from '../views/Sign.vue';
 const token = localStorage.getItem('token');
 
 const routes = [
-  // {
-  //   // will match everything
-  //   path: '*'
-  // },
- 
   {
    path:'/',
-  //  name: 'Default',
-   redirect:'/sign',
+
+   redirect:{name:'Sign'},
+
 
    beforeEnter: (to, from, next) => {
 
@@ -25,7 +21,7 @@ const routes = [
     }
    }
 
-  // redirect:{name : "Sign"},
+ 
   },
   {
     path: '/sign',
@@ -90,14 +86,10 @@ const router = createRouter({
 
 
 router.beforeEach((to, from, next) => {
-  // if (to.name == 'Sign' && token == !null) 
-  //   {next({ name: 'Home' })}
-  // else 
-  //   {next()}
 
   if (to.matched.some(record => record.meta.isAuth)) {
     if (token == null) 
-      // {router.push("/sign");}
+
     {next({ name: 'Sign' })}
 
     else 
