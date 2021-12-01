@@ -1,24 +1,22 @@
 <template>
   <div class="home col-md-5 mx-auto">
-    <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
-
 
     <div class="sign card ">
-        <h2 v-if="!show">{{title}}</h2>
-        <h2 v-if="show">{{negatif_title}}</h2>
+        <h2>{{title}}</h2>
+        <!-- <h2 v-if="show">{{negatif_title}}</h2> -->
 
 
 
-                <div v-if="!show" ><Login/></div>
+                <div v-if="title == 'connexion'" ><Login/></div>
 
             <transition name="fade">
-                <div v-if="show"><SignIn/></div>
+                <div v-if="title == 'inscription'"><SignIn/></div>
             </transition>
 
         <div class="togSign d-flex justify-content-between">
 
-                <p v-if="!show">pas encore de compte ? <span v-on:click="show = !show"> enregistrez-vous ! </span> </p>
-                <p v-if="show">déjà un compte ? <span v-on:click="show =!show">connecter vous !</span></p>
+                <p v-if="title == 'connexion'">pas encore de compte ? <span @click="toggle"> enregistrez-vous ! </span> </p>
+                <p v-if="title == 'inscription'">déjà un compte ? <span @click="toggle">connecter vous !</span></p>
 
         </div>
 
@@ -40,29 +38,26 @@ export default {
   },
     data(){
         return{ 
-            show : false,
-            title:'inscription',
-            negatif_title:'connexion'
+            title: "connexion",
         }
-    },
-
-  mounted(){
-        console.log(this.show);
-        if(this.show == false){
-            this.title = 'connexion';
-            this.negatif_title = 'inscription';
-        }
-        console.log(this.title);
     },
     methods:{
+        toggle(){
+            if(this.title == 'inscription'){
+                this.title = 'connexion'
+            }
+            else if(this.title == 'connexion'){
+                this.title = 'inscription'
+            }
+        },
         getDataSign(){
-            if(this.show == false){
+            if(this.title == 'connexion'){
                 console.log('ok submit');
                 const email = document.getElementsByName("email_login")[0].value;
                 const password = document.getElementsByName("password_login")[0].value;
                 console.log(email , password);
             }
-            if(this.show == true){
+            if(this.title == 'inscription'){
                 console.log('ok submit');
                 const nom = document.getElementsByName("nom_Sign")[0].value;
                 const prenom = document.getElementsByName("prenom_Sign")[0].value;
