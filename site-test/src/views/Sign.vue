@@ -50,27 +50,6 @@ export default {
                 this.title = 'inscription'
             }
         },
-        getDataSign(){
-            if(this.title == 'connexion'){
-                console.log('ok submit');
-                const email = document.getElementsByName("email_login")[0].value;
-                const password = document.getElementsByName("password_login")[0].value;
-                console.log(email , password);
-            }
-            if(this.title == 'inscription'){
-                console.log('ok submit');
-                const nom = document.getElementsByName("nom_Sign")[0].value;
-                const prenom = document.getElementsByName("prenom_Sign")[0].value;
-                const email = document.getElementsByName("email_Sign")[0].value;
-                const password = document.getElementsByName("password_Sign")[0].value;
-                console.log(email , password ,nom ,prenom);
-            }
-        },
-// [Sign]__________________________________
-        
-// [Login]__________________________________
-
-
     }
 }
 
