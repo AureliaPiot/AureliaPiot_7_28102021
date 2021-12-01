@@ -9,14 +9,15 @@ const jwt = require('jsonwebtoken');
 
 exports.connect = (req, res, next) => {
   const token = req.headers.authorization.split(' ')[1];
-  console.log(token);
-
-
+  
   if(token !== null) {
   next();
   console.log('utilisateur connecté');
+  console.log('action autorisé');
+
 } else {
   console.log('utilisateur non connecté');
+  console.log('action non autorisé');
   res.status(401).json({ error: error | 'Requete  !'});
   }
 }
@@ -26,9 +27,6 @@ exports.user = (req, res, next) => {
     const token = req.headers.authorization.split(' ')[1];
     const decodedToken = jwt.verify(token,process.env.TOKEN);
     const role = decodedToken.role;
-    const userId = decodedToken.userId;
-
-    console.log(role);
 
     if(role === 'user'|| role === 'admin') {
     next();

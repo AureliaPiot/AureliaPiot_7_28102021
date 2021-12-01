@@ -301,12 +301,8 @@ export default {
     .card-left{
         grid-area: left;
         .pic{
-            // width: 100%;
-            // height: 100%;
             max-height: 11vw;
             border-radius: 15%;
-            // object-fit: cover;
-
         }
 
     }
@@ -325,7 +321,7 @@ export default {
             border: 1px solid rgba(26, 44, 126, 0.322);
         }
         .eBio{
-            border: 2px solid rgba(58, 83, 192, 0.322);
+            border: 2px solid rgba(22, 61, 236, 0.466);
 
         }
         

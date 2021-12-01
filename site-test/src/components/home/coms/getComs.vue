@@ -29,7 +29,7 @@
 
             <div v-if="this.editCom" class="Editcontent">
                 <input  type="text" class="inputEditCom" :name="'editCom'+coms.id" :value="coms.content" v-on:keyup.enter.prevent="submitComEdit(coms.id)">
-                <i class="fas fa-arrow-alt-circle-right submitCom"  v-on:click.prevent="submitComEdit(coms.id)"></i>
+                <i class="fas fa-chevron-right  submitCom"  v-on:click.prevent="submitComEdit(coms.id)"></i>
 
             </div>
 

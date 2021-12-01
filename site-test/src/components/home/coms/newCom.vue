@@ -2,7 +2,7 @@
             <div id="newCom" class="newCom">
                
                     <img  v-bind:src="getUser.profilePic" alt="" class="userAvatar --round">
-                    <input  type="text" class="form-control messageCom" :name="'messageCom'+postId" :id="'messageCom'+postId" placeholder="commentaire..."  v-on:keyup.enter.prevent="submitCom" :disabled="getUser.role =='mute' ? true : false">
+                    <input  type="text" class="form-control messageCom" :name="'messageCom'+postId" :id="'messageCom'+postId" placeholder="commentaire..."  v-on:keyup.enter.prevent="submitCom" >
 
                     <i class="fas fa-chevron-right submitCom"  v-on:click.prevent="submitCom"></i>
 
