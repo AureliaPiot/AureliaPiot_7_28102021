@@ -2,6 +2,8 @@
 
     <div class="col-xl-5 col-md-8 mx-auto">
         <newPost v-if="this.role !== 'mute'"/>
+        <mute v-if="this.role == 'mute'"/>
+
         <getPost query='all'/>
     </div>
 
@@ -10,12 +12,16 @@
 <script>
 import newPost from '@/components/home/post/new_post.vue'
 import getPost from '@/components/home/post/get_post.vue'
+import mute from '@/components/home/mute.vue'
+
 
 export default {
     name:'main_home',
     components:{
         newPost,
-        getPost
+        getPost,
+        mute
+
     },
     props: {
         msg: String

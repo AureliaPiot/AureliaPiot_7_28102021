@@ -31,7 +31,6 @@ export default {
     methods:{},
     watch: {
     '$route' () {
-        console.log(this.$route)
         if(this.$route.name !== "HomePage" && this.$route.name !== "Sign"){
             this.id = this.$route.params.id;
             this.$store.dispatch('userStore/getUserProfile',this.$route.params.id);
