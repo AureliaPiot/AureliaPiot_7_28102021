@@ -1,7 +1,7 @@
 <template>
 
     <div class="newPost">
-        <h2>new post</h2>
+        <h2>quoi de neuf ?</h2>
         <form id="newPost" class="form-inline" enctype="multipart/form-data">
 
 
@@ -12,6 +12,9 @@
             <div class="row justify-content-between m0">
                 <label for="file" class="file-upload btn btn-outline-primary w30">file</label>
                 <input type="file"  class="btn btn-outline-primary w30" id="file" name="file" accept=".jpg, .jpeg, .png, .gif" @change="onFileChange">
+
+                <button v-if="url" class="btn --invalide --text-delete w30" @click.prevent="clearImg">clear</button>
+
                 <button class="btn btn-outline-primary w30" v-on:click.prevent="submitPost">Submit</button>
             </div>
 
@@ -37,7 +40,11 @@ export default {
             const file = e.target.files[0];
             this.url = URL.createObjectURL(file);
             },
-
+        clearImg(){
+            console.log(document.getElementsByName("file")[0].value)
+            this.url=null;
+            document.getElementsByName("file")[0].value="";      
+        },
          submitPost(){
 
             const userId = localStorage.getItem("userId");
@@ -83,9 +90,6 @@ export default {
 
 <style scoped lang="scss">
 
-.preview{
-    max-height:10vw;
-}
 .newPost{
     background: rgb(255, 255, 255);
     width: 100%;
@@ -93,11 +97,20 @@ export default {
     border-radius: 8px;
     margin: 2rem 0;
     border:1px solid $ligth_theme_Color_primary ;
+    text-align: center;
 }
+
 .w30{
     width: 30%;
     background: rgba(0, 0, 255, 0.034);
 }
+
+.preview{
+    max-height:10vw;
+    width: auto;
+    margin: 0.5rem;
+}
+
 input[type="file"] {
     display: none;
 }
@@ -108,5 +121,18 @@ input[type="file"] {
 }
 .m0{
     margin: 5px 0;
+}
+@media (max-width: 1200px) {
+    .preview{
+     max-height:15vw;
+
+    }
+}
+
+@media (max-width: 767px) {
+    .preview{
+     max-height:30vw;
+
+    }
 }
 </style>
