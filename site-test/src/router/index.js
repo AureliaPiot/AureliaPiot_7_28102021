@@ -10,16 +10,16 @@ const routes = [
    redirect:{name:'Sign'},
 
 
-   beforeEnter: (to, from, next) => {
+  //  beforeEnter: (to, from, next) => {
 
-    if(token == null){
-      next({path:'/sign'})
+  //   if(token == null){
+  //     next({path:'/sign'})
       
-    }else{
-      next({path:'/home'})
+  //   }else{
+  //     next({path:'/home'})
 
-    }
-   }
+  //   }
+  //  }
 
  
   },

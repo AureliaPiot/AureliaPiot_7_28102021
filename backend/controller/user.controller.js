@@ -298,9 +298,27 @@ exports.delete = (req,res)=>{
     console.log('delete');
     const id = req.params.id;
 
-  //  
+    Coms.destroy( {where : {UserId: id} });
+    Likes.destroy( {where : {UserId: id} });
+
+    Posts.findAll({ where: { UserId : id}})
+      .then(data=>{
+
+        data.forEach(post => {
+            const filename = post.attachement.split("/images/")[1];
+            fs.unlink(`images/${filename}`,()=>{
+              console.log('unlink post attachement');
+            });
+        });//for each
+
+      })//then findAll
+      .then(()=>{
+        Posts.destroy( {where : {UserId: id} });
+      })
+
     Users.findOne({ where: { id : id} ,  attributes: {exclude: ['password']}, })
     .then(data=>{ 
+      
       //suppression de la photo de profile (sauf si c'est celle par defaut)
       const filename = data.profilePic.split("/images/")[1];
       if( filename !=="defaultPic/default.jpg") {
@@ -308,44 +326,14 @@ exports.delete = (req,res)=>{
           console.log('unlink profilePic');
         });
       }
-    })//then 1
-    // apres avoir supprimer la pp
-    .then(()=>{
-      Coms.destroy( {where : {UserId: id} });
-    })
-    .then(()=>{
-      Likes.destroy( {where : {UserId: id} });
-    })
-    .then(()=>{
-      // suppression des image des posts
-      Posts.findAll({ where: { UserId : id}})
-            .then(data=>{
-             
-              data.forEach(post => {
-                if(post.attachement !== "null"){
-                  const filename = post.attachement.split("/images/")[1];
-                  fs.unlink(`images/${filename}`,()=>{
-                    console.log('unlink post attachement');
-                  });
-                }//if
-              });//for each
-
-            })//then findAll
-    })
-    .then(()=>{
-      Posts.destroy( {where : {UserId: id} });
     })
     .then(()=>{
       Users.destroy( {where : {id: id} })
       .then(()=>{
         res.send({ message: "user was deleted successfully!" });
       })
-      .catch(err=> { res.status(500).send({message: err.message || " error delete User"}) });
     })
-    .catch(err=> { res.status(404).send({message: err.message || " error cannot find any User"}) });
-
-
-
+    .catch(err=> { res.status(500).send({message: err.message || " error delete User"}) });
 
 };
 
