@@ -7,6 +7,7 @@ const Coms= db.coms;
 
 const jwt = require('jsonwebtoken');
 
+// [Connect] verifie que l'utilisateur est bien connecté (possede donc un token)
 exports.connect = (req, res, next) => {
   const token = req.headers.authorization.split(' ')[1];
   
@@ -22,13 +23,13 @@ exports.connect = (req, res, next) => {
   }
 }
 
-
+// [USER] verifie que le role ne soit pas "mute"
 exports.user = (req, res, next) => {
     const token = req.headers.authorization.split(' ')[1];
     const decodedToken = jwt.verify(token,process.env.TOKEN);
     const role = decodedToken.role;
 
-    if(role === 'user'|| role === 'admin') {
+    if(role !== 'mute') {
     next();
     console.log('action autorisé');
   } else {
@@ -37,6 +38,7 @@ exports.user = (req, res, next) => {
     }
 }
 
+// [admin] verifie que le role de l'utilisateur sois "admin"
 exports.admin = (req, res, next) =>{
   const token = req.headers.authorization.split(' ')[1];
   const decodedToken = jwt.verify(token,process.env.TOKEN);
@@ -54,6 +56,7 @@ exports.admin = (req, res, next) =>{
 }
 // ----------------------------------------------------------------------------------------
 
+// [action] suivant la route (user / Post / com) verifie que l'utilisateur sois bien le createur de l'element a supprimé (user), ou a le rôle "admin"  (post /com)
 exports.action = (req, res, next) =>{
   const token = req.headers.authorization.split(' ')[1];
   const decodedToken = jwt.verify(token,process.env.TOKEN);
@@ -80,7 +83,7 @@ exports.action = (req, res, next) =>{
         .then(data=>{
 
           console.log("com trouvé")
-          console.log(userId === data.UserId || role ==="admin")
+          console.log(userId === data.UserId || data.role ==="admin")
 
 
           if(userId === data.UserId || role ==="admin"){

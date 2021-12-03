@@ -8,23 +8,21 @@ const auth =require("../middleware/auth.js")
 
 // Create
 router.post('/',auth.user,comsCtrl.create);
+
 // get all
 router.get('/all',auth.connect,comsCtrl.getAll);
-
 // get all where user = query
 router.get('/user/:user',auth.connect,comsCtrl.getAllByUser);
-
 // get all where post = query
 router.get('/post/:post',auth.connect,comsCtrl.getAllByPost);
-
 // get one 
 router.get('/:id',auth.connect,comsCtrl.getOne);
+
 // update with id
-router.put('/:id',auth.user,comsCtrl.update);
+router.put('/:id',auth.action,comsCtrl.update);
 // delete whit id
 router.delete('/:id',auth.action,comsCtrl.delete);
 
 // fin url
-// app.use('api/user')
 
 module.exports = router;

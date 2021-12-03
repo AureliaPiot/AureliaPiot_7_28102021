@@ -56,12 +56,12 @@ export const postStore ={
             },
         }) 
         .then(res => {
-          commit("setLoadingStatus",'notloading'),
-          commit("setPost",res.data)
+            commit("setPost",res.data)
         })
         .catch(function(){
             console.log('erreur de requete');
         })
+        commit("setLoadingStatus",'notloading')
       },//get post
 
 
@@ -80,12 +80,12 @@ export const postStore ={
             console.log(response.data);
             
             dispatch('getPost','all');
-            commit('setLoadingStatus','notLoading');
-
+            
         })
         .catch(function (error) {
             console.log(error);
         });
+        commit('setLoadingStatus','notLoading');
     },
 //////////////////////////////////////////////////////////////////
     updatePost({commit, dispatch},data){
@@ -101,12 +101,12 @@ export const postStore ={
             console.log(response.data);
             
             dispatch('getPost',data.query);
-            commit('setLoadingStatus','notLoading');
-
+            
         })
         .catch(function (error) {
             console.log(error);
         });
+        commit('setLoadingStatus','notLoading');
         
     },
 ///////////////////////////////////////////////////////////////////
@@ -123,13 +123,12 @@ export const postStore ={
         }) 
         .then(function(res){return res.json();}) 
         .then(value => (console.log(value),         
-            dispatch('getPost', data.query),
-            commit('setLoadingStatus','notLoading')
-        
-        ))
+            dispatch('getPost', data.query)
+            ))
         .catch(function(){
             console.log('erreur de requete');
         })
+        commit('setLoadingStatus','notLoading')
         
     },
 ///////////////////////////////////////////////////////////////////    

@@ -3,11 +3,7 @@
 
     <div class="sign card ">
         <h2>{{title}}</h2>
-        <!-- <h2 v-if="show">{{negatif_title}}</h2> -->
-
-
-
-                <div v-if="title == 'connexion'" ><Login/></div>
+            <div v-if="title == 'connexion'" ><Login/></div>
 
             <transition name="fade">
                 <div v-if="title == 'inscription'"><SignIn/></div>

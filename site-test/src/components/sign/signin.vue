@@ -17,7 +17,7 @@
                 <div class="form-group my-md-4">
                     <label for="password_input">Password</label>
                     <input type="password" class="form-control" id="password_input" placeholder="Password" aria-describedby="passwordHelp" minlength="8" autocomplete="off" name="password_Sign" required>
-                    <small id="passwordHelp" class="form-text text-muted"> Ne communiqué jamais votre mot de passe.</small>
+                    <small id="passwordHelp" class="form-text text-muted"> Huit caractères, une lettre minuscule et majuscule, un chiffre et un caractère spécial.</small>
                 </div>
                 <div class="d-flex justify-content-center">
                      <button id="signSubmit" type="button" class="submit btn btn-primary" v-on:click="signIn">Entrée</button>

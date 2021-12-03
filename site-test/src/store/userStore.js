@@ -8,7 +8,8 @@ export const userStore ={
   state: {
     // User data
     name: "userStore",
-    loading: true,
+    // loading: true,
+
     storage:{
       userId: null,
       userRole: null,
@@ -24,13 +25,13 @@ export const userStore ={
   },
 
   mutations: {
-  setLoad(state,value){
-    state.loading = value
-    },
+  // setLoad(state,value){
+  //   state.loading = value
+  //   },
 
-    setStatus(state,status){
-      state.status =status;
-    },
+    // setStatus(state,status){
+    //   state.status =status;
+    // },
     setUser(state,value){
       state.user = value
     },
@@ -74,9 +75,9 @@ export const userStore ={
 
 ///////////////////////////////////////////////////////////////////
 
-    login: ({commit}, userLogin)=>{
+    login: (_, userLogin)=>{
 
-      commit('setStatus','loading');
+      // commit('setStatus','loading');
       console.log('login');
 
 
@@ -232,8 +233,8 @@ export const userStore ={
             });
       },
 ///////////////////////////////////////////////////////////////////
-    UpdateUserDeletePic({dispatch ,commit},data){
-      commit('setLoad',false)
+    UpdateUserDeletePic({dispatch },data){
+      // commit('setLoad',false)
 
       console.log('user update')
       axios.put('http://localhost:3000/api/user/delete/file/'+data.id,data.form,{
@@ -243,7 +244,7 @@ export const userStore ={
             }) 
             .then(function(response) {
               console.log(response.data);
-              commit('setLoad',true)
+              // commit('setLoad',true)
 
               dispatch('getUserData',data.id);
 

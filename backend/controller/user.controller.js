@@ -298,75 +298,54 @@ exports.delete = (req,res)=>{
     console.log('delete');
     const id = req.params.id;
 
+  //  
     Users.findOne({ where: { id : id} ,  attributes: {exclude: ['password']}, })
     .then(data=>{ 
-
+      //suppression de la photo de profile (sauf si c'est celle par defaut)
       const filename = data.profilePic.split("/images/")[1];
       if( filename !=="defaultPic/default.jpg") {
         fs.unlink(`images/${filename}`,()=>{
           console.log('unlink profilePic');
         });
-      }//if filename
-
+      }
+    })//then 1
+    // apres avoir supprimer la pp
+    .then(()=>{
+      Coms.destroy( {where : {UserId: id} });
+    })
+    .then(()=>{
+      Likes.destroy( {where : {UserId: id} });
+    })
+    .then(()=>{
+      // suppression des image des posts
       Posts.findAll({ where: { UserId : id}})
-      .then(data=>{
-       
-        data.forEach(post => {
+            .then(data=>{
+             
+              data.forEach(post => {
+                if(post.attachement !== "null"){
+                  const filename = post.attachement.split("/images/")[1];
+                  fs.unlink(`images/${filename}`,()=>{
+                    console.log('unlink post attachement');
+                  });
+                }//if
+              });//for each
 
-        if(post.attachement !== null){
-          const filename = post.attachement.split("/images/")[1];
-          fs.unlink(`images/${filename}`,()=>{
-            console.log('unlink all delete post attachement');
-          });
-        }
-        });//for each
-
-        Posts.destroy( {where : {UserId: id} });
-
-      })//then findAll
-
+            })//then findAll
+    })
+    .then(()=>{
+      Posts.destroy( {where : {UserId: id} });
+    })
+    .then(()=>{
+      Users.destroy( {where : {id: id} })
       .then(()=>{
-        Likes.destroy( {where : {UserId: id} });
+        res.send({ message: "user was deleted successfully!" });
       })
-      .then(()=>{
-        Coms.destroy( {where : {UserId: id} });
-      })
-      .then(()=>{
-        Users.destroy({
-          where: { id: id }
-        })
-          .then(num => {
-            if (num == 1) {
-              res.send({
-                message: "user was deleted successfully!"
-              });
-            } else {
-              res.send({
-                message: `Cannot delete user with id=${id}. Maybe user was not found!`
-              });
-            }
-          })//then destroy users  
-      })
-    })//then findone
-    
-    .catch(err => {
-      res.status(500).send({
-        message: "Could not find user with id=" + id
-      });
-    });
+      .catch(err=> { res.status(500).send({message: err.message || " error delete User"}) });
+    })
+    .catch(err=> { res.status(404).send({message: err.message || " error cannot find any User"}) });
+
+
+
+
 };
 
-// conditionnel ? Find all user with role = user:
-
-// exports.findAllPublished = (req, res) => {
-//     Users.findAll({ where: { role: user } })
-//       .then(data => {
-//         res.send(data);
-//       })
-//       .catch(err => {
-//         res.status(500).send({
-//           message:
-//             err.message || "Some error occurred while retrieving tutorials."
-//         });
-//       });
-//   };

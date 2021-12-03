@@ -39,15 +39,12 @@ export default {
 
         },
         getLoadinStatus(){
-          // console.log(this.$store.state.postStore.loadingStatus)
           return this.$store.state.postStore.loadingStatus
         }  
     },
        beforeCreate(){
-        // this.$store.dispatch('postStore/getPost',this.query);
         this.$store.dispatch('postStore/getComs');
-          // console.log("get post")
-          // console.log(this.query)
+
 
 
         
