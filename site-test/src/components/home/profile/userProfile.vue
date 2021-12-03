@@ -18,7 +18,11 @@
                         <input type="text" name="prenom" :value="userData.prenom" v-on:change="this.getNewName" maxlength="20">
                     </div>
                     
-                    <button  class="btn --edit text-white fw-bold"  v-if="this.isUser == userData.id" @click="showEditName"><i class="fas fa-pen"></i></button>
+                    <button  class="btn --edit text-white fw-bold"  v-if="this.isUser == userData.id" @click="showEditName">
+                        <i  v-if="!this.editName" class="fas fa-pen"></i>
+                        <i v-if="this.editName" class="fas fa-check"></i>
+                    </button>
+                    
                 </div>
 
             </div>
@@ -36,9 +40,19 @@
                         <form id="newPP">
                             <label for="file" class="btn --edit text-white">choisir</label>
                             <input id="file" type="file" name="profilePic"  accept=".jpg, .jpeg, .png" v-on:change="this.getNewPic" >
-                            <button class="btn btn-danger" @click.prevent="this.deletePic">delete</button>
+                            <button class="btn btn-danger" @click.prevent="this.deletePic">supp</button>
                         </form>
                     </div>
+                </div>
+                
+
+            <!-- [V-IF EDIT BIO] -->
+                <div v-if="this.isUser == userData.id" class="col editBio">
+                    <button class="btn --edit text-white fw-bold" @click="showEditBio">
+                        <i v-if="!editbio" class="fas fa-pen"></i>
+                        <i v-if="editbio" class="fas fa-check"></i>
+                    </button>
+                   
                 </div>
 
             <!-- [CARD RIGHT] -->
@@ -49,12 +63,6 @@
                 </div>
                 <textarea v-if="editbio"  class="userBio eBio" rows="6"  name="newBio" :value="userData.bio" v-on:change="this.getNewBio"></textarea>
             </div>
-
-
-            <!-- [V-IF EDIT BIO] -->
-                <div v-if="this.isUser == userData.id" class="col editBio">
-                    <button class="btn --edit text-white fw-bold" @click="showEditBio"><i class="fas fa-pen iconEdit edit"></i></button>
-                </div>
 
             <!-- [V-IF EDIT ROLE] -->
                 <div v-if="this.isAdmin" class="editRole">
@@ -141,7 +149,6 @@ export default {
   },
    methods:{
         showEditName(){
-             console.log('editname')
             if(!this.editName){
                 this.editName = true
             }
@@ -150,7 +157,6 @@ export default {
             }
         },
         showEditBio(){
-             console.log('editbio')
             if(!this.editbio){
                 this.editbio = true
             }
@@ -159,7 +165,6 @@ export default {
             }
         },
         showEditPP(){
-             console.log('editpic')
             if(!this.editPic){
                 this.editPic = true
             }
@@ -223,10 +228,12 @@ export default {
         },
 
         getNewBio() {
-            const bio = document.getElementsByName('newBio')[0].value;
-
+            let bio = document.getElementsByName('newBio')[0].value;
+            const inputEmpty = /[\S]+/;
+            if(inputEmpty.test(bio)== false){
+                bio =""
+            }
             this.$store.dispatch('userStore/UpdateUserBio',{id: this.id, form : {bio : bio}});
-            this.editbio = false
         },
         
         getRole(){
@@ -303,6 +310,7 @@ export default {
         .pic{
             max-height: 11vw;
             border-radius: 15%;
+            margin-top: 1rem;
         }
 
     }
@@ -363,6 +371,8 @@ h2{
             text-align: center;
             .pic{
                 width: 60%;
+
+                // width: auto;
             }
         }
 
@@ -386,8 +396,14 @@ h2{
             .card-left{
                 place-self: center;
                 .pic{
-                    width: 100%;
+                    margin-top: 0;
+
+                    width: 20vw;
+                    height: 20vw;
                     min-height: 5rem;
+                    min-width: 5rem;
+                    max-height: none;
+
                 }
             }
             .editPp, .editBio{

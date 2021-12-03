@@ -94,10 +94,4 @@ export default {
     }
 }
 
-@media (max-width: 350px) {
- .messageCom{
-     width: 55%;
- }
-
-}
 </style>
