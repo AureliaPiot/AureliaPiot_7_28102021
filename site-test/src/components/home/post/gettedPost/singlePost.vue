@@ -5,7 +5,7 @@
     <div class="post">
         <div class="headerPost ">
             <div class="userData">
-                <img class="profilePic --round" v-bind:src="this.UserProfilePic" v-bind:alt="this.UserNom">
+                <img class="profilePic --round" v-bind:src="this.UserProfilePic" alt>
                 <router-link class="name" :to="{ name: 'userPage',params:{id: this.UserId }}">{{this.UserNom}}  {{this.UserPrenom}} <i class="fas fa-crown" v-if="this.UserRole == 'admin'" ></i> </router-link>
                 <p class="date"> {{ this.createDate }}</p>
             </div>
