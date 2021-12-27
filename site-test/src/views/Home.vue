@@ -4,6 +4,7 @@
     <!-- <div><a href="#head"><i class="btnUp fas fa-arrow-up"></i></a></div> -->
       <nav_home />
       <router-view/>
+      <!-- c'est le router qui indique qu'elle composant afficher -->
       
   </div>
 </template>

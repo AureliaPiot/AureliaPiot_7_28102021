@@ -142,8 +142,6 @@ export default {
         return this.$store.state.userStore.loading
     },
     userData(){
-        console.log('user profile')
-        console.log(this.$store.state.userStore.userProfile)
         return this.$store.state.userStore.userProfile
     }
   },

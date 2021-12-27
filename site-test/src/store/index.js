@@ -3,10 +3,7 @@ import { createStore } from 'vuex'
 import {userStore} from './userStore.js'
 import {postStore} from './postStore.js'
 
-// import router from "../router/index.js"
-// const userStore = {
-//   namespaced: true,
-// }
+
 export default createStore({
   state: {
     loader:null,

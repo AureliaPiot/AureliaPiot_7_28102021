@@ -6,32 +6,18 @@ export const userStore ={
   namespaced: true,
 
   state: {
-    // User data
-    name: "userStore",
-    // loading: true,
 
-    storage:{
-      userId: null,
-      userRole: null,
-      token: null
-    },
+    name: "userStore",
 
     user:null,
     userProfile:null,
 
     searchUsers:[],
-    // // liste
 
   },
 
   mutations: {
-  // setLoad(state,value){
-  //   state.loading = value
-  //   },
 
-    // setStatus(state,status){
-    //   state.status =status;
-    // },
     setUser(state,value){
       state.user = value
     },
@@ -76,10 +62,7 @@ export const userStore ={
 ///////////////////////////////////////////////////////////////////
 
     login: (_, userLogin)=>{
-
-      // commit('setStatus','loading');
       console.log('login');
-
 
       fetch('http://localhost:3000/api/user/login', {
           method : "Post",
@@ -91,7 +74,7 @@ export const userStore ={
       })    
       .then(function(value){
           if(value.token){
-              // console.log(value);
+    
               localStorage.setItem("token",value.token);
               localStorage.setItem("userId",value.userId);
               localStorage.setItem("role",value.userRole);
@@ -121,7 +104,7 @@ export const userStore ={
 ///////////////////////////////////////////////////////////////////
 
     getUserData({commit},value){
-      // console.log('getUser')
+
       axios.get('http://localhost:3000/api/user/'+value,{
                 headers: {
                     "authorization" : 'Bearer ' + localStorage.getItem('token'),
@@ -129,8 +112,6 @@ export const userStore ={
             }) 
             .then(function(response) {
                 console.log('get current user data');
-
-                console.log(response.data);
                 commit('setUser',response.data)
             })
             .catch(function (error) {
@@ -140,16 +121,13 @@ export const userStore ={
 ///////////////////////////////////////////////////////////////////
   getUserProfile({commit},value){
     console.log('getProfile')
-    // console.log(value)
+
     axios.get('http://localhost:3000/api/user/'+value,{
               headers: {
                   "authorization" : 'Bearer ' + localStorage.getItem('token'),
                   },
           }) 
           .then(function(response) {
-              console.log('get user profile');
-
-              console.log(response.data);
               commit('setUserProfile',response.data)
           })
           .catch(function (error) {
@@ -198,7 +176,6 @@ export const userStore ={
           }) 
           .then(function(response) {
             console.log(response.data);
-            // commit("setRole",data.form.role) 
             if(data.id == localStorage.getItem('userId')){
               localStorage.setItem('role', data.form.role)
             }
@@ -234,7 +211,6 @@ export const userStore ={
       },
 ///////////////////////////////////////////////////////////////////
     UpdateUserDeletePic({dispatch },data){
-      // commit('setLoad',false)
 
       console.log('user update')
       axios.put('http://localhost:3000/api/user/delete/file/'+data.id,data.form,{
@@ -244,7 +220,6 @@ export const userStore ={
             }) 
             .then(function(response) {
               console.log(response.data);
-              // commit('setLoad',true)
 
               dispatch('getUserData',data.id);
 
@@ -285,7 +260,6 @@ export const userStore ={
           }) 
           .then(function(response) {
             commit('setUserList',response.data)
-            // console.log(response.data);
 
           })
           .catch(function (error) {

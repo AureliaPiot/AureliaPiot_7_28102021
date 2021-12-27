@@ -1,10 +1,9 @@
 <template>
-<div class="mute">
-<h2 class='text-danger'>votre compte est actuellement muet</h2>
 
-</div>
+    <div class="mute">
+        <h2 class='text-danger'>votre compte est actuellement muet</h2>
+    </div>
 
-   
 </template>
 
 <script>

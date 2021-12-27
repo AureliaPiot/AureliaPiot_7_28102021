@@ -24,6 +24,12 @@ const routes = [
  
   },
   {
+    path:'/user',
+ 
+    redirect:{path:'/home'},
+  
+   },
+  {
     path: '/sign',
     name: 'Sign',
     component: Sign,
@@ -40,7 +46,7 @@ const routes = [
     },
     component: () => import(/* webpackChunkName: "home" */ '../views/Home.vue'),
     children: [
-      // they will be rendered inside User's <router-view>
+      // ils seront affichés dans <router-view>
       {
         path: '',
         name: 'HomePage',
@@ -53,8 +59,6 @@ const routes = [
       {
         path: '/user/:id',
         name: 'userPage',
-        // faire un alis pour pas voir les id
-        // component: () => import('../components/home/profile/userProfile.vue'),
         component: () => import('../components/home/user_home.vue'),
 
         meta: {
@@ -63,7 +67,7 @@ const routes = [
       },
 
       { path: '*',
-       redirect:'/home',
+       redirect:{path:'/home'},
        meta: {
         isAuth: true,
         }

@@ -77,7 +77,7 @@ exports.getAllByUser = (req,res) =>{
     console.log(userId);
 
     Posts.findAll({ 
-        order: [['id', 'DESC']],
+        order: [['createDate', 'DESC']],
         where:{userid : userId},
         include: [{
             // model: db.users,

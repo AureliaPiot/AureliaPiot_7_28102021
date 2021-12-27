@@ -96,7 +96,7 @@ export default {
             id: this.post.id ,
             attachement: this.post.attachement ,
             content: this.post.content ,
-            createDate: new Date(this.post.createDate).toLocaleDateString('fr-FR', {  year: 'numeric', month: 'long', day: 'numeric' }),
+            createDate: new Date(this.post.createDate).toLocaleDateString('fr-FR', {  year: 'numeric', month: 'long', day: 'numeric' , hour:'numeric', minute:'numeric'}),
             Postlikes: this.post.likes.length ,
             PostComs: this.post.Coms.length ,
 

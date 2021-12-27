@@ -1,8 +1,8 @@
 module.exports={
-    HOST:"localhost",
-    USER:"root",
-    PASSWORD:"",
-    DB:"projet_7",
-    dialect: "mysql",
+    HOST : process.env.DB_HOST,
+    USER : process.env.DB_USER,
+    PASSWORD : process.env.DB_PASSWORD,
+    DB : process.env.DB_DATABASE,
+    dialect : process.env.DB_DIALECT,
 }
 

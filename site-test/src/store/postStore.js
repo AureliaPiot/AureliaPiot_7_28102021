@@ -14,14 +14,11 @@ export const postStore ={
     posts: null,
     coms: [],
 
-
-
   },
   getters:{
     getPosts(state){
         return state.posts.filter(post => post.UserId==1)
     },
-
    
 },
   mutations: {
@@ -34,13 +31,8 @@ export const postStore ={
     setComs(state,data){
         state.coms = data;
 
-    },
-
-
-
-    showData(value){
-        console.log(value);
     }
+
   },
 
   actions: {
@@ -66,7 +58,6 @@ export const postStore ={
 
 
 ///////////////////////////////////////////////////////////////////
-
     newPost({commit, dispatch},data){
 
         commit("setLoadingStatus",'loading')
@@ -89,7 +80,6 @@ export const postStore ={
     },
 //////////////////////////////////////////////////////////////////
     updatePost({commit, dispatch},data){
-        // console.log(data);
         commit("setLoadingStatus",'loading')
 
         axios.put('http://localhost:3000/api/post/'+data.id,data.form,{
@@ -143,8 +133,6 @@ export const postStore ={
                     },
             }) 
             .then(function(response) {
-                // console.log('data get all coms');
-                // console.log(response.data);
                 commit('setComs',response.data);
             })
             .catch(function (error) {
@@ -154,8 +142,7 @@ export const postStore ={
 ///////////////////////////////////////////////////////////////////
 
     newCom({dispatch},data){
-        // console.log(data);
-        // commit("setLoadingStatus",'loading')
+
 
         axios.post('http://localhost:3000/api/com/',data.form,{
             headers: {
@@ -164,11 +151,8 @@ export const postStore ={
         }) 
         .then(function(response) {
             console.log(response.data.message);
-            
-            // dispatch('getPost',data.query);
-            dispatch('getComs');
 
-            // commit('setLoadingStatus','notLoading');
+            dispatch('getComs');
 
         })
         .catch(function (error) {
@@ -177,8 +161,6 @@ export const postStore ={
     },
 ///////////////////////////////////////////////////////////////////
     deleteCom({dispatch},data){
-        // console.log(data);
-        // commit("setLoadingStatus",'loading')
 
         axios.delete('http://localhost:3000/api/com/'+data.id,{
             headers: {
@@ -189,8 +171,6 @@ export const postStore ={
             console.log(response.data);           
             dispatch('getComs');
 
-            // commit('setLoadingStatus','notLoading');
-
         })
         .catch(function (error) {
             console.log(error);
@@ -199,7 +179,7 @@ export const postStore ={
 ///////////////////////////////////////////////////////////////////
     updateCom({dispatch},data){
         console.log(data);
-        // commit("setLoadingStatus",'loading')
+
 
 
         axios.put('http://localhost:3000/api/com/'+data.id,data.data,{
@@ -210,9 +190,7 @@ export const postStore ={
         .then(function(response) {
             console.log(response.data);
             
-            // dispatch('getPost',data.query);
             dispatch('getComs');
-            // commit('setLoadingStatus','notLoading');
 
         })
         .catch(function (error) {

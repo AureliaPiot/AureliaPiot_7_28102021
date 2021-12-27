@@ -62,7 +62,7 @@ export default {
         return{
             token :localStorage.getItem("token"),
             editCom: false,
-            createDate: new Date(this.coms.createDate).toLocaleDateString('fr-FR', {  year: 'numeric', month: 'numeric', day: 'numeric' }),
+            createDate: new Date(this.coms.createDate).toLocaleDateString('fr-FR', {  year: 'numeric', month: 'numeric', day: 'numeric' , hour:'numeric', minute:'numeric' }),
         }
     },
     computed:{

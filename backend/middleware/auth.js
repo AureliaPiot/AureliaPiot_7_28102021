@@ -56,7 +56,7 @@ exports.admin = (req, res, next) =>{
 }
 // ----------------------------------------------------------------------------------------
 
-// [action] suivant la route (user / Post / com) verifie que l'utilisateur sois bien le createur de l'element a supprimé (user), ou a le rôle "admin"  (post /com)
+// [action] suivant la route (user / Post / com) verifie que l'utilisateur sois bien le createur de l'element, ou a le rôle "admin" 
 exports.action = (req, res, next) =>{
   const token = req.headers.authorization.split(' ')[1];
   const decodedToken = jwt.verify(token,process.env.TOKEN);

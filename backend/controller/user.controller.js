@@ -125,7 +125,7 @@ exports.create = (req,res,err) =>{
 
 // //////////////////////////////////////////////////////////////////////////////////////
 // [get all]
-// (plus utiliser dans le front)
+// (barre de recherche des users)
 exports.findAll = (req,res)=>{
     console.log('findAll with query');
     console.log(req.params.query);
@@ -181,7 +181,7 @@ exports.findOne = (req,res)=>{
 };
 
 // //////////////////////////////////////////////////////////////////////////////////////
-// [update with id][FILE]
+// [update with id]
 
 exports.updateName = (req,res)=>{
   console.log('update name---------------------------------');
@@ -279,7 +279,6 @@ exports.deleteFile = (req,res)=>{
 exports.update = (req,res)=>{
   console.log('update (bio || role || nom || prenom  ---------------------------------');
   const id = req.params.id;
-  // let bodyKey = Object.keys(req.body)
   console.log(id);
   console.log(req.body);
   
