@@ -10,9 +10,13 @@
                 <p class="date"> {{ this.createDate }}</p>
             </div>
             <div class="editPost"  v-if="this.isCreator == this.UserId || this.isAdmin ">
-                <button class="btn --edit m-3" v-if="this.isCreator == this.UserId && this.UserRole !== 'mute'" @click.prevent="showEdit"><i class="fas fa-pen text-white"></i></button>
+                <button class="btn --edit m-3" v-if="this.isCreator == this.UserId && this.UserRole !== 'mute'" @click.prevent="showEdit"><i class="fas fa-pen text-white"></i>
+                    <span class="none">Trigger edit Button</span>
+                </button>
                 <!-- ouvre affiche un composant qui recupere les données dans le form  -->
-                <button class="btn --delete " @click.prevent="deletePost"><i class="fas fa-trash text-white"></i></button>
+                <button class="btn --delete " @click.prevent="deletePost"><i class="fas fa-trash text-white"></i>
+                    <span class="none">Trigger delete Button</span>
+                </button>
                 <!-- affiche une alerte avant la suppression du post -->
             </div>
         </div>

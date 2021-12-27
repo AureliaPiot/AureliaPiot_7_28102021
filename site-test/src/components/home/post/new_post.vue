@@ -6,8 +6,9 @@
 
 
             <div class="form-group">
+                <label class="none" for="message">message</label>
                 <textarea class="form-control" id="message" rows="3"  name="message" placeholder="exprimez-vous!" required></textarea>
-                <img v-if="url" class="preview" :src="url" />
+                <img v-if="url" class="preview" :src="url" alt="img" />
             </div>
             <div class="row justify-content-between m0">
                 <label for="file" class="file-upload btn btn-outline-primary w30">file</label>

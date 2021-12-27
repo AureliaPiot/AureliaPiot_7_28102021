@@ -2,10 +2,13 @@
 
     <nav class="navbar " id="head">
         <router-link to="/home">
-            <span class="navbar-brand mb-0 h1"><img class="logo" src="../../assets/logo/icon-left-font-monochrome-black.svg" alt="Groupomania"> </span>
+            <h1>
+                <span class="navbar-brand mb-0 h1"><img class="logo" src="../../assets/logo/icon-left-font-monochrome-black.svg" alt="Groupomania"> </span>
+            </h1>
         </router-link>
       
         <div class="search" >
+            <label class="none" for="searchUser">search User</label>
             <input type="text" name="searchUser" id="searchUser"  @input="searchUser" placeholder="trouver un utilisateur ">
             <div class="getSearchUser" v-if="this.search">
                 <ul >
@@ -19,9 +22,17 @@
         </div>
 
         <div class="link-group">
-            <button class="--round"><router-link to="/home"><i class="fas fa-home"></i></router-link></button> 
-            <button class="--round"><router-link :to="{ name: 'userPage',params:{id: this.userId }}"><i class="fas fa-user"></i></router-link></button>
-            <button class="--round" @click="signOut"><i class="fas fa-sign-out-alt"></i></button>
+            <button class="--round">
+                <router-link to="/home"><i class="fas fa-home"></i><span class="none">home</span></router-link>
+                 <span class="none">Trigger home Button</span>
+            </button> 
+            <button class="--round">
+                <router-link :to="{ name: 'userPage',params:{id: this.userId }}"><i class="fas fa-user"><span class="none">home</span></i></router-link>
+                 <span class="none">Trigger profil Button</span>
+            </button>
+            <button class="--round" @click="signOut"><i class="fas fa-sign-out-alt"></i>
+                 <span class="none">Trigger signout Button</span>
+            </button>
         </div>
       
     </nav>
@@ -79,6 +90,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+
 .search{
     width: 30%;
     input{

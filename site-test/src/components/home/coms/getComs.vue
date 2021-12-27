@@ -20,6 +20,7 @@
                 <div class="editCom" >
 
                     <i class="fas fa-pen iconEdit --text-edit" v-if=" isCreator == coms.User.id && coms.User.role !=='mute'" @click.prevent="showEditCom"></i>
+                    
                     <i class="fas fa-trash iconEdit --text-delete"  v-if="isCreator == coms.User.id || isAdmin " @click.prevent="deleteCom(coms.id)"></i>
 
                 </div>
