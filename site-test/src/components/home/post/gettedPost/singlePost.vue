@@ -10,12 +10,12 @@
                 <p class="date"> {{ this.createDate }}</p>
             </div>
             <div class="editPost"  v-if="this.isCreator == this.UserId || this.isAdmin ">
-                <button class="btn --edit m-3" v-if="this.isCreator == this.UserId && this.UserRole !== 'mute'" @click.prevent="showEdit"><i class="fas fa-pen text-white"></i>
-                    <span class="none">Trigger edit Button</span>
+                <button class="btn --edit m-3" v-if="this.isCreator == this.UserId && this.UserRole !== 'mute'" @click.prevent="showEdit" aria-label="edit">
+                    <i class="fas fa-pen text-white"></i>
                 </button>
                 <!-- ouvre affiche un composant qui recupere les données dans le form  -->
-                <button class="btn --delete " @click.prevent="deletePost"><i class="fas fa-trash text-white"></i>
-                    <span class="none">Trigger delete Button</span>
+                <button class="btn --delete " @click.prevent="deletePost" aria-label="delete">
+                    <i class="fas fa-trash text-white"></i>
                 </button>
                 <!-- affiche une alerte avant la suppression du post -->
             </div>
@@ -25,8 +25,14 @@
             <img v-if="this.attachement !== 'null'" class="imgPost" :src="this.attachement" alt="post_img">
         </div>
         <div class="footerPost d-flex align-items-center">
-                <div class="col "><i v-bind:class="{ 'valide' : this.like } " class="fas fa-thumbs-up like" @click="addLike"></i> <p>{{ this.Postlikes}} </p></div>
-                <div class="col comments"><i class="fas fa-comment-dots comment"></i> <p>{{ getAllComs.length}}</p> </div>
+                <div class="col like" aria-label="like">
+                    <i v-bind:class="{ 'valide' : this.like } " class="fas fa-thumbs-up like" @click="addLike"  ></i>
+                    <p>{{ this.Postlikes}} </p>
+                </div>
+                <div class="col comments" aria-label="comments">
+                    <i class="fas fa-comment-dots comment" ></i> 
+                    <p>{{ getAllComs.length}}</p>
+                </div>
         </div>   
         
         <div class="showEdit" v-if="this.show">

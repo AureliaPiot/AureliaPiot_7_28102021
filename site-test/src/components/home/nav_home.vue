@@ -22,9 +22,9 @@
         </div>
 
         <div class="link-group">
-            <button class="--round">
+            <button class="--round" aria-label="home">
                 <router-link to="/home"><i class="fas fa-home"></i><span class="none">home</span></router-link>
-                 <span class="none">Trigger home Button</span>
+                 <span class="none" >Trigger home Button</span>
             </button> 
             <button class="--round">
                 <router-link :to="{ name: 'userPage',params:{id: this.userId }}"><i class="fas fa-user"><span class="none">home</span></i></router-link>
