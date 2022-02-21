@@ -13,6 +13,8 @@
     "axios": "^0.24.0",
     "core-js": "^3.6.5",
     "glob-parent": "^6.0.2",
+    "node-forge": "^1.2.1",
+    "postcss": "^8.4.6",
     "url-parse": "^1.5.9",
     "vue": "^3.2.22",
     "vue-axios": "^3.4.0",
